@@ -1,3 +1,13 @@
+# PS: FROM ANGULAR-SEED PROJECT:
+logs/*
+!.gitkeep
+node_modules/
+bower_components/
+tmp
+.DS_Store
+.idea
+
+# PS: ORIGINALLY FROM GIT FOR WINDOWS - IGNORING WINDOWS FILES:
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
