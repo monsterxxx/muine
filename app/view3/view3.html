@@ -2,7 +2,12 @@
 
 <div ng-controller="ListController">
   <ol>
-    <li ng-repeat="name in names">{{name}} from haha</li>
+    <li ng-repeat="name in names" ng-controller="ListItemCtrl">
+      {{name}} from haha<br/>
+      {{counter}}
+      <input type="button" ng-click="incrementCounter()" value="incCounter">
+    </li>
+
   </ol>
   <p>
     counter: {{counter}}

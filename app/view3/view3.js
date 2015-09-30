@@ -1,19 +1,12 @@
 'use strict';
 
 angular.module('myApp.view3', ['ngRoute'])
-.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-  $routeProvider.when('/view3', {
+.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
+  $stateProvider
+  .state('view3', {
+    url: '/view3',
     templateUrl: 'view3/view3.html',
     controller: 'View3Ctrl'
-  })
-  .when('/view3/1', {
-    templateUrl: 'view3/view3.html'
-  })
-  .when('/view3/2', {
-    templateUrl: 'view3/view3.html'
-  })
-  .when('/view3/3', {
-    templateUrl: 'view3/view3.html'
   });
 }])
 .controller('View3Ctrl', function($scope, $rootScope) {
@@ -32,7 +25,7 @@ angular.module('myApp.view3', ['ngRoute'])
     $scope.successPath = $location.path();
     console.log('< incCounter()');
   };
-  $scope.$on('$locationChangeSuccess', function (event, newUrl, oldUrl) {
+  $rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
     console.log('> $on.$locationChangeSuccess');
     console.log(newUrl, oldUrl);
     $scope.counter++;
@@ -44,7 +37,14 @@ angular.module('myApp.view3', ['ngRoute'])
     $scope.successNewUrl = newUrl;
     console.log('$scope.successNewUrl > '+$scope.successNewUrl);
     $scope.successOldUrl = oldUrl;
+    event.preventDefault();
+    console.log('event.defaultPrevented > '+event.defaultPrevented);
     console.log('< $on.$locationChangeSuccess');
+  });
+  $scope.$on('listItemEvent', function(event){
+    console.log('> ListController $on.listItemEvent');
+    console.log('event > '+ angular.toJson(event));
+    console.log('< ListController $on.listItemEvent');
   });
   $scope.back = function () {
     $window.history.back();
@@ -52,4 +52,18 @@ angular.module('myApp.view3', ['ngRoute'])
   $scope.forward = function () {
     $window.history.forward();
   };
-}]);
+}])
+.controller('ListItemCtrl', function($scope){
+  $scope.counter = 0;
+  $scope.incrementCounter = function(){
+    console.log('> ListItemCtrl incCounter()');
+    $scope.counter++;
+    $scope.$emit('listItemEvent');
+    console.log('< ListItemCtrl incCounter()');
+  };
+  $scope.$on('$locationChangeSuccess', function (event, newUrl, oldUrl) {
+    console.log('> ListItemCtrl $on.$locationChangeSuccess');
+    $scope.counter++;
+    console.log('< ListItemCtrl $on.$locationChangeSuccess');
+  });
+});
