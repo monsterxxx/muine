@@ -1,3 +1,6 @@
+# PS: MUINE PROJECT:
+.sass-cache/
+
 # PS: FROM ANGULAR-SEED PROJECT:
 logs/*
 !.gitkeep

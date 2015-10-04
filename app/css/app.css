@@ -1,0 +1,97 @@
+/* app css stylesheet */
+body {
+  background-color: #ebe8e4;
+  color: #222222;
+  font-family: HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+  font-weight: 300;
+  font-size: 15px; }
+
+nav {
+  background-color: white;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
+  color: #888888;
+  display: block;
+  margin: 8px 22px;
+  overflow: hidden;
+  width: 90%; }
+  nav ul {
+    margin: 0;
+    padding: 0; }
+    nav ul li {
+      display: inline-block;
+      list-style-type: none;
+      transition: all 0.2s; }
+  nav > ul > li > a {
+    color: #aaaaaa;
+    display: block;
+    line-height: 56px;
+    padding: 0 24px;
+    text-decoration: none; }
+    nav > ul > li > a > .caret {
+      border-top: 4px solid #aaaaaa;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+      content: "";
+      display: inline-block;
+      height: 0;
+      width: 0;
+      vertical-align: middle;
+      transition: color 0.1s linear; }
+  nav > ul > li > div {
+    background-color: #282c2f;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
+    display: none;
+    margin: 0;
+    opacity: 0;
+    position: absolute;
+    width: 165px;
+    visibility: hidden;
+    z-index: 100; }
+    nav > ul > li > div ul > li {
+      display: block; }
+      nav > ul > li > div ul > li > a {
+        color: white;
+        display: block;
+        padding: 12px 24px;
+        text-decoration: none; }
+      nav > ul > li > div ul > li:hover > a {
+        background-color: rgba(255, 255, 255, 0.1); }
+  nav > ul > li:hover {
+    background-color: #282c2f; }
+    nav > ul > li:hover > a {
+      color: white; }
+      nav > ul > li:hover > a > .caret {
+        border-top-color: white; }
+    nav > ul > li:hover > div {
+      display: block;
+      opacity: 1;
+      visibility: visible; }
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 0;
+  padding: 0 0 0.5em; }
+
+.menu:before {
+  content: "["; }
+
+.menu:after {
+  content: "]"; }
+
+.menu > li {
+  display: inline; }
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em; }
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0; }
+
+/*# sourceMappingURL=app.css.map */

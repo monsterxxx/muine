@@ -1,4 +1,6 @@
-<p>This is my view3 for AngularJS experiments.</p>
+<ps-navbar></ps-navbar>
+
+<p>This is my view3 for AngularJS experiments. Really</p>
 
 <div ng-controller="ListController">
   <ol>
@@ -28,4 +30,10 @@
       <li><a href="" ng-click="forward()">Forward</a></li>
     </ul>
   <hr/>
+</div>
+<div ng-controller="ExperimentServiceCtrl">
+  {{value}}<br/>
+  {{getValue()}}<br/>
+  <input type="button" ng-click="incValue()" value="incrementExperimentValue">
+  {{getAnotherValue()}}
 </div>

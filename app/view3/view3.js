@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view3', ['ngRoute'])
+angular.module('myApp.view3', [])
 .config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
   $stateProvider
   .state('view3', {
@@ -37,7 +37,6 @@ angular.module('myApp.view3', ['ngRoute'])
     $scope.successNewUrl = newUrl;
     console.log('$scope.successNewUrl > '+$scope.successNewUrl);
     $scope.successOldUrl = oldUrl;
-    event.preventDefault();
     console.log('event.defaultPrevented > '+event.defaultPrevented);
     console.log('< $on.$locationChangeSuccess');
   });
@@ -66,4 +65,20 @@ angular.module('myApp.view3', ['ngRoute'])
     $scope.counter++;
     console.log('< ListItemCtrl $on.$locationChangeSuccess');
   });
+})
+.controller('ExperimentServiceCtrl', function(PSExperimentService, PSAnotherExperimentFactory, $scope){
+  $scope.value = PSExperimentService.value
+  $scope.getValue = function(){
+    return PSExperimentService.value;
+  };
+  $scope.incValue = function(){
+    PSExperimentService.incValue();
+    $scope.value = PSExperimentService.getValue();
+    console.log('ExperimentServiceCtrl>PSExperimentService.value>'+PSExperimentService.value);
+    console.log('>ExperimentServiceCtrl>$scope.value>'+$scope.value);
+    console.log('>ExperimentServiceCtrl>PSExperimentService.getValue>'+PSExperimentService.getValue());
+  };
+  $scope.getAnotherValue = function(){
+    return PSAnotherExperimentFactory();
+  };
 });
