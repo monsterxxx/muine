@@ -20,8 +20,6 @@ header {
   background-color: #222222;
   border-bottom: 1px solid black;
   box-shadow: 0 2px 2px -1px black;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex; }
   header .caret {
     width: 30px;
@@ -43,9 +41,7 @@ header {
     color: white;
     line-height: 30px;
     text-align: center;
-    -webkit-flex-grow: 10;
-        -ms-flex-positive: 10;
-            flex-grow: 10; }
+    flex-grow: 10; }
   header a {
     color: white;
     line-height: 60px; }
@@ -61,8 +57,6 @@ header {
     header > a.brand > span {
       color: #3493c5; }
   header > nav > ul {
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex; }
     header > nav > ul > li {
       position: relative;
@@ -81,15 +75,11 @@ header {
         header > nav > ul > li > div:nth-child(3) {
           height: 29px;
           top: 31px;
-          -webkit-justify-content: space-around;
-              -ms-flex-pack: distribute;
-                  justify-content: space-around; }
+          justify-content: space-around; }
       header > nav > ul > li.active {
         width: 300px;
         border-right-color: #2ECC40; }
         header > nav > ul > li.active > div {
-          display: -webkit-flex;
-          display: -ms-flexbox;
           display: flex; }
       header > nav > ul > li > a {
         line-height: 54px;
@@ -101,14 +91,12 @@ header {
         font-weight: bold;
         text-align: center;
         text-transform: uppercase;
-        transition: -webkit-transform 0.2s;
         transition: transform 0.2s; }
         header > nav > ul > li > a.active {
           border-bottom: 1px solid #2ECC40;
           line-height: 20px;
           position: absolute;
-          -webkit-transform: translate(-61px, 17px) rotate(-90deg);
-                  transform: translate(-61px, 17px) rotate(-90deg); }
+          transform: translate(-61px, 17px) rotate(-90deg); }
         header > nav > ul > li > a.underlined > span {
           padding: 3px 0;
           border-bottom: 1px solid #FF851B; }
@@ -136,4 +124,4 @@ header {
   content: "";
   padding: 0; }
 
-/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app_sass.css.map */

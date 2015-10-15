@@ -1,102 +1,311 @@
-//colors
-$color_ebb_approx: rgb(235, 232, 228)
-$color_log_cabin_approx: rgb(34, 34, 34)
-$white: rgb(255, 255, 255)
-$color_alto_approx: rgb(222, 222, 222)
-$black_5-5: rgba(0, 0, 0, 0.055)
-$color_suva_gray_approx: rgb(136, 136, 136)
-$color_silver_chalice_approx: rgb(170, 170, 170)
-$color_baltic_sea_approx: rgb(40, 44, 47)
-$white_10: rgba(255, 255, 255, 0.1)
+// //navbar original colors
 
-body
-	background-color: $color_ebb_approx
-	color: $color_log_cabin_approx
-	font-family: HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif
-	font-weight: 300
-	font-size: 15px
+// $white: rgb(255, 255, 255)
+// $white_1: rgba(255, 255, 255, 0.1)
+// $black: rgb(0, 0, 0)
+// $black_055: rgba($black, 0.055)
+// $gray-13: rgb(34, 34, 34)
+// $gray-53: rgb(136, 136, 136)
+// $gray-67: rgb(170, 170, 170)
+// $gray-87: rgb(222, 222, 222) //87%
+// $baltic_sea: rgb(40, 44, 47)
 
-nav
-	background-color: $white
-	border: 1px solid $color_alto_approx
-	//If you use compass, instead of the line below you could use + border-radius($radius, $vertical-radius)
-	border-radius: 4px
-	//If you use compass, instead of the line below you could use + box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-	box-shadow: 0 2px 2px -1px $black_5-5
-	color: $color_suva_gray_approx
-	display: block
-	margin: 8px 22px
-	overflow: hidden
-	width: 90%
-	ul
-		margin: 0
-		padding: 0
-		li
-			display: inline-block
-			list-style-type: none
-			//If you use compass, instead of the line below you could use + transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
-			transition: all 0.2s
+// $navbar_background: $white
+// $navbar_border: $gray-87
+// $navbar_color: $gray-53
+// $navbar_shadow: $black_055
+// $navbar_item: $gray-67
+// $navbar_item_hover_background: $baltic_sea
+// $navbar_hover: $white
+// $navbar_secondary_background: $baltic_sea
+// $navbar_secondary_color: $white
+// $navbar_secondary_item_hover_background_mask: $white_1
+// svg
+// 	width: 87.4px
+// 	height: 40px
 
-
-	> ul > li
-		>
-			a
-				color: $color_silver_chalice_approx
-				display: block
-				line-height: 56px
-				padding: 0 24px
-				text-decoration: none
-				> .caret
-					border-top: 4px solid $color_silver_chalice_approx
-					border-right: 4px solid transparent
-					border-left: 4px solid transparent
-					content: ""
-					display: inline-block
-					height: 0
-					width: 0
-					vertical-align: middle
-					//If you use compass, instead of the line below you could use + transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
-					transition: color 0.1s linear
-
-
-			div
-				background-color: $color_baltic_sea_approx
-				border-top: 0
-				//If you use compass, instead of the line below you could use + border-radius($radius, $vertical-radius)
-				border-radius: 0 0 4px 4px
-				//If you use compass, instead of the line below you could use + box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-				box-shadow: 0 2px 2px -1px $black_5-5
-				display: none
-				margin: 0
-				opacity: 0
-				position: absolute
-				width: 165px
-				visibility: hidden
-				z-index: 100
-				ul > li
-					display: block
-					> a
-						color: $white
-						display: block
-						padding: 12px 24px
-						text-decoration: none
-
-					&:hover > a
-						background-color: $white_10
-
-
-
-
+header
+	min-width: 1200px
+	height: $navbar_height
+	background-color: $navbar_background
+	border-bottom: 1px solid $black
+	box-shadow: 0 2px 2px -1px $black
+	display: flex
+	.caret
+		width: $navbar_height/2
+		line-height: $navbar_height/2
+		text-align: center
+		color: $navbar_color
 		&:hover
-			background-color: $color_baltic_sea_approx
-			>
-				a
-					color: $white
-					> .caret
-						border-top-color: $white
+			color: $navbar_hover
+	.icon
+		width: $navbar_height/2
+		height: $navbar_height/2
+		fill: $navbar_color
+		&:hover
+			cursor: pointer
+			> use
+				stroke-width: 1.5px
+				stroke: $navbar_hover
+	.name
+		color: $white
+		line-height: 30px
+		text-align: center
+		flex-grow: 10
+	a
+		color: white
+		line-height: $navbar_height
+	> a.logo > svg
+		width: 87.4px
+		height: 40px
+		padding: 5px 15px
+		fill: $navbar_brand //$navbar_logo
+	> a.brand
+		font-size: 22px
+		padding-right: 20px
+		border-right: 1px solid $gray-53
+		> span
+			color: $navbar_brand
+	> nav > ul
+		display: flex
+		> li
+			position: relative
+			min-width: $navbar_item_width
+			height: $navbar_height
+			border-right: 1px solid $gray-53
+			> div
+				display: none
+				position: absolute
+				width: $navbar_control_width - 27px
+				left: 27px
+				&:nth-child(2)
+					height: $navbar_height/2
+					top: 0px
+					border-bottom: 1px solid $green
+				&:nth-child(3)
+					height: $navbar_height/2 - 1px
+					top: $navbar_height/2 + 1px
+					justify-content: space-around
+			&.active
+				width: $navbar_control_width
+				border-right-color: $green
+				> div
+					display: flex
+			> a
+				line-height: $navbar_height - 6px
+				width: $navbar_height
+				padding: 3px 0
+				position: absolute
+				left: $navbar_item_width/2-$navbar_height/2
+				font:
+					size: 14px
+					weight: bold
+				text-align: center
+				text-transform: uppercase
+				transition: transform 0.2s
+				&.active
+					border-bottom: 1px solid $green
+					line-height: 20px
+					position: absolute
+					transform: translate(-61px, 17px) rotate(-90deg)
+				&.underlined > span
+					padding: 3px 0
+					border-bottom: 1px solid $orange
 
 
-				div
-					display: block
-					opacity: 1
-					visibility: visible
+
+		//align-content: center
+
+
+
+
+
+
+// ul
+// 	list-style-type: none
+// 	margin: 0
+// 	padding: 0
+// nav > ul
+// 	background-color: $navbar_background
+// 	display: flex
+// 	align-content: center
+// 	height: 50px
+// 	> li
+// 		&.item
+// 			min-width: 200px
+// 			text-align: center
+// 		&:hover ul
+// 			display: flex
+// 			flex-direction: column
+// 			opacity: 1
+// 			visibility: visible
+// 		> a
+// 			vertical-align: middle
+// 			line-height: 50px
+// 			display: block
+// 			text-decoration: none
+// 			color: white
+// 			text-transform: uppercase
+// 			padding: 0 10px
+// 			&.brand
+// 				background: $navbar_brand_background
+// 				text-transform: none
+// 				font-size: 22px
+// 			&:hover
+// 				background-color: rgb(49, 56, 63)
+// 				+ ul
+// 					display: flex
+// 					flex-direction: column
+// 					opacity: 1
+// 					visibility: visible
+// 			> svg.navbar-logo
+// 				width: 87.4px
+// 				height: 40px
+// 				fill: $navbar_logo
+// 			> span.navbar-brand-part
+// 				color: $navbar_brand
+// 			> .caret
+// 				border-top: 4px solid $navbar_item
+// 				border-right: 4px solid transparent
+// 				border-left: 4px solid transparent
+// 				content: ""
+// 				display: inline-block
+// 				height: 0
+// 				width: 0
+// 				vertical-align: middle
+// 				transition: color 0.1s linear
+// 			+ ul
+// 				background-color: $navbar_secondary_background
+// 				border-top: 0
+// 				border-radius: 0 0 4px 4px
+// 				box-shadow: 0 2px 2px -1px $navbar_shadow
+// 				display: none
+// 				opacity: 0
+// 				//position: absolute
+// 				//width: 165px
+// 				visibility: hidden
+// 				z-index: 100
+// 				> li > a
+// 					color: $navbar_secondary_color
+// 					display: block
+// 					padding: 12px 24px
+// 					text-decoration: none
+// 					text-align: center
+// 					&:hover &
+// 						background-color: $navbar_secondary_item_hover_background_mask
+// 				&:hover
+// 					display: flex
+// 					flex-direction: column
+// 					opacity: 1
+// 					visibility: visible
+
+	// > ul
+	//   > li > a
+	//     color: white
+	//     text-transform: uppercase
+	//     line-height: 50px
+	//     padding: 10px
+	//     &:hover
+	//       background-color: rgb(49, 56, 63)
+	//   > ul
+	//     flex-direction: column
+	//     align-content: center
+	//     margin-right: 30px
+	//     li:nth-child(1)
+	//       line-height: 30px
+	//     li:nth-child(2) a
+	//       color: rgb(52, 147, 197)
+	//       line-height: 20px
+	//       font-weight: bold
+
+
+// nav
+// 	background-color: $navbar_background
+// 	border-bottom: 1px solid $navbar_border
+// 	box-shadow: 0 2px 2px -1px $navbar_shadow
+// 	color: $navbar_color
+// 	display: block
+// 	overflow: hidden
+// 	position: fixed
+// 	text-transform: uppercase
+// 	width: 100%
+// 	ul
+// 		margin: 0
+// 		padding: 0
+// 		height: 56px
+// 		li
+// 			display: inline-block
+// 			list-style-type: none
+// 			transition: all 0.2s
+//
+// 	> ul > li:not(.brand)
+// 		>
+// 			a
+// 				color: $navbar_item
+// 				display: block
+// 				line-height: 56px
+// 				padding: 0 24px
+// 				position: relative
+// 				text-decoration: none
+// 				top: 0px
+// 				> .caret
+// 					border-top: 4px solid $navbar_item
+// 					border-right: 4px solid transparent
+// 					border-left: 4px solid transparent
+// 					content: ""
+// 					display: inline-block
+// 					height: 0
+// 					width: 0
+// 					vertical-align: middle
+// 					transition: color 0.1s linear
+//
+// 			div
+// 				background-color: $navbar_secondary_background
+// 				border-top: 0
+// 				border-radius: 0 0 4px 4px
+// 				box-shadow: 0 2px 2px -1px $navbar_shadow
+// 				display: none
+// 				margin: 0
+// 				opacity: 0
+// 				position: absolute
+// 				width: 165px
+// 				visibility: hidden
+// 				z-index: 100
+// 				ul > li
+// 					display: block
+// 					> a
+// 						color: $navbar_secondary_color
+// 						display: block
+// 						padding: 12px 24px
+// 						text-decoration: none
+// 					&:hover > a
+// 						background-color: $navbar_secondary_item_hover_background_mask
+//
+// 		&:hover
+// 			background-color: $navbar_item_hover_background
+// 			>
+// 				a
+// 					color: $navbar_hover
+// 					> .caret
+// 						border-top-color: $navbar_hover
+// 				div
+// 					display: block
+// 					opacity: 1
+// 					visibility: visible
+// 	> ul > li.brand
+// 		height: 56px
+// 		width: 209px
+// 		> a
+// 			color: $navbar_brand
+// 			font-weight: bold
+// 			line-height: 28px
+// 			padding: 0 24px
+// 			position: absolute
+// 			text-decoration: none
+// 			text-transform: none
+// 			&:hover
+// 				color: $navbar_brand_hover
+// 			&#brand-line-1
+// 				top: 0px
+// 			&#brand-line-2
+// 				top: 28px
