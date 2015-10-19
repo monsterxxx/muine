@@ -7,11 +7,16 @@
   "private": true,
   "dependencies": {
     "angular": "~1.4.0",
+    "angular-animate": "~1.4.7",
     "angular-loader": "~1.4.0",
     "angular-ui-router": "~0.2.15",
-    "html5-boilerplate": "~5.2.0"
+    "html5-boilerplate": "~5.2.0",
+    "lodash": "~3.10.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"
+  },
+  "resolutions": {
+    "angular": "1.4.7"
   }
 }

@@ -1,3 +1,5 @@
+(function(){
+
 'use strict';
 
 describe('myApp.version module', function() {
@@ -15,3 +17,5 @@ describe('myApp.version module', function() {
     });
   });
 });
+
+})();

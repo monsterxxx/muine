@@ -1,3 +1,7 @@
+(function(){
+
+'use strict';
+
 angular.module('psApp.services.experiment', [])
 
 .factory('PSExperimentService', function(){
@@ -19,3 +23,5 @@ angular.module('psApp.services.experiment', [])
     return PSExperimentService.getValue();
   };
 });
+
+})();

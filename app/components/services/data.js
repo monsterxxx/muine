@@ -1,4 +1,5 @@
 (function(){
+
 'use strict';
 
 angular.module('muineApp.services.data', [])

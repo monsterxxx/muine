@@ -1,0 +1,97 @@
+// .repeat.ng-enter
+//   transition: 1000ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all
+//
+// .repeat.ng-leave
+//   transition: 5000ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all
+//
+// .repeat.ng-enter.ng-enter-active, .repeat.ng-leave
+//   top: 0
+//   //transform: translateY(-1000px)
+//
+// .repeat.ng-leave.ng-leave-active, .repeat.ng-enter
+//   top: 5 * -31px
+
+
+
+// @keyframes new-active
+//   100%
+//     transform: translateY(5 * -31px)
+//
+// .old-active-animation
+//   animation-name: new-active
+//   animation-timing-function: linear
+//   animation-duration: 5s
+//   animation-delay: 5s
+//   animation-iteration-count: infinite
+//
+// .new-active-animation
+//   animation-name: new-active
+//   animation-timing-function: linear
+//   animation-duration: 5s
+//
+//   animation-iteration-count: infinite
+//
+//
+// .hide
+//   transition: all linear 2s
+//
+// .hide.ng-hide
+//   transform: translateX(5 * -31px)
+
+.trans.ng-anchor
+  transition: 1000ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all
+//   transform: translateX(5 * -31px)
+//
+// .trans.ng-anchor-out
+//   transition: 0.5s linear all
+//   transform: translateX(5 * -31px)
+//
+// .trans.ng-anchor-in
+//   transition: 0.5s linear all
+//   transform: translateX(5 * -31px)
+
+
+div.view2-container
+  display: flex
+  width: 100%
+  div.window
+    width: 100%
+    &:nth-child(1)
+      border-right: 1px solid black
+    &:nth-child(2)
+      padding: 10px
+      > div:nth-child(1)
+        height: 230px
+      a
+        text-decoration: none
+        color: white
+      ul
+        width: 300px
+        display: inline-block
+        position: relative
+        text-align: center
+        > li
+          position: relative
+          border-right: 1px solid $green
+          border-left: 1px solid $green
+          border-bottom: 1px solid $black
+          background: $gray-25
+          vertical-align: middle
+          &.active
+            background: $navbar_background
+          &:first-child
+            z-index: 1000
+            font-weight: bold
+            border: none
+            border-bottom: 1px solid $black
+          &:last-child
+            border-bottom: 1px solid $green
+          > a
+            line-height: $navbar_height/2
+            height: 30px
+          &:hover
+            cursor: pointer
+            background: $navbar_background
+        > li.hide
+          &:first-child
+            z-index: 0

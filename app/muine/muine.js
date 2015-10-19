@@ -1,3 +1,5 @@
+(function(){
+
 'use strict';
 
 angular.module('myApp.muine', [])
@@ -5,9 +7,9 @@ angular.module('myApp.muine', [])
 .config(function ($urlRouterProvider) {
   $urlRouterProvider
   //check that provided id is in the index range of real data array
-  .when('/muine/clubs/:clubId', ['$match', '$stateParams', 'muineDataSvc', function($match, $stateParams, muineDataSvc){
+  .when('/muine/clubs/:clubId', ['$match', '$stateParams', 'MuineDataSvc', function($match, $stateParams, MuineDataSvc){
     console.log('$urlRouterProvider');
-    if ($match.clubId >= 0 && $match.clubId < muineDataSvc.getLength('clubs')) {
+    if ($match.clubId >= 0 && $match.clubId < MuineDataSvc.getLength('clubs')) {
       return false;
     }
     return '/muine';
@@ -25,9 +27,20 @@ angular.module('myApp.muine', [])
     url: '/sports'
   })
   .state('muine.clubs', {
-    url: '/clubs/{clubId:int}', //(?:[0-9])
-    controller: ['$stateParams', function($stateParams) {
-    }]
+    abstract: true,
+    url: '/clubs/{clubId:int}' //(?:[0-9])
+  })
+  .state('muine.clubs.home', {
+    url: '/home'
+  })
+  .state('muine.clubs.photo', {
+    url: '/photo'
+  })
+  .state('muine.clubs.video', {
+    url: '/video'
+  })
+  .state('muine.clubs.contact', {
+    url: '/contact'
   })
   .state('muine.spots', {
     url: '/spots'
@@ -47,6 +60,12 @@ angular.module('myApp.muine', [])
         console.log('event > stateChangeSuccess');
         console.log($rootScope.$state.current.name);
       });
+      //for testing purposes
+      $rootScope.log = function(message){
+        console.log(message);
+      };
     }
   ]
 );
+
+})();

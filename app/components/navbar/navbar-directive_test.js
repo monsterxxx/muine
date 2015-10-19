@@ -1,42 +1,6 @@
-// 'use strict';
-//
-// describe('describe something..', function(){
-//
-//   var mockMuineDataSvc;
-//
-//   beforeEach(function(){
-//
-//     module(function($provide){
-//       $provide.factory('mockMuineDataSvc', function(){
-//         var x = 'fuck';
-//         return {
-//           x: x,
-//           changeX: function(y){
-//             x = y;
-//           },
-//           getX: function () {
-//             return x;
-//           }
-//         };
-//       });
-//     })
-//     inject(function(_mockMuineDataSvc_){
-//       mockMuineDataSvc = _mockMuineDataSvc_;
-//     });
-//
-//   });
-//
-//   it('should say to you a bad word', function(){
-//     expect(mockMuineDataSvc.getX()).toEqual('fuck');
-//     mockMuineDataSvc.changeX('whore');
-//     expect(mockMuineDataSvc.getX()).toEqual('whore');
-//   });
-//
-//   it('should say to you another bad word', function(){
-//     expect(mockMuineDataSvc.getX()).toEqual('fuck');
-//   });
-//
-// });
+(function(){
+
+'use strict';
 
 describe('navbar component', function() {
 
@@ -107,3 +71,5 @@ describe('navbar component', function() {
 
   });
 });
+
+})();

@@ -1,3 +1,5 @@
+(function(){
+
 'use strict';
 
 angular.module('myApp.view1', [])
@@ -14,3 +16,5 @@ angular.module('myApp.view1', [])
 .controller('View1Ctrl', [function() {
 
 }]);
+
+})();

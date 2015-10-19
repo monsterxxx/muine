@@ -1,5 +1,84 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+  <!-- -->
+<div class="view2-container">
+
+  <div class="window" ng-controller="View2Ctrl1">
+    <h4
+      class="repeat"
+      ng-repeat="club in data.clubs | orderBy: ['-active', nameVar ] | limitTo: clubmenu.limit"
+      ng-click="setActive(club.name); clubmenu.limit=1"
+    >{{club.name}}{{$index}}</h4>
+    limit:<input type="text" ng-model="clubmenu.limit"><input type="button" ng-click="clubmenu.limit ? clubmenu.limit='' : clubmenu.limit=1">
+    <br>
+    <input type="button" ng-click="swapClubs();" value="swapClubs">
+    <input type="button" ng-click="(nameVar[0] === '-') ? nameVar = 'name' : nameVar = '-'+nameVar" value="negate nameVar">
+    <p>
+      $scope.data:
+    </p>
+    <pre>
+      {{data | json}}
+    </pre>
+
+  </div>
+<!-- , 'ng-leave ng-leave-active': addClass && club.active -->
+  <div class="window" ng-controller="View2Ctrl2">
+    <div>
+
+      <!-- <ul>
+        <li
+          class="repeat"
+          ng-repeat="club in data.clubs | orderBy: ['-active', nameVar ] | limitTo: clubmenu.limit"
+          ng-click="setActive(club.id)"
+          ng-class="{'active': (club.id === newActiveClubId) || (club.id === oldActiveClubId),
+                     'new-active-animation': addAnimation && club.id === newActiveClubId,
+                     'old-active-animation': addAnimation && club.name === oldActiveClubName}"
+        ><a href="javascript:void(0);">{{club.name}}{{club.id}}{{club.name === oldActiveClubName}}</a></li>
+      </ul> -->
+      <ul>
+        <li
+          class="trans"
+          ng-repeat="club in clubs1"
+          ng-animate-ref="{{ club.id }}"
+        ><a href="javascript:void(0);">{{club.name}}{{$index}}</a></li>
+      </ul>
+      <ul>
+        <li
+          class="trans"
+          ng-repeat="club in clubs2"
+          ng-animate-ref="{{ club.id }}"
+        ><a href="javascript:void(0);">{{club.name}}{{$index}}</a></li>
+      </ul>
+    </div>
+    <div>
+      limit:<input type="text" ng-model="clubmenu.limit"><input type="button" ng-click="clubmenu.limit ? clubmenu.limit='' : clubmenu.limit=1">
+      {{addClass}}
+      <br>
+      <input type="button" ng-click="(nameVar[0] === '-') ? nameVar = 'name' : nameVar = '-'+nameVar" value="negate nameVar">
+      <input type="button" ng-click="transClubs()" value="transClubs">
+      <pre>
+        {{clubs1 | json}}
+        {{clubs2 | json}}
+      </pre>
+      <pre>
+        $scope.addAnimation > {{addAnimation}}
+        $scope.oldActiveClubId > {{oldActiveClubId}}
+        $scope.newActiveClubId > {{newActiveClubId}}
+        $scope.newActiveClubIndex > {{newActiveClubIndex}}
+      </pre>
+      <h3>
+        $scope.data:
+      </h3>
+      <pre>
+        {{data | json}}
+      </pre>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <p>This is the partial for view 2.</p>
+  <p>
+    Showing of 'interpolate' filter:
+    {{ 'Current version is v%VERSION%.' | interpolate }}
+  </p>
+</div>

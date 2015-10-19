@@ -14,6 +14,55 @@ ul {
 a {
   text-decoration: none; }
 
+.trans.ng-anchor {
+  transition: 1000ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all; }
+
+div.view2-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%; }
+  div.view2-container div.window {
+    width: 100%; }
+    div.view2-container div.window:nth-child(1) {
+      border-right: 1px solid black; }
+    div.view2-container div.window:nth-child(2) {
+      padding: 10px; }
+      div.view2-container div.window:nth-child(2) > div:nth-child(1) {
+        height: 230px; }
+      div.view2-container div.window:nth-child(2) a {
+        text-decoration: none;
+        color: white; }
+      div.view2-container div.window:nth-child(2) ul {
+        width: 300px;
+        display: inline-block;
+        position: relative;
+        text-align: center; }
+        div.view2-container div.window:nth-child(2) ul > li {
+          position: relative;
+          border-right: 1px solid #2ECC40;
+          border-left: 1px solid #2ECC40;
+          border-bottom: 1px solid black;
+          background: #404040;
+          vertical-align: middle; }
+          div.view2-container div.window:nth-child(2) ul > li.active {
+            background: #222222; }
+          div.view2-container div.window:nth-child(2) ul > li:first-child {
+            z-index: 1000;
+            font-weight: bold;
+            border: none;
+            border-bottom: 1px solid black; }
+          div.view2-container div.window:nth-child(2) ul > li:last-child {
+            border-bottom: 1px solid #2ECC40; }
+          div.view2-container div.window:nth-child(2) ul > li > a {
+            line-height: 30px;
+            height: 30px; }
+          div.view2-container div.window:nth-child(2) ul > li:hover {
+            cursor: pointer;
+            background: #222222; }
+        div.view2-container div.window:nth-child(2) ul > li.hide:first-child {
+          z-index: 0; }
+
 header {
   min-width: 1200px;
   height: 60px;
@@ -27,25 +76,18 @@ header {
     width: 30px;
     line-height: 30px;
     text-align: center;
-    color: #dedede; }
+    color: #dedede;
+    display: inline-block; }
     header .caret:hover {
       color: white; }
-  header .icon {
-    width: 30px;
-    height: 30px;
-    fill: #dedede; }
-    header .icon:hover {
-      cursor: pointer; }
-      header .icon:hover > use {
-        stroke-width: 1.5px;
-        stroke: white; }
   header .name {
     color: white;
     line-height: 30px;
     text-align: center;
     -webkit-flex-grow: 10;
         -ms-flex-positive: 10;
-            flex-grow: 10; }
+            flex-grow: 10;
+    display: inline-block; }
   header a {
     color: white;
     line-height: 60px; }
@@ -55,43 +97,64 @@ header {
     padding: 5px 15px;
     fill: #3493c5; }
   header > a.brand {
+    height: 60px;
     font-size: 22px;
-    padding-right: 20px;
-    border-right: 1px solid #888888; }
+    padding-right: 20px; }
     header > a.brand > span {
       color: #3493c5; }
-  header > nav > ul {
+  header a.icon {
+    line-height: 29px;
+    display: inline-block; }
+    header a.icon > svg {
+      width: 30px;
+      height: 28px; }
+      header a.icon > svg > use {
+        fill: #dedede; }
+    header a.icon:hover > svg > use {
+      stroke-width: 2px;
+      stroke: white; }
+    header a.icon.active > svg {
+      -webkit-filter: drop-shadow(0 0 4px #2ecc40);
+              filter: drop-shadow(0 0 4px #2ecc40); }
+      header a.icon.active > svg > use {
+        stroke: white;
+        stroke-width: 2px; }
+  header > nav {
+    border-left: 1px solid #888888; }
+  header ul.mainmenu {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
-    header > nav > ul > li {
+    header ul.mainmenu > li {
       position: relative;
       min-width: 150px;
       height: 60px;
       border-right: 1px solid #888888; }
-      header > nav > ul > li > div {
+      header ul.mainmenu > li > div {
         display: none;
         position: absolute;
         width: 273px;
         left: 27px; }
-        header > nav > ul > li > div:nth-child(2) {
+        header ul.mainmenu > li > div:nth-child(2) {
           height: 30px;
           top: 0px;
           border-bottom: 1px solid #2ECC40; }
-        header > nav > ul > li > div:nth-child(3) {
+        header ul.mainmenu > li > div:nth-child(3) {
           height: 29px;
           top: 31px;
           -webkit-justify-content: space-around;
               -ms-flex-pack: distribute;
                   justify-content: space-around; }
-      header > nav > ul > li.active {
+          header ul.mainmenu > li > div:nth-child(3) > a {
+            display: inline-block; }
+      header ul.mainmenu > li.active {
         width: 300px;
         border-right-color: #2ECC40; }
-        header > nav > ul > li.active > div {
+        header ul.mainmenu > li.active > div {
           display: -webkit-flex;
           display: -ms-flexbox;
           display: flex; }
-      header > nav > ul > li > a {
+      header ul.mainmenu > li > a {
         line-height: 54px;
         width: 60px;
         padding: 3px 0;
@@ -103,15 +166,74 @@ header {
         text-transform: uppercase;
         transition: -webkit-transform 0.2s;
         transition: transform 0.2s; }
-        header > nav > ul > li > a.active {
+        header ul.mainmenu > li > a.rotated {
           border-bottom: 1px solid #2ECC40;
           line-height: 20px;
-          position: absolute;
           -webkit-transform: translate(-61px, 17px) rotate(-90deg);
                   transform: translate(-61px, 17px) rotate(-90deg); }
-        header > nav > ul > li > a.underlined > span {
+        header ul.mainmenu > li > a.underlined > span {
           padding: 3px 0;
           border-bottom: 1px solid #FF851B; }
+  header ul.submenu {
+    z-index: 1000;
+    position: absolute;
+    left: 27px;
+    top: 31px;
+    width: 273px;
+    background: #404040;
+    text-align: center; }
+    header ul.submenu > li > a {
+      line-height: 30px; }
+  header ul.newsubmenu {
+    -webkit-flex-grow: 10;
+        -ms-flex-positive: 10;
+            flex-grow: 10;
+    display: inline-block;
+    z-index: 1000;
+    text-align: center;
+    position: relative; }
+    header ul.newsubmenu > li {
+      position: relative;
+      border-right: 1px solid #2ECC40;
+      border-left: 1px solid #2ECC40;
+      border-bottom: 1px solid black;
+      background: #404040;
+      vertical-align: middle; }
+      header ul.newsubmenu > li.active {
+        background: #222222; }
+      header ul.newsubmenu > li:first-child {
+        z-index: 1100;
+        font-weight: bold;
+        border: none;
+        border-bottom: 1px solid black; }
+      header ul.newsubmenu > li:last-child {
+        border-bottom: 1px solid #2ECC40; }
+      header ul.newsubmenu > li > a {
+        line-height: 30px;
+        height: 30px; }
+      header ul.newsubmenu > li:hover {
+        cursor: pointer;
+        background: #222222; }
+
+.slide.ng-enter {
+  transition: 0.4s linear all;
+  -webkit-transform: translateY(-1000px);
+          transform: translateY(-1000px); }
+
+.slide.ng-enter.ng-enter-active {
+  -webkit-transform: translateY(0);
+          transform: translateY(0); }
+
+.subselect.ng-enter, .subselect.ng-leave {
+  transition: 900ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  position: relative;
+  display: block; }
+
+.subselect.ng-enter.ng-enter-active, .subselect.ng-leave {
+  top: 0; }
+
+.subselect.ng-leave.ng-leave-active, .subselect.ng-enter {
+  top: -200px; }
 
 .menu {
   list-style: none;

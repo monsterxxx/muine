@@ -1,3 +1,5 @@
+(function(){
+
 'use strict';
 
 describe('myApp.view2 module', function() {
@@ -15,3 +17,5 @@ describe('myApp.view2 module', function() {
 
   });
 });
+
+})();

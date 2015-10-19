@@ -2,9 +2,9 @@
 	<a class="logo" ui-sref="muine" ui-sref-active="active"><svg><use xlink:href="#shape-logo"></use></svg></a>
 	<a class="brand" ui-sref="muine" ui-sref-active="active">muine<span>watersports</span>.com</a>
 	<nav>
-		<ul>
+		<ul class="mainmenu">
 			<li ng-class="{active: $state.includes('muine.sports')}" class="item">
-				<a ui-sref="muine.sports" ui-sref-active="active">Sports</a>
+				<a ui-sref="muine.sports" ui-sref-active="rotated">Sports</a>
 				<div class="control-panel-row">
 
 				</div>
@@ -13,28 +13,33 @@
 				</div>
 			</li>
 			<li ng-class="{active: $state.includes('muine.clubs')}" class="item">
-				<a ui-sref="muine.clubs({clubId: clubId})" ng-click="log('clicked')" ng-class="{active: $state.includes('muine.clubs')}">Clubs</a>
+				<a ui-sref="muine.clubs.home({clubId: clubId})" ng-click="log('clicked')" ng-class="{rotated: $state.includes('muine.clubs')}">Clubs</a>
 				<div class="control-panel-row">
-					<a class="caret" ui-sref="muine.clubs({clubId: prevId('clubs', clubId)})">◀</a>
-					<span class="name">{{data.clubs[clubId].name}}</span>
-					<a class="caret" ui-sref="muine.clubs({clubId: nextId('clubs', clubId)})">▶</a>
-					<svg class="icon"><use xlink:href="#shape-menu"></use></svg>
+					<a class="caret" ui-sref="muine.clubs.home({clubId: prevId('clubs', clubId)})">◀</a>
+					<ul class="newsubmenu slide">
+						<li class="subselect" ng-repeat="club in data.clubs | limitTo: navbar.limit | filter: {name: clubName}" ng-class="{active: $state.includes('muine.clubs', {clubId: $index})}">
+							<!-- ng-show="navabar.menuToggle || $state.includes('muine.clubs', {clubId: $index})"  -->
+							<a ui-sref="muine.clubs.home({clubId: $index})" ng-click="clubName=club.name">{{club.name}}</a>
+						</li>
+					</ul>
+					<!-- <span class="name">{{data.clubs[clubId].name}}</span> -->
+					<a class="caret" ui-sref="muine.clubs.home({clubId: nextId('clubs', clubId)})">▶</a>
+					<a class="icon" ng-click="navabar.menuToggle=!navabar.menuToggle; clubName=''" href="javascript: void(0);"><svg><use xlink:href="#shape-menu"></use></svg></a>
 				</div>
 				<div class="control-panel-row">
-					<svg class="icon" ui-sref="muine.clubs" ui-sref-active="active"><use xlink:href="#shape-home"></use></svg>
-					<svg class="icon"><use xlink:href="#shape-photo"></use></svg>
-					<svg class="icon"><use xlink:href="#shape-video"></use></svg>
-					<svg class="icon"><use xlink:href="#shape-contact"></use></svg>
+					<a class="icon" ui-sref="muine.clubs.home({clubId: clubId})" ui-sref-active="active"><svg><use xlink:href="#shape-home"></use></svg></a>
+					<a class="icon" ui-sref="muine.clubs.photo({clubId: clubId})" ui-sref-active="active"><svg><use xlink:href="#shape-photo"></use></svg></a>
+					<a class="icon" ui-sref="muine.clubs.video({clubId: clubId})" ui-sref-active="active"><svg><use xlink:href="#shape-video"></use></svg></a>
+					<a class="icon" ui-sref="muine.clubs.contact({clubId: clubId})" ui-sref-active="active"><svg><use xlink:href="#shape-contact"></use></svg></a>
 				</div>
-					<!-- <ul>
-						<li><a href="products.html#chair"> _</a></li>
-						<li><a href="products.html#chair">Chair</a></li>
-						<li><a href="products.html#table">Table</a></li>
-						<li><a href="cooker.html">Cooker</a></li>
-					</ul> -->
+				<!-- <ul class="submenu">
+					<li ng-repeat="club in data.clubs">
+						<a ui-sref="muine.clubs.home({clubId: $index})">{{data.clubs[$index].name}}</a>
+					</li>
+				</ul> -->
 			</li>
 			<li ng-class="{active: $state.includes('muine.spots')}" class="item">
-				<a ui-sref="muine.spots" ui-sref-active="active">Spots</a>
+				<a ui-sref="muine.spots" ui-sref-active="rotated">Spots</a>
 				<div class="control-panel-row">
 
 				</div>
@@ -49,8 +54,20 @@
 	</nav>
 </header>
 <div>
-	{{$state.current}}
-	{{$stateParams}}
-	<br/>
-	$scope.currentClub: {{currentClub}}
+	<h3>state props</h3>
+	<blockquote>
+		$state.current > {{$state.current}}<br/>
+		$stateParams > {{$stateParams}}
+	</blockquote>
+	<h3>navbar scope</h3>
+	<blockquote>
+		$scope.clubId > {{clubId}}<br/>
+		$scope.navabar.menuToggle > {{navabar.menuToggle}}<br/>
+		$scope.navabar.clubName > {{navabar.clubName}}
+	</blockquote>
 </div>
+<!-- <ul class="newsubmenu">
+	<li class="subselect" ng-repeat="club in data.clubs | filter:search">
+		{{club.name}}
+	</li>
+</ul> -->

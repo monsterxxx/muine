@@ -19,20 +19,12 @@ module.exports = function(grunt){
     },
     postcss: {
       options: {
-        map: true, // inline sourcemaps
-
-        // or
-        // map: {
-        //     inline: false, // save all sourcemaps as separate files...
-        //     annotation: 'dist/css/maps/' // ...to the specified directory
-        // },
+        map: true,
         processors: [
           require('autoprefixer')({browsers: 'last 2 versions'}) // add vendor prefixes
           //,require('cssnano')() // minify the result
         ]
       },
-      // src: 'app/css/app_sass.css',
-      // dest: 'app/css/app.css'
       dist: {
         src: 'app/css/app_sass.css',
         dest: 'app/css/app.css'
@@ -55,13 +47,20 @@ module.exports = function(grunt){
       }
     },
     watch: {
+      configFiles: {
+        files: ['Gruntfile.js'],
+        options: {
+          reload: true
+        }
+      },
       scripts: {
-        files: "app/**/*.js",
+        files: ["app/**/*.js", "e2e-tests/**/*.js"],
+        tasks: ['jshint'],
         options: {
           livereload: true
         }
       },
-      styles: {
+      sass: {
         files: "app/**/*.sass",
         tasks: ['sass', 'postcss'],
         options: {
@@ -90,7 +89,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-svgstore');
   grunt.loadNpmTasks('grunt-contrib-watch');
   //Register tasks
-  grunt.registerTask('build', ['sass', 'postcss', 'svgstore']);
+  grunt.registerTask('build', ['jshint', 'sass', 'postcss', 'svgstore']);
   //Default task
   grunt.registerTask('default', ['build', 'watch']);
 };

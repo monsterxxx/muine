@@ -1,7 +1,9 @@
+(function(){
 'use strict';
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
+  'ngAnimate',
   'ui.router',
   'myApp.view1',
   'myApp.view2',
@@ -11,3 +13,5 @@ angular.module('myApp', [
   'psApp.navbar',
   'muineApp.services.data'
 ]);
+
+})();

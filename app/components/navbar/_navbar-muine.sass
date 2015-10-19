@@ -20,9 +20,6 @@
 // $navbar_secondary_background: $baltic_sea
 // $navbar_secondary_color: $white
 // $navbar_secondary_item_hover_background_mask: $white_1
-// svg
-// 	width: 87.4px
-// 	height: 40px
 
 header
 	min-width: 1200px
@@ -36,22 +33,15 @@ header
 		line-height: $navbar_height/2
 		text-align: center
 		color: $navbar_color
+		display: inline-block
 		&:hover
 			color: $navbar_hover
-	.icon
-		width: $navbar_height/2
-		height: $navbar_height/2
-		fill: $navbar_color
-		&:hover
-			cursor: pointer
-			> use
-				stroke-width: 1.5px
-				stroke: $navbar_hover
 	.name
 		color: $white
 		line-height: 30px
 		text-align: center
 		flex-grow: 10
+		display: inline-block
 	a
 		color: white
 		line-height: $navbar_height
@@ -61,12 +51,31 @@ header
 		padding: 5px 15px
 		fill: $navbar_brand //$navbar_logo
 	> a.brand
+		height: $navbar_height
 		font-size: 22px
 		padding-right: 20px
-		border-right: 1px solid $gray-53
 		> span
 			color: $navbar_brand
-	> nav > ul
+	a.icon
+		line-height: $navbar_height/2 - 1px
+		display: inline-block
+		> svg
+			width: $navbar_height/2
+			height: $navbar_height/2 - 2px
+			> use
+				fill: $navbar_color
+		&:hover > svg > use
+			stroke-width: 2px
+			stroke: $navbar_hover
+		&.active > svg
+			filter: drop-shadow(0 0 4px rgba($green,1))
+			> use
+				//filter: url(#drop-shadow) this is luxury coding, as for ie10 only, and only 1% uses ie10
+				stroke: $navbar_hover
+				stroke-width: 2px
+	> nav
+		border-left: 1px solid $gray-53
+	ul.mainmenu
 		display: flex
 		> li
 			position: relative
@@ -86,6 +95,8 @@ header
 					height: $navbar_height/2 - 1px
 					top: $navbar_height/2 + 1px
 					justify-content: space-around
+					> a
+						display: inline-block
 			&.active
 				width: $navbar_control_width
 				border-right-color: $green
@@ -103,209 +114,70 @@ header
 				text-align: center
 				text-transform: uppercase
 				transition: transform 0.2s
-				&.active
+				&.rotated
 					border-bottom: 1px solid $green
 					line-height: 20px
-					position: absolute
 					transform: translate(-61px, 17px) rotate(-90deg)
 				&.underlined > span
 					padding: 3px 0
 					border-bottom: 1px solid $orange
+	ul.submenu
+		z-index: 1000
+		position: absolute
+		left: 27px
+		top: $navbar_height/2 + 1px
+		width: $navbar_control_width - 27px
+		background: $gray-25
+		text-align: center
+		> li
+			> a
+				line-height: 30px
+	ul.newsubmenu
+		flex-grow: 10
+		display: inline-block
+		z-index: 1000
+		text-align: center
+		position: relative
+		> li
+			position: relative
+			border-right: 1px solid $green
+			border-left: 1px solid $green
+			border-bottom: 1px solid $black
+			background: $gray-25
+			vertical-align: middle
+			&.active
+				background: $navbar_background
+			&:first-child
+				z-index: 1100
+				font-weight: bold
+				border: none
+				border-bottom: 1px solid $black
+			&:last-child
+				border-bottom: 1px solid $green
+			> a
+				line-height: $navbar_height/2
+				height: 30px
+			&:hover
+				cursor: pointer
+				background: $navbar_background
 
+//animation
+.slide.ng-enter
+	transition: 0.4s linear all
+	transform: translateY(-1000px)
 
+.slide.ng-enter.ng-enter-active
+	transform: translateY(0)
 
-		//align-content: center
+.subselect.ng-enter, .subselect.ng-leave
+	transition: 900ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all
+	position: relative
+	display: block
 
+.subselect.ng-enter.ng-enter-active, .subselect.ng-leave
+	top: 0
+	//transform: translateY(-1000px)
 
-
-
-
-
-// ul
-// 	list-style-type: none
-// 	margin: 0
-// 	padding: 0
-// nav > ul
-// 	background-color: $navbar_background
-// 	display: flex
-// 	align-content: center
-// 	height: 50px
-// 	> li
-// 		&.item
-// 			min-width: 200px
-// 			text-align: center
-// 		&:hover ul
-// 			display: flex
-// 			flex-direction: column
-// 			opacity: 1
-// 			visibility: visible
-// 		> a
-// 			vertical-align: middle
-// 			line-height: 50px
-// 			display: block
-// 			text-decoration: none
-// 			color: white
-// 			text-transform: uppercase
-// 			padding: 0 10px
-// 			&.brand
-// 				background: $navbar_brand_background
-// 				text-transform: none
-// 				font-size: 22px
-// 			&:hover
-// 				background-color: rgb(49, 56, 63)
-// 				+ ul
-// 					display: flex
-// 					flex-direction: column
-// 					opacity: 1
-// 					visibility: visible
-// 			> svg.navbar-logo
-// 				width: 87.4px
-// 				height: 40px
-// 				fill: $navbar_logo
-// 			> span.navbar-brand-part
-// 				color: $navbar_brand
-// 			> .caret
-// 				border-top: 4px solid $navbar_item
-// 				border-right: 4px solid transparent
-// 				border-left: 4px solid transparent
-// 				content: ""
-// 				display: inline-block
-// 				height: 0
-// 				width: 0
-// 				vertical-align: middle
-// 				transition: color 0.1s linear
-// 			+ ul
-// 				background-color: $navbar_secondary_background
-// 				border-top: 0
-// 				border-radius: 0 0 4px 4px
-// 				box-shadow: 0 2px 2px -1px $navbar_shadow
-// 				display: none
-// 				opacity: 0
-// 				//position: absolute
-// 				//width: 165px
-// 				visibility: hidden
-// 				z-index: 100
-// 				> li > a
-// 					color: $navbar_secondary_color
-// 					display: block
-// 					padding: 12px 24px
-// 					text-decoration: none
-// 					text-align: center
-// 					&:hover &
-// 						background-color: $navbar_secondary_item_hover_background_mask
-// 				&:hover
-// 					display: flex
-// 					flex-direction: column
-// 					opacity: 1
-// 					visibility: visible
-
-	// > ul
-	//   > li > a
-	//     color: white
-	//     text-transform: uppercase
-	//     line-height: 50px
-	//     padding: 10px
-	//     &:hover
-	//       background-color: rgb(49, 56, 63)
-	//   > ul
-	//     flex-direction: column
-	//     align-content: center
-	//     margin-right: 30px
-	//     li:nth-child(1)
-	//       line-height: 30px
-	//     li:nth-child(2) a
-	//       color: rgb(52, 147, 197)
-	//       line-height: 20px
-	//       font-weight: bold
-
-
-// nav
-// 	background-color: $navbar_background
-// 	border-bottom: 1px solid $navbar_border
-// 	box-shadow: 0 2px 2px -1px $navbar_shadow
-// 	color: $navbar_color
-// 	display: block
-// 	overflow: hidden
-// 	position: fixed
-// 	text-transform: uppercase
-// 	width: 100%
-// 	ul
-// 		margin: 0
-// 		padding: 0
-// 		height: 56px
-// 		li
-// 			display: inline-block
-// 			list-style-type: none
-// 			transition: all 0.2s
-//
-// 	> ul > li:not(.brand)
-// 		>
-// 			a
-// 				color: $navbar_item
-// 				display: block
-// 				line-height: 56px
-// 				padding: 0 24px
-// 				position: relative
-// 				text-decoration: none
-// 				top: 0px
-// 				> .caret
-// 					border-top: 4px solid $navbar_item
-// 					border-right: 4px solid transparent
-// 					border-left: 4px solid transparent
-// 					content: ""
-// 					display: inline-block
-// 					height: 0
-// 					width: 0
-// 					vertical-align: middle
-// 					transition: color 0.1s linear
-//
-// 			div
-// 				background-color: $navbar_secondary_background
-// 				border-top: 0
-// 				border-radius: 0 0 4px 4px
-// 				box-shadow: 0 2px 2px -1px $navbar_shadow
-// 				display: none
-// 				margin: 0
-// 				opacity: 0
-// 				position: absolute
-// 				width: 165px
-// 				visibility: hidden
-// 				z-index: 100
-// 				ul > li
-// 					display: block
-// 					> a
-// 						color: $navbar_secondary_color
-// 						display: block
-// 						padding: 12px 24px
-// 						text-decoration: none
-// 					&:hover > a
-// 						background-color: $navbar_secondary_item_hover_background_mask
-//
-// 		&:hover
-// 			background-color: $navbar_item_hover_background
-// 			>
-// 				a
-// 					color: $navbar_hover
-// 					> .caret
-// 						border-top-color: $navbar_hover
-// 				div
-// 					display: block
-// 					opacity: 1
-// 					visibility: visible
-// 	> ul > li.brand
-// 		height: 56px
-// 		width: 209px
-// 		> a
-// 			color: $navbar_brand
-// 			font-weight: bold
-// 			line-height: 28px
-// 			padding: 0 24px
-// 			position: absolute
-// 			text-decoration: none
-// 			text-transform: none
-// 			&:hover
-// 				color: $navbar_brand_hover
-// 			&#brand-line-1
-// 				top: 0px
-// 			&#brand-line-2
-// 				top: 28px
+.subselect.ng-leave.ng-leave-active, .subselect.ng-enter
+	top: -200px
+	//transform: translateY(0)
