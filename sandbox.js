@@ -63,6 +63,7 @@ mkdirp(boxDir, function(err){
 
   var jsName = boxName + '.js';
   var jsDir = path.join(boxDir, jsName);
+  var boxNameFirstLetterCapital = boxName.charAt(0).toUpperCase() + boxName.slice(1);
   var jsContent = "(function(){\n\n"
                 + "'use strict';\n\n"
                 + "angular.module('myApp." + boxName + "', [])\n\n"
@@ -70,12 +71,12 @@ mkdirp(boxDir, function(err){
                 + "  $stateProvider\n"
                 + "  .state('" + boxName + "', {\n"
                 + "    url: '/" + boxName + "',\n"
-                + "    templateUrl: '" + boxName + "/" + boxName + ".html',\n"
-                + "    controller: '" + boxName + "Ctrl'\n"
+                + "    templateUrl: 'sandbox/" + boxName + "/" + boxName + ".html',\n"
+                + "    controller: '" + boxNameFirstLetterCapital + "Ctrl'\n"
                 + "  });\n"
                 + "}])\n\n"
-                + ".controller('" + boxName + "Ctrl', [function() {\n\n"
-                + "}]);\n\n"
+                + ".controller('" + boxNameFirstLetterCapital + "Ctrl', function($scope) {\n\n"
+                + "});\n\n"
                 + "})();\n\n";
   fs.writeFile(jsDir, jsContent,  function(err) {
     if (err) {
@@ -125,48 +126,5 @@ mkdirp(boxDir, function(err){
           });
       });
   });
-
-  // var html = "<!doctype html><html><body><h1>Hello world!</h1></body></html>";
-
-  /* parse the html and create a dom window */
-  // var window = require('jsdom').jsdom(html, null, {
-  //         // standard options:  disable loading other assets
-  //         // or executing script tags
-  //         FetchExternalResources: false,
-  //         ProcessExternalResources: false,
-  //         MutationEvents: false,
-  //         QuerySelector: false
-  // }).createWindow();
-
-  // var jsdom = require("jsdom");
-  // var window = jsdom.jsdom(html).defaultView;
-  //
-  // console.log(window.document.documentElement.outerHTML);
-  // // output: "<html><head></head><body>hello world</body></html>"
-  //
-  // console.log(window.innerWidth);
-  // // output: 1024
-  //
-  // console.log(typeof window.document.getElementsByClassName);
-  // // outputs: function
-  //
-  // jsdom.jQueryify(window, "http://code.jquery.com/jquery-2.1.1.js", function () {
-  //   window.$("body").append('<div class="testing">Hello World, It works</div>');
-  //
-  //   console.log(window.$(".testing").text());
-  //   console.log(window.document.documentElement.outerHTML);
-  // });
-
-
-
-  // /* apply jquery to the window */
-  // var $ = require('jquery').create(window);
-  //
-  // /* modify html using jquery */
-  // $('h1').text('World hello!');
-  // $('body').append('<p>Lorem ipsum...</p>');
-  //
-  // /* output the modified html with doctype */
-  // console.log( window.document.doctype + window.document.innerHTML );
 
 });

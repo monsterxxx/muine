@@ -61,6 +61,147 @@ div.view2-container {
         div.view2-container div.window:nth-child(2) ul > li.hide:first-child {
           z-index: 0; }
 
+div.box3-container {
+  background: #333;
+  height: 1000px;
+  padding-left: 20px; }
+  div.box3-container .a {
+    background: #fff;
+    margin: 0 0 0 -20px; }
+    div.box3-container .a h3 {
+      margin: 0;
+      border-bottom: 1px solid black; }
+  div.box3-container .e {
+    color: white; }
+  div.box3-container .b {
+    height: 20px; }
+  div.box3-container .c {
+    position: relative;
+    height: 30px;
+    width: 200px;
+    background: rgba(0, 0, 255, 0.8);
+    color: #fff; }
+    div.box3-container .c.ng-leave {
+      transition: 1.5s linear all;
+      transform: translate(0, 0); }
+    div.box3-container .c.ng-leave.ng-leave-active {
+      transform: translate(0, -180px); }
+    div.box3-container .c.ng-enter {
+      transition: 1.5s linear all;
+      transform: translate(0, -180px); }
+    div.box3-container .c.ng-enter.ng-enter-active {
+      transform: translate(0, 0); }
+    div.box3-container .c0 {
+      background: rgba(0, 0, 255, 0.8);
+      z-index: 1; }
+    div.box3-container .c1 {
+      background: rgba(75, 0, 130, 0.8); }
+    div.box3-container .c2 {
+      background: rgba(75, 0, 130, 0.8); }
+    div.box3-container .c3 {
+      background: rgba(75, 0, 130, 0.8); }
+    div.box3-container .c4 {
+      background: rgba(0, 128, 0, 0.8); }
+    div.box3-container .c5 {
+      background: rgba(75, 0, 130, 0.8); }
+    div.box3-container .c6 {
+      background: rgba(75, 0, 130, 0.8); }
+
+div.box4-container {
+  background: #333;
+  height: 1000px;
+  padding-left: 20px; }
+  div.box4-container .a {
+    background: #fff;
+    margin: 0 0 0 -20px; }
+    div.box4-container .a h3 {
+      margin: 0;
+      border-bottom: 1px solid black; }
+  div.box4-container .e {
+    color: white; }
+  div.box4-container .b {
+    height: 20px; }
+  div.box4-container .b4-c {
+    position: relative;
+    height: 30px;
+    width: 200px;
+    background: rgba(75, 0, 130, 0.8);
+    color: #fff; }
+    div.box4-container .b4-c0 {
+      background: rgba(0, 0, 255, 0.8);
+      z-index: 1; }
+  div.box4-container .b4-selected {
+    background: rgba(0, 128, 0, 0.8);
+    z-index: 2; }
+
+div.box5-container {
+  background: #333;
+  height: 1000px;
+  padding-left: 20px; }
+  div.box5-container .a {
+    background: #fff;
+    margin: 0 0 0 -20px; }
+    div.box5-container .a h3 {
+      margin: 0;
+      border-bottom: 1px solid black; }
+  div.box5-container .e {
+    color: white; }
+  div.box5-container .b {
+    height: 20px; }
+  div.box5-container .b5-c {
+    position: relative;
+    height: 30px;
+    width: 200px;
+    background: rgba(0, 0, 255, 0.8);
+    color: #fff; }
+    div.box5-container .b5-c0 {
+      background: rgba(0, 0, 255, 0.8);
+      z-index: 1; }
+    div.box5-container .b5-c1 {
+      background: rgba(75, 0, 130, 0.8); }
+    div.box5-container .b5-c2 {
+      background: rgba(75, 0, 130, 0.8); }
+    div.box5-container .b5-c3 {
+      background: rgba(75, 0, 130, 0.8); }
+    div.box5-container .b5-c4 {
+      background: rgba(0, 128, 0, 0.8);
+      z-index: 2; }
+    div.box5-container .b5-c5 {
+      background: rgba(75, 0, 130, 0.8); }
+    div.box5-container .b5-c6 {
+      background: rgba(75, 0, 130, 0.8); }
+
+div.box6-container .a {
+  background: white;
+  margin: 0;
+  padding-left: 10px;
+  border-bottom: 1px solid black; }
+div.box6-container .b {
+  display: flex;
+  height: 100px; }
+div.box6-container .c {
+  background: gray;
+  color: white;
+  width: 200px;
+  border-right: 1px solid black; }
+div.box6-container svg {
+  width: 30px;
+  height: 30px; }
+div.box6-container a {
+  color: white; }
+div.box6-container .d {
+  float: right;
+  width: 30px;
+  height: 30px;
+  background: rgba(0, 0, 255, 0.5); }
+div.box6-container .e {
+  display: flex; }
+  div.box6-container .e .f {
+    flex-grow: 1;
+    text-align: center; }
+  div.box6-container .e .g {
+    color: black; }
+
 header {
   min-width: 1200px;
   height: 60px;

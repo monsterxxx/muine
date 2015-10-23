@@ -1,0 +1,34 @@
+<div class="box6-container">
+<h3 class = "a">Implement routing and data based ng-repeating in navbar</h3>
+<div class="b">
+  <div class="c"
+       ng-repeat="dataPath in dataKeysList"
+       ng-controller="mainMenuItemCtrl">
+    <a ng-href="{{uiSref() + childStates[0]}}">{{dataPath}}</a>
+    <br/>
+    <!-- {{rootState +'.'+ dataPath +'.'+ state}} -->
+    <a ng-repeat="state in childStates"
+       ng-href="{{uiSref() + state}}">
+      <svg>
+        <use ng-attr-xlink:href="{{'#shape-'+ state}}" xlink:href="" ></use>
+      </svg>
+    </a>
+    <a class="d" ng-click="toggleMenu()" href="#">m</a>
+    <br/>
+    <div class="e">
+      <a ng-href="{{prevUiSref()}}">◀</a>
+      <ul class="f">
+        <li ng-repeat="item in menuList">
+          <a class="g" ui-sref="{{rootState +'.'+ dataPath +'.'+ childStates[0] +'({'+ itemIdParam +': item.id})'}}">{{item.name}}</a>
+        </li>
+      </ul>
+      <a ng-href="{{nextUiSref()}}">▶</a>
+    </div>
+
+  </div>
+  <div class="c">
+    <a ui-sref="box6.prices">prices</a>
+  </div>
+</div>
+
+</div>

@@ -1,1 +1,75 @@
 div.box3-container
+  background: #333
+  height: 1000px
+  padding-left: 20px
+  .a
+    background: #fff
+    margin: 0 0 0 -20px
+    h3
+      margin: 0
+      border-bottom: 1px solid black
+
+  .e
+    color: white
+  .b
+    height: 20px
+
+  .c
+    position: relative
+    height: 30px
+    width: 200px
+    background: rgba(blue, 0.8)
+    color: #fff
+    // &.ng-move
+    //   transition: 1.0s linear all
+    //   transform: translate(0,90px)
+    // &.ng-move.ng-move-active
+    //   transform: translate(0,0)
+    &.ng-leave
+      transition: 1.5s linear all
+      transform: translate(0,0)
+    &.ng-leave.ng-leave-active
+      transform: translate(0,-30px*6)
+    &.ng-enter
+      transition: 1.5s linear all
+      transform: translate(0,-30px*6)
+    &.ng-enter.ng-enter-active
+      transform: translate(0,0)
+    &0
+      background: rgba(blue, 0.8)
+      z-index: 1
+      // &.ng-leave
+      //   transition: 1.0s linear all 3.0s
+      //   transform: translate(0,-30px)
+      // &.ng-leave.ng-leave-active
+      //   transform: translate(0,-30px*2)
+    &1
+      background: rgba(indigo, 0.8)
+      // &.ng-leave
+      //   transform: translate(0,-30px)
+      //   &.ng-leave.ng-leave-active
+      //     transform: translate(0,-30px*7)
+    &2
+      background: rgba(indigo, 0.8)
+      // &.ng-leave
+      //   transform: translate(0,-30px)
+      //   &.ng-leave.ng-leave-active
+      //     transform: translate(0,-30px*7)
+    &3
+      background: rgba(indigo, 0.8)
+      // &.ng-leave
+      //   transform: translate(0,-30px)
+      //   &.ng-leave.ng-leave-active
+      //     transform: translate(0,-30px*7)
+    &4
+      background: rgba(green, 0.8)
+      // z-index: 2
+      // &.ng-move
+      //   transition: 4s linear all
+      //   transform: translate(0,30px*4)
+      // &.ng-move.ng-move-active
+      //   transform: translate(0,0)
+    &5
+      background: rgba(indigo, 0.8)
+    &6
+      background: rgba(indigo, 0.8)

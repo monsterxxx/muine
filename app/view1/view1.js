@@ -13,8 +13,9 @@ angular.module('myApp.view1', [])
   });
 }])
 
-.controller('View1Ctrl', [function() {
+.controller('View1Ctrl', function() {
 
-}]);
+
+});
 
 })();

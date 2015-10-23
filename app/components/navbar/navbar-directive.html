@@ -15,16 +15,14 @@
 			<li ng-class="{active: $state.includes('muine.clubs')}" class="item">
 				<a ui-sref="muine.clubs.home({clubId: clubId})" ng-click="log('clicked')" ng-class="{rotated: $state.includes('muine.clubs')}">Clubs</a>
 				<div class="control-panel-row">
-					<a class="caret" ui-sref="muine.clubs.home({clubId: prevId('clubs', clubId)})">◀</a>
+					<a class="caret" ui-sref="muine.clubs.home({clubId: prevId(clubs, clubId)})">◀</a>
 					<ul class="newsubmenu slide">
-						<li class="subselect" ng-repeat="club in data.clubs | limitTo: navbar.limit | filter: {name: clubName}" ng-class="{active: $state.includes('muine.clubs', {clubId: $index})}">
-							<!-- ng-show="navabar.menuToggle || $state.includes('muine.clubs', {clubId: $index})"  -->
-							<a ui-sref="muine.clubs.home({clubId: $index})" ng-click="clubName=club.name">{{club.name}}</a>
+						<li class="subselect" ng-repeat="club in data.clubs" ng-class="{active: $state.includes('muine.clubs', {clubId: $index})}">
+							<a ui-sref="muine.clubs.home({clubId: $index})" ng-click="selectClub(club.id)">{{club.name}}{{club.id}}</a>
 						</li>
 					</ul>
-					<!-- <span class="name">{{data.clubs[clubId].name}}</span> -->
-					<a class="caret" ui-sref="muine.clubs.home({clubId: nextId('clubs', clubId)})">▶</a>
-					<a class="icon" ng-click="navabar.menuToggle=!navabar.menuToggle; clubName=''" href="javascript: void(0);"><svg><use xlink:href="#shape-menu"></use></svg></a>
+					<a class="caret" ui-sref="muine.clubs.home({clubId: nextId(clubs, clubId)})">▶</a>
+					<a class="icon" ng-click="toggleList()" href="javascript: void(0);"><svg><use xlink:href="#shape-menu"></use></svg></a>
 				</div>
 				<div class="control-panel-row">
 					<a class="icon" ui-sref="muine.clubs.home({clubId: clubId})" ui-sref-active="active"><svg><use xlink:href="#shape-home"></use></svg></a>
@@ -62,8 +60,6 @@
 	<h3>navbar scope</h3>
 	<blockquote>
 		$scope.clubId > {{clubId}}<br/>
-		$scope.navabar.menuToggle > {{navabar.menuToggle}}<br/>
-		$scope.navabar.clubName > {{navabar.clubName}}
 	</blockquote>
 </div>
 <!-- <ul class="newsubmenu">

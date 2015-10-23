@@ -17,26 +17,18 @@ angular.module('psApp.navbar', [])
 .controller('NavbarCtrl', ['$scope', '$state', '$stateParams', 'MuineDataSvc', function($scope, $state, $stateParams, MuineDataSvc){
   console.log('NavbarCtrl load');
   //get data
-  $scope.data = MuineDataSvc.getData();
+  $scope.clubs = MuineDataSvc.getData('clubs');
   //initialize variables
-  $scope.clubId = $scope.clubId || parseInt($stateParams.clubId) || 0;
-  $scope.navabar = {
-    menuToggle: true,
-    clubName: $scope.data.clubs[$scope.clubId].name,
-    name: $scope.data.clubs[$scope.clubId].name,
-    limit: 1
-  };
-  $scope.clubName =$scope.data.clubs[$scope.clubId].name;
+  $scope.clubId = $scope.clubId || parseInt($stateParams.clubId) || 3;
+
   //assign controller functions
-  $scope.prevId = function(address, id){
-    var arLength = $scope.data[address].length;
-    if (id === 0) {return arLength-1;}
-    return id-1;
+  $scope.prevId = function(collection, id){
+    if (id === 0) {return collection.length - 1;}
+    return id - 1;
   };
-  $scope.nextId = function(address, id){
-    var arLength = $scope.data[address].length;
-    if (id === arLength-1) {return 0;}
-    return id+1;
+  $scope.nextId = function(collection, id){
+    if (id === collection.length - 1) {return 0;}
+    return id + 1;
   };
 
   $scope.$on('$stateChangeSuccess', function(){

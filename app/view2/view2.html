@@ -4,10 +4,12 @@
   <div class="window" ng-controller="View2Ctrl1">
     <h4
       class="repeat"
-      ng-repeat="club in data.clubs | orderBy: ['-active', nameVar ] | limitTo: clubmenu.limit"
+      ng-repeat="club in data.clubs | orderBy: ['-active', nameVar ] | limitTo: clubmenu.limit | filter: search"
       ng-click="setActive(club.name); clubmenu.limit=1"
     >{{club.name}}{{$index}}</h4>
-    limit:<input type="text" ng-model="clubmenu.limit"><input type="button" ng-click="clubmenu.limit ? clubmenu.limit='' : clubmenu.limit=1">
+    limit:<input type="text" ng-model="clubmenu.limit">
+    <input type="button" ng-click="clubmenu.limit ? clubmenu.limit='' : clubmenu.limit=1">
+    limit:<input type="text" ng-model="search">
     <br>
     <input type="button" ng-click="swapClubs();" value="swapClubs">
     <input type="button" ng-click="(nameVar[0] === '-') ? nameVar = 'name' : nameVar = '-'+nameVar" value="negate nameVar">

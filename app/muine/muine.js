@@ -6,12 +6,17 @@ angular.module('myApp.muine', [])
 
 .config(function ($urlRouterProvider) {
   $urlRouterProvider
-  //check that provided id is in the index range of real data array
   .when('/muine/clubs/:clubId', ['$match', '$stateParams', 'MuineDataSvc', function($match, $stateParams, MuineDataSvc){
     console.log('$urlRouterProvider');
-    if ($match.clubId >= 0 && $match.clubId < MuineDataSvc.getLength('clubs')) {
+    //check that provided id exists in real data array
+    var exists = MuineDataSvc.getDataPart('clubs').some(function (club, index, array) {
+      return club.id === id;
+    });
+    //return false if exists. It will continue to corresponding state
+    if (exists === true) {
       return false;
     }
+    //otherwise redirect
     return '/muine';
   }])
   .otherwise('/muine');

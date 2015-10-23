@@ -1,0 +1,14 @@
+<div class="box4-container">
+  <div class="a">
+    <h3>Trying ng-move feature of ngAnimate</h3>
+  </div>
+  <div class="b"></div>
+  <div class="b4-c"
+       ng-repeat="item in list"
+       ng-class="['b4-c'+{{item}}, {'b4-old': isOld(item), 'b4-selected': isSelected(item)}]">
+    {{item}}
+  </div>
+  <div class="e">
+    {{list}}
+  </div>
+</div>
