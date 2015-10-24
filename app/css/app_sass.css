@@ -184,6 +184,8 @@ div.box6-container .c {
   color: white;
   width: 200px;
   border-right: 1px solid black; }
+  div.box6-container .c.active {
+    background: silver; }
 div.box6-container svg {
   width: 30px;
   height: 30px; }
@@ -313,7 +315,7 @@ header {
   header ul.newsubmenu {
     flex-grow: 10;
     display: inline-block;
-    z-index: 1000;
+    z-index: 1;
     text-align: center;
     position: relative; }
     header ul.newsubmenu > li {
@@ -323,10 +325,17 @@ header {
       border-bottom: 1px solid black;
       background: #404040;
       vertical-align: middle; }
-      header ul.newsubmenu > li.active {
-        background: #222222; }
+      header ul.newsubmenu > li.muine-old {
+        background: #222222;
+        z-index: 2;
+        font-weight: bold;
+        border: none;
+        border-bottom: 1px solid black; }
+      header ul.newsubmenu > li.muine-selected {
+        border-bottom: 1px solid #2ECC40; }
       header ul.newsubmenu > li:first-child {
-        z-index: 1100;
+        background: #222222;
+        z-index: 2;
         font-weight: bold;
         border: none;
         border-bottom: 1px solid black; }
@@ -338,24 +347,6 @@ header {
       header ul.newsubmenu > li:hover {
         cursor: pointer;
         background: #222222; }
-
-.slide.ng-enter {
-  transition: 0.4s linear all;
-  transform: translateY(-1000px); }
-
-.slide.ng-enter.ng-enter-active {
-  transform: translateY(0); }
-
-.subselect.ng-enter, .subselect.ng-leave {
-  transition: 900ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-  position: relative;
-  display: block; }
-
-.subselect.ng-enter.ng-enter-active, .subselect.ng-leave {
-  top: 0; }
-
-.subselect.ng-leave.ng-leave-active, .subselect.ng-enter {
-  top: -200px; }
 
 .menu {
   list-style: none;

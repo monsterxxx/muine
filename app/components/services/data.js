@@ -31,6 +31,15 @@ angular.module('muineApp.services.data', [])
   },{
     id: 87,
     name: 'VKS'
+  },{
+    id: 28,
+    name: 'Leto'
+  },{
+    id: 99,
+    name: "Jibe's"
+  },{
+    id: 115,
+    name: 'Source Kiteboarding'
   }];
   var spots = [{
     id: 3,

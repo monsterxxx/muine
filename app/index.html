@@ -20,7 +20,7 @@
 
   <ng-include src="'assets/shapes.svg'"></ng-include>
 
-  <ul class="menu">
+  <ul class="menu" ng-if="!$state.includes('muine')">
     <li><a ui-sref="view1">view1</a></li>
     <li><a ui-sref="view2">view2</a></li>
     <li><a ui-sref="muine">muine</a></li>

@@ -15,7 +15,7 @@ angular.module('myApp.box4', [])
 
 .controller('Box4Ctrl', function($scope, $interval, $timeout) {
   $scope.listOrigin = [0,1,2,3,4,5,6];
-  $scope.leaveSpeed = 0.5;
+  $scope.speed = 0.5;
   $scope.isOld = function (item) {
     return item === $scope.old;
   };
@@ -63,7 +63,7 @@ angular.module('myApp.box4', [])
       return $animateCss(element, {
         from: { transform: 'translate(0,-' + startHeight + 'px)' },
         to: { transform: 'translate(0,-' + (startHeight + height * $scope.listOrigin.length) +'px)' },
-        duration: $scope.listOrigin.length*$scope.leaveSpeed,
+        duration: $scope.listOrigin.length*$scope.speed,
       });
     }
   };
@@ -80,8 +80,8 @@ angular.module('myApp.box4', [])
       return $animateCss(element, {
         from: { transform: 'translate(0,-'+ height +'px)' },
         to: { transform: 'translate(0,-'+ 2*height +'px)' },
-        duration: $scope.leaveSpeed,
-        delay: ($scope.selected - 1 ) * $scope.leaveSpeed
+        duration: $scope.speed,
+        delay: ($scope.selected - 1 ) * $scope.speed
       });
     }
   };
@@ -98,7 +98,7 @@ angular.module('myApp.box4', [])
       return $animateCss(element, {
         from: { transform: 'translate(0,'+ $scope.selected * height +'px)' },
         to: { transform: 'translate(0,0)' },
-        duration: $scope.selected * $scope.leaveSpeed
+        duration: $scope.selected * $scope.speed
       });
     }
   };

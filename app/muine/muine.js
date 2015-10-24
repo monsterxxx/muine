@@ -29,27 +29,45 @@ angular.module('myApp.muine', [])
     controller: 'MuineCtrl'
   })
   .state('muine.sports', {
-    url: '/sports'
+    url: '/sports/{sportId:int}'
   })
+    .state('muine.sports.home', {
+      url: '/home'
+    })
+    .state('muine.sports.photo', {
+      url: '/photo'
+    })
+    .state('muine.sports.video', {
+      url: '/video'
+    })
   .state('muine.clubs', {
     abstract: true,
     url: '/clubs/{clubId:int}' //(?:[0-9])
   })
-  .state('muine.clubs.home', {
-    url: '/home'
-  })
-  .state('muine.clubs.photo', {
-    url: '/photo'
-  })
-  .state('muine.clubs.video', {
-    url: '/video'
-  })
-  .state('muine.clubs.contact', {
-    url: '/contact'
-  })
+    .state('muine.clubs.home', {
+      url: '/home'
+    })
+    .state('muine.clubs.photo', {
+      url: '/photo'
+    })
+    .state('muine.clubs.video', {
+      url: '/video'
+    })
+    .state('muine.clubs.contact', {
+      url: '/contact'
+    })
   .state('muine.spots', {
-    url: '/spots'
+    url: '/spots/{spotId:int}'
   })
+    .state('muine.spots.home', {
+      url: '/home'
+    })
+    .state('muine.spots.photo', {
+      url: '/photo'
+    })
+    .state('muine.spots.video', {
+      url: '/video'
+    })
   .state('muine.prices', {
     url: '/prices'
   });

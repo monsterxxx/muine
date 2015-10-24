@@ -3,7 +3,8 @@
 <div class="b">
   <div class="c"
        ng-repeat="dataPath in dataKeysList"
-       ng-controller="mainMenuItemCtrl">
+       ng-controller="mainMenuItemCtrl"
+       ng-class="{active: $state.includes(rootState +'.'+ dataPath)}">
     <a ng-href="{{uiSref() + childStates[0]}}">{{dataPath}}</a>
     <br/>
     <!-- {{rootState +'.'+ dataPath +'.'+ state}} -->

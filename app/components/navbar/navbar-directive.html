@@ -2,47 +2,46 @@
 	<a class="logo" ui-sref="muine" ui-sref-active="active"><svg><use xlink:href="#shape-logo"></use></svg></a>
 	<a class="brand" ui-sref="muine" ui-sref-active="active">muine<span>watersports</span>.com</a>
 	<nav>
+		<!-- TODO make links selectable not draggable! -->
 		<ul class="mainmenu">
-			<li ng-class="{active: $state.includes('muine.sports')}" class="item">
-				<a ui-sref="muine.sports" ui-sref-active="rotated">Sports</a>
+			<li class="item"
+					ng-repeat="dataPath in dataKeysList"
+					ng-controller="mainMenuItemCtrl1"
+					ng-class="{active: $state.includes(rootState +'.'+ dataPath)}">
+				<a ng-href="{{uiSref() + childStates[0]}}"
+					 ng-class="{rotated: $state.includes(rootState +'.'+ dataPath)}">
+					{{dataPath}}
+				</a>
 				<div class="control-panel-row">
-
-				</div>
-				<div class="control-panel-row">
-
-				</div>
-			</li>
-			<li ng-class="{active: $state.includes('muine.clubs')}" class="item">
-				<a ui-sref="muine.clubs.home({clubId: clubId})" ng-click="log('clicked')" ng-class="{rotated: $state.includes('muine.clubs')}">Clubs</a>
-				<div class="control-panel-row">
-					<a class="caret" ui-sref="muine.clubs.home({clubId: prevId(clubs, clubId)})">◀</a>
-					<ul class="newsubmenu slide">
-						<li class="subselect" ng-repeat="club in data.clubs" ng-class="{active: $state.includes('muine.clubs', {clubId: $index})}">
-							<a ui-sref="muine.clubs.home({clubId: $index})" ng-click="selectClub(club.id)">{{club.name}}{{club.id}}</a>
+					<a class="caret" ng-href="{{prevUiSref()}}">◀</a>
+					<ul class="newsubmenu">
+						<li class="subselect" ng-init="itemIndex = $index"
+								ng-repeat="item in menuList"
+								ng-class="{'muine-submenu': menuExpanded, 'muine-old': isOld(item.id), 'muine-selected': isSelected(item.id)}">
+							<a ui-sref="{{rootState +'.'+ dataPath +'.'+ childStates[0] +'({'+ itemIdParam +': item.id})'}}">
+								{{item.name}}
+							</a>
 						</li>
 					</ul>
-					<a class="caret" ui-sref="muine.clubs.home({clubId: nextId(clubs, clubId)})">▶</a>
-					<a class="icon" ng-click="toggleList()" href="javascript: void(0);"><svg><use xlink:href="#shape-menu"></use></svg></a>
+					<a class="caret" ng-href="{{nextUiSref()}}">▶</a>
+					<a class="icon" ng-click="toggleMenu()" href="javascript: void(0);"><svg><use xlink:href="#shape-menu"></use></svg></a>
 				</div>
 				<div class="control-panel-row">
-					<a class="icon" ui-sref="muine.clubs.home({clubId: clubId})" ui-sref-active="active"><svg><use xlink:href="#shape-home"></use></svg></a>
-					<a class="icon" ui-sref="muine.clubs.photo({clubId: clubId})" ui-sref-active="active"><svg><use xlink:href="#shape-photo"></use></svg></a>
-					<a class="icon" ui-sref="muine.clubs.video({clubId: clubId})" ui-sref-active="active"><svg><use xlink:href="#shape-video"></use></svg></a>
-					<a class="icon" ui-sref="muine.clubs.contact({clubId: clubId})" ui-sref-active="active"><svg><use xlink:href="#shape-contact"></use></svg></a>
+					<a class="icon"
+						 ng-repeat="state in childStates"
+					   ng-href="{{uiSref() + state}}"
+						 ng-class="{active: $state.includes(rootState +'.'+ dataPath +'.'+ state)}">
+						<svg>
+							<use ng-attr-xlink:href="{{'#shape-'+ state}}" xlink:href="" ></use>
+						</svg>
+					</a>
 				</div>
-				<!-- <ul class="submenu">
-					<li ng-repeat="club in data.clubs">
-						<a ui-sref="muine.clubs.home({clubId: $index})">{{data.clubs[$index].name}}</a>
-					</li>
-				</ul> -->
-			</li>
-			<li ng-class="{active: $state.includes('muine.spots')}" class="item">
-				<a ui-sref="muine.spots" ui-sref-active="rotated">Spots</a>
-				<div class="control-panel-row">
-
-				</div>
-				<div class="control-panel-row">
-
+				<div style="margin-top: 320px; text-align: left; width: 400px">
+<pre>
+$scope.selected > {{selected}}
+$scope.old > {{old}}
+$scope.menuExpanded > {{menuExpanded}}
+</pre>
 				</div>
 			</li>
 			<li class="item">
