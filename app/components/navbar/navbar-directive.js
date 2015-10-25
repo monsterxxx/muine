@@ -26,7 +26,7 @@ angular.module('psApp.navbar', [])
   $scope.stateList = $state.get();
 
   //submenu animation speed (menu item/second)
-  $scope.speed = 0.15;//0.15;
+  $scope.speed = 1;//0.15;
 }])
 
 .controller('mainMenuItemCtrl1', function ($scope, $timeout, $stateParams, $state) {
@@ -67,22 +67,6 @@ angular.module('psApp.navbar', [])
     }
   });
 
-
-  $scope.menuList = [$scope.lCol[$scope.index]];
-
-  $scope.menuExpanded = false;
-  $scope.toggleMenu = function () {
-    if ($scope.menuExpanded === false) {
-      $scope.menuExpanded = true;
-      var addList = $scope.lCol.slice();
-      addList.splice($scope.index, 1);
-      $scope.menuList = $scope.menuList.concat(addList);
-    } else {
-      $scope.menuExpanded = false;
-      $scope.menuList.splice(1);
-    }
-  };
-
   $scope.prevId = function () {
     if ($scope.index === 0) {return $scope.col[$scope.colLength - 1].id;}
     return $scope.col[$scope.index - 1].id;
@@ -106,6 +90,21 @@ angular.module('psApp.navbar', [])
     return '#/'+ $scope.rootState +'/'+ $scope.dataPath +'/'+$scope.nextId()+'/'+ $scope.childStates[0];
   };
 
+  $scope.menuList = [$scope.lCol[$scope.index]];
+
+  $scope.menuExpanded = false;
+  $scope.toggleMenu = function () {
+    if ($scope.menuExpanded === false) {
+      $scope.menuExpanded = true;
+      var addList = $scope.lCol.slice();
+      addList.splice($scope.index, 1);
+      $scope.menuList = $scope.menuList.concat(addList);
+    } else {
+      $scope.menuExpanded = false;
+      $scope.menuList.splice(1);
+    }
+  };
+
   //on each state change there's a need to reconfig ctrl's current variables
   $scope.$on('$stateChangeSuccess', function(){
     if ($state.includes($scope.rootState +'.'+ $scope.dataPath)) {
@@ -125,8 +124,14 @@ angular.module('psApp.navbar', [])
         $timeout(function () {
           $scope.menuList = [$scope.lCol[$scope.index]];
           $scope.menuExpanded = false;
-          $scope.old = undefined;
+          $scope.$apply(function () {
+          $scope.old = 0;
+
+          });
           $scope.selected = undefined;
+          $timeout(function () {
+            $scope.addBorder = true;
+          }, ($scope.colLength - 1) * $scope.speed);
         }, 2);
       } else {
         console.log('mex false');
@@ -138,7 +143,7 @@ angular.module('psApp.navbar', [])
     }
   });
 
-  //animation
+  //animation styles
   $scope.isOld = function (id) {
     return id === $scope.old;
   };
@@ -155,11 +160,17 @@ angular.module('psApp.navbar', [])
     enter: function(element, doneFn) {
       var $scope = getScope(element);
       var height = element[0].offsetHeight;
-      console.log($scope.colLength, height);
+      var from = { transform: 'translate(0,-' + height * ($scope.colLength - 1) + 'px)' };
+      var to = { transform: 'translate(0,0)' };
+      var duration = ($scope.colLength - 1) * $scope.speed;
+      var addClass = ($scope.itemIndex === $scope.colLength - 1 ? 'border-bottom' : '');
+      console.log('enter > '+ $scope.itemIndex, from, to, duration, addClass);
       return $animateCss(element, {
-        from: { transform: 'translate(0,-' + height * ($scope.colLength - 1) + 'px)' },
-        to: { transform: 'translate(0,0)' },
-        duration: ($scope.colLength - 1) * $scope.speed
+        addClass: addClass,
+        applyClassesEarly: true,
+        from: from,
+        to: to,
+        duration: duration
       });
     },
     leave: function(element, doneFn) {

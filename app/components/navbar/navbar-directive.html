@@ -17,7 +17,10 @@
 					<ul class="newsubmenu">
 						<li class="subselect" ng-init="itemIndex = $index"
 								ng-repeat="item in menuList"
-								ng-class="{'muine-submenu': menuExpanded, 'muine-old': isOld(item.id), 'muine-selected': isSelected(item.id)}">
+								ng-class="{'muine-submenu': menuExpanded,
+													 'muine-old': isOld(item.id),
+													 'muine-selected': isSelected(item.id),
+													 'border-bottom': itemIndex === 0}">
 							<a ui-sref="{{rootState +'.'+ dataPath +'.'+ childStates[0] +'({'+ itemIdParam +': item.id})'}}">
 								{{item.name}}
 							</a>

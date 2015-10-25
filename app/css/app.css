@@ -355,18 +355,14 @@ header {
       header ul.newsubmenu > li.muine-old {
         background: #222222;
         z-index: 2;
-        font-weight: bold;
         border: none;
         border-bottom: 1px solid black; }
-      header ul.newsubmenu > li.muine-selected {
-        border-bottom: 1px solid #2ECC40; }
       header ul.newsubmenu > li:first-child {
         background: #222222;
         z-index: 2;
-        font-weight: bold;
         border: none;
         border-bottom: 1px solid black; }
-      header ul.newsubmenu > li:last-child {
+      header ul.newsubmenu > li.border-bottom {
         border-bottom: 1px solid #2ECC40; }
       header ul.newsubmenu > li > a {
         line-height: 30px;
