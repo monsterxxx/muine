@@ -140,42 +140,45 @@ div.box4-container {
     background: rgba(0, 128, 0, 0.8);
     z-index: 2; }
 
-div.box5-container {
-  background: #333;
-  height: 1000px;
-  padding-left: 20px; }
-  div.box5-container .a {
-    background: #fff;
-    margin: 0 0 0 -20px; }
-    div.box5-container .a h3 {
-      margin: 0;
-      border-bottom: 1px solid black; }
-  div.box5-container .e {
-    color: white; }
-  div.box5-container .b {
-    height: 20px; }
-  div.box5-container .b5-c {
-    position: relative;
-    height: 30px;
-    width: 200px;
-    background: rgba(0, 0, 255, 0.8);
-    color: #fff; }
-    div.box5-container .b5-c0 {
-      background: rgba(0, 0, 255, 0.8);
-      z-index: 1; }
-    div.box5-container .b5-c1 {
-      background: rgba(75, 0, 130, 0.8); }
-    div.box5-container .b5-c2 {
-      background: rgba(75, 0, 130, 0.8); }
-    div.box5-container .b5-c3 {
-      background: rgba(75, 0, 130, 0.8); }
-    div.box5-container .b5-c4 {
-      background: rgba(0, 128, 0, 0.8);
-      z-index: 2; }
-    div.box5-container .b5-c5 {
-      background: rgba(75, 0, 130, 0.8); }
-    div.box5-container .b5-c6 {
-      background: rgba(75, 0, 130, 0.8); }
+div.box5-container .a {
+  background: white;
+  margin: 0;
+  padding-left: 10px;
+  border-bottom: 1px solid black; }
+div.box5-container .b {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100px;
+  min-width: 1200px; }
+div.box5-container .c {
+  background: gray;
+  color: white;
+  width: 300px;
+  border-right: 1px solid black; }
+  div.box5-container .c.active {
+    background: silver; }
+div.box5-container svg {
+  width: 30px;
+  height: 30px; }
+div.box5-container a {
+  color: white; }
+div.box5-container .d {
+  float: right;
+  width: 30px;
+  height: 30px;
+  background: rgba(0, 0, 255, 0.5); }
+div.box5-container .e {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  div.box5-container .e .f {
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    text-align: center; }
+  div.box5-container .e .g {
+    color: black; }
 
 div.box6-container .a {
   background: white;
@@ -190,7 +193,7 @@ div.box6-container .b {
 div.box6-container .c {
   background: gray;
   color: white;
-  width: 200px;
+  width: 250px;
   border-right: 1px solid black; }
   div.box6-container .c.active {
     background: silver; }
@@ -215,6 +218,72 @@ div.box6-container .e {
     text-align: center; }
   div.box6-container .e .g {
     color: black; }
+
+div.box7-container .a {
+  background: white;
+  margin: 0;
+  padding-left: 10px;
+  border-bottom: 1px solid black; }
+
+box7-dir .p {
+  width: 150px;
+  top: 150px;
+  color: black; }
+box7-dir .control-panel-row {
+  background: #222222;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  width: 273px;
+  left: 27px;
+  height: 30px;
+  top: 0px;
+  border-bottom: 1px solid #2ECC40; }
+box7-dir .caret, box7-dir .icon > svg {
+  position: relative;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #dedede;
+  fill: #dedede;
+  display: inline-block; }
+  box7-dir .caret:hover, box7-dir .icon > svg:hover {
+    color: white;
+    fill: white;
+    stroke-width: 2px;
+    stroke: white;
+    cursor: pointer; }
+box7-dir .icon.active > svg {
+  -webkit-filter: drop-shadow(0 0 4px yellow);
+          filter: drop-shadow(0 0 4px yellow);
+  color: white;
+  fill: white;
+  stroke-width: 2px;
+  stroke: white; }
+box7-dir .menu {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  text-align: center;
+  list-style-type: none;
+  line-height: 30px; }
+  box7-dir .menu a {
+    text-decoration: none;
+    color: white; }
+  box7-dir .menu li {
+    position: relative; }
+box7-dir li.subselect {
+  z-index: 1;
+  background: darkgray; }
+  box7-dir li.subselect:hover {
+    background: #222222;
+    cursor: pointer; }
 
 header {
   min-width: 1200px;
@@ -371,26 +440,26 @@ header {
         cursor: pointer;
         background: #222222; }
 
-.menu {
+.dev-menu {
   list-style: none;
   border-bottom: 0.1em solid black;
   margin-bottom: 0;
   padding: 0 0 0.5em; }
 
-.menu:before {
+.dev-menu:before {
   content: "["; }
 
-.menu:after {
+.dev-menu:after {
   content: "]"; }
 
-.menu > li {
+.dev-menu > li {
   display: inline; }
 
-.menu > li:before {
+.dev-menu > li:before {
   content: "|";
   padding-right: 0.3em; }
 
-.menu > li:nth-child(1):before {
+.dev-menu > li:nth-child(1):before {
   content: "";
   padding: 0; }
 

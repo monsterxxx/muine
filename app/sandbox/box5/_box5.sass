@@ -1,38 +1,35 @@
 div.box5-container
-  background: #333
-  height: 1000px
-  padding-left: 20px
   .a
-    background: #fff
-    margin: 0 0 0 -20px
-    h3
-      margin: 0
-      border-bottom: 1px solid black
-
-  .e
-    color: white
+    background: white
+    margin: 0
+    padding-left: 10px
+    border-bottom: 1px solid black
   .b
-    height: 20px
-
-  .b5-c
-    position: relative
+    display: flex
+    height: 100px
+    min-width: 1200px
+  .c
+    background: gray
+    color: white
+    width: 300px
+    border-right: 1px solid black
+    &.active
+      background: silver
+  svg
+    width: 30px
     height: 30px
-    width: 200px
-    background: rgba(blue, 0.8)
-    color: #fff
-    &0
-      background: rgba(blue, 0.8)
-      z-index: 1
-    &1
-      background: rgba(indigo, 0.8)
-    &2
-      background: rgba(indigo, 0.8)
-    &3
-      background: rgba(indigo, 0.8)
-    &4
-      background: rgba(green, 0.8)
-      z-index: 2
-    &5
-      background: rgba(indigo, 0.8)
-    &6
-      background: rgba(indigo, 0.8)
+
+  a
+    color: white
+  .d
+    float: right
+    width: 30px
+    height: 30px
+    background: rgba(blue, 0.5)
+  .e
+    display: flex
+    .f
+      flex-grow: 1
+      text-align: center
+    .g
+      color: black

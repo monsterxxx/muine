@@ -22,7 +22,7 @@
 													 'muine-selected': isSelected(item.id),
 													 'border-bottom': itemIndex === 0}">
 							<a ui-sref="{{rootState +'.'+ dataPath +'.'+ childStates[0] +'({'+ itemIdParam +': item.id})'}}">
-								{{item.name}}
+								{{item.name}}{{item.id}}{{isOld(item.id)}}
 							</a>
 						</li>
 					</ul>
@@ -63,6 +63,7 @@ $scope.menuExpanded > {{menuExpanded}}
 	<blockquote>
 		$scope.clubId > {{clubId}}<br/>
 	</blockquote>
+	<input type="text" ng-model="speed" value="" style="width:100px">
 </div>
 <!-- <ul class="newsubmenu">
 	<li class="subselect" ng-repeat="club in data.clubs | filter:search">

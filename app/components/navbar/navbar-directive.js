@@ -124,10 +124,7 @@ angular.module('psApp.navbar', [])
         $timeout(function () {
           $scope.menuList = [$scope.lCol[$scope.index]];
           $scope.menuExpanded = false;
-          $scope.$apply(function () {
-          $scope.old = 0;
-
-          });
+          $scope.old = undefined;
           $scope.selected = undefined;
           $timeout(function () {
             $scope.addBorder = true;

@@ -1,0 +1,66 @@
+div.box7-container
+  .a
+    background: white
+    margin: 0
+    padding-left: 10px
+    border-bottom: 1px solid black
+
+box7-dir
+  .p
+    // position: absolute
+    // background: purple
+    width: 150px
+    top: 150px
+    color: black
+
+  .control-panel-row
+    background: $navbar_background
+    display: flex
+    position: relative
+    width: $navbar_control_width - 27px
+    left: 27px
+    height: $navbar_height/2
+    top: 0px
+    border-bottom: 1px solid #2ECC40
+  .caret, .icon>svg
+    position: relative
+    z-index: 2
+    width: $navbar_height/2
+    height: $navbar_height/2
+    line-height: $navbar_height/2
+    text-align: center
+    color: $navbar_color
+    fill: $navbar_color
+    display: inline-block
+    &:hover
+      color: $navbar_hover
+      fill: $navbar_hover
+      stroke-width: 2px
+      stroke: $navbar_hover
+      cursor: pointer
+  .icon.active>svg
+    filter: drop-shadow(0 0 4px rgba(yellow,1))
+    color: $navbar_hover
+    fill: $navbar_hover
+    stroke-width: 2px
+    stroke: $navbar_hover
+  .menu
+    position: relative
+    margin: 0
+    padding: 0
+    flex-grow: 1
+    text-align: center
+    list-style-type: none
+    line-height: $navbar_height/2
+    a
+      text-decoration: none
+      color: white
+    li
+      position: relative
+
+  li.subselect
+    z-index: 1
+    background: darkgray
+    &:hover
+      background: $navbar_background
+      cursor: pointer

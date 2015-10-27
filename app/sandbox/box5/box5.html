@@ -1,14 +1,36 @@
 <div class="box5-container">
-  <div class="a">
-    <h3>Trying ng-move feature of ngAnimate</h3>
+<h3 class = "a">Merge boxes 6 and 7</h3>
+<div class="b">
+  <div class="c"
+       ng-repeat="dataPath in dataKeysList"
+       ng-if="$index===1"
+       ng-controller="mainMenuItemCtrl2"
+       ng-class="{active: $state.includes(rootState +'.'+ dataPath)}">
+    <a ng-href="{{uiSref() + childStates[0]}}">{{dataPath}}</a>
+    <br/>
+    <!-- {{rootState +'.'+ dataPath +'.'+ state}} -->
+    <a ng-repeat="state in childStates"
+       ng-href="{{uiSref() + state}}">
+      <svg>
+        <use ng-attr-xlink:href="{{'#shape-'+ state}}" xlink:href="" ></use>
+      </svg>
+    </a>
+    <a class="d" ng-click="toggleMenu()" href="#">m</a>
+    <br/>
+    <div class="e">
+      <a ng-href="{{prevUiSref()}}">◀</a>
+      <ul class="f">
+        <li ng-repeat="item in menuList">
+          <a class="g" ui-sref="{{rootState +'.'+ dataPath +'.'+ childStates[0] +'({'+ itemIdParam +': item.id})'}}">{{item.name}}</a>
+        </li>
+      </ul>
+      <a ng-href="{{nextUiSref()}}">▶</a>
+    </div>
+    <box7-dir path="{{dataPath}}"></box7-dir>
+
   </div>
-  <div class="b"></div>
-  <div class="b5-c"
-       ng-repeat="item in list"
-       ng-class="['b5-c'+{{item}}, {'b5-old': isOld(item), 'b5-selected': isSelected(item)}]">
-    {{item}}
+  <div class="c">
+    <a ui-sref="box6.prices">prices</a>
   </div>
-  <div class="e">
-    {{list}}
-  </div>
+</div>
 </div>

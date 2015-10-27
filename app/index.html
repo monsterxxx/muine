@@ -13,14 +13,13 @@
   <link rel="stylesheet" href="css/app.css">
   <!-- HTML5 Boilerplate -->
   <script src="../bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-
 </head>
 
 <body>
 
   <ng-include src="'assets/shapes.svg'"></ng-include>
 
-  <ul class="menu" ng-if="!$state.includes('muine')">
+  <ul class="dev-menu" ng-if="!$state.includes('muine')">
     <li><a ui-sref="view1">view1</a></li>
     <li><a ui-sref="view2">view2</a></li>
     <li><a ui-sref="muine">muine</a></li>
@@ -28,6 +27,7 @@
     <li><a ui-sref="box4">box4</a></li>
     <li><a ui-sref="box5">box5</a></li>
     <li><a ui-sref="box6">box6</a></li>
+    <li><a ui-sref="box7">box7</a></li>
   </ul>
 
   <!--[if lt IE 10]>
@@ -39,6 +39,9 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/velocity/velocity.min.js"></script>
+  <script src="../bower_components/velocity/velocity.ui.min.js"></script>
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/angular-animate/angular-animate.js"></script>
   <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
@@ -59,4 +62,6 @@
   <script src="sandbox/box4/box4.js"></script>
   <script src="sandbox/box5/box5.js"></script>
   <script src="sandbox/box6/box6.js"></script>
+
+  <script src="sandbox/box7/box7.js"></script>
 </body></html>

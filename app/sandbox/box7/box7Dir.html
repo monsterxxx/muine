@@ -1,0 +1,20 @@
+<div class="control-panel-row">
+  <a class="caret caret-left" ng-href="{{prevUiSref()}}">◀</a>
+  <ul class="menu">
+    <li class-"selected" data-index=""></li>
+    <li class="subselect" data-index="">
+      <a href="{{'#/'+ rootState}}">
+      </a>
+    </li>
+  </ul>
+  <a class="caret caret-right" ng-href="{{'#/'+ rootState}}">▶</a>
+  <a class="icon" ng-click="menu()" href="{{'#/'+ rootState}}"><svg><use xlink:href="#shape-menu"></use></svg></a>
+</div>
+<div class="p">
+  <pre>
+scope
+  index: {{index}}
+  id: {{id}}
+
+  </pre>
+</div>
