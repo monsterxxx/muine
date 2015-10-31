@@ -1,15 +1,33 @@
 <div class="control-panel-row">
-  <a class="caret caret-left" ng-href="{{prevUiSref()}}">◀</a>
+
+  <a class="caret caret-left"
+     ng-href="{{prevUiSref()}}"
+     ng-click="prevItem()">
+    ◀
+  </a>
+
   <ul class="menu">
     <li class-"selected" data-index=""></li>
     <li class="subselect" data-index="">
-      <a href="{{'#/'+ rootState}}">
+      <a href="#">
       </a>
     </li>
   </ul>
-  <a class="caret caret-right" ng-href="{{'#/'+ rootState}}">▶</a>
-  <a class="icon" ng-click="menu()" href="{{'#/'+ rootState}}"><svg><use xlink:href="#shape-menu"></use></svg></a>
+
+  <a class="caret caret-right"
+     ng-href="{{nextUiSref()}}"
+     ng-click="nextItem()">
+    ▶
+  </a>
+
+  <a class="icon"
+     ng-click="toggleMenu()"
+     ng-class="{active: menuOpened}"
+     href="javascript: void(0)">
+    <svg><use xlink:href="#shape-menu"></use></svg>
+  </a>
 </div>
+
 <div class="p">
   <pre>
 scope

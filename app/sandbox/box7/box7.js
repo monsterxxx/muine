@@ -17,91 +17,247 @@ angular.module('myApp.box7', [])
 
 })
 
-.directive('box7Dir', function (MuineDataSvc, $timeout) {
+.controller('box7DirCtrl', function () {
+  console.log('> dirCtrl load');
+})
+
+.directive('box7Dir', function (MuineDataSvc, $timeout, $state, $stateParams, $q) {
   var data = MuineDataSvc.getData();
   //console.log(angular.toJson());
   return {
     restrict: 'E',
     templateUrl: 'sandbox/box7/box7Dir.html',
-    link: function (scope, element, attrs) {
+    controller: 'box7DirCtrl',
+    link: function ($scope, element, attrs) {
+      console.log('> dir load');
 
-    var rootState = scope.$state.current.name.split('.')[0];
-    scope.rootState = rootState;
 
-    var col = scope.lCol || data[attrs.path];
+      //EXTERNAL DATA
+        //FROM PARENT SCOPES:
+        //root router state                          $scope.rootState
+        //dataPath defining app menu item            $scope.dataPath
+        //first element of the childStates list      $scope.childStates[0]
 
-    var index = 0;
+      //collection of menu elements
+      var col = $scope.col;
 
-    //scope.index = index;
+      //VARIABlES
+      var $menu = element.find('.menu');
 
-    scope.$watch('index', function () {
-      console.log('dir watch index  > '+scope.index);
+      //FUNCTIONS FOR TESTING PURPOSES
+      $scope.$watch('index', function () {
+        //console.log('dir watch index  > '+ $scope.index);
+      });
 
-    });
+      $scope.$watch('id', function () {
+        //console.log('dir watch id     > '+ $scope.id);
+      });
 
-    scope.$watch('id', function () {
-      console.log('dir watch id     > '+scope.id);
+      $scope.test = function () {
+        console.log('test!');
+      };
 
-    });
+      function sleep(miliseconds) {
+         var currentTime = new Date().getTime();
+         while (currentTime + miliseconds >= new Date().getTime()) {
+         }
+       }
 
-    element.find('.menu').html('<li class="selected" data-index="'+index+'"><a href="#/'+ rootState +'">'+ col[index].name +'</a></li>');
 
-    element.find('a.icon').click(function(){
-      if (!$(this).hasClass('active')) {
+
+      //FUNCTIONS
+      //generating html of a menu item
+      var genSelected = function (index) {
+        return '<li class="selected" data-index="'+ $scope.index + '">' +
+                  '<span>'+ col[$scope.index].name + '</span>' +
+                '</li>';
+      };
+      var genSubselect = function (index) {
+        var href = '#/'+ $scope.rootState +'/'+ $scope.dataPath +'/' +
+                    col[index].id +'/'+ $scope.childStates[0];
+        return '<li class="subselect" data-index="'+index+'">' +
+                 '<a href="'+ href +'">'+ col[index].name +'</a>' +
+               '</li>';
+      };
+
+      //ui
+      $scope.prevItem = function () {
+        $scope.leftClicked = true;
+      };
+
+      $scope.nextItem = function () {
+        $scope.rightClicked = true;
+      };
+
+      $scope.toggleMenu = function () {
+        if ($scope.menuOpened) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      };
+
+      $menu.on('click', '.subselect', function () {
+        $scope.subselectClicked = true;
+        console.log('clicked');
+      });
+
+      //animations
+      //submenu speed item/ms
+      var speed = 150;
+
+      var slide = function (direction) {
+        if (direction !== 'Left' && direction !== 'Right') {
+          console.log('direction for slide() should be either Left or Right');
+        }
+        //console.log('slide'+direction >);
+        var reverse = (direction === 'Left') ? 'Right': 'Left';
+
+        var selected = element.find('.selected')
+          .first();
+
+        var temp = selected.find('span')
+          .clone()
+          .addClass('temp');
+        selected.append(temp);
+          //.insertAfter(selected);
+
+        setTimeout(function() {
+            temp.velocity('transition.slide'+ reverse +'BigOut', function () {
+              temp.remove();
+            });
+        }, 10);
+
+        selected.attr('data-index', $scope.index);
+
+        var span = selected.find('span').first();
+        span.text(col[$scope.index].name);
+
+        if (!span.hasClass('velocity-animating')) {
+          span.velocity('transition.slide'+ direction +'BigIn');
+        }
+        element.find('.icon').removeClass('active');
+      };
+
+      var openMenu = function () {
+        console.log('> openMenu()');
+
+        $scope.menuOpened = true;
+
+        var $selected = element.find('.selected');
+        var menuOffset = $selected.outerHeight() * (col.length - 1);
         for (var i = 0; i < col.length; i++){
-          if (i !== index){
-            element.find('.menu').append('<li class="subselect" data-index="'+i+'"><a href="#/'+ rootState +'">'+ col[i].name +'</a></li>');
-            //element.find('ul.menu').append($compile('<li class="subselect" data-index="'+i+'" ng-click="select()" ><a href="#/'+ rootState +'">'+ col[i].name +'</a></li>')(scope));
+          if (i !== $scope.index){
+            var $subselect = angular.element(genSubselect(i));
+            $subselect.css({ 'top' : '-' + menuOffset + 'px' });
+            //TODO check why following variant is not working:
+            //$subselect.css({ 'transform' : 'translateY(-' + menuOffset + 'px)' });
+            console.log(i,$subselect);
+
+            $menu.append($subselect);
+
+            $subselect.velocity({
+              'translateY':  menuOffset + 'px',
+              //'translateY':  0
+            },{
+              duration: speed * (col.length - 1),
+              easing: 'linear'
+            });
           }
         }
-        //scope.$apply();
-        $(this).addClass('active');
-      } else {
-        element.find('menu').html('<li class="selected"><a href="#/'+ rootState +'">'+ col[index].name +'</a></li>');
-        $(this).removeClass('active');
-      }
-    });
+      };
 
-    scope.select = function () {
-      console.log('select!');
-    };
+      var closeMenu = function () {
+        console.log('> closeMenu()');
 
-    element.find('.menu').on('click', '.subselect', function(){
-      index = parseInt($(this).attr('data-index'), 10);
-      element.find('.menu').html('<li class="selected" data-index="'+index+'"><a href="#/'+ rootState +'">'+ col[index].name +'</a></li>');
-      element.find('.icon').removeClass('active');
-    });
+        var $selected = element.find('.selected');
+        var menuOffset = $selected.outerHeight() * (col.length - 1);
+        console.log(menuOffset);
+        //take all subselect elements, translate them up and remove
+        element.find('.subselect').velocity({
+          'translateY': 0
+        },{
+          duration: speed * (col.length - 1),
+          easing: 'linear',
+          complete: function (elements) {
+            console.log(elements);
+            elements.forEach(function (el) {
+              angular.element(el).remove();
+            });
+          }
+        });
 
-    element.find('.caret-left').click(function(){
-      if (index === 0) {
-        index = col.length - 1;
-      } else {
-        index = index - 1;
-      }
-      element.find('.selected').velocity('transition.slideRightBigOut', function () {
-        element.find('.menu').html('<li class="selected" data-index="'+index+'"><a href="#/'+ rootState +'">'+ col[index].name +'</a></li>');
-        element.find('.selected').velocity('transition.slideLeftBigIn');
+        $scope.menuOpened = false;
+      };
+
+      var select = function () {
+        console.log('> select()');
+        var old = $menu.find('.selected');
+        var selected = $menu.find('.subselect[data-index="'+ $scope.index +'"]');
+        selected
+          .removeClass('subselect')
+          .addClass('selected')
+          .html('<span>'+ col[$scope.index].name + '</span>');
+        var subselect = $menu.find('.subselect');
+
+        var height = old.outerHeight();
+        // index position of selected element in current DOM list
+        var selectedIndex = selected.index();
+        old.velocity({
+          'translateY': '-' + height
+        },{
+          easing: 'linear',
+          duration: speed,
+          delay: speed * (selectedIndex - 1),
+        });
+        selected.velocity({
+          'translateY': height * (col.length - selectedIndex - 1)
+        },{
+          easing: 'linear',
+          duration: speed * selectedIndex
+        });
+        subselect.velocity({
+          'translateY': 0
+        },{
+          duration: speed * (col.length - 1),
+          easing: 'linear',
+          complete: function (elements) {
+            $menu.html(genSelected($scope.index));
+          }
+        });
+        $scope.menuOpened = false;
+      };
+
+
+
+      //BOOTSTRAP
+      element.find('.menu').html(genSelected($scope.index));
+      //reaction on a state change
+      $scope.$on('$stateChangeSuccess', function(){
+        console.log('dir > stateChange processing');
+
+        if ($state.includes($scope.rootState +'.'+ $scope.dataPath)) {
+          $scope.id = parseInt($stateParams[$scope.itemIdParam]);
+          $scope.index = $scope.indexById($scope.id);
+          //if left/right carets or subselect were clicked, perform animation
+          if ($scope.leftClicked) {
+            $scope.leftClicked = false;
+            slide('Left');
+          }
+          if ($scope.rightClicked) {
+            $scope.rightClicked = false;
+            slide('Right');
+          }
+          if ($scope.subselectClicked) {
+            select();
+            $scope.subselectClicked = false;
+          }
+
+          $scope.menuList = [$scope.col[$scope.index]];
+          $scope.menuExpanded = false;
+          console.log('stateChange > $scope.id > '+ $scope.id +', $scope.index > '+ $scope.index);
+        }
       });
-      element.find('.icon').removeClass('active');
-    });
-
-    element.find('.caret-right').click(function(){
-      if (index === col.length - 1) {
-        index = 0;
-        scope.index = index;
-      } else {
-        index = index + 1;
-        console.log(index);
-        scope.index = index;
-        console.log(scope.index);
-        scope.select();
-      }
-      element.find('.selected').velocity('transition.slideLeftBigOut', function () {
-        element.find('.menu').html('<li class="selected" data-index="'+index+'"><a href="#/'+ rootState +'">'+ col[index].name +'</a></li>');
-        element.find('.selected').velocity('transition.slideRightBigIn');
-      });
-      element.find('.icon').removeClass('active');
-    });
 
     }
   };

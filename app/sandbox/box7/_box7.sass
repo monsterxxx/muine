@@ -7,8 +7,6 @@ div.box7-container
 
 box7-dir
   .p
-    // position: absolute
-    // background: purple
     width: 150px
     top: 150px
     color: black
@@ -49,18 +47,35 @@ box7-dir
     margin: 0
     padding: 0
     flex-grow: 1
-    text-align: center
-    list-style-type: none
-    line-height: $navbar_height/2
     a
       text-decoration: none
       color: white
-    li
-      position: relative
-
-  li.subselect
-    z-index: 1
-    background: darkgray
-    &:hover
+  li
+    list-style-type: none
+    line-height: $navbar_height/2
+    height: $navbar_height/2
+    position: relative
+    border-bottom: 1px solid black
+    &.selected
       background: $navbar_background
-      cursor: pointer
+      z-index: 2
+    &.subselect
+      text-align: center
+      z-index: 1
+      background: darkgray
+      &:hover
+        background: $navbar_background
+        cursor: pointer
+    a
+      display: list-item
+      // height: $navbar_height/2
+      // width: 100%
+
+  span
+    text-align: center
+    position: absolute
+    display: inline-block
+    width: 100%
+  span.temp
+    //top: 0
+    //width: 100%

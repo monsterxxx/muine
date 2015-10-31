@@ -16,6 +16,30 @@ angular.module('myApp.view1', [])
 .controller('View1Ctrl', function() {
 
 
+})
+
+.directive('view1Dir', function ($parse) {
+  return function link($scope, element, attrs){
+    var $appendix = $('<div class="a">dsgs</div>');
+    element.append($appendix).velocity({
+      translateY: 'translateY(400px)'
+    },{
+      duration: 5000,
+      easing: 'linear'
+    });
+    $('.a').animate({
+      'width' : '500'
+      //translateY: menuOffset + 'px'
+    }, 3000);
+    // $appendix.animate({
+    //   opacity: 0.25,
+    //   left: "+=50",
+    //   height: "toggle",
+    //   translateY: '400px'
+    // }, {
+    //   duration: 5000
+    // });
+  };
 });
 
 })();
