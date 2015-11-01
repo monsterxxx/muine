@@ -109,11 +109,8 @@ angular.module('psApp.navbar', [])
   $scope.$on('$stateChangeSuccess', function(){
     if ($state.includes($scope.rootState +'.'+ $scope.dataPath)) {
       if ($scope.menuExpanded === true) {
-        console.log('mex true');
         $scope.old = $scope.id;
-        console.log($scope.old ,$scope.id);
         $scope.id = parseInt($stateParams[$scope.itemIdParam]);
-        console.log($scope.old ,$scope.id);
         $scope.selected = $scope.id;
         $scope.index = indexById($scope.lCol, $scope.id);
         //index of selected item in menu list
@@ -121,15 +118,6 @@ angular.module('psApp.navbar', [])
         $timeout(function () {
           $scope.menuList.splice(0, 0, $scope.menuList.splice($scope.selectedIndex, 1)[0]);
         }, 1);
-        $timeout(function () {
-          $scope.menuList = [$scope.lCol[$scope.index]];
-          $scope.menuExpanded = false;
-          $scope.old = undefined;
-          $scope.selected = undefined;
-          $timeout(function () {
-            $scope.addBorder = true;
-          }, ($scope.colLength - 1) * $scope.speed);
-        }, 2);
       } else {
         console.log('mex false');
         $scope.id = parseInt($stateParams[$scope.itemIdParam]);
@@ -147,84 +135,7 @@ angular.module('psApp.navbar', [])
   $scope.isSelected = function (id) {
     return id === $scope.selected;
   };
-})
-
-.animation('.muine-submenu', ['$animateCss', function($animateCss) {
-  var getScope = function(e) {
-    return angular.element(e).scope();
-  };
-  return {
-    enter: function(element, doneFn) {
-      var $scope = getScope(element);
-      var height = element[0].offsetHeight;
-      var from = { transform: 'translate(0,-' + height * ($scope.colLength - 1) + 'px)' };
-      var to = { transform: 'translate(0,0)' };
-      var duration = ($scope.colLength - 1) * $scope.speed;
-      var addClass = ($scope.itemIndex === $scope.colLength - 1 ? 'border-bottom' : '');
-      console.log('enter > '+ $scope.itemIndex, from, to, duration, addClass);
-      return $animateCss(element, {
-        addClass: addClass,
-        applyClassesEarly: true,
-        from: from,
-        to: to,
-        duration: duration
-      });
-    },
-    leave: function(element, doneFn) {
-      var $scope = getScope(element);
-      var height = element[0].offsetHeight;
-      console.log('leave index>'+$scope.itemIndex);
-      console.log('leave > '+ $scope.itemIndex, $scope.colLength, height, $scope.selectedIndex);
-      var startHeight = $scope.itemIndex < $scope.selectedIndex ? height : 0;
-      console.log('leave > '+ startHeight, $scope.speed, $scope.colLength);
-      console.log('leave from > '+'translate(0,-' + startHeight + 'px)');
-      console.log('leave to > '+'translate(0,-' + (startHeight + height * ($scope.colLength - 1)) +'px)');
-      console.log('leave duration > '+ ($scope.colLength - 1) * $scope.speed);
-      return $animateCss(element, {
-        from: { transform: 'translate(0,-' + startHeight + 'px)' },
-        to: { transform: 'translate(0,-' + (startHeight + height * ($scope.colLength - 1)) +'px)' },
-        duration: ($scope.colLength - 1) * $scope.speed
-      });
-    }
-  };
-}])
-
-.animation('.muine-old', ['$animateCss', function($animateCss) {
-  var getScope = function(e) {
-    return angular.element(e).scope();
-  };
-  return {
-    leave: function(element, doneFn) {
-      var $scope = getScope(element);
-      var height = element[0].offsetHeight;
-      console.log('old leave > '+ height, $scope.speed, $scope.selectedIndex);
-      return $animateCss(element, {
-        from: { transform: 'translate(0,-'+ height +'px)' },
-        to: { transform: 'translate(0,-'+ 2*height +'px)' },
-        duration: $scope.speed,
-        delay: ($scope.selectedIndex - 1 ) * $scope.speed
-      });
-    }
-  };
-}])
-
-.animation('.muine-selected', ['$animateCss', function($animateCss) {
-  var getScope = function(e) {
-    return angular.element(e).scope();
-  };
-  return {
-    move: function(element, doneFn) {
-      var $scope = getScope(element);
-      var height = element[0].offsetHeight;
-      console.log('selected > translate(0,'+ $scope.selectedIndex * height +'px)');
-      return $animateCss(element, {
-        from: { transform: 'translate(0,'+ $scope.selectedIndex * height +'px)' },
-        to: { transform: 'translate(0,0)' },
-        duration: $scope.selectedIndex * $scope.speed
-      });
-    }
-  };
-}]);
+});
 
 
 })();

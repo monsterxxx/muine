@@ -7,28 +7,12 @@
 			<li class="item"
 					ng-repeat="dataPath in dataKeysList"
 					ng-controller="mainMenuItemCtrl1"
-					ng-class="{active: $state.includes(rootState +'.'+ dataPath)}">
+					ng-class="['item-n' + {{$index + 1}}, {active: $state.includes(rootState +'.'+ dataPath)}]">
 				<a ng-href="{{uiSref() + childStates[0]}}"
 					 ng-class="{rotated: $state.includes(rootState +'.'+ dataPath)}">
 					{{dataPath}}
 				</a>
-				<div class="control-panel-row">
-					<a class="caret" ng-href="{{prevUiSref()}}">◀</a>
-					<ul class="newsubmenu">
-						<li class="subselect" ng-init="itemIndex = $index"
-								ng-repeat="item in menuList"
-								ng-class="{'muine-submenu': menuExpanded,
-													 'muine-old': isOld(item.id),
-													 'muine-selected': isSelected(item.id),
-													 'border-bottom': itemIndex === 0}">
-							<a ui-sref="{{rootState +'.'+ dataPath +'.'+ childStates[0] +'({'+ itemIdParam +': item.id})'}}">
-								{{item.name}}{{item.id}}{{isOld(item.id)}}
-							</a>
-						</li>
-					</ul>
-					<a class="caret" ng-href="{{nextUiSref()}}">▶</a>
-					<a class="icon" ng-click="toggleMenu()" href="javascript: void(0);"><svg><use xlink:href="#shape-menu"></use></svg></a>
-				</div>
+				<box7-dir></box7-dir>
 				<div class="control-panel-row">
 					<a class="icon"
 						 ng-repeat="state in childStates"
@@ -65,8 +49,3 @@ $scope.menuExpanded > {{menuExpanded}}
 	</blockquote>
 	<input type="text" ng-model="speed" value="" style="width:100px">
 </div>
-<!-- <ul class="newsubmenu">
-	<li class="subselect" ng-repeat="club in data.clubs | filter:search">
-		{{club.name}}
-	</li>
-</ul> -->

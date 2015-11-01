@@ -5,7 +5,10 @@ module.exports = function(grunt){
   //Project configuration
   grunt.initConfig({
     jshint: {
-      all: ['Gruntfile.js', 'app/**/*.js', 'e2e-tests/**/*.js']
+      all: ['Gruntfile.js', 'app/**/*.js', 'e2e-tests/**/*.js'],
+      options: {
+        laxbreak: true
+      }
     },
     sass: {
       dist: {                            // Target
