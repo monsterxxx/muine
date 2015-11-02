@@ -25,8 +25,15 @@ angular.module('psApp.navbar', [])
   //state list to traverse by item's controller and find further item's child states
   $scope.stateList = $state.get();
 
-  //submenu animation speed (menu item/second)
-  $scope.speed = 1;//0.15;
+  //UI
+  $scope.brandBackgroundDimmed = false;
+  $scope.dimBrandBackground = function () {
+      $scope.brandBackgroundDimmed = true;
+  };
+  $scope.undimBrandBackground = function () {
+      $scope.brandBackgroundDimmed = false;
+  };
+
 }])
 
 .controller('mainMenuItemCtrl1', function ($scope, $timeout, $stateParams, $state) {
@@ -90,51 +97,15 @@ angular.module('psApp.navbar', [])
     return '#/'+ $scope.rootState +'/'+ $scope.dataPath +'/'+$scope.nextId()+'/'+ $scope.childStates[0];
   };
 
-  $scope.menuList = [$scope.lCol[$scope.index]];
-
-  $scope.menuExpanded = false;
-  $scope.toggleMenu = function () {
-    if ($scope.menuExpanded === false) {
-      $scope.menuExpanded = true;
-      var addList = $scope.lCol.slice();
-      addList.splice($scope.index, 1);
-      $scope.menuList = $scope.menuList.concat(addList);
-    } else {
-      $scope.menuExpanded = false;
-      $scope.menuList.splice(1);
-    }
-  };
-
   //on each state change there's a need to reconfig ctrl's current variables
   $scope.$on('$stateChangeSuccess', function(){
     if ($state.includes($scope.rootState +'.'+ $scope.dataPath)) {
-      if ($scope.menuExpanded === true) {
-        $scope.old = $scope.id;
-        $scope.id = parseInt($stateParams[$scope.itemIdParam]);
-        $scope.selected = $scope.id;
-        $scope.index = indexById($scope.lCol, $scope.id);
-        //index of selected item in menu list
-        $scope.selectedIndex = indexById($scope.menuList, $scope.selected);
-        $timeout(function () {
-          $scope.menuList.splice(0, 0, $scope.menuList.splice($scope.selectedIndex, 1)[0]);
-        }, 1);
-      } else {
-        console.log('mex false');
-        $scope.id = parseInt($stateParams[$scope.itemIdParam]);
-        $scope.index = indexById($scope.lCol, $scope.id);
-        $scope.menuList = [$scope.lCol[$scope.index]];
-      }
+      $scope.id = parseInt($stateParams[$scope.itemIdParam]);
+      $scope.index = indexById($scope.lCol, $scope.id);
       console.log('stateChange > $scope.id > '+ $scope.id +', $scope.index > '+ $scope.index);
     }
   });
 
-  //animation styles
-  $scope.isOld = function (id) {
-    return id === $scope.old;
-  };
-  $scope.isSelected = function (id) {
-    return id === $scope.selected;
-  };
 });
 
 

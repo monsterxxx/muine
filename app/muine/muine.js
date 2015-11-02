@@ -29,7 +29,12 @@ angular.module('myApp.muine', [])
     controller: 'MuineCtrl'
   })
   .state('muine.sports', {
-    url: '/sports/{sportId:int}'
+    url: '/sports/{sportId:int}',
+    views: {
+      'sports': {
+        templateUrl: './muine/sports/sports.html'
+      }
+    }
   })
     .state('muine.sports.home', {
       url: '/home'
@@ -72,8 +77,23 @@ angular.module('myApp.muine', [])
     url: '/prices'
   });
 }])
-.controller('MuineCtrl', function() {
-})
+.controller('MuineCtrl', ['$scope', function($scope) {
+  $scope.navbarTransparent = true;
+  $(window).scroll(function() {
+   if ($(this).scrollTop() === 0) {
+     $scope.$apply(function () {
+       $scope.navbarTransparent = true;
+     });
+   } else {
+     $scope.$apply(function () {
+       $scope.navbarTransparent = false;
+     });
+   }
+  //  if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+  //      alert("near bottom!");
+  });
+
+}])
 .run(
   [          '$rootScope', '$state', '$stateParams',
     function ($rootScope,   $state,   $stateParams) {
