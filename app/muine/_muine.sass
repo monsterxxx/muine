@@ -1,3 +1,8 @@
+@import './sports/sports'
+@import './clubs/clubs'
+@import './spots/spots'
+@import './prices/prices'
+
 ps-navbar
   width: 100%
   position: fixed
@@ -10,9 +15,22 @@ ps-navbar
   background-size: cover
 
 .muine-section
-  margin-top: -$navbar_height
-  padding-top: $navbar_height
   height: 600px
+  border-bottom: 1px solid gray
 
 #prices
-  height: 1000px
+  margin: 0
+  padding: 0
+  height: 1200px
+
+.debug-info
+  position: fixed
+  background: black
+  color: white
+  font-size: 12px
+  top: 90%
+  button
+    color: black
+  pre
+    display: inline-block
+    margin: 0

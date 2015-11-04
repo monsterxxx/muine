@@ -17,19 +17,14 @@ angular.module('myApp.box7', [])
 
 })
 
-.controller('box7DirCtrl', function () {
-  console.log('> dirCtrl load');
-})
-
 .directive('box7Dir', function (MuineDataSvc, $timeout, $state, $stateParams, $q) {
   var data = MuineDataSvc.getData();
   //console.log(angular.toJson());
   return {
     restrict: 'E',
     templateUrl: 'sandbox/box7/box7Dir.html',
-    controller: 'box7DirCtrl',
     link: function ($scope, element, attrs) {
-      console.log('> dir load');
+      //console.log('>>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataPath +' ) > subcontrolDir load');
 
 
       //EXTERNAL DATA
@@ -66,12 +61,6 @@ angular.module('myApp.box7', [])
       $scope.test = function () {
         console.log('test!');
       };
-
-      function sleep(miliseconds) {
-         var currentTime = new Date().getTime();
-         while (currentTime + miliseconds >= new Date().getTime()) {
-         }
-       }
 
 
 
@@ -289,7 +278,7 @@ angular.module('myApp.box7', [])
       element.find('.menu').html(genSelected($scope.index));
       //reaction on a state change
       $scope.$on('$stateChangeSuccess', function(){
-        console.log('dir > stateChange processing');
+        //console.log('>>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataPath +' ) > subcontrolDir > stateChangeSuccess > start');
 
         if ($state.includes($scope.rootState +'.'+ $scope.dataPath)) {
           $scope.id = parseInt($stateParams[$scope.itemIdParam]);

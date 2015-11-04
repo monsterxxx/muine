@@ -1,17 +1,24 @@
 <header ng-class="{transparent: navbarTransparent}">
 	<div class="header-left" ></div>
 	<div class="navbar-container">
-		<div class="brandzone">
-			<a class="logo" ui-sref="muine" ui-sref-active="active"><svg><use xlink:href="#shape-logo"></use></svg></a>
-			<a class="brand" ui-sref="muine" ui-sref-active="active">muine<span>watersports</span>.com</a>
-		</div>
+			<a class="brandzone"
+				 ui-sref="muine.home"
+				 ui-sref-active="active"
+				 ps-smooth-scroll="muine"
+				 data-ps-scrollspy="muine">
+				<svg><use xlink:href="#shape-logo"></use></svg>
+				muine<span>watersports</span>.com
+			</a>
 		<nav>
 			<!-- TODO make links selectable not draggable! -->
 			<ul class="mainmenu">
 				<li class="item"
 						ng-repeat="dataPath in dataKeysList"
 						ng-controller="mainMenuItemCtrl1"
-						ng-class="['item-n' + {{$index + 1}}, {active: $state.includes(rootState +'.'+ dataPath)}]">
+						ng-class="['item-n' + {{$index + 1}}, {active: $state.includes(rootState +'.'+ dataPath)}]"
+						ps-smooth-scroll="{{dataPath}}"
+						offset="{{-navbarHeight}}"
+						data-ps-scrollspy="{{dataPath}}">
 					<a ng-href="{{uiSref() + childStates[0]}}"
 						 ng-class="{rotated: $state.includes(rootState +'.'+ dataPath)}">
 						{{dataPath}}
@@ -27,31 +34,18 @@
 							</svg>
 						</a>
 					</div>
-					<!-- <div style="margin-top: 320px; text-align: left; width: 400px">
-	<pre>
-	$scope.selected > {{selected}}
-	$scope.old > {{old}}
-	$scope.menuExpanded > {{menuExpanded}}
-	</pre>
-					</div> -->
 				</li>
-				<li class="item">
-					<a ui-sref="muine.prices" ui-sref-active="underlined"><span>Prices</span></a>
+				<li class="item"
+						ps-smooth-scroll="prices"
+						offset="{{-navbarHeight}}"
+						data-ps-scrollspy="prices">
+					<a ui-sref="muine.prices"
+						 ui-sref-active="underlined">
+						<span>Prices</span>
+					</a>
 				</li>
 			</ul>
 		</nav>
 	</div>
-	<!-- <div>
-		<h3>state props</h3>
-		<blockquote>
-			$state.current > {{$state.current}}<br/>
-			$stateParams > {{$stateParams}}
-		</blockquote>
-		<h3>navbar scope</h3>
-		<blockquote>
-			$scope.clubId > {{clubId}}<br/>
-		</blockquote>
-		<input type="text" ng-model="speed" value="" style="width:100px">
-	</div> -->
 	<div class="header-right"></div>
 </header>

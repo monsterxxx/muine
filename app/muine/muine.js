@@ -2,7 +2,14 @@
 
 'use strict';
 
-angular.module('myApp.muine', [])
+angular.module('myApp.muine', [
+  'ps.scrolling',
+  'ps.background-img',
+  'ps.muine.sports',
+  'ps.muine.clubs',
+  'ps.muine.spots',
+  'ps.muine.prices'
+])
 
 .config(function ($urlRouterProvider) {
   $urlRouterProvider
@@ -25,14 +32,27 @@ angular.module('myApp.muine', [])
   $stateProvider
   .state('muine', {
     url: '/muine',
-    templateUrl: 'muine/muine.html',
-    controller: 'MuineCtrl'
+    abstract: true,
+    views: {
+      'muine': {
+        templateUrl: './muine/muine.html',
+        controller: 'MuineCtrl'
+      }
+    }
+  })
+  .state('muine.home', {
+    url: '',
+    sticky: true
   })
   .state('muine.sports', {
     url: '/sports/{sportId:int}',
+    abstract: true,
+    sticky: true,
+    deepStateRedirect: true,
     views: {
       'sports': {
-        templateUrl: './muine/sports/sports.html'
+        templateUrl: './muine/sports/sports.html',
+        controller: 'MuineSportsCtrl'
       }
     }
   })
@@ -46,8 +66,16 @@ angular.module('myApp.muine', [])
       url: '/video'
     })
   .state('muine.clubs', {
+    url: '/clubs/{clubId:int}', //(?:[0-9])
     abstract: true,
-    url: '/clubs/{clubId:int}' //(?:[0-9])
+    sticky: true,
+    deepStateRedirect: true,
+    views: {
+      'clubs': {
+        templateUrl: './muine/clubs/clubs.html',
+        controller: 'MuineClubsCtrl'
+      }
+    }
   })
     .state('muine.clubs.home', {
       url: '/home'
@@ -62,7 +90,16 @@ angular.module('myApp.muine', [])
       url: '/contact'
     })
   .state('muine.spots', {
-    url: '/spots/{spotId:int}'
+    url: '/spots/{spotId:int}',
+    abstract: true,
+    sticky: true,
+    deepStateRedirect: true,
+    views: {
+      'spots': {
+        templateUrl: './muine/spots/spots.html',
+        controller: 'MuineSpotsCtrl'
+      }
+    }
   })
     .state('muine.spots.home', {
       url: '/home'
@@ -74,11 +111,22 @@ angular.module('myApp.muine', [])
       url: '/video'
     })
   .state('muine.prices', {
-    url: '/prices'
+    url: '/prices',
+    sticky: true,
+    views: {
+      'prices': {
+        templateUrl: './muine/prices/prices.html',
+        controller: 'MuinePricesCtrl'
+      }
+    }
   });
 }])
-.controller('MuineCtrl', ['$scope', function($scope) {
+
+.controller('MuineCtrl', ['$scope', '$stickyState', function($scope, $stickyState) {
+  console.log('> MuineCtrl load');
   $scope.navbarTransparent = true;
+
+  //scrollspy
   $(window).scroll(function() {
    if ($(this).scrollTop() === 0) {
      $scope.$apply(function () {
@@ -89,24 +137,55 @@ angular.module('myApp.muine', [])
        $scope.navbarTransparent = false;
      });
    }
-  //  if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-  //      alert("near bottom!");
   });
+
+  //DEBUG //TEST //EXPERIMENT
+  $scope.refreshDebugInfo = function () {
+    console.log(angular.toJson($stickyState.getInactiveStates()));
+  };
 
 }])
 .run(
-  [          '$rootScope', '$state', '$stateParams',
-    function ($rootScope,   $state,   $stateParams) {
+  [          '$rootScope', '$state', '$stateParams', '$stickyState', 'PsScrollSpy',
+    function ($rootScope,   $state,   $stateParams ,  $stickyState ,  PsScrollSpy) {
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
-      $rootScope.$on('$stateChangeSuccess', function(){
-        console.log('event > stateChangeSuccess');
-        console.log($rootScope.$state.current.name);
+      $rootScope.$stickyState = $stickyState;
+      $rootScope.$on("$stateChangeError", console.log.bind(console));
+
+      var firstInit = false;
+      $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState){
+        console.log('> stateChangeSuccess > '+ $rootScope.$state.current.name);
+        //first initialization
+        if (toState.name === 'muine.home' && fromState.name === ''){
+          firstInit = true;
+          $state.go("muine.sports.home", {sportId: 3}, { location: false }).then(function () {
+            $state.go("muine.clubs.home", {clubId: 49}, { location: false }).then(function () {
+              $state.go("muine.spots.home", {spotId: 3}, { location: false }).then(function () {
+                $state.go("muine.prices", {}, { location: false }).then(function () {
+                  firstInit = false;
+                  $state.go("muine.home");
+                });
+              });
+            });
+          });
+        }
+        //all states are loaded
+        if (firstInit === true && toState.name === 'muine.prices') {
+          //console.log('All states are loaded! Inittialization!');
+          PsScrollSpy.initialize();
+        }
       });
-      //for testing purposes
+
+      //TEST
       $rootScope.log = function(message){
         console.log(message);
       };
+
+      //DOM TEST
+      // window.onload = function () {
+      //   window.alert(document.documentURI);
+      // };
     }
   ]
 );

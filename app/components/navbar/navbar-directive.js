@@ -4,6 +4,12 @@
 
 angular.module('psApp.navbar', [])
 
+.factory('NavbarSize', function() {
+  return {
+    height: 61
+  };
+})
+
 .directive('psNavbar', function(){
   return {
     restrict: 'E',
@@ -14,8 +20,12 @@ angular.module('psApp.navbar', [])
     controller: 'NavbarCtrl'
   };
 })
-.controller('NavbarCtrl', ['$scope', '$state', '$stateParams', 'MuineDataSvc', function($scope, $state, $stateParams, MuineDataSvc){
-  console.log('NavbarCtrl load');
+.controller('NavbarCtrl', ['$scope', '$state', '$stateParams', 'MuineDataSvc', 'NavbarSize',
+                   function($scope,   $state,   $stateParams,   MuineDataSvc ,  NavbarSize ){
+  console.log('> NavbarCtrl load');
+  //navbar dimensions
+  $scope.navbarHeight = NavbarSize.height;
+
   //get data
   $scope.data = MuineDataSvc.getData();
   //array for ng-repeated main menu items
@@ -25,19 +35,10 @@ angular.module('psApp.navbar', [])
   //state list to traverse by item's controller and find further item's child states
   $scope.stateList = $state.get();
 
-  //UI
-  $scope.brandBackgroundDimmed = false;
-  $scope.dimBrandBackground = function () {
-      $scope.brandBackgroundDimmed = true;
-  };
-  $scope.undimBrandBackground = function () {
-      $scope.brandBackgroundDimmed = false;
-  };
-
 }])
 
 .controller('mainMenuItemCtrl1', function ($scope, $timeout, $stateParams, $state) {
-  console.log($scope.dataPath + '> navbar child controller load');
+  console.log('>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataPath +') load');
   //collection of data for this menu item (dataPath)
   $scope.col = $scope.data[$scope.dataPath];
   //itemIdParam - to access this item's $stateParam id
@@ -102,7 +103,7 @@ angular.module('psApp.navbar', [])
     if ($state.includes($scope.rootState +'.'+ $scope.dataPath)) {
       $scope.id = parseInt($stateParams[$scope.itemIdParam]);
       $scope.index = indexById($scope.lCol, $scope.id);
-      console.log('stateChange > $scope.id > '+ $scope.id +', $scope.index > '+ $scope.index);
+      console.log('>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataPath +') > on(stateChangeSuccess) > finish > $scope.id: '+ $scope.id +', $scope.index: '+ $scope.index);
     }
   });
 

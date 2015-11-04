@@ -4,13 +4,21 @@
   <!-- <video-bg video-id="'USWnYR8DErY'"></video-bg> -->
 </div>
 
-<div id="sports" class="muine-section" ui-view="sports">
+<div id="sports" class="muine-section" ui-view="sports"></div>
 
-</div>
+<div id="clubs" class="muine-section" ui-view="clubs"></div>
 
-<div id="prices" class="muine-section"><section>
+<div id="spots" class="muine-section" ui-view="spots"></div>
+
+<div id="prices" class="muine-section" ui-view="prices"><section>
   prices' section
 </section></div>
 
+<div class="debug-info">
+<button type="button" ng-click="refreshDebugInfo()" name="button">refresh</button>
+<pre>
+$state.current.name: {{$state.current.name}}; $stateParams: {{$stateParams}}; $state.params: {{$state.params}}
+</pre>
+</div>
 
 <p>This is my muine for muinewatersports.com. Really</p>

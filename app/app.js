@@ -19,7 +19,8 @@ angular.module('myApp', [
   'myApp.version',
   'psApp.services.experiment',
   'psApp.navbar',
-  'muineApp.services.data'
+  'muineApp.services.data',
+  'ps.debugs'
 ]);
 
 })();
