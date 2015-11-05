@@ -4,27 +4,32 @@ angular.module('ps.scrolling', [])
   return function($scope, element, attrs) {
     element.on('click', function (e) {
 
-      id = attrs.psSmoothScroll;
-
-      var target = $('#'+ id);
-
-      var offset = parseInt(attrs.offset, 10) || 0;
-
-      var duration = parseInt(attrs.duration, 10) || 1000;
-
       var $body = $('body');
 
-      target.velocity('scroll', {
-        duration: duration,
-        offset: offset,
-        begin: function () {
-          $body.addClass('ps-velocity-scrolling');
-        },
-        complete: function () {
-          $body.removeClass('ps-velocity-scrolling');
-        }
-      });
+      if (!$body.hasClass('ps-velocity-scrolling')) {
 
+        id = attrs.psSmoothScroll;
+
+        var target = $('#'+ id);
+
+        var offset = parseInt(attrs.offset, 10) || 0;
+
+        var duration = parseInt(attrs.duration, 10) || 1000;
+
+        target.velocity('scroll', {
+          duration: duration,
+          offset: offset,
+          begin: function () {
+            $body.addClass('ps-velocity-scrolling');
+          },
+          complete: function () {
+            window.setTimeout(function () {
+              $body.removeClass('ps-velocity-scrolling');
+            }, 35);
+          }
+        });
+
+      }
     });
   };
 })
@@ -54,7 +59,7 @@ angular.module('ps.scrolling', [])
       var currSection = 0;
       var prevScroll = 0;
       var currScroll = 0;
-      var scrollDir = '';
+      var scrollDown;
 
       var i = 0;
       var length = breakPoints.length;
@@ -62,11 +67,10 @@ angular.module('ps.scrolling', [])
       var $window = $(window);
       var $body = $('body');
       var offset = 0;
-      // var animationInProcess = false;
 
       function scrollHandler() {
 
-        currScroll = $(this).scrollTop();
+        currScroll = $window.scrollTop();
         for (i = 0; i < length; i++) {
           console.log(i, currScroll, breakPoints[i], currScroll < breakPoints[i]);
           if (currScroll < breakPoints[i]) {
@@ -74,36 +78,30 @@ angular.module('ps.scrolling', [])
             break;
           }
         }
-        scrollDir = (currScroll > prevScroll) ? 'down' : 'up';
+        scrollDown = (currScroll > prevScroll) ? true : false;
+
         console.log(currScroll, $body.hasClass('ps-velocity-scrolling'), currSection, prevSection);
+        if (currSection !== length - 2 && !$body.hasClass('ps-velocity-scrolling')) {
+          console.log('velocity');
 
-
-        if ( !$body.hasClass('ps-velocity-scrolling')
-            //  && !animationInProcess
-             && currSection !== length - 2) {
-               console.log('velocity');
-          // animationInProcess = true;
-
-          if (scrollDir === 'down' ) {
+          if (scrollDown ) {
             offset = breakPoints[prevSection + 1];
+          } else {
+            offset = breakPoints[prevSection - 1];
           }
-            $body.velocity("scroll", {
-              offset: offset,
-              duration: 1000,
-              begin: function () {
-                $body.addClass('ps-velocity-scrolling');
-                $window.off('scroll');
-              },
-              complete: function () {
-                $window.on('scroll', scrollHandler);
-                window.setTimeout(function () {
-                  console.log('class Remove!');
-                  $body.removeClass('ps-velocity-scrolling');
-
-                }, 100);
-              }
-            });
-          // animationInProcess = false;
+          $body.velocity("scroll", {
+            offset: offset,
+            duration: 1000,
+            begin: function () {
+              $body.addClass('ps-velocity-scrolling');
+            },
+            complete: function () {
+              window.setTimeout(function () {
+                console.log('class Remove!');
+                $body.removeClass('ps-velocity-scrolling');
+              }, 35);
+            }
+          });
         }
 
         prevScroll = currScroll;
@@ -111,9 +109,27 @@ angular.module('ps.scrolling', [])
 
       }
 
+      function innerScrollHandler() {
+
+      }
+
+      function preventWheel(e) {
+        if ($body.hasClass('ps-velocity-scrolling')) {
+          e.preventDefault();
+        } else if (currScroll === breakPoints[length - 2] || currSection !== length - 2) {
+          if (e.wheelDelta < 0) {
+            e.preventDefault();
+            window.scrollBy(0,1);
+          } else {
+            e.preventDefault();
+            window.scrollBy(0,-1);
+          }
+        }
+      }
+
 
       $window.on('scroll', scrollHandler);
-
+      window.onwheel = preventWheel;
 
 
     }

@@ -11,7 +11,8 @@ angular.module('myApp.muine', [
   'ps.muine.prices'
 ])
 
-.config(function ($urlRouterProvider) {
+.config(function ($urlRouterProvider, $stickyStateProvider) {
+  $stickyStateProvider.enableDebug(true);
   $urlRouterProvider
   .when('/muine/clubs/:clubId', ['$match', '$stateParams', 'MuineDataSvc', function($match, $stateParams, MuineDataSvc){
     console.log('$urlRouterProvider');
@@ -48,7 +49,7 @@ angular.module('myApp.muine', [
     url: '/sports/{sportId:int}',
     abstract: true,
     sticky: true,
-    deepStateRedirect: true,
+    // deepStateRedirect: true,
     views: {
       'sports': {
         templateUrl: './muine/sports/sports.html',
@@ -69,7 +70,7 @@ angular.module('myApp.muine', [
     url: '/clubs/{clubId:int}', //(?:[0-9])
     abstract: true,
     sticky: true,
-    deepStateRedirect: true,
+    // deepStateRedirect: true,
     views: {
       'clubs': {
         templateUrl: './muine/clubs/clubs.html',
@@ -93,7 +94,7 @@ angular.module('myApp.muine', [
     url: '/spots/{spotId:int}',
     abstract: true,
     sticky: true,
-    deepStateRedirect: true,
+    // deepStateRedirect: true,
     views: {
       'spots': {
         templateUrl: './muine/spots/spots.html',
@@ -151,7 +152,10 @@ angular.module('myApp.muine', [
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
       $rootScope.$stickyState = $stickyState;
-      $rootScope.$on("$stateChangeError", console.log.bind(console));
+      $rootScope.$on("$stateChangeError", function () {
+        console.log('> stateChangeError');
+        console.log.bind(console);
+      });
 
       var firstInit = false;
       $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState){

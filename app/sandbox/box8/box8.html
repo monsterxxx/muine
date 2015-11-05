@@ -1,0 +1,26 @@
+<div class="box8-container">
+  <h3 class = "a">Adding ui-router-extras</h3>
+  <div class="b">
+    <!-- MAIN MENU ITEMS -->
+    <div class="c"
+         ng-repeat="dataPath in dataKeysList"
+         ng-controller="mainMenuItemCtrl3"
+         ng-class="{active: $state.includes(rootState +'.'+ dataPath)}">
+      <a ng-href="{{uiSref() + childStates[0]}}">{{dataPath}}</a>
+      <br/>
+      <!-- ICONS -->
+      <a ng-repeat="state in childStates"
+         ng-href="{{uiSref() + state}}">
+        <svg>
+          <use ng-attr-xlink:href="{{'#shape-'+ state}}" xlink:href="" ></use>
+        </svg>
+      </a>
+
+      <box7-dir path="{{dataPath}}"></box7-dir>
+
+    </div>
+    <div class="c">
+      <a ui-sref="box8.prices">prices</a>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,8 @@ angular.module('myApp.box5', [])
     url: '/box5',
     templateUrl: 'sandbox/box5/box5.html',
     controller: 'Box5Ctrl'
-  }).state('box5.sports', {
+  })
+.state('box5.sports', {
   abstract: true,
   url: '/sports/{sportId:int}'
 })
