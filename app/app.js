@@ -21,7 +21,6 @@ angular.module('myApp', [
   'myApp.muine',
   'myApp.version',
   'psApp.services.experiment',
-  'psApp.navbar',
   'muineApp.services.data',
   'ps.debugs'
 ]);

@@ -16,11 +16,11 @@
 						ng-repeat="dataKey in dataKeysList"
 						ng-controller="mainMenuItemCtrl1"
 						ng-class="['item-n' + {{$index + 1}}, {active: $state.includes(rootState +'.'+ dataKey)}]"
-						ps-smooth-scroll="{{dataKey}}"
 						offset="{{-navbarHeight}}"
 						data-ps-scrollspy="{{dataKey}}">
 					<a ng-href="{{uiSref() + childStates[0]}}"
-						 ng-class="{rotated: $state.includes(rootState +'.'+ dataKey)}">
+						 ng-class="{rotated: $state.includes(rootState +'.'+ dataKey)}"
+						 ps-smooth-scroll="{{dataKey}}">
 						{{dataKey}}
 					</a>
 					<ps-muine-subcontrol></ps-muine-subcontrol>

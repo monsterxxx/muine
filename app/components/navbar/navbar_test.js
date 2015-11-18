@@ -28,7 +28,7 @@ describe('navbar component', function() {
         //this.showModalDialog = jasmine.createSpy('showModalDialog');
       });
     });
-    module('psApp.navbar');
+    module('ps.muine.navbar');
     inject(function(_$controller_, _$rootScope_ ,_mockMuineDataSvc_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;

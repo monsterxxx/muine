@@ -2,7 +2,7 @@
 
 'use strict';
 
-angular.module('psApp.navbar', [])
+angular.module('ps.muine.navbar', [])
 
 .factory('NavbarSize', function() {
   return {
@@ -10,10 +10,10 @@ angular.module('psApp.navbar', [])
   };
 })
 
-.directive('psNavbar', function(){
+.directive('psMuineNavbar', function(){
   return {
     restrict: 'E',
-    templateUrl: 'components/navbar/navbar-directive.html',
+    templateUrl: 'components/navbar/navbar.html',
     link: function(scope,element,attrs){
       // element.text('futurePSNavbar!');
     },

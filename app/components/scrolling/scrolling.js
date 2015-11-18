@@ -2,10 +2,14 @@ angular.module('ps.scrolling', [])
 
 .directive('psSmoothScroll', function() {
   return function($scope, element, attrs) {
-    element.on('click', function (e) {
+    element.on('click', function (event) {
+      var doLog = true;
+      if (doLog) {console.log('> psSmoothScroll click event');}
+      if (doLog) {console.log('> psSmoothScroll attrs.psSmoothScroll: '+ attrs.psSmoothScroll);}
 
       var $body = $('body');
 
+      if (doLog) {console.log('> psSmoothScroll $body.hasClass("ps-velocity-scrolling") :' + $body.hasClass('ps-velocity-scrolling'));}
       if (!$body.hasClass('ps-velocity-scrolling')) {
 
         id = attrs.psSmoothScroll;
@@ -20,9 +24,11 @@ angular.module('ps.scrolling', [])
           duration: duration,
           offset: offset,
           begin: function () {
+            if (doLog) {console.log('> psSmoothScroll > velocity begin');}
             $body.addClass('ps-velocity-scrolling');
           },
           complete: function () {
+            if (doLog) {console.log('> psSmoothScroll > velocity complete');}
             window.setTimeout(function () {
               $body.removeClass('ps-velocity-scrolling');
             }, 35);
@@ -37,6 +43,8 @@ angular.module('ps.scrolling', [])
 .factory('PsScrollSpy', ['NavbarSize', function(NavbarSize) {
   return {
     initialize: function () {
+      var enableLog = false;
+
       console.log('> PsScrollSpy > initialize');
 
       //page sections based on data-ps-scrollspy attributes

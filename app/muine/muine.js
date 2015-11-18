@@ -5,6 +5,7 @@
 angular.module('myApp.muine', [
   'ps.scrolling',
   'ps.background-img',
+  'ps.muine.navbar',
   'ps.muine.navbar.subcontrol',
   'ps.muine.sports',
   'ps.muine.clubs',
@@ -13,7 +14,7 @@ angular.module('myApp.muine', [
 ])
 
 .config(function ($urlRouterProvider, $stickyStateProvider) {
-  $stickyStateProvider.enableDebug(true);
+  //$stickyStateProvider.enableDebug(true);
   $urlRouterProvider
   .when('/muine/clubs/:clubId', ['$match', '$stateParams', 'MuineDataSvc', function($match, $stateParams, MuineDataSvc){
     console.log('$urlRouterProvider');
