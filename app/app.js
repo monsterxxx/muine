@@ -16,6 +16,8 @@ angular.module('myApp', [
   'myApp.box6',
   'myApp.box7',
   'myApp.box8',
+  'myApp.box9',
+  'myApp.box10',
   'myApp.muine',
   'myApp.version',
   'psApp.services.experiment',

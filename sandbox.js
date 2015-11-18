@@ -39,7 +39,9 @@ mkdirp(boxDir, function(err){
 
   var htmlName = boxName + '.html';
   var htmlDir = path.join(boxDir, htmlName);
-  var htmlContent = '<div class="' + boxName + '-container">\n</div>'
+  var htmlContent = '<div class="' + boxName + '-container">\n' +
+                    '  <h3 class="sandbox-title"></h3>\n' +
+                    '</div>';
   fs.writeFile(htmlDir, htmlContent,  function(err) {
     if (err) {
       deferred1.reject(err);
@@ -51,7 +53,12 @@ mkdirp(boxDir, function(err){
 
   var sassName = '_' + boxName + '.sass';
   var sassDir = path.join(boxDir, sassName);
-  var sassContent = 'div.' + boxName + '-container'
+  var sassContent = 'div.' + boxName + '-container\n' +
+                    '  .sandbox-title\n' +
+                    '    background: white\n' +
+                    '    margin: 0\n' +
+                    '    padding-left: 10px\n' +
+                    '    border-bottom: 1px solid black';
   fs.writeFile(sassDir, sassContent,  function(err) {
     if (err) {
       deferred2.reject(err);
@@ -102,6 +109,8 @@ mkdirp(boxDir, function(err){
     console.log('Import link was appended to _sandbox.sass!');
   });
 
+  console.log('Going to append index.html');
+
   var jsdom = require("jsdom");
   var indexHtmlDir = path.join(__dirname, 'app/index.html');
 
@@ -112,7 +121,7 @@ mkdirp(boxDir, function(err){
           //     var content = $(this).text();
           //     $(this).text(content + " modified!");
           // });
-          $('ul.menu').append('  <li><a ui-sref="'+ boxName + '">'+ boxName + '</a></li>\n  ');
+          $('ul.dev-menu').append('  <li><a ui-sref="'+ boxName + '">'+ boxName + '</a></li>\n  ');
           $('body').append('  <script src="sandbox/'+ boxName + '/'+ boxName + '.js"></script>\n');
           var htmlPrefix = '<!DOCTYPE html>\n' +
             '<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->\n' +

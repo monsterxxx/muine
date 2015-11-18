@@ -366,6 +366,18 @@ div.box8-container .e {
   div.box8-container .e .g {
     color: black; }
 
+div.box9-container .sandbox-title {
+  background: white;
+  margin: 0;
+  padding-left: 10px;
+  border-bottom: 1px solid black; }
+
+div.box10-container .sandbox-title {
+  background: white;
+  margin: 0;
+  padding-left: 10px;
+  border-bottom: 1px solid black; }
+
 header {
   display: -webkit-flex;
   display: -ms-flexbox;
