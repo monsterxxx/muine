@@ -2,27 +2,14 @@
 
 'use strict';
 
-angular.module('myApp.box7', [])
+angular.module('ps.muine.navbar.subcontrol', [])
 
-.config(['$stateProvider', function($stateProvider) {
-  $stateProvider
-  .state('box7', {
-    url: '/box7',
-    templateUrl: 'sandbox/box7/box7.html',
-    controller: 'Box7Ctrl'
-  });
-}])
-
-.controller('Box7Ctrl', function($scope) {
-
-})
-
-.directive('box7Dir', function (MuineDataSvc, $timeout, $state, $stateParams, $q) {
+.directive('psMuineSubcontrol', function (MuineDataSvc, $timeout, $state, $stateParams, $q) {
   var data = MuineDataSvc.getData();
   //console.log(angular.toJson());
   return {
     restrict: 'E',
-    templateUrl: 'sandbox/box7/box7Dir.html',
+    templateUrl: 'components/navbar/subcontrol/subcontrol.html',
     link: function ($scope, element, attrs) {
       //console.log('>>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataKey +' ) > subcontrolDir load');
 

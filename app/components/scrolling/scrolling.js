@@ -37,9 +37,9 @@ angular.module('ps.scrolling', [])
 .factory('PsScrollSpy', ['NavbarSize', function(NavbarSize) {
   return {
     initialize: function () {
-      console.log('> PsScrollSpy');
+      console.log('> PsScrollSpy > initialize');
 
-      //page sections
+      //page sections based on data-ps-scrollspy attributes
       var pageSections = [];
       var breakPoints = [];
       $('[data-ps-scrollspy]').each(function () {

@@ -378,6 +378,92 @@ div.box10-container .sandbox-title {
   padding-left: 10px;
   border-bottom: 1px solid black; }
 
+ps-muine-subcontrol .control-panel-row {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  width: 273px;
+  height: 30px;
+  border-bottom: 1px solid #2ECC40; }
+ps-muine-subcontrol .caret, ps-muine-subcontrol .icon > svg {
+  position: relative;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #dedede;
+  fill: #dedede;
+  display: inline-block; }
+  ps-muine-subcontrol .caret:hover, ps-muine-subcontrol .icon > svg:hover {
+    color: white;
+    fill: white;
+    stroke-width: 2px;
+    stroke: white;
+    cursor: pointer; }
+ps-muine-subcontrol .icon.active > svg {
+  -webkit-filter: drop-shadow(0 0 4px yellow);
+          filter: drop-shadow(0 0 4px yellow);
+  color: white;
+  fill: white;
+  stroke-width: 2px;
+  stroke: white; }
+ps-muine-subcontrol .menu {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
+  ps-muine-subcontrol .menu a {
+    text-decoration: none;
+    color: white; }
+ps-muine-subcontrol li {
+  list-style-type: none;
+  height: 30px;
+  position: relative;
+  border-right: 1px solid #2ECC40;
+  border-left: 1px solid #2ECC40;
+  border-bottom: 1px solid black; }
+  ps-muine-subcontrol li.selected {
+    margin: 0 1px;
+    border-right: none;
+    border-left: none;
+    z-index: 3;
+    background: #222222; }
+    ps-muine-subcontrol li.selected span {
+      position: absolute; }
+  ps-muine-subcontrol li.subselect {
+    text-align: center;
+    z-index: 1;
+    background: #404040; }
+    ps-muine-subcontrol li.subselect:hover {
+      background: #222222;
+      cursor: pointer; }
+  ps-muine-subcontrol li.underlay {
+    text-align: center;
+    position: absolute;
+    border-bottom: none;
+    z-index: 1; }
+  ps-muine-subcontrol li:first-child {
+    margin: 0;
+    z-index: 2;
+    border: none;
+    border-bottom: 1px solid black; }
+  ps-muine-subcontrol li:last-child {
+    border-bottom: 1px solid #2ECC40; }
+  ps-muine-subcontrol li a {
+    line-height: 30px;
+    display: list-item; }
+ps-muine-subcontrol span {
+  line-height: 30px;
+  color: white;
+  text-align: center;
+  position: absolute;
+  display: block;
+  width: 100%; }
+
 header {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -406,7 +492,7 @@ header {
         background-color: #222222; }
       header.transparent ul.mainmenu > li.active {
         width: 150px; }
-        header.transparent ul.mainmenu > li.active > box7-dir {
+        header.transparent ul.mainmenu > li.active > ps-muine-subcontrol {
           display: none; }
         header.transparent ul.mainmenu > li.active > div {
           display: none; }
@@ -477,7 +563,7 @@ header {
       min-width: 150px;
       height: 60px;
       border-right: 1px solid #888888; }
-      .navbar-container ul.mainmenu > li > box7-dir {
+      .navbar-container ul.mainmenu > li > ps-muine-subcontrol {
         position: absolute;
         top: 0px;
         left: 26px;
@@ -496,7 +582,7 @@ header {
           display: inline-block; }
       .navbar-container ul.mainmenu > li.active {
         width: 300px; }
-        .navbar-container ul.mainmenu > li.active > box7-dir {
+        .navbar-container ul.mainmenu > li.active > ps-muine-subcontrol {
           display: block; }
         .navbar-container ul.mainmenu > li.active > div {
           display: -webkit-flex;
@@ -529,18 +615,18 @@ header {
   .navbar-container .item-n1 .control-panel-row {
     border-left: 1px solid #FFDC00;
     border-right: 1px solid #FFDC00; }
-  .navbar-container .item-n1 box7-dir .control-panel-row {
+  .navbar-container .item-n1 ps-muine-subcontrol .control-panel-row {
     border-bottom: 1px solid #FFDC00; }
-  .navbar-container .item-n1 box7-dir li {
+  .navbar-container .item-n1 ps-muine-subcontrol li {
     border-right: 1px solid #FFDC00;
     border-left: 1px solid #FFDC00; }
-  .navbar-container .item-n1 box7-dir li.selected {
+  .navbar-container .item-n1 ps-muine-subcontrol li.selected {
     border-right: none;
     border-left: none; }
-  .navbar-container .item-n1 box7-dir li:first-child {
+  .navbar-container .item-n1 ps-muine-subcontrol li:first-child {
     border: none;
     border-bottom: 1px solid black; }
-  .navbar-container .item-n1 box7-dir li:last-child {
+  .navbar-container .item-n1 ps-muine-subcontrol li:last-child {
     border-bottom: 1px solid #FFDC00; }
   .navbar-container .item-n2 a.icon.active > svg {
     -webkit-filter: drop-shadow(0 0 4px #2ecc40);
@@ -548,18 +634,18 @@ header {
   .navbar-container .item-n2 .control-panel-row {
     border-left: 1px solid #2ECC40;
     border-right: 1px solid #2ECC40; }
-  .navbar-container .item-n2 box7-dir .control-panel-row {
+  .navbar-container .item-n2 ps-muine-subcontrol .control-panel-row {
     border-bottom: 1px solid #2ECC40; }
-  .navbar-container .item-n2 box7-dir li {
+  .navbar-container .item-n2 ps-muine-subcontrol li {
     border-right: 1px solid #2ECC40;
     border-left: 1px solid #2ECC40; }
-  .navbar-container .item-n2 box7-dir li.selected {
+  .navbar-container .item-n2 ps-muine-subcontrol li.selected {
     border-right: none;
     border-left: none; }
-  .navbar-container .item-n2 box7-dir li:first-child {
+  .navbar-container .item-n2 ps-muine-subcontrol li:first-child {
     border: none;
     border-bottom: 1px solid black; }
-  .navbar-container .item-n2 box7-dir li:last-child {
+  .navbar-container .item-n2 ps-muine-subcontrol li:last-child {
     border-bottom: 1px solid #2ECC40; }
   .navbar-container .item-n3 a.icon.active > svg {
     -webkit-filter: drop-shadow(0 0 4px #b10dc9);
@@ -567,18 +653,18 @@ header {
   .navbar-container .item-n3 .control-panel-row {
     border-left: 1px solid #B10DC9;
     border-right: 1px solid #B10DC9; }
-  .navbar-container .item-n3 box7-dir .control-panel-row {
+  .navbar-container .item-n3 ps-muine-subcontrol .control-panel-row {
     border-bottom: 1px solid #B10DC9; }
-  .navbar-container .item-n3 box7-dir li {
+  .navbar-container .item-n3 ps-muine-subcontrol li {
     border-right: 1px solid #B10DC9;
     border-left: 1px solid #B10DC9; }
-  .navbar-container .item-n3 box7-dir li.selected {
+  .navbar-container .item-n3 ps-muine-subcontrol li.selected {
     border-right: none;
     border-left: none; }
-  .navbar-container .item-n3 box7-dir li:first-child {
+  .navbar-container .item-n3 ps-muine-subcontrol li:first-child {
     border: none;
     border-bottom: 1px solid black; }
-  .navbar-container .item-n3 box7-dir li:last-child {
+  .navbar-container .item-n3 ps-muine-subcontrol li:last-child {
     border-bottom: 1px solid #B10DC9; }
 
 .sports-container {

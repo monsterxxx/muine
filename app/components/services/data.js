@@ -63,8 +63,8 @@ angular.module('muineApp.services.data', [])
     getData: function(){
       return data;
     },
-    getDataPart: function (dataPath) {
-      return data[dataPath];
+    getDataPart: function (dataKey) {
+      return data[dataKey];
     }
   };
 });

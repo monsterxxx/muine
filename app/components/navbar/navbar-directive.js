@@ -38,11 +38,11 @@ angular.module('psApp.navbar', [])
 }])
 
 .controller('mainMenuItemCtrl1', function ($scope, $timeout, $stateParams, $state) {
-  console.log('>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataPath +') load');
-  //collection of data for this menu item (dataPath)
-  $scope.col = $scope.data[$scope.dataPath];
-  //itemIdParam - to access this item's $stateParam id
-  $scope.itemIdParam = $scope.dataPath.slice(0, -1).concat('Id');
+  console.log('>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataKey +') load');
+  //collection of data for this menu item (dataKey)
+  $scope.col = $scope.data[$scope.dataKey];
+  //itemIdParam - to access this item's $stateParam id. Remove pluralise 's' from the end and add 'Id' so that 'sports' become 'sportId'
+  $scope.itemIdParam = $scope.dataKey.slice(0, -1).concat('Id');
   //current id is either allready specified or provided in url and accessed through $stateParams. Otherwise take first collection element
   $scope.id = $scope.id || parseInt($stateParams[$scope.itemIdParam]) || $scope.col[0].id;
   //collection length is frequently used in following functions
@@ -70,8 +70,9 @@ angular.module('psApp.navbar', [])
   $scope.childStates = [];
   $scope.stateList.forEach(function (state) {
     var nameArr = state.name.split('.');
-    if (nameArr[0] === $scope.rootState && nameArr[1] === $scope.dataPath && nameArr[2]) {
-      $scope.childStates.push(nameArr[2]);
+    if (nameArr[0] === $scope.rootState && nameArr[1] === $scope.dataKey
+        && nameArr[2] === $scope.dataKey.slice(0, -1) && nameArr[3]) {
+      $scope.childStates.push(nameArr[3]);
     }
   });
 
@@ -88,22 +89,22 @@ angular.module('psApp.navbar', [])
   //functions to populate ng-href links
   //TODO check situation with to many requests per stateChange to the following functions
   $scope.uiSref = function () {
-    return '#/'+ $scope.rootState +'/'+ $scope.dataPath +'/'+$scope.id+'/';
+    return '#/'+ $scope.rootState +'/'+ $scope.dataKey +'/'+$scope.id+'/';
   };
   $scope.prevUiSref = function () {
-    return '#/'+ $scope.rootState +'/'+ $scope.dataPath +'/'+$scope.prevId()+'/'+ $scope.childStates[0];
+    return '#/'+ $scope.rootState +'/'+ $scope.dataKey +'/'+$scope.prevId()+'/'+ $scope.childStates[0];
   };
   $scope.nextUiSref = function () {
-    //console.log('#/'+ $scope.rootState +'/'+ $scope.dataPath +'/'+$scope.nextId()+'/'+ $scope.childStates[0]);
-    return '#/'+ $scope.rootState +'/'+ $scope.dataPath +'/'+$scope.nextId()+'/'+ $scope.childStates[0];
+    //console.log('#/'+ $scope.rootState +'/'+ $scope.dataKey +'/'+$scope.nextId()+'/'+ $scope.childStates[0]);
+    return '#/'+ $scope.rootState +'/'+ $scope.dataKey +'/'+$scope.nextId()+'/'+ $scope.childStates[0];
   };
 
   //on each state change there's a need to reconfig ctrl's current variables
   $scope.$on('$stateChangeSuccess', function(){
-    if ($state.includes($scope.rootState +'.'+ $scope.dataPath)) {
+    if ($state.includes($scope.rootState +'.'+ $scope.dataKey)) {
       $scope.id = parseInt($stateParams[$scope.itemIdParam]);
       $scope.index = indexById($scope.lCol, $scope.id);
-      console.log('>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataPath +') > on(stateChangeSuccess) > finish > $scope.id: '+ $scope.id +', $scope.index: '+ $scope.index);
+      console.log('>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataKey +') > on(stateChangeSuccess) > finish > $scope.id: '+ $scope.id +', $scope.index: '+ $scope.index);
     }
   });
 

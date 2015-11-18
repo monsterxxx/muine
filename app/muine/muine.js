@@ -5,6 +5,7 @@
 angular.module('myApp.muine', [
   'ps.scrolling',
   'ps.background-img',
+  'ps.muine.navbar.subcontrol',
   'ps.muine.sports',
   'ps.muine.clubs',
   'ps.muine.spots',
@@ -46,7 +47,7 @@ angular.module('myApp.muine', [
     sticky: true
   })
   .state('muine.sports', {
-    url: '/sports/{sportId:int}',
+    url: '/sports',
     abstract: true,
     sticky: true,
     // deepStateRedirect: true,
@@ -57,17 +58,21 @@ angular.module('myApp.muine', [
       }
     }
   })
-    .state('muine.sports.home', {
+  .state('muine.sports.sport', {
+    url: '/{sportId:int}',
+    abstract: true
+  })
+    .state('muine.sports.sport.home', {
       url: '/home'
     })
-    .state('muine.sports.photo', {
+    .state('muine.sports.sport.photo', {
       url: '/photo'
     })
-    .state('muine.sports.video', {
+    .state('muine.sports.sport.video', {
       url: '/video'
     })
   .state('muine.clubs', {
-    url: '/clubs/{clubId:int}', //(?:[0-9])
+    url: '/clubs', //(?:[0-9])
     abstract: true,
     sticky: true,
     // deepStateRedirect: true,
@@ -78,20 +83,24 @@ angular.module('myApp.muine', [
       }
     }
   })
-    .state('muine.clubs.home', {
+  .state('muine.clubs.club', {
+    url: '/{clubId:int}',
+    abstract: true
+  })
+    .state('muine.clubs.club.home', {
       url: '/home'
     })
-    .state('muine.clubs.photo', {
+    .state('muine.clubs.club.photo', {
       url: '/photo'
     })
-    .state('muine.clubs.video', {
+    .state('muine.clubs.club.video', {
       url: '/video'
     })
-    .state('muine.clubs.contact', {
+    .state('muine.clubs.club.contact', {
       url: '/contact'
     })
   .state('muine.spots', {
-    url: '/spots/{spotId:int}',
+    url: '/spots',
     abstract: true,
     sticky: true,
     // deepStateRedirect: true,
@@ -102,13 +111,17 @@ angular.module('myApp.muine', [
       }
     }
   })
-    .state('muine.spots.home', {
+  .state('muine.spots.spot', {
+    url: '/{spotId:int}',
+    abstract: true
+  })
+    .state('muine.spots.spot.home', {
       url: '/home'
     })
-    .state('muine.spots.photo', {
+    .state('muine.spots.spot.photo', {
       url: '/photo'
     })
-    .state('muine.spots.video', {
+    .state('muine.spots.spot.video', {
       url: '/video'
     })
   .state('muine.prices', {
@@ -163,12 +176,12 @@ angular.module('myApp.muine', [
         //first initialization
         if (toState.name === 'muine.home' && fromState.name === ''){
           firstInit = true;
-          $state.go("muine.sports.home", {sportId: 3}, { location: false }).then(function () {
-            $state.go("muine.clubs.home", {clubId: 49}, { location: false }).then(function () {
-              $state.go("muine.spots.home", {spotId: 3}, { location: false }).then(function () {
+          $state.go("muine.sports.sport.home", {sportId: 3}, { location: false }).then(function () {
+            $state.go("muine.clubs.club.home", {clubId: 49}, { location: false }).then(function () {
+              $state.go("muine.spots.spot.home", {spotId: 3}, { location: false }).then(function () {
                 $state.go("muine.prices", {}, { location: false }).then(function () {
-                  firstInit = false;
                   $state.go("muine.home");
+                  firstInit = false;
                 });
               });
             });

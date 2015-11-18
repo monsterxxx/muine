@@ -8,7 +8,6 @@ angular.module('myApp.box9', [])
   $stateProvider
   .state('box9', {
     url: '/box9',
-    sticky: true,
     templateUrl: 'sandbox/box9/box9.html',
     controller: 'Box9Ctrl'
   })
