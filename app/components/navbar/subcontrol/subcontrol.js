@@ -66,7 +66,9 @@ angular.module('ps.muine.navbar.subcontrol', [])
                '</li>';
       };
 
-      //ui
+
+
+      //UI
       $scope.prevItem = function () {
         $scope.leftClicked = true;
         if ($scope.menuOpened) {

@@ -51,7 +51,7 @@ angular.module('myApp.muine', [
     url: '/sports',
     abstract: true,
     sticky: true,
-    // deepStateRedirect: true,
+    deepStateRedirect: true,
     views: {
       'sports': {
         templateUrl: './muine/sports/sports.html',
@@ -161,8 +161,9 @@ angular.module('myApp.muine', [
 
 }])
 .run(
-  [          '$rootScope', '$state', '$stateParams', '$stickyState', 'PsScrollSpy',
-    function ($rootScope,   $state,   $stateParams ,  $stickyState ,  PsScrollSpy) {
+  [          '$rootScope', '$state', '$stateParams', '$stickyState',
+    function ($rootScope,   $state,   $stateParams ,  $stickyState ) {
+      console.log('> run');
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
       $rootScope.$stickyState = $stickyState;
@@ -171,27 +172,27 @@ angular.module('myApp.muine', [
         console.log.bind(console);
       });
 
-      var firstInit = false;
+      $rootScope.firstInit = false;
       $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState){
         console.log('> stateChangeSuccess > '+ $rootScope.$state.current.name);
         //first initialization
         if (toState.name === 'muine.home' && fromState.name === ''){
-          firstInit = true;
+          $rootScope.firstInit = true;
           $state.go("muine.sports.sport.home", {sportId: 3}, { location: false }).then(function () {
             $state.go("muine.clubs.club.home", {clubId: 49}, { location: false }).then(function () {
               $state.go("muine.spots.spot.home", {spotId: 3}, { location: false }).then(function () {
                 $state.go("muine.prices", {}, { location: false }).then(function () {
-                  $state.go("muine.home");
-                  firstInit = false;
+                  $state.go("muine.home").then(function () {
+                    $rootScope.firstInit = false;
+                  });
                 });
               });
             });
           });
         }
         //all states are loaded
-        if (firstInit === true && toState.name === 'muine.prices') {
+        if ($rootScope.firstInit === true && toState.name === 'muine.prices') {
           //console.log('All states are loaded! Inittialization!');
-          PsScrollSpy.initialize();
         }
       });
 

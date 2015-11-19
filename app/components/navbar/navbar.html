@@ -4,8 +4,7 @@
 			<a class="brandzone"
 				 ui-sref="muine.home"
 				 ui-sref-active="active"
-				 ps-smooth-scroll="muine"
-				 data-ps-scrollspy="muine">
+				 ps-smooth-scroll="home">
 				<svg><use xlink:href="#shape-logo"></use></svg>
 				muine<span>watersports</span>.com
 			</a>
@@ -15,12 +14,11 @@
 				<li class="item"
 						ng-repeat="dataKey in dataKeysList"
 						ng-controller="mainMenuItemCtrl1"
-						ng-class="['item-n' + {{$index + 1}}, {active: $state.includes(rootState +'.'+ dataKey)}]"
-						offset="{{-navbarHeight}}"
-						data-ps-scrollspy="{{dataKey}}">
+						ng-class="['item-n' + {{$index + 1}}, {active: $state.includes(rootState +'.'+ dataKey)}]">
 					<a ng-href="{{uiSref() + childStates[0]}}"
 						 ng-class="{rotated: $state.includes(rootState +'.'+ dataKey)}"
-						 ps-smooth-scroll="{{dataKey}}">
+						 ps-smooth-scroll="{{dataKey}}"
+						 offset="{{-navbarHeight}}">
 						{{dataKey}}
 					</a>
 					<ps-muine-subcontrol></ps-muine-subcontrol>
@@ -35,12 +33,11 @@
 						</a>
 					</div>
 				</li>
-				<li class="item"
-						ps-smooth-scroll="prices"
-						offset="{{-navbarHeight}}"
-						data-ps-scrollspy="prices">
+				<li class="item">
 					<a ui-sref="muine.prices"
-						 ui-sref-active="underlined">
+						 ui-sref-active="underlined"
+						 ps-smooth-scroll="prices"
+						 offset="{{-navbarHeight}}">
 						<span>Prices</span>
 					</a>
 				</li>

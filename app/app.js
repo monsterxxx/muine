@@ -22,6 +22,7 @@ angular.module('myApp', [
   'myApp.version',
   'psApp.services.experiment',
   'muineApp.services.data',
+  'ps.muine.services.states',
   'ps.debugs'
 ]);
 
