@@ -452,12 +452,14 @@ header {
       border-left: 1px solid white; }
     header.transparent ul.mainmenu > li {
       border-right: 1px solid white; }
+      header.transparent ul.mainmenu > li > ps-muine-subcontrol li.selected {
+        background: #222222; }
       header.transparent ul.mainmenu > li:hover {
         background-color: #222222; }
       header.transparent ul.mainmenu > li.active {
         width: 150px; }
         header.transparent ul.mainmenu > li.active > ps-muine-subcontrol {
-          display: none; }
+          opacity: 0; }
         header.transparent ul.mainmenu > li.active > div {
           display: none; }
         header.transparent ul.mainmenu > li.active > a.rotated {
@@ -647,6 +649,7 @@ ps-muine-navbar {
 
 .muine-section {
   height: 600px;
+  min-width: 1200px;
   border-bottom: 1px solid gray; }
 
 #prices {

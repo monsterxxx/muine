@@ -44,13 +44,16 @@ ps-muine-subcontrol
     border-left: 1px solid $green
     border-bottom: 1px solid black
     &.selected
+      // transition-delay: 1s
       margin: 0 1px
       border-right: none
       border-left: none
       z-index: 3
-      background: $navbar_background
+      background: $navbar_background //rgba($navbar_background, 0) //
       span
         position: absolute
+    // &.selected-top
+    //   transition-delay: 1s
     &.subselect
       text-align: center
       z-index: 1

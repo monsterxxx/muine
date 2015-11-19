@@ -267,7 +267,8 @@ angular.module('ps.muine.navbar.subcontrol', [])
       element.find('.menu').html(genSelected($scope.index));
       //reaction on a state change
       $scope.$on('$stateChangeSuccess', function(){
-        //console.log('>>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataKey +' ) > subcontrolDir > stateChangeSuccess > start');
+        var doLog = false;
+        if (doLog) {console.log('>>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataKey +' ) > subcontrolDir > stateChangeSuccess > start');}
 
         if ($state.includes($scope.rootState +'.'+ $scope.dataKey)) {
           $scope.id = parseInt($stateParams[$scope.itemIdParam]);
@@ -288,7 +289,7 @@ angular.module('ps.muine.navbar.subcontrol', [])
 
           $scope.menuList = [$scope.col[$scope.index]];
           $scope.menuExpanded = false;
-          console.log('stateChange > $scope.id > '+ $scope.id +', $scope.index > '+ $scope.index);
+          if (doLog) {console.log('stateChange > $scope.id > '+ $scope.id +', $scope.index > '+ $scope.index);}
         }
       });
 
