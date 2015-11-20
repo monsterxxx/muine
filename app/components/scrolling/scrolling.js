@@ -3,7 +3,7 @@ angular.module('ps.scrolling', [])
 .directive('psSmoothScroll', ['$rootScope', function($rootScope) {
   return function($scope, element, attrs) {
     element.on('click', function (event) {
-      var doLog = true;
+      var doLog = false;
       if (doLog) {console.log('> psSmoothScroll click event');}
 
       //prevent click event on menu item, if another transition is running
@@ -86,6 +86,7 @@ angular.module('ps.scrolling', [])
         } else {
           if (doLog) {console.log('scrollin up');}
           console.log('check'+prevScroll, currScroll);
+          if (doLog) {console.log(JSON.stringify($rootScope.pageSections , null, 2), prevSection - 1);}
           stateToGo = defaultStates[$rootScope.pageSections[prevSection - 1].name];
         }
         $state.go(stateToGo.name, stateToGo.params);
@@ -159,8 +160,8 @@ angular.module('ps.scrolling', [])
       //when all states are loaded, record sections' names and offsets
       if ($rootScope.firstInit === true
           && fromState.name === 'muine.prices'
-          && toState.name === 'muine.home'
       ) {
+        console.log('scrollInit!');
         initialize();
       }
 

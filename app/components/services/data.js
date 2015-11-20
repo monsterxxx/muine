@@ -8,10 +8,16 @@ angular.module('muineApp.services.data', [])
   //Data recieved in sorted order
   var sports = [{
     id: 3,
-    name: 'Windsurfing'
+    name: 'Windsurfing',
+    home: {
+      img: '1.jpg'
+    }
   },{
     id: 55,
-    name: 'Kitesurfing'
+    name: 'Kitesurfing',
+    home: {
+      img: '1.jpg'
+    }
   },{
     id: 87,
     name: 'Surfing'
@@ -63,7 +69,7 @@ angular.module('muineApp.services.data', [])
     getData: function(){
       return data;
     },
-    getDataPart: function (dataKey) {
+    getDataKey: function (dataKey) {
       return data[dataKey];
     }
   };

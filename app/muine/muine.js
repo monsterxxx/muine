@@ -4,7 +4,7 @@
 
 angular.module('myApp.muine', [
   'ps.scrolling',
-  'ps.background-img',
+  'ps.background',
   'ps.muine.navbar',
   'ps.muine.navbar.subcontrol',
   'ps.muine.sports',
@@ -41,11 +41,19 @@ angular.module('myApp.muine', [
         templateUrl: './muine/muine.html',
         controller: 'MuineCtrl'
       }
+    },
+    resolve: {
+      muineData: ['MuineDataSvc', function (MuineDataSvc) {
+        return MuineDataSvc.getData();
+      }]
     }
   })
   .state('muine.home', {
     url: '',
-    sticky: true
+    sticky: true,
+    views: {
+      'home': {}
+    }
   })
   .state('muine.sports', {
     url: '/sports',
@@ -54,14 +62,18 @@ angular.module('myApp.muine', [
     deepStateRedirect: true,
     views: {
       'sports': {
-        templateUrl: './muine/sports/sports.html',
-        controller: 'MuineSportsCtrl'
+        //templateUrl: './muine/sports/sports.html',
+        template: '<div ui-view></div>'
       }
     }
   })
   .state('muine.sports.sport', {
     url: '/{sportId:int}',
-    abstract: true
+    abstract: true,
+    templateUrl: './muine/sports/sports.html',
+    controller: 'MuineSportsCtrl'
+    // templateUrl: './muine/sports/sportsChild.html',
+    // controller: 'MuineSportsChildCtrl'
   })
     .state('muine.sports.sport.home', {
       url: '/home'
@@ -173,21 +185,39 @@ angular.module('myApp.muine', [
       });
 
       $rootScope.firstInit = false;
+      var toPara = {};
+      var toStat = '';
       $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState){
-        console.log('> stateChangeSuccess > '+ $rootScope.$state.current.name);
+        console.log('> stateChangeSuccess > '+ fromState.name +' --> '+ toState.name, toParams);
         //first initialization
-        if (toState.name === 'muine.home' && fromState.name === ''){
+        if (fromState.name === ''){
           $rootScope.firstInit = true;
-          $state.go("muine.sports.sport.home", {sportId: 3}, { location: false }).then(function () {
-            $state.go("muine.clubs.club.home", {clubId: 49}, { location: false }).then(function () {
-              $state.go("muine.spots.spot.home", {spotId: 3}, { location: false }).then(function () {
-                $state.go("muine.prices", {}, { location: false }).then(function () {
-                  $state.go("muine.home").then(function () {
-                    $rootScope.firstInit = false;
+          toPara = toParams;
+          toStat = toState;
+          console.log('First INIT!!'+toPara,toStat);
+          $state.go("muine.home").then(function () {
+            console.log('yesp');
+            $state.go("muine.sports.sport.home", {sportId: 3}, { location: false }).then(function () {
+              console.log('yesp');
+              $state.go("muine.clubs.club.home", {clubId: 49}, { location: false }).then(function () {
+                console.log('yesp');
+                $state.go("muine.spots.spot.home", {spotId: 3}, { location: false }).then(function () {
+                  console.log('yesp');
+                  $state.go("muine.prices", {}, { location: false }).then(function () {
+                    console.log('yesp');
+                    $state.go($state.current, {}, {reload: true}).then(function () {
+                      console.log('yesp');
+                      $rootScope.firstInit = false;
+                    });
+                    // $state.go(toStat.name, toPara).then(function () {
+                    //   console.log('yesp');
+                    //   $rootScope.firstInit = false;
+                    // });
                   });
                 });
               });
             });
+
           });
         }
         //all states are loaded

@@ -23,7 +23,8 @@ angular.module('myApp', [
   'psApp.services.experiment',
   'muineApp.services.data',
   'ps.muine.services.states',
-  'ps.debugs'
+  'ps.debugs',
+  'ps.utils'
 ]);
 
 })();

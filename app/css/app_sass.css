@@ -616,10 +616,14 @@ header {
   .navbar-container .item-n3 ps-muine-subcontrol li:last-child {
     border-bottom: 1px solid #B10DC9; }
 
-.sports-container {
+#sports .background {
   width: 100%;
   height: 100%;
-  background: #FFDC00; }
+  position: absolute;
+  z-index: -1; }
+#sports .container {
+  width: 100%;
+  height: 100%; }
 
 .clubs-container {
   width: 100%;
@@ -648,6 +652,7 @@ ps-muine-navbar {
   background-size: cover; }
 
 .muine-section {
+  position: relative;
   height: 600px;
   min-width: 1200px;
   border-bottom: 1px solid gray; }

@@ -1,7 +1,17 @@
 angular.module('ps.muine.sports', [])
 
-.controller('MuineSportsCtrl', ['$scope',function ($scope) {
+.controller('MuineSportsCtrl', ['$scope', '$stateParams', 'muineData', 'PsUtils',
+                      function ( $scope ,  $stateParams ,  muineData ,  PsUtils )
+{
   console.log('> SportsCtrl load');
-  $scope.sport = 'windsurfing';
-  $scope.purple = true;
+
+  //get data
+  $scope.sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
+  console.log('$scope.sport'+JSON.stringify($scope.sport , null, 2));
+
+  $scope.bgImg = 'assets/img/sports/' + $scope.sport.name +'/'+ $scope.sport.home.img;
+}])
+
+.controller('MuineSportsChildCtrl', ['$scope', function ($scope) {
+  console.log('> SportsChildCtrl load');
 }]);

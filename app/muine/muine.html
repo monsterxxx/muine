@@ -1,8 +1,12 @@
 <ps-muine-navbar></ps-muine-navbar>
 
+<!-- video background replaced with img for development stage-->
 <div id="home" class="v">
   <!-- <video-bg video-id="'USWnYR8DErY'"></video-bg> -->
 </div>
+
+<!-- blank view -->
+<div id="sports" ui-view="home"></div>
 
 <div id="sports" class="muine-section" ui-view="sports"></div>
 
@@ -14,11 +18,11 @@
   prices' section
 </section></div>
 
+
+<!-- DEBUG INFO in the bottom -->
 <div class="debug-info">
 <button type="button" ng-click="refreshDebugInfo()" name="button">refresh</button>
 <pre>
 $state.current.name: {{$state.current.name}}; $stateParams: {{$stateParams}}; $state.params: {{$state.params}}
 </pre>
 </div>
-
-<p>This is my muine for muinewatersports.com. Really</p>

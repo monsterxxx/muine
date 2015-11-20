@@ -104,7 +104,7 @@ angular.module('ps.muine.navbar', [])
     if ($state.includes($scope.rootState +'.'+ $scope.dataKey)) {
       $scope.id = parseInt($stateParams[$scope.itemIdParam]);
       $scope.index = indexById($scope.lCol, $scope.id);
-      console.log('>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataKey +') > on(stateChangeSuccess) > finish > $scope.id: '+ $scope.id +', $scope.index: '+ $scope.index);
+      //console.log('>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataKey +') > on(stateChangeSuccess) > finish > $scope.id: '+ $scope.id +', $scope.index: '+ $scope.index);
     }
   });
 
