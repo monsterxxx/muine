@@ -15,18 +15,24 @@ angular.module('ps.scrolling', [])
   };
 }])
 
-.factory('PsMuineScroll', ['$rootScope', '$state', 'PsMuineStatesSvc', function($rootScope, $state, PsMuineStatesSvc) {
+.factory('PsMuineScroll', ['$rootScope', '$state', 'PsMuineStatesSvc',
+function(                   $rootScope,   $state,   PsMuineStatesSvc ) {
 
   var defaultStates = PsMuineStatesSvc.getDefaultStates();
 
-  return {
+  var PsMuineScroll = {
 
     initialize: function initialize() {
-      console.log('> PsMuineScroll.initialize()');
       var doLog = false;
       if (doLog) {console.log('> PsMuineScroll.initialize()');}
 
-      //page sections based on ps-smooth-scroll attributes and their scroll positions
+      //PAGE SECTIONS AND THEIR BREAKPOINTS
+      //in html markup page sections are defined as id="section.name"
+      //  whereas links leading to these sections defined as ps-smooth-scroll="section.name"
+      //breakPoints is an array of navbar scroll positions between sections
+      //offsets defined by attributes on the links
+      //TODO defining offset on links is actualy extraneous, because it's allways
+      //     equals -navbarHeight except for the first section, because of video bg
       $rootScope.pageSections = [];
       $rootScope.breakPoints = [];
       $('[ps-smooth-scroll]').each(function () {
@@ -42,7 +48,6 @@ angular.module('ps.scrolling', [])
       if (doLog) {console.log('breakPoints: '+ $rootScope.breakPoints);}
 
       //VARS DECLARATION
-      //scrollspy
       var prevSection = 0;
       var currSection = 0;
       var prevScroll = 0;
@@ -53,13 +58,16 @@ angular.module('ps.scrolling', [])
       var length = $rootScope.breakPoints.length;
       var $window = $(window);
       var $body = $('body');
-      var stateToGo = {};
 
+      //SCROLL HANDLER
+      //serves to keep scroll position under control and run corresponding logic
       function scrollHandler() {
+        var doLog = false;
+
+        //DETERMINE SCROLL PARAMETERS
         //current scroll position
         currScroll = $window.scrollTop();
-
-        //current section based on scroll position and break points
+        //determine current section based on scroll position within break points
         for (i = 0; i < length; i++) {
           if (doLog) {console.log(i, currScroll, $rootScope.breakPoints[i], currScroll < $rootScope.breakPoints[i]);}
           if (currScroll < $rootScope.breakPoints[i]) {
@@ -67,25 +75,27 @@ angular.module('ps.scrolling', [])
             break;
           }
         }
-
-        //scroll direction
+        //determine scroll direction
         scrollDown = (currScroll > prevScroll) ? true : false;
 
-        if (doLog) {console.log(currScroll, $rootScope.psMuineScrolling, currSection, prevSection);}
-
-        //do nothing if scrolling in last (prices) section or another transition is running
+        //STATE TRANSITION TRIGGER
+        //  implementation of a full section scroll design:
+        //  vertical scroll will tansite user to the next or prev section
+        //do nothing if scrolling in last section or if another transition is running
         //also do nothing if scrolling horizontally
+        if (doLog) {console.log(currScroll, $rootScope.psMuineScrolling, currSection, prevSection);}
         if (currSection !== length - 2 && !$rootScope.psMuineScrolling
           && prevScroll !== currScroll
         ) {
           if (doLog) {console.log('currSection: '+ currSection);}
           //do state.go transition to prev or next sections depending on scroll direction
+          var stateToGo = {};
           if ( scrollDown ) {
             if (doLog) {console.log('scrollin down');}
             stateToGo = defaultStates[$rootScope.pageSections[prevSection + 1].name];
           } else {
             if (doLog) {console.log('scrollin up');}
-            console.log('check'+prevScroll, currScroll);
+            if (doLog) {console.log('check'+prevScroll, currScroll);}
             if (doLog) {console.log(JSON.stringify($rootScope.pageSections , null, 2), prevSection - 1);}
             stateToGo = defaultStates[$rootScope.pageSections[prevSection - 1].name];
           }
@@ -94,7 +104,7 @@ angular.module('ps.scrolling', [])
 
         //NAVBAR TOP STYLE
         //this is a fix for strange navcontrol > selected items behavior
-        //could nnot get it done with css transition
+        //could not get it done with css transition
         if (prevScroll === 0) {
           var $selected = $('li.selected');
           $selected.velocity({
@@ -110,108 +120,102 @@ angular.module('ps.scrolling', [])
           });
         }
 
-        //prepare to next scroll event
+        //prepare to the next scroll event
         prevScroll = currScroll;
         prevSection = currSection;
-
       }
 
 
-
-      //prevent wheel if another transition is running
+      //MOUSEWHEEL HANDLER
+      //prevent wheel event if another transition is running
       //otherwise, scroll only 1 px to make transition start smooth
-      function handleWheel(e) {
-        // var currSection = $state.current.name.split('.')[1];
-        // var currScroll = $window.scrollTop();
+      function handleWheel(event) {
+        doLog = true;
         if ($rootScope.psMuineScrolling) {
-          e.preventDefault();
-        } else if (e.wheelDelta < 0) { //moving down
+          event.preventDefault();
+        } else if (event.wheelDelta < 0) { //moving down
             //act as normal mousewheel if it's the last section
             if (currSection !== length - 2) {
-              e.preventDefault();
+              event.preventDefault();
               window.scrollBy(0,1);
             }
           } else { //moving up
             //act as normal mousewheel if it's the last section and current scroll is in it
             if (currScroll <= $rootScope.breakPoints[length - 2]
             ) {
-              e.preventDefault();
+              event.preventDefault();
               window.scrollBy(0,-1);
             }
           }
       }
 
+      // detect available wheel event
+      support = "onwheel" in document.createElement("div") ? "wheel" : // Modern browsers support "wheel"
+                document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
+                "DOMMouseScroll"; // let's assume that remaining browsers are older Firefox
 
-      //define listners
+      console.log(support);
+
+
+      //ACTIVATE LISTNERS
       $window.on('scroll', scrollHandler);
       window.onwheel = handleWheel;
 
-      }
-  };
-}])
-
-
-
-
-
-
-.directive('psMuineScrollSpy', ['$rootScope', '$state', function($rootScope, $state) {
-  var doLog = false;
-
-  return function($scope, element, attrs) {
-    var doLog = true;
-    if (doLog) {console.log('> psMuineScrollSpy');}
-
-    //smoothscroll on state change
-    $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState) {
-      if (doLog) {console.log('> psMuineScrollSpy > on.stateChangeSuccess fromState: '+ fromState.name +', toState: '+ toState.name);}
-
-      if ($rootScope.firstInit === false) {
-
-        //animation starts if another muine router branch is activated
+      //ON STATECHANGE SCROLL
+      $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState) {
+        if (doLog) {console.log('> PsMuineScroll > on.stateChangeSuccess > '
+                                + fromState.name +' --> '+ toState.name);}
         var fromStateNameArr = fromState.name.split('.');
         var toStateNameArr = toState.name.split('.');
-        if ( fromStateNameArr[0] === 'muine' && toStateNameArr[0] === 'muine'
-             && fromStateNameArr[1] !== toStateNameArr[1]) {
-          if (doLog) {console.log('  external transition');}
-          //define section to smoothscroll to
-          var sectionName = toStateNameArr[1];
-          var sectionOffset = 0;
+        //no scroll while preloading app states
+        //scroll only if another muine router branch is activated
+        if (doLog) {console.log('  $rootScope.firstInit: '+ $rootScope.firstInit);}
+        if ($rootScope.firstInit === false
+            && fromStateNameArr[0] === 'muine' && toStateNameArr[0] === 'muine'
+            && fromStateNameArr[1] !== toStateNameArr[1]
+        ) {
+          if (doLog) {console.log('  stateChange triggered scroll passed');}
+          PsMuineScroll.scroll(toStateNameArr[1]);
+        }
+      });
 
-          var target = $('#'+ sectionName);
+    },
+    scroll: function (sectionName) {
+      var doLog = false;
+      if (doLog) {console.log('> PsMuineScroll.scroll('+ sectionName +')');}
 
-          if (doLog) {console.log('  pageSections: '+ angular.toJson($rootScope.pageSections));}
+      //find section element to smoothscroll to
+      var $target = $('#'+ sectionName);
+      if (doLog) {console.log('  $target.length: '+ JSON.stringify($target.length , null, 2));}
 
-          var $body = $('body');
-
-          //find this section offset in pageSections array
-          for (var i = 0; i < $rootScope.pageSections.length; i++) {
-            if ($rootScope.pageSections[i].name === sectionName) {
-              sectionOffset = $rootScope.pageSections[i].offset;
-              break;
-            }
-          }
-          if (doLog) {console.log('offset: '+ sectionOffset);}
-
-          target.velocity('scroll', {
-            duration: 1000,
-            offset: sectionOffset,
-            begin: function () {
-              if (doLog) {console.log('> psMuineScrollSpy > velocity begin');}
-              $rootScope.psMuineScrolling = true;
-            },
-            complete: function () {
-              if (doLog) {console.log('> psMuineScrollSpy > velocity complete');}
-              window.setTimeout(function () {
-                $rootScope.psMuineScrolling = false;
-              }, 35);
-            }
-          });
-
+      //find this section offset in pageSections array
+      var sectionOffset = 0;
+      if (doLog) {console.log('  pageSections: '+ angular.toJson($rootScope.pageSections));}
+      for (var i = 0; i < $rootScope.pageSections.length; i++) {
+        if ($rootScope.pageSections[i].name === sectionName) {
+          sectionOffset = $rootScope.pageSections[i].offset;
+          break;
         }
       }
+      if (doLog) {console.log('  offset: '+ sectionOffset);}
 
-
-    });
+      //velocity smoothscroll
+      $target.velocity('scroll', {
+        duration: 1000,
+        offset: sectionOffset,
+        begin: function () {
+          if (doLog) {console.log('> PsMuineScroll.scroll('+ sectionName +') > velocity begin');}
+          $rootScope.psMuineScrolling = true;
+        },
+        complete: function () {
+          if (doLog) {console.log('> PsMuineScroll.scroll('+ sectionName +') > velocity complete');}
+          window.setTimeout(function () {
+            $rootScope.psMuineScrolling = false;
+          }, 35);
+        }
+      });
+    }
   };
+
+  return PsMuineScroll;
 }]);

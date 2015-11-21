@@ -15,6 +15,8 @@ angular.module('myApp.muine', [
 
 .config(function ($urlRouterProvider, $stickyStateProvider) {
   //$stickyStateProvider.enableDebug(true);
+  // Don't sync the url till all sticky states are preloaded
+  $urlRouterProvider.deferIntercept();
   $urlRouterProvider
   .when('/muine/clubs/:clubId', ['$match', '$stateParams', 'MuineDataSvc', function($match, $stateParams, MuineDataSvc){
     console.log('$urlRouterProvider');
@@ -51,6 +53,7 @@ angular.module('myApp.muine', [
   .state('muine.home', {
     url: '',
     sticky: true,
+    preload: true,
     views: {
       'home': {}
     }
@@ -70,13 +73,15 @@ angular.module('myApp.muine', [
   .state('muine.sports.sport', {
     url: '/{sportId:int}',
     abstract: true,
+    params: {sportId: 3},
     templateUrl: './muine/sports/sports.html',
     controller: 'MuineSportsCtrl'
     // templateUrl: './muine/sports/sportsChild.html',
     // controller: 'MuineSportsChildCtrl'
   })
     .state('muine.sports.sport.home', {
-      url: '/home'
+      url: '/home',
+      preload: true
     })
     .state('muine.sports.sport.photo', {
       url: '/photo'
@@ -85,7 +90,7 @@ angular.module('myApp.muine', [
       url: '/video'
     })
   .state('muine.clubs', {
-    url: '/clubs', //(?:[0-9])
+    url: '/clubs',
     abstract: true,
     sticky: true,
     // deepStateRedirect: true,
@@ -98,10 +103,12 @@ angular.module('myApp.muine', [
   })
   .state('muine.clubs.club', {
     url: '/{clubId:int}',
-    abstract: true
+    abstract: true,
+    params: {clubId: 49}
   })
     .state('muine.clubs.club.home', {
-      url: '/home'
+      url: '/home',
+      preload: true
     })
     .state('muine.clubs.club.photo', {
       url: '/photo'
@@ -126,10 +133,12 @@ angular.module('myApp.muine', [
   })
   .state('muine.spots.spot', {
     url: '/{spotId:int}',
-    abstract: true
+    abstract: true,
+    params: {spotId: 3}
   })
     .state('muine.spots.spot.home', {
-      url: '/home'
+      url: '/home',
+      preload: true
     })
     .state('muine.spots.spot.photo', {
       url: '/photo'
@@ -140,6 +149,7 @@ angular.module('myApp.muine', [
   .state('muine.prices', {
     url: '/prices',
     sticky: true,
+    preload: true,
     views: {
       'prices': {
         templateUrl: './muine/prices/prices.html',
@@ -172,10 +182,45 @@ angular.module('myApp.muine', [
   };
 
 }])
+
+.run(     ['$state', '$q', '$urlRouter', '$rootScope', 'PsMuineScroll', '$location',
+function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $location) {
+  var doLog = false;
+
+  //firstInit var prevents scrolling on stateChangeSuccess while preloading states
+  $rootScope.firstInit = true;
+  // get list of all registered states
+  $state.get()
+     // limit to those with 'state.preload'
+    .filter(function(state) { return state.preload; })
+    // create a promise chain that goes to the state, then goes to the next one
+    .reduce(function (memo, state) {
+      // dont update the location (location: false)
+      return memo.then(function() { return $state.go(state, undefined, { location: false }); });
+    }, $q.when())
+    .then(function() {
+      //Now, when all sections are rendered, run essential scrolling functions
+      PsMuineScroll.initialize();
+      $rootScope.firstInit = false;
+      if (doLog) {console.log('> RUN > before url sync');}
+      // ok, now sync the url
+      $urlRouter.listen();
+
+      //if the last preloaded state is the state required by user,
+      //force scroll to it, as there will be no state transition and consequent scrolling
+      if (doLog) {console.log('$location.url(): '+ $location.url());}
+      if ($state.href($state.current.name) === '#' + $location.url()) {
+        PsMuineScroll.scroll($state.current.name.split('.')[1]);
+      }
+    });
+}])
+
 .run(
   [          '$rootScope', '$state', '$stateParams', '$stickyState', 'PsMuineScroll',
     function ($rootScope,   $state,   $stateParams ,  $stickyState ,  PsMuineScroll) {
-      console.log('> run');
+      var doLog = false;
+
+      if (doLog) {console.log('> run');}
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
       $rootScope.$stickyState = $stickyState;
@@ -184,51 +229,14 @@ angular.module('myApp.muine', [
         console.log.bind(console);
       });
 
-      $rootScope.firstInit = false;
+      //$rootScope.firstInit = false;
       var toPara = {};
       var toStat = '';
       $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState){
         console.log('> stateChangeSuccess > '+ fromState.name +' --> '+ toState.name, toParams);
-        //first initialization
-        if (fromState.name === ''){
-          $rootScope.firstInit = true;
-          toPara = toParams;
-          toStat = toState;
-          console.log('First INIT!!'+toPara,toStat);
-          $state.go("muine.home").then(function () {
-            console.log('yesp');
-            $state.go("muine.sports.sport.home", {sportId: 3}, { location: false }).then(function () {
-              console.log('yesp');
-              $state.go("muine.clubs.club.home", {clubId: 49}, { location: false }).then(function () {
-                console.log('yesp');
-                $state.go("muine.spots.spot.home", {spotId: 3}, { location: false }).then(function () {
-                  console.log('yesp');
-                  $state.go("muine.prices", {}, { location: false }).then(function () {
-                    console.log('yesp');
-                    // $state.go($state.current, {}, {reload: true}).then(function () {
-                    //   console.log('yesp');
-                    //   PsMuineScroll.initialize();
-                    //   $rootScope.firstInit = false;
-                    // });
-                    $state.go(toStat.name, toPara).then(function () {
-                      console.log('yesp');
-                      PsMuineScroll.initialize();
-                      $rootScope.firstInit = false;
-                    });
-                  });
-                });
-              });
-            });
-
-          });
-        }
-        //all states are loaded
-        if ($rootScope.firstInit === true && toState.name === 'muine.prices') {
-          //console.log('All states are loaded! Inittialization!');
-        }
       });
 
-      //TEST
+      //DEBUG UTIL
       $rootScope.log = function(message){
         console.log(message);
       };

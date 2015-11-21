@@ -10,6 +10,7 @@ angular.module('ps.muine.navbar', [])
   };
 })
 
+
 .directive('psMuineNavbar', function(){
   return {
     restrict: 'E',
@@ -20,9 +21,13 @@ angular.module('ps.muine.navbar', [])
     controller: 'NavbarCtrl'
   };
 })
-.controller('NavbarCtrl', ['$scope', '$state', '$stateParams', 'MuineDataSvc', 'NavbarSize',
-                   function($scope,   $state,   $stateParams,   MuineDataSvc ,  NavbarSize ){
-  console.log('> NavbarCtrl load');
+
+
+.controller('NavbarCtrl', ['$scope', '$state', 'MuineDataSvc', 'NavbarSize',
+function                  ( $scope,   $state,   MuineDataSvc ,  NavbarSize ){
+  var doLog = false;
+  if (doLog) {console.log('> NavbarCtrl load');}
+
   //navbar dimensions
   $scope.navbarHeight = NavbarSize.height;
 
@@ -37,8 +42,11 @@ angular.module('ps.muine.navbar', [])
 
 }])
 
-.controller('mainMenuItemCtrl1', function ($scope, $timeout, $stateParams, $state) {
-  console.log('>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataKey +') load');
+.controller('mainMenuItemCtrl1', ['$scope', '$state', '$stateParams',
+function                         ( $scope,   $state,   $stateParams) {
+  var doLog = false;
+  if (doLog) {console.log('>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataKey +') load');}
+
   //collection of data for this menu item (dataKey)
   $scope.col = $scope.data[$scope.dataKey];
   //itemIdParam - to access this item's $stateParam id. Remove pluralise 's' from the end and add 'Id' so that 'sports' become 'sportId'
@@ -108,7 +116,7 @@ angular.module('ps.muine.navbar', [])
     }
   });
 
-});
+}]);
 
 
 })();

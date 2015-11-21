@@ -436,10 +436,6 @@ header {
   background-color: #222222;
   box-shadow: 0 2px 2px 0 black;
   transition: 1s linear all; }
-  header > .header-left {
-    width: 50%; }
-  header > .header-right {
-    width: 50%; }
   header.transparent {
     background-color: rgba(34, 34, 34, 0);
     box-shadow: none;

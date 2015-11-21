@@ -5,14 +5,16 @@
 angular.module('ps.muine.navbar.subcontrol', [])
 
 .directive('psMuineSubcontrol', function (MuineDataSvc, $timeout, $state, $stateParams, $q) {
+  var doLog = false;
+  //console.log('>> psMuineSubcontrol');
+
   var data = MuineDataSvc.getData();
-  //console.log(angular.toJson());
+
   return {
     restrict: 'E',
     templateUrl: 'components/navbar/subcontrol/subcontrol.html',
     link: function ($scope, element, attrs) {
-      //console.log('>>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataKey +' ) > subcontrolDir load');
-
+      if (doLog) {console.log('>>> NavbarCtrl > mainMenuItemCtrl1( '+ $scope.dataKey +' ) > subcontrolDir load');}
 
       //EXTERNAL DATA
         //FROM PARENT SCOPES:
@@ -140,11 +142,11 @@ angular.module('ps.muine.navbar.subcontrol', [])
 
         selected.attr('data-index', $scope.index);
 
-        var span = selected.find('span').first();
-        span.text(col[$scope.index].name);
+        var $span = selected.find('span').first();
+        $span.text(col[$scope.index].name);
 
-        if (!span.hasClass('velocity-animating')) {
-          span.velocity('transition.slide'+ direction +'BigIn');
+        if (!$span.hasClass('velocity-animating')) {
+          $span.velocity('transition.slide'+ direction +'BigIn');
         }
         element.find('.icon').removeClass('active');
       };
@@ -277,18 +279,20 @@ angular.module('ps.muine.navbar.subcontrol', [])
           if ($scope.leftClicked) {
             $scope.leftClicked = false;
             slide('Left');
-          }
+          } else
           if ($scope.rightClicked) {
             $scope.rightClicked = false;
             slide('Right');
-          }
+          } else
           if ($scope.subselectClicked) {
             select();
             $scope.subselectClicked = false;
           }
+          //if state change was triggered from other place, change name
+          else {
+            element.find('.selected').find('span').text(col[$scope.index].name);
+          }
 
-          $scope.menuList = [$scope.col[$scope.index]];
-          $scope.menuExpanded = false;
           if (doLog) {console.log('stateChange > $scope.id > '+ $scope.id +', $scope.index > '+ $scope.index);}
         }
       });
