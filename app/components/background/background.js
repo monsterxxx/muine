@@ -10,8 +10,8 @@ angular.module('ps.background', [])
     },
     link: function(scope, element, attrs) {
       // var url = attrs.psBgImg;
-      console.log('> psBgImg');
-      console.log(scope.psBgImg);
+      var doLog = false;
+      if (doLog) {console.log('> psBgImg url: '+ scope.psBgImg);}
       element.css({
         'background-image': 'url(' + scope.psBgImg + ')',
         'background-size': 'cover',

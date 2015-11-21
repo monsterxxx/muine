@@ -173,8 +173,8 @@ angular.module('myApp.muine', [
 
 }])
 .run(
-  [          '$rootScope', '$state', '$stateParams', '$stickyState',
-    function ($rootScope,   $state,   $stateParams ,  $stickyState ) {
+  [          '$rootScope', '$state', '$stateParams', '$stickyState', 'PsMuineScroll',
+    function ($rootScope,   $state,   $stateParams ,  $stickyState ,  PsMuineScroll) {
       console.log('> run');
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
@@ -205,14 +205,16 @@ angular.module('myApp.muine', [
                   console.log('yesp');
                   $state.go("muine.prices", {}, { location: false }).then(function () {
                     console.log('yesp');
-                    $state.go($state.current, {}, {reload: true}).then(function () {
-                      console.log('yesp');
-                      $rootScope.firstInit = false;
-                    });
-                    // $state.go(toStat.name, toPara).then(function () {
+                    // $state.go($state.current, {}, {reload: true}).then(function () {
                     //   console.log('yesp');
+                    //   PsMuineScroll.initialize();
                     //   $rootScope.firstInit = false;
                     // });
+                    $state.go(toStat.name, toPara).then(function () {
+                      console.log('yesp');
+                      PsMuineScroll.initialize();
+                      $rootScope.firstInit = false;
+                    });
                   });
                 });
               });
