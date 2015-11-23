@@ -89,43 +89,40 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
       //discard scroll position, as some browsers will refresh saving old value
       $window.scrollTop(0);
 
+
       //RESIZE HANDLER
+      //resize breaks things a little:
+      //  1. browser (chrome and moz for sure) change sections' offset().top
+      //     so breakPoints should be redetermined
+      //  2. browser (chrome, moz. ie) scrolls window upon resize resulting
+      //     in offset between window.scrollTop() and current breakPoint
       function handleResize(event) {
         var doLog = true;
         if (doLog) {console.log('resize event!');}
-        console.log('$window.scrollTop(): '+ $window.scrollTop());
-        $window.off('scroll', PsMuineScroll.scrollHandler);
-        console.log('currSection: '+ currSection + ' prevSection: '+ prevSection);
-        //redetermine breakPoints
-        PsMuineScroll.findSections();
 
-        //find this sectionOffset in breakPoints array
-        var sectionOffset = breakPoints[currSection];
-        console.log('sectionOffset: '+ sectionOffset);
-        $window.scrollTop(sectionOffset);
-        console.log('$window.scrollTop(): '+ $window.scrollTop());
-        if (breakPoints[currSection] !== $window.scrollTop()) {
-          breakPoints[currSection] = $window.scrollTop();
-        }
-        prevScroll = $window.scrollTop();
-        $window.on('scroll', PsMuineScroll.scrollRemover);
+        //in ie destructing resizing scroll accures after resize event
+        //  set timeout in order to catch and correct scroll position
         window.setTimeout(function () {
-          $window.off('scroll', PsMuineScroll.scrollRemover);
-          $window.on('scroll', PsMuineScroll.scrollHandler);
-        }, 20);
-        // var stateNameArr = $state.current.name.split('.');
-        // var sectionOffset = 0;
-        // for (var i = 0; i < pageSections.length; i++) {
-        //   if (pageSections[i].name === sectionName) {
-        //     sectionOffset = breakPoints[i];
-        //     break;
-        //   }
-        // }
-        // console.log('sectionOffset: '+sectionOffset);
+          if (doLog) console.log('$window.scrollTop(): '+ $window.scrollTop());
+          $window.off('scroll', PsMuineScroll.scrollHandler);
+          if (doLog) console.log('currSection: '+ currSection + ' prevSection: '+ prevSection);
+          //redetermine breakPoints
+          PsMuineScroll.findSections();
 
+          //find this sectionOffset in breakPoints array
+          var sectionOffset = breakPoints[currSection];
+          if (doLog) console.log('sectionOffset: '+ sectionOffset);
+          $window.scrollTop(sectionOffset);
+          if (doLog) console.log('$window.scrollTop(): '+ $window.scrollTop());
+          //correct breakpoint to browser's window scroll position
+          breakPoints[currSection] = $window.scrollTop();
+          //reassign prevScroll to get it right in the next scrollHandler call
+          prevScroll = $window.scrollTop();
 
-        //redefine page sections
-        // PsMuineScroll.findSections();
+          window.setTimeout(function () {
+            $window.on('scroll', PsMuineScroll.scrollHandler);
+          }, 20);
+        }, 5);
       }
 
 
@@ -169,22 +166,27 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
         }
       }
 
+
+
+      //ACTIVATE LISTNERS
       // detect available wheel event
       support = "onwheel" in document.createElement("div") ? "wheel" : // Modern browsers support "wheel"
                 document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
                 "DOMMouseScroll"; // let's assume that remaining browsers are older Firefox
 
-      //ACTIVATE LISTNERS
       // window.onresize = handleResize;
       $window.on('resize', handleResize);
       $window.on('scroll', PsMuineScroll.scrollHandler);
+      $window.on('scroll', PsMuineScroll.navbarStyleFix);
       if (support === 'wheel') {
-        window.onwheel = handleWheel;
+        window.addEventListener('wheel', handleWheel);
         // $window.on('wheel', handleWheel);
       } else if (support === 'mousewheel'){
-        window.onmousewheel = handleWheel;
+        window.addEventListener('mousewheel', handleWheel);
         // $window.on('mousewheel', handleWheel);
       }
+
+
 
       //ON STATECHANGE SCROLL
       $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState) {
@@ -206,19 +208,6 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
 
     },
 
-    scrollRemover: function () {
-      var doLog = true;
-      if (doLog) {console.log('scrollRemover!');}
-      //find this sectionOffset in breakPoints array
-      var sectionOffset = breakPoints[currSection];
-      console.log('sectionOffset: '+ sectionOffset);
-      $window.scrollTop(sectionOffset);
-      console.log('$window.scrollTop(): '+ $window.scrollTop());
-      if (breakPoints[currSection] !== $window.scrollTop()) {
-        breakPoints[currSection] = $window.scrollTop();
-      }
-      prevScroll = $window.scrollTop();
-    },
 
     //SCROLL HANDLER
     //serves to keep scroll position under control and run corresponding logic
@@ -260,30 +249,36 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
           $state.go(stateToGo.name, stateToGo.params);
         }
 
-        //NAVBAR TOP STYLE
-        //this is a fix for strange navcontrol > selected items behavior
-        //could not get it done with css transition
-        if (prevScroll === 0) {
-          var $selected = $('li.selected');
-          $selected.velocity({
-            backgroundColorAlpha: 0
-          },{
-            duration: 0,
-            delay: 0
-          }).velocity({
-            backgroundColorAlpha: 1
-          },{
-            duration: 0,
-            delay: 1000
-          });
-        }
+
+
 
         //prepare to the next scroll event
         prevScroll = currScroll;
         prevSection = currSection;
 
       }, 10); //end of timeout
+    },
 
+
+
+    //NAVBAR TOP STYLE
+    //this is a fix for strange navcontrol > selected items behavior
+    //could not get it done with css transition
+    navbarStyleFix: function () {
+      if (prevScroll === 0) {
+        var $selected = $('li.selected');
+        $selected.velocity({
+          backgroundColorAlpha: 0
+        },{
+          duration: 0,
+          delay: 0
+        }).velocity({
+          backgroundColorAlpha: 1
+        },{
+          duration: 0,
+          delay: 1000
+        });
+      }
     },
 
     scroll: function (sectionName) {
@@ -311,18 +306,15 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
         },
         complete: function () {
           if (doLog) {console.log('> PsMuineScroll.scroll('+ sectionName +') > velocity complete');}
-          //sometimes, when browser window is zoomed it is scrolled not precisely to breakPoints
+          //sometimes, when browser window was zoomed it is scrolled not precisely to breakPoints
           //in this case ajust this breakpoint accordingly
-          if (sectionOffset !== $window.scrollTop()) {
-            breakPoints[i] = $window.scrollTop();
-          }
+          breakPoints[i] = $window.scrollTop();
+          //as scrollHandler was deactivated for the time of this animation,
+          //  define internal scroll state to get it right in scroll and zoom handlers
           prevScroll = $window.scrollTop();
           currSection = prevSection = i;
           $rootScope.psMuineScrolling = false;
           $window.on('scroll', PsMuineScroll.scrollHandler);
-          // window.setTimeout(function () {
-          //   $rootScope.psMuineScrolling = false;
-          // }, 35);
         }
       });
     }
