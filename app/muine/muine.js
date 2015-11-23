@@ -10,7 +10,8 @@ angular.module('myApp.muine', [
   'ps.muine.sports',
   'ps.muine.clubs',
   'ps.muine.spots',
-  'ps.muine.prices'
+  'ps.muine.prices',
+  'ps.muine.layout'
 ])
 
 .config(function ($urlRouterProvider, $stickyStateProvider) {

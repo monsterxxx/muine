@@ -703,8 +703,7 @@ ps-muine-navbar {
 .muine-section {
   position: relative;
   height: 600px;
-  min-width: 1200px;
-  border-bottom: 1px solid gray; }
+  min-width: 1200px; }
 
 #prices {
   margin: 0;
