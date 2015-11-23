@@ -7,7 +7,8 @@ module.exports = function(grunt){
     jshint: {
       all: ['Gruntfile.js', 'app/**/*.js', 'e2e-tests/**/*.js'],
       options: {
-        laxbreak: true
+        laxbreak: true,
+        multistr: true
       }
     },
     sass: {

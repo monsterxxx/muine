@@ -1,3 +1,6 @@
+(function(){
+'use strict';
+
 angular.module('ps.muine.sports', [])
 
 .controller
@@ -8,11 +11,7 @@ function            ( $scope ,  $stateParams ,  muineData ,  PsUtils ){
 
   //get data
   $scope.sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
-  if (doLog) {console.log('$scope.sport'+JSON.stringify($scope.sport , null, 2));}
-
-  $scope.bgImg = 'assets/img/sports/' + $scope.sport.name +'/'+ $scope.sport.home.img;
-}])
-
-.controller('MuineSportsChildCtrl', ['$scope', function ($scope) {
-  console.log('> SportsChildCtrl load');
+  if (doLog) console.log('$scope.sport'+JSON.stringify($scope.sport , null, 2));
 }]);
+
+})();

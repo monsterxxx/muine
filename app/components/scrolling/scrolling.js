@@ -42,7 +42,7 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
   var PsMuineScroll = {
 
     findSections: function () {
-      var doLog = true;
+      var doLog = false;
       if (doLog) {console.log('> PsMuineScroll.findSections()');}
 
       pageSections = [];
@@ -80,7 +80,7 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
     },
 
     initialize: function () {
-      var doLog = true;
+      var doLog = false;
       if (doLog) {console.log('> PsMuineScroll.initialize()');}
 
       //INITIALIZE
@@ -97,7 +97,7 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
       //  2. browser (chrome, moz. ie) scrolls window upon resize resulting
       //     in offset between window.scrollTop() and current breakPoint
       function handleResize(event) {
-        var doLog = true;
+        var doLog = false;
         if (doLog) {console.log('resize event!');}
 
         //in ie destructing resizing scroll accures after resize event
@@ -131,7 +131,7 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
       //otherwise, scroll only 1 px to make transition start smooth
       var delta = 0;
       function handleWheel(event) {
-        var doLog = true;
+        var doLog = false;
         if (doLog) {console.log('wheel event');}
         if (doLog) {console.log('event.deltaY: '+ event.deltaY);}
         if (doLog) {console.log('event.wheelDelta: '+ event.wheelDelta);}
@@ -212,7 +212,7 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
     //SCROLL HANDLER
     //serves to keep scroll position under control and run corresponding logic
     scrollHandler: function () {
-      var doLog = true;
+      var doLog = false;
       if (doLog) {console.log('scroll event');}
 
       //set timeout to make resize event handled before scroll event
@@ -282,7 +282,7 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
     },
 
     scroll: function (sectionName) {
-      var doLog = true;
+      var doLog = false;
       if (doLog) {console.log('> PsMuineScroll.scroll('+ sectionName +')');}
 
       //find this sectionOffset in breakPoints array

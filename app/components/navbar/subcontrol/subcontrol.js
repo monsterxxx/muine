@@ -4,7 +4,8 @@
 
 angular.module('ps.muine.navbar.subcontrol', [])
 
-.directive('psMuineSubcontrol', function (MuineDataSvc, $timeout, $state, $stateParams, $q) {
+.directive('psMuineSubcontrol', ['MuineDataSvc', '$timeout', '$state', '$stateParams', '$q', '$rootScope',
+function (                        MuineDataSvc ,  $timeout ,  $state ,  $stateParams ,  $q ,  $rootScope) {
   var doLog = false;
   //console.log('>> psMuineSubcontrol');
 
@@ -72,6 +73,7 @@ angular.module('ps.muine.navbar.subcontrol', [])
 
       //UI
       $scope.prevItem = function () {
+        $rootScope.slideRight = true;
         $scope.leftClicked = true;
         if ($scope.menuOpened) {
           closeMenu();
@@ -278,6 +280,9 @@ angular.module('ps.muine.navbar.subcontrol', [])
           //if left/right carets or subselect were clicked, perform animation
           if ($scope.leftClicked) {
             $scope.leftClicked = false;
+            $timeout(function () {
+              $rootScope.slideRight = false;
+            }, 300);
             slide('Left');
           } else
           if ($scope.rightClicked) {
@@ -299,6 +304,6 @@ angular.module('ps.muine.navbar.subcontrol', [])
 
     }
   };
-});
+}]);
 
 })();

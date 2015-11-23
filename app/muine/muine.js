@@ -8,10 +8,12 @@ angular.module('myApp.muine', [
   'ps.muine.navbar',
   'ps.muine.navbar.subcontrol',
   'ps.muine.sports',
+  'ps.muine.sports.home',
   'ps.muine.clubs',
   'ps.muine.spots',
   'ps.muine.prices',
-  'ps.muine.layout'
+  'ps.muine.layout',
+  'angular-velocity'
 ])
 
 .config(function ($urlRouterProvider, $stickyStateProvider) {
@@ -66,8 +68,10 @@ angular.module('myApp.muine', [
     deepStateRedirect: true,
     views: {
       'sports': {
-        //templateUrl: './muine/sports/sports.html',
-        template: '<div ui-view></div>'
+        template: '<div ui-view \
+                        ng-class="{&apos;ps-transition-slideRight&apos;: slideRight,\
+                                   &apos;ps-transition-slideLeft&apos;: !slideRight}">\
+                  </div>'
       }
     }
   })
@@ -82,7 +86,9 @@ angular.module('myApp.muine', [
   })
     .state('muine.sports.sport.home', {
       url: '/home',
-      preload: true
+      preload: true,
+      templateUrl: './muine/sports/home/home.html',
+      controller: 'MuineSportsHomeCtrl'
     })
     .state('muine.sports.sport.photo', {
       url: '/photo'

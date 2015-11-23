@@ -20,10 +20,16 @@ angular.module('muineApp.services.data', [])
     }
   },{
     id: 87,
-    name: 'Surfing'
+    name: 'Surfing',
+    home: {
+      img: '1.jpg'
+    }
   },{
     id: 49,
-    name: 'SUP'
+    name: 'SUP',
+    home: {
+      img: '1.jpg'
+    }
   }];
   var clubs = [{
     id: 49,
