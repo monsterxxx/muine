@@ -15,10 +15,8 @@ angular.module('ps.scrolling', [])
   };
 }])
 
-.factory('PsMuineScroll', ['$rootScope', '$state', 'PsMuineStatesSvc', 'MuineLayoutSvc',
-function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLayoutSvc) {
-
-  var defaultStates = PsMuineStatesSvc.getDefaultStates();
+.factory('PsMuineScroll', ['$rootScope', '$state', 'MuineLayoutSvc',
+function(                   $rootScope,   $state ,  MuineLayoutSvc) {
 
   //common jquery objects
   var $window = $(window);
@@ -238,18 +236,17 @@ function(                   $rootScope,   $state,   PsMuineStatesSvc ,  MuineLay
           && prevScroll !== currScroll
         ) {
           //do state.go transition to prev or next sections depending on scroll direction
-          var stateToGo = {};
+          var stateToGo = '';
           if ( scrollDown ) {
-            if (doLog) {console.log('transition down to '+ pageSections[prevSection + 1].name);}
-            stateToGo = defaultStates[pageSections[prevSection + 1].name];
+            stateToGo = 'muine.'+ pageSections[prevSection + 1].name;
+            if (doLog) {console.log('transition down to '+ stateToGo);}
           } else {
-            if (doLog) {console.log('transition up to '+ pageSections[prevSection - 1].name);}
-            stateToGo = defaultStates[pageSections[prevSection - 1].name];
+            stateToGo = 'muine.'+ pageSections[prevSection - 1].name;
+            if (doLog) {console.log('transition up to '+ stateToGo);}
           }
-          $state.go(stateToGo.name, stateToGo.params);
+          $state.go(stateToGo);
+
         }
-
-
 
 
         //prepare to the next scroll event

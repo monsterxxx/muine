@@ -1,6 +1,6 @@
 /* app css stylesheet */
 body {
-  background-color: #e5e9eb;
+  background-color: #404040;
   color: #222222;
   font-family: HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
   font-weight: 300;
@@ -711,33 +711,6 @@ header {
   .navbar-container .item-n3 ps-muine-subcontrol li:last-child {
     border-bottom: 1px solid #B10DC9; }
 
-.sports-child-view .background {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: -1; }
-.sports-child-view .container {
-  width: 100%;
-  height: 100%; }
-
-#sports .sports-child-view {
-  height: 600px; }
-
-.clubs-container {
-  width: 100%;
-  height: 100%;
-  background: #2ECC40; }
-
-.spots-container {
-  width: 100%;
-  height: 100%;
-  background: #B10DC9; }
-
-.prices-container {
-  width: 100%;
-  height: 100%;
-  background: #FF851B; }
-
 ps-muine-navbar {
   width: 100%;
   position: fixed;
@@ -747,12 +720,25 @@ ps-muine-navbar {
 .v {
   height: 600px;
   background: url("../assets/img/video-background.png");
-  background-size: cover; }
+  background-size: cover;
+  box-shadow: inset 0 -20px 20px -20px black; }
 
 .muine-section {
   position: relative;
   height: 600px;
   min-width: 1200px; }
+
+.section-view {
+  height: 600px;
+  box-shadow: inset 0 -20px 20px -20px black; }
+  .section-view .background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1; }
+  .section-view .container {
+    width: 100%;
+    height: 100%; }
 
 #prices {
   margin: 0;
@@ -770,6 +756,30 @@ ps-muine-navbar {
   .debug-info pre {
     display: inline-block;
     margin: 0; }
+
+.sports-child-view .background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1; }
+.sports-child-view .container {
+  width: 100%;
+  height: 100%; }
+
+.clubs-container {
+  width: 100%;
+  height: 100%;
+  background: #2ECC40; }
+
+.spots-container {
+  width: 100%;
+  height: 100%;
+  background: #B10DC9; }
+
+.prices-container {
+  width: 100%;
+  height: 100%;
+  background: #FF851B; }
 
 .dev-menu {
   list-style: none;

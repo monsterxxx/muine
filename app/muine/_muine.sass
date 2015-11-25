@@ -1,8 +1,3 @@
-@import './sports/sports'
-@import './clubs/clubs'
-@import './spots/spots'
-@import './prices/prices'
-
 ps-muine-navbar
   width: 100%
   position: fixed
@@ -13,11 +8,30 @@ ps-muine-navbar
   height: 600px
   background: url('../assets/img/video-background.png')
   background-size: cover
+  box-shadow: inset 0 -20px 20px -20px black //bottom only
 
+//'muine' state
 .muine-section
   position: relative
   height: 600px
   min-width: 1200px
+
+//'muine.sections' state templates
+.section-sticky-view
+
+//'muine.sections.section' state templates
+.section-view
+  height: 600px
+  box-shadow: inset 0 -20px 20px -20px black //bottom only
+  //'muine.sections.section.child' state templates' content:
+  .background
+    width: 100%
+    height: 100%
+    position: absolute
+    z-index: -1
+  .container
+    width: 100%
+    height: 100%
 
 #prices
   margin: 0
@@ -35,3 +49,8 @@ ps-muine-navbar
   pre
     display: inline-block
     margin: 0
+
+@import './sports/sports'
+@import './clubs/clubs'
+@import './spots/spots'
+@import './prices/prices'

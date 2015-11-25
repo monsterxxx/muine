@@ -10,7 +10,9 @@ angular.module('myApp.muine', [
   'ps.muine.sports',
   'ps.muine.sports.home',
   'ps.muine.clubs',
+  'ps.muine.clubs.home',
   'ps.muine.spots',
+  'ps.muine.spots.home',
   'ps.muine.prices',
   'ps.muine.layout',
   'angular-velocity'
@@ -63,30 +65,24 @@ angular.module('myApp.muine', [
   })
   .state('muine.sports', {
     url: '/sports',
-    abstract: true,
     sticky: true,
-    deepStateRedirect: true,
+    dsr: true,
     views: {
       'sports': {
-        template: '<div ui-view \
-                        ng-class="{&apos;ps-transition-slideRight&apos;: slideRight,\
-                                   &apos;ps-transition-slideLeft&apos;: !slideRight}">\
-                  </div>'
+        templateUrl: './muine/sports/sportsSticky.html'
       }
     }
   })
   .state('muine.sports.sport', {
     url: '/{sportId:int}',
     abstract: true,
-    params: {sportId: 3},
     templateUrl: './muine/sports/sports.html',
     controller: 'MuineSportsCtrl'
-    // templateUrl: './muine/sports/sportsChild.html',
-    // controller: 'MuineSportsChildCtrl'
   })
     .state('muine.sports.sport.home', {
       url: '/home',
       preload: true,
+      preloadParams: {sportId: 3},
       templateUrl: './muine/sports/home/home.html',
       controller: 'MuineSportsHomeCtrl'
     })
@@ -98,24 +94,26 @@ angular.module('myApp.muine', [
     })
   .state('muine.clubs', {
     url: '/clubs',
-    abstract: true,
     sticky: true,
-    // deepStateRedirect: true,
+    dsr: true,
     views: {
       'clubs': {
-        templateUrl: './muine/clubs/clubs.html',
-        controller: 'MuineClubsCtrl'
+        templateUrl: './muine/clubs/clubsSticky.html',
       }
     }
   })
   .state('muine.clubs.club', {
     url: '/{clubId:int}',
     abstract: true,
-    params: {clubId: 49}
+    templateUrl: './muine/clubs/clubs.html',
+    controller: 'MuineClubsCtrl'
   })
     .state('muine.clubs.club.home', {
       url: '/home',
-      preload: true
+      preload: true,
+      preloadParams: {clubId: 49},
+      templateUrl: './muine/clubs/home/home.html',
+      controller: 'MuineClubsHomeCtrl'
     })
     .state('muine.clubs.club.photo', {
       url: '/photo'
@@ -128,12 +126,11 @@ angular.module('myApp.muine', [
     })
   .state('muine.spots', {
     url: '/spots',
-    abstract: true,
     sticky: true,
-    // deepStateRedirect: true,
+    dsr: true,
     views: {
       'spots': {
-        templateUrl: './muine/spots/spots.html',
+        templateUrl: './muine/spots/spotsSticky.html',
         controller: 'MuineSpotsCtrl'
       }
     }
@@ -141,11 +138,15 @@ angular.module('myApp.muine', [
   .state('muine.spots.spot', {
     url: '/{spotId:int}',
     abstract: true,
-    params: {spotId: 3}
+    templateUrl: './muine/spots/spots.html',
+    controller: 'MuineSpotsCtrl'
   })
     .state('muine.spots.spot.home', {
       url: '/home',
-      preload: true
+      preload: true,
+      preloadParams: {spotId: 3},
+      templateUrl: './muine/spots/home/home.html',
+      controller: 'MuineSpotsHomeCtrl'
     })
     .state('muine.spots.spot.photo', {
       url: '/photo'
@@ -190,12 +191,13 @@ angular.module('myApp.muine', [
 
 }])
 
-.run(     ['$state', '$q', '$urlRouter', '$rootScope', 'PsMuineScroll', '$location',
-function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $location) {
-  var doLog = false;
+.run(     ['$state', '$q', '$urlRouter', '$rootScope', 'PsMuineScroll', '$location', '$timeout',
+function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $location ,  $timeout ) {
+  var doLog = true;
 
   //firstInit var prevents scrolling on stateChangeSuccess while preloading states
-  $rootScope.firstInit = true;
+  $rootScope.firstInit = false;
+
   // get list of all registered states
   $state.get()
      // limit to those with 'state.preload'
@@ -203,15 +205,18 @@ function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $locati
     // create a promise chain that goes to the state, then goes to the next one
     .reduce(function (memo, state) {
       // dont update the location (location: false)
-      return memo.then(function() { return $state.go(state, undefined, { location: false }); });
+      return memo.then(function() {
+        return $state.go(state, state.preloadParams || {}, { location: false }); });
     }, $q.when())
     .then(function() {
       //Now, when all sections are rendered, run essential scrolling functions
       PsMuineScroll.initialize();
       $rootScope.firstInit = false;
       if (doLog) {console.log('> RUN > before url sync');}
+
       // ok, now sync the url
       $urlRouter.listen();
+      // $urlRouter.sync(); //sync() is used to sync just once
 
       //if the last preloaded state is the state required by user,
       //force scroll to it, as there will be no state transition and consequent scrolling

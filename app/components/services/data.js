@@ -33,38 +33,71 @@ angular.module('muineApp.services.data', [])
   }];
   var clubs = [{
     id: 49,
-    name: 'Kitesurf Vietnam'
+    name: 'Kitesurf Vietnam',
+    home: {
+      img: '1.jpg'
+    }
   },{
     id: 3,
-    name: 'Rids'
+    name: 'Rids',
+    home: {
+      img: '1.jpg'
+    }
   },{
     id: 23,
-    name: 'Surf4You'
+    name: 'Surf4You',
+    home: {
+      img: '2.jpg'
+    }
   },{
     id: 87,
-    name: 'VKS'
+    name: 'VKS',
+    home: {
+      img: '1.jpg'
+    }
   },{
     id: 28,
-    name: 'Leto'
+    name: 'Leto',
+    home: {
+      img: '2.jpg'
+    }
   },{
     id: 99,
-    name: "Jibe's"
+    name: "Jibe's",
+    home: {
+      img: '1.jpg'
+    }
   },{
     id: 115,
-    name: 'Source Kiteboarding'
+    name: 'Source Kiteboarding',
+    home: {
+      img: '2.jpg'
+    }
   }];
   var spots = [{
     id: 3,
-    name: 'Muine overview'
+    name: 'Muine overview',
+    home: {
+      img: '1.jpg'
+    }
   },{
     id: 55,
-    name: 'Nga Tro'
+    name: 'Nga Tro',
+    home: {
+      img: '2.jpg'
+    }
   },{
     id: 87,
-    name: 'Tro Nka'
+    name: 'Tro Nka',
+    home: {
+      img: '1.jpg'
+    }
   },{
     id: 49,
-    name: 'Suoi Nuoc'
+    name: 'Suoi Nuoc',
+    home: {
+      img: '2.jpg'
+    }
   }];
   var data = {
     sports: sports,
