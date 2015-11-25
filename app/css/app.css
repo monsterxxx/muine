@@ -723,6 +723,10 @@ ps-muine-navbar {
   background-size: cover;
   box-shadow: inset 0 -20px 20px -20px black; }
 
+.video-overlay {
+  height: 600px;
+  box-shadow: inset 0 -20px 20px -20px black; }
+
 .muine-section {
   position: relative;
   height: 600px;

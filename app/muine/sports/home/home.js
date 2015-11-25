@@ -13,7 +13,7 @@ function                ( $scope ){
   //from ancestor's template used
   //$scope.section
 
-  $scope.bgImg = 'assets/img/sports/' + $scope.sport.name +'/'+ $scope.sport.home.img;
+  $scope.bgImg = 'assets/img/sports/' + $scope.sport.name.toLowerCase() +'/'+ $scope.sport.home.img;
 }]);
 
 })();
