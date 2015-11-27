@@ -117,17 +117,14 @@ mkdirp(boxDir, function(err){
   fs.readFile(indexHtmlDir, 'utf8', function(error, data) {
       jsdom.env(data, [], function (errors, window) {
           var $ = require('jquery')(window);
-          // $("p").each(function () {
-          //     var content = $(this).text();
-          //     $(this).text(content + " modified!");
-          // });
           $('ul.dev-menu').append('  <li><a ui-sref="'+ boxName + '">'+ boxName + '</a></li>\n  ');
           $('body').append('  <script src="sandbox/'+ boxName + '/'+ boxName + '.js"></script>\n');
-          var htmlPrefix = '<!DOCTYPE html>\n' +
-            '<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->\n' +
-            '<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->\n' +
-            '<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->\n' +
-            '<!--[if gt IE 8]><!--> ';
+          var htmlPrefix = '';
+          // '<!DOCTYPE html>\n' +
+          //   '<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->\n' +
+          //   '<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->\n' +
+          //   '<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->\n' +
+          //   '<!--[if gt IE 8]><!--> ';
           fs.writeFile(indexHtmlDir, htmlPrefix + window.document.documentElement.outerHTML,
                        function (error){
               if (error) throw error;
