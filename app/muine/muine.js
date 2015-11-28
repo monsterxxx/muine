@@ -171,19 +171,6 @@ angular.module('myApp.muine', [
   console.log('> MuineCtrl load');
   $scope.navbarTransparent = true;
 
-  //scrollspy
-  $(window).scroll(function() {
-   if ($(this).scrollTop() === 0) {
-     $scope.$apply(function () {
-       $scope.navbarTransparent = true;
-     });
-   } else {
-     $scope.$apply(function () {
-       $scope.navbarTransparent = false;
-     });
-   }
-  });
-
   //DEBUG //TEST //EXPERIMENT
   $scope.refreshDebugInfo = function () {
     console.log(angular.toJson($stickyState.getInactiveStates()));

@@ -39,6 +39,8 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
 
   var PsMuineScroll = {
 
+
+
     findSections: function () {
       var doLog = false;
       if (doLog) {console.log('> PsMuineScroll.findSections()');}
@@ -68,6 +70,8 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
       if (doLog) {console.log('breakPoints: '+ breakPoints);}
     },
 
+
+
     //to determine section based on scroll position within break points
     getSection: function (scroll) {
       for (var i = 0; i < breakPoints.length; i++) {
@@ -76,6 +80,8 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
         }
       }
     },
+
+
 
     initialize: function () {
       var doLog = false;
@@ -175,7 +181,7 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
       // window.onresize = handleResize;
       $window.on('resize', handleResize);
       $window.on('scroll', PsMuineScroll.scrollHandler);
-      $window.on('scroll', PsMuineScroll.navbarStyleFix);
+      $window.on('scroll', PsMuineScroll.navbarStyler);
       if (support === 'wheel') {
         window.addEventListener('wheel', handleWheel);
         // $window.on('wheel', handleWheel);
@@ -205,6 +211,7 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
       });
 
     },
+
 
 
     //SCROLL HANDLER
@@ -256,13 +263,31 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
       }, 10); //end of timeout
     },
 
+    var currScroll2 = 0;
+    var prevScroll2 = 0;
 
+    //NAVBAR STYLER
+    navbarStyler: function () {
 
-    //NAVBAR TOP STYLE
-    //this is a fix for strange navcontrol > selected items behavior
-    //could not get it done with css transition
-    navbarStyleFix: function () {
-      if (prevScroll === 0) {
+      currScroll2 = $window.scrollTop();
+
+      //scrollspy
+      // $(window).scroll(function() {
+      //  if ($(this).scrollTop() === 0) {
+      if (currScroll2 === 0)
+         $scope.$apply(function () {
+           $scope.navbarTransparent = true;
+         });
+       } else {
+         $scope.$apply(function () {
+           $scope.navbarTransparent = false;
+         });
+       }
+      // });
+
+      //This is a fix for strange navcontrol > selected items behavior.
+      //  Could not get it done with css transition.
+      if (prevScroll2 === 0) {
         var $selected = $('li.selected');
         $selected.velocity({
           backgroundColorAlpha: 0
@@ -276,7 +301,11 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
           delay: 1000
         });
       }
+
+      prevScroll2 = currScroll2;
     },
+
+
 
     scroll: function (sectionName) {
       var doLog = false;
@@ -315,6 +344,9 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
         }
       });
     }
+
+
+
   };
 
   return PsMuineScroll;

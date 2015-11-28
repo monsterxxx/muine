@@ -30,19 +30,16 @@
   <!-- end of favicons -->
   <!-- responsiveness and styles -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="../bower_components/html5-boilerplate/dist/css/main.css">
+  <!-- TODO <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scaleable=no"> -->
+  <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css">
   <link rel="stylesheet" href="css/app.css">
-  <!-- HTML5 Boilerplate -->
-  <script src="../bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-
 <body>
-  <!--[if lt IE 11]>
+  <!-- TODO <body class="ng-cloak"> -->
+  <!--[if lt IE 10]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <ng-include src="'assets/favicons/favicons.html'"></ng-include>
   <ng-include src="'assets/shapes.svg'"></ng-include>
 
   <ul class="dev-menu" ng-if="!$state.includes('muine')">
@@ -58,10 +55,6 @@
     <li><a ui-sref="box9">box9</a></li>
     <li><a ui-sref="box10">box10</a></li>
   </ul>
-
-  <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
 
   <div ui-view=""></div>
   <div ui-view="muine"></div>
@@ -79,6 +72,9 @@
   <script src="../bower_components/ui-router-extras/release/ct-ui-router-extras.min.js"></script>
   <script src="../bower_components/lodash/lodash.min.js"></script>
   <script src="../bower_components/angular-video-bg/angular-video-bg.min.js"></script>
+  <script src="../bower_components/angular-material/angular-material.js"></script>
+  <script src="../bower_components/angular-aria/angular-aria.min.js"></script>
+
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
@@ -102,7 +98,7 @@
   <script src="components/background/background.js"></script>
   <script src="components/scrolling/scrolling.js"></script>
   <script src="components/debugs/debugs.js"></script>
-  <script src="components/utils/utils.js"></script>utils
+  <script src="components/utils/utils.js"></script>
 
   <script src="sandbox/box3/box3.js"></script>
   <script src="sandbox/box4/box4.js"></script>
@@ -111,6 +107,5 @@
   <script src="sandbox/box7/box7.js"></script>
   <script src="sandbox/box8/box8.js"></script>
   <script src="sandbox/box9/box9.js"></script>
-
   <script src="sandbox/box10/box10.js"></script>
 </body></html>

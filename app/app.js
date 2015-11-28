@@ -3,10 +3,11 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ct.ui.router.extras',
+  'ngMaterial',
   'angularVideoBg',
-  'ngAnimate',
+  'ct.ui.router.extras',
   'ui.router',
+  'ngAnimate',
   'myApp.view1',
   'myApp.view2',
   'myApp.box3',
