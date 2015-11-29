@@ -3,7 +3,6 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ngMaterial',
   'angularVideoBg',
   'ct.ui.router.extras',
   'ui.router',

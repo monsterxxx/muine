@@ -15,12 +15,13 @@ angular.module('ps.scrolling', [])
   };
 }])
 
-.factory('PsMuineScroll', ['$rootScope', '$state', 'MuineLayoutSvc',
-function(                   $rootScope,   $state ,  MuineLayoutSvc) {
+.factory('PsMuineScroll', ['$rootScope', '$state', 'MuineLayoutSvc', '$q', '$compile',
+function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $compile) {
 
   //common jquery objects
-  var $window = $(window);
-  var $html = $('html');
+  var $window = $(window),
+      $html = $('html'),
+      $v;
 
   //PAGE SECTIONS AND THEIR BREAKPOINTS
   //in html markup page sections are defined as id="pageSection.name"
@@ -86,6 +87,9 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
     initialize: function () {
       var doLog = false;
       if (doLog) {console.log('> PsMuineScroll.initialize()');}
+
+      //now, when all DOM is rendered, determine some jquery vars
+      $v = $('.v');
 
       //INITIALIZE
       PsMuineScroll.findSections();
@@ -205,8 +209,22 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
             && fromStateNameArr[0] === 'muine' && toStateNameArr[0] === 'muine'
             && fromStateNameArr[1] !== toStateNameArr[1]
         ) {
-          if (doLog) {console.log('  stateChange triggered scroll passed');}
-          PsMuineScroll.scroll(toStateNameArr[1]);
+          if (doLog) {console.log('  stateChange triggered scrolling');}
+          //before scroll
+          if (toStateNameArr[1] === 'home') {
+            console.log('transition to home!');
+            //insert video background
+            console.log('.v: '+ $v.length);
+            $v.prepend($compile('<video-bg video-id="&apos;USWnYR8DErY&apos;"'+
+              'mobile-image="&apos;assets/img/video-background.png&apos;"></video-bg>')($rootScope));
+          }
+          PsMuineScroll.scroll(toStateNameArr[1]).then(function () {
+            //after scroll
+            if (fromStateNameArr[1] === 'home') {
+              console.log('transition from home!');
+              $v.find('[video-id]').remove();
+            }
+          });
         }
       });
 
@@ -263,31 +281,14 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
       }, 10); //end of timeout
     },
 
-    var currScroll2 = 0;
-    var prevScroll2 = 0;
+
 
     //NAVBAR STYLER
     navbarStyler: function () {
 
-      currScroll2 = $window.scrollTop();
-
-      //scrollspy
-      // $(window).scroll(function() {
-      //  if ($(this).scrollTop() === 0) {
-      if (currScroll2 === 0)
-         $scope.$apply(function () {
-           $scope.navbarTransparent = true;
-         });
-       } else {
-         $scope.$apply(function () {
-           $scope.navbarTransparent = false;
-         });
-       }
-      // });
-
       //This is a fix for strange navcontrol > selected items behavior.
       //  Could not get it done with css transition.
-      if (prevScroll2 === 0) {
+      if (prevScroll === 0) {
         var $selected = $('li.selected');
         $selected.velocity({
           backgroundColorAlpha: 0
@@ -302,14 +303,15 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
         });
       }
 
-      prevScroll2 = currScroll2;
     },
 
 
-
+    //Smooth scroll to specified section. Returns promise.
     scroll: function (sectionName) {
       var doLog = false;
       if (doLog) {console.log('> PsMuineScroll.scroll('+ sectionName +')');}
+
+      var deferred = $q.defer();
 
       //find this sectionOffset in breakPoints array
       var sectionOffset = 0;
@@ -341,8 +343,10 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
           currSection = prevSection = i;
           $rootScope.psMuineScrolling = false;
           $window.on('scroll', PsMuineScroll.scrollHandler);
+          deferred.resolve();
         }
       });
+      return deferred.promise;
     }
 
 

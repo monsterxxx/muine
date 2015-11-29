@@ -130,8 +130,7 @@ angular.module('myApp.muine', [
     dsr: true,
     views: {
       'spots': {
-        templateUrl: './muine/spots/spotsSticky.html',
-        controller: 'MuineSpotsCtrl'
+        templateUrl: './muine/spots/spotsSticky.html'
       }
     }
   })
@@ -170,6 +169,19 @@ angular.module('myApp.muine', [
 .controller('MuineCtrl', ['$scope', '$stickyState', function($scope, $stickyState) {
   console.log('> MuineCtrl load');
   $scope.navbarTransparent = true;
+
+  //scrollspy
+  $(window).scroll(function() {
+   if ($(this).scrollTop() === 0) {
+     $scope.$apply(function () {
+       $scope.navbarTransparent = true;
+     });
+   } else {
+     $scope.$apply(function () {
+       $scope.navbarTransparent = false;
+     });
+   }
+  });
 
   //DEBUG //TEST //EXPERIMENT
   $scope.refreshDebugInfo = function () {

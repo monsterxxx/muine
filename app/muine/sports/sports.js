@@ -7,7 +7,7 @@ angular.module('ps.muine.sports', [])
 ('MuineSportsCtrl', ['$scope', '$stateParams', 'muineData', 'PsUtils',
 function            ( $scope ,  $stateParams ,  muineData ,  PsUtils ){
   console.log('> SportsCtrl load');
-  var doLog = true;
+  var doLog = false;
 
   //get data
   $scope.sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
