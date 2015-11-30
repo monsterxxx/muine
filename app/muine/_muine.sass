@@ -5,13 +5,27 @@ ps-muine-navbar
   top: 0
 
 .v
+  position: relative
   height: 600px
-  background: url('../assets/img/video-background.png')
-  background-size: cover
+  // background: url('../assets/img/video-background.png')
+  // background-size: cover
   min-width: 1200px
+.loader
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-12.5px, -82.5px)
 .video-overlay
   height: 600px
   box-shadow: inset 0 -20px 20px -20px black //bottom only
+  svg
+    width: 50px
+    height: 50px
+    position: absolute
+    top: 80px
+    right: 20px
+    fill: rgba(black, 0.6)
+    cursor: pointer
 
 //'muine' state
 .muine-section

@@ -20,8 +20,7 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
 
   //common jquery objects
   var $window = $(window),
-      $html = $('html'),
-      $v;
+      $html = $('html');
 
   //PAGE SECTIONS AND THEIR BREAKPOINTS
   //in html markup page sections are defined as id="pageSection.name"
@@ -88,8 +87,6 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
       var doLog = false;
       if (doLog) {console.log('> PsMuineScroll.initialize()');}
 
-      //now, when all DOM is rendered, determine some jquery vars
-      $v = $('.v');
 
       //INITIALIZE
       PsMuineScroll.findSections();
@@ -212,17 +209,13 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
           if (doLog) {console.log('  stateChange triggered scrolling');}
           //before scroll
           if (toStateNameArr[1] === 'home') {
-            console.log('transition to home!');
-            //insert video background
-            console.log('.v: '+ $v.length);
-            $v.prepend($compile('<video-bg video-id="&apos;USWnYR8DErY&apos;"'+
-              'mobile-image="&apos;assets/img/video-background.png&apos;"></video-bg>')($rootScope));
+            //insert video background if it's not there yet
+            $rootScope.videoEnabled = true;
           }
           PsMuineScroll.scroll(toStateNameArr[1]).then(function () {
             //after scroll
             if (fromStateNameArr[1] === 'home') {
-              console.log('transition from home!');
-              $v.find('[video-id]').remove();
+              $rootScope.videoEnabled = false;
             }
           });
         }

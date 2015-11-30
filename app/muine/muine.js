@@ -166,9 +166,77 @@ angular.module('myApp.muine', [
   });
 }])
 
-.controller('MuineCtrl', ['$scope', '$stickyState', function($scope, $stickyState) {
+// .directive('videoOverlay', function () {
+//   return {
+//     restrict: 'E',
+//     link: function ($scope, el, attrs) {
+//       el.on('click', function () {
+//
+//       });
+//     }
+//   }
+// })
+
+.controller('MuineCtrl', ['$scope', '$stickyState',
+function(                  $scope ,  $stickyState ) {
   console.log('> MuineCtrl load');
   $scope.navbarTransparent = true;
+
+  //default video background params
+  $scope.videoMuted = false;
+
+  //register video-bg youtube player functions
+  $scope.videoBgReg = function(player) {
+    $scope.getPlayerState = function () {
+      return player.getPlayerState();
+    };
+    $scope.pauseVideo = function() {
+      player.pauseVideo();
+    };
+    $scope.playVideo = function() {
+      player.playVideo();
+    };
+    $scope.playerIsMuted = function () {
+      return player.isMuted();
+    };
+    $scope.playerMute = function() {
+      player.mute();
+      $scope.videoMuted = true;
+    };
+    $scope.playerUnmute = function() {
+      player.unMute();
+      $scope.videoMuted = false;
+    };
+    if ($scope.videoMuted) {
+      player.mute();
+    } else {
+      player.unMute();
+    }
+    // $scope.getVideoLoadedFraction = function () {
+    //   return player.getVideoLoadedFraction();
+    // };
+  };
+
+  //video overlay
+  $scope.videoPlayPause = function () {
+    if ($scope.getPlayerState() === 1) {
+      $scope.pauseVideo();
+      return;
+    }
+    if ($scope.getPlayerState() === 2) {
+      $scope.playVideo();
+      return;
+    }
+  };
+  $scope.videoMuteUnmute = function (event) {
+    console.log('mute - unmute');
+    event.stopPropagation();
+    if ($scope.playerIsMuted()) {
+      $scope.playerUnmute();
+    } else {
+      $scope.playerMute();
+    }
+  };
 
   //scrollspy
   $(window).scroll(function() {
@@ -193,6 +261,9 @@ angular.module('myApp.muine', [
 .run(     ['$state', '$q', '$urlRouter', '$rootScope', 'PsMuineScroll', '$location', '$timeout',
 function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $location ,  $timeout ) {
   var doLog = true;
+
+  //default globals
+  $rootScope.enableVideo = true;
 
   //firstInit var prevents scrolling on stateChangeSuccess while preloading states
   $rootScope.firstInit = false;

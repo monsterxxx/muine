@@ -5,10 +5,20 @@
 
 </div> -->
 <div class="v">
-  <!-- <video-bg video-id="'USWnYR8DErY'" mobile-image="'assets/img/video-background.png'"></video-bg> -->
-  <div class="video-overlay">
-
+  <div class="loader">Loading...</div>
+  <video-bg ng-if="videoEnabled"
+            video-id="'USWnYR8DErY'"
+            mobile-image="'assets/img/video-background.png'"
+            mute="false"
+            allow-click-events="true"
+            player-callback="videoBgReg(player)"
+            start="2">
+  <div class="video-overlay" ng-click="videoPlayPause()">
+    <svg ng-show="videoMuted" ng-click="videoMuteUnmute($event)"><use xlink:href="#shape-mute"></use></svg>
+    <svg ng-hide="videoMuted" ng-click="videoMuteUnmute($event)"><use xlink:href="#shape-unmute"></use></svg>
   </div>
+  </video-bg>
+  <!-- <video-overlay></video-overlay> -->
 </div>
 
 <!-- blank view -->
