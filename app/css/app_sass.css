@@ -354,6 +354,9 @@ td,
 th {
   padding: 0; }
 
+.ps-fadeIn {
+  animation-name: fadeIn; }
+
 .ps-transition-slideLeft.ng-enter, .ps-transition-slideLeft.ng-leave {
   position: absolute;
   left: 0;
@@ -392,9 +395,41 @@ th {
   opacity: 1;
   transform: translate3d(100%, 0, 0); }
 
+@keyframes show {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 1; } }
+@keyframes hide {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 0; } }
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+@keyframes fadeOut {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+@keyframes fadeOut2 {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0.2; } }
+@keyframes arrowUpDown {
+  0% {
+    transform: translateY(0); }
+  50% {
+    transform: translateY(10px); }
+  100% {
+    transform: translateY(0px); } }
 .loader {
   margin: 100px auto;
-  font-size: 25px;
+  font-size: 10px;
   width: 1em;
   height: 1em;
   border-radius: 50%;
@@ -1072,24 +1107,90 @@ ps-muine-navbar {
   position: relative;
   height: 600px;
   min-width: 1200px; }
+  .v .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-12.5px, -82.5px); }
 
-.loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-12.5px, -82.5px); }
-
-.video-overlay {
+[ps-video-bg] .video-overlay {
   height: 600px;
   box-shadow: inset 0 -20px 20px -20px black; }
-  .video-overlay svg {
+  [ps-video-bg] .video-overlay svg {
     width: 50px;
     height: 50px;
     position: absolute;
-    top: 80px;
-    right: 20px;
     fill: rgba(0, 0, 0, 0.6);
     cursor: pointer; }
+    [ps-video-bg] .video-overlay svg.mute {
+      top: 80px;
+      right: 20px; }
+  [ps-video-bg] .video-overlay .cover-text {
+    font-family: "Open Sans", sans-serif;
+    width: 100%;
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translate(0, 30px);
+    text-shadow: black 0px 0px 10px;
+    opacity: 0.2;
+    animation-name: show, fadeOut2;
+    animation-delay: 0s, 15s;
+    animation-duration: 15s, 10s; }
+  [ps-video-bg] .video-overlay .cover-title {
+    text-transform: uppercase;
+    font-size: 60px;
+    font-weight: bold;
+    animation-name: hide, fadeIn;
+    animation-delay: 0s, 6s;
+    animation-duration: 6s, 3s; }
+  [ps-video-bg] .video-overlay .cover-description {
+    font-size: 40px; }
+    [ps-video-bg] .video-overlay .cover-description span {
+      animation-name: hide, fadeIn; }
+      [ps-video-bg] .video-overlay .cover-description span:nth-child(1) {
+        animation-delay: 0s, 10s;
+        animation-duration: 10s, 1s; }
+      [ps-video-bg] .video-overlay .cover-description span:nth-child(2) {
+        animation-delay: 0s, 11s;
+        animation-duration: 11s, 1s; }
+      [ps-video-bg] .video-overlay .cover-description span:nth-child(3) {
+        animation-delay: 0s, 11.5s;
+        animation-duration: 11.5s, 0.5s; }
+  [ps-video-bg] .video-overlay .skip-intro {
+    line-height: 50px;
+    height: 50px;
+    display: flex;
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    transform: translate(-25px, 0);
+    bottom: 15px;
+    cursor: pointer; }
+    [ps-video-bg] .video-overlay .skip-intro span {
+      margin-left: 60px;
+      vertical-align: middle;
+      line-height: 50px;
+      display: inline; }
+    [ps-video-bg] .video-overlay .skip-intro svg {
+      line-height: 50px;
+      vertical-align: middle;
+      display: inline;
+      width: 50px;
+      height: 50px;
+      fill: rgba(0, 0, 0, 0.6);
+      cursor: pointer; }
+    [ps-video-bg] .video-overlay .skip-intro:hover {
+      color: rgba(255, 255, 255, 0.8); }
+      [ps-video-bg] .video-overlay .skip-intro:hover svg {
+        fill: rgba(255, 255, 255, 0.8);
+        animation-name: arrowUpDown;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out; }
 
 .muine-section {
   position: relative;

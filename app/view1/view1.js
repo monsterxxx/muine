@@ -13,25 +13,44 @@ angular.module('myApp.view1', [])
   });
 }])
 
-.controller('View1Ctrl', function() {
+.controller('View1Ctrl', function($scope) {
 
+  $scope.show = false;
 
-  $(document).ready(function () {
-    var $window = $(window);
+  $scope.test = 'initial test';
 
-    var a = 0;
-    var b = 1;
-    var c = a || console.log('hi from a');
-    c();
-    //b || console.log('hi from b');
-
+  $scope.$on('$destroy', function () {
+    window.alert('scope.destroied');
   });
 
 })
 
-.directive('view1Dir', function ($parse) {
+.directive('view1Dir', function ($parse, $timeout) {
   return function link($scope, element, attrs){
 
+    $timeout(function () {
+      $scope.test = 'buya1';
+      window.alert('dir1 timeout');
+    }, 6000);
+
+    $scope.$on('$destroy', function () {
+      window.alert('dir1 destroied');
+    });
+
+
+  };
+})
+
+.directive('view1SecondDir', function ($parse, $timeout) {
+  return function link($scope, element, attrs){
+
+    $timeout(function () {
+      $scope.test = 'buya2';
+    }, 3000);
+
+    $scope.$on('$destroy', function () {
+      window.alert('dir2 destroied');
+    });
 
 
   };

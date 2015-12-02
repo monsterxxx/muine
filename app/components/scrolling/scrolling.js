@@ -182,7 +182,6 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
       // window.onresize = handleResize;
       $window.on('resize', handleResize);
       $window.on('scroll', PsMuineScroll.scrollHandler);
-      $window.on('scroll', PsMuineScroll.navbarStyler);
       if (support === 'wheel') {
         window.addEventListener('wheel', handleWheel);
         // $window.on('wheel', handleWheel);
@@ -192,7 +191,7 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
       }
 
 
-
+      var firstTransition = true;
       //ON STATECHANGE SCROLL
       $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState) {
         if (doLog) {console.log('> PsMuineScroll > on.stateChangeSuccess > '
@@ -211,6 +210,11 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
           if (toStateNameArr[1] === 'home') {
             //insert video background if it's not there yet
             $rootScope.videoEnabled = true;
+          }
+          if (firstTransition) {
+            //fix selected subcontrol item style
+            PsMuineScroll.fixSelectedItemStyle();
+            firstTransition = false;
           }
           PsMuineScroll.scroll(toStateNameArr[1]).then(function () {
             //after scroll
@@ -277,26 +281,26 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
 
 
     //NAVBAR STYLER
-    navbarStyler: function () {
-
-      //This is a fix for strange navcontrol > selected items behavior.
-      //  Could not get it done with css transition.
-      if (prevScroll === 0) {
-        var $selected = $('li.selected');
-        $selected.velocity({
-          backgroundColorAlpha: 0
-        },{
-          duration: 0,
-          delay: 0
-        }).velocity({
-          backgroundColorAlpha: 1
-        },{
-          duration: 0,
-          delay: 1000
-        });
-      }
-
+    //This is a fix for strange navcontrol > selected items behavior.
+    //  Could not get it done with css transition.
+    fixSelectedItemStyle: function () {
+      var $selected = $('li.selected');
+      $selected.velocity({
+        backgroundColorAlpha: 0
+      },{
+        duration: 0,
+        delay: 0
+      }).velocity({
+        backgroundColorAlpha: 1
+      },{
+        duration: 0,
+        delay: 1000,
+        complete: function () {
+          console.log('topFix complete: '+ $(this).length );
+        }
+      });
     },
+
 
 
     //Smooth scroll to specified section. Returns promise.

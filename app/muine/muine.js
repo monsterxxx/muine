@@ -166,16 +166,14 @@ angular.module('myApp.muine', [
   });
 }])
 
-// .directive('videoOverlay', function () {
-//   return {
-//     restrict: 'E',
-//     link: function ($scope, el, attrs) {
-//       el.on('click', function () {
-//
-//       });
-//     }
-//   }
-// })
+.directive('psVideoBg', function () {
+  return {
+    restrict: 'A',
+    link: function ($scope, el, attrs) {
+
+    }
+  };
+})
 
 .controller('MuineCtrl', ['$scope', '$stickyState',
 function(                  $scope ,  $stickyState ) {
@@ -184,6 +182,16 @@ function(                  $scope ,  $stickyState ) {
 
   //default video background params
   $scope.videoMuted = false;
+
+  $scope.videoPlaylist = [{
+    videoId: 'USWnYR8DErY',
+    start: 158,
+    end: 178
+  },{
+    videoId: 'USWnYR8DErY',
+    start: 187,
+    end: 235
+  }];
 
   //register video-bg youtube player functions
   $scope.videoBgReg = function(player) {
@@ -215,6 +223,17 @@ function(                  $scope ,  $stickyState ) {
     // $scope.getVideoLoadedFraction = function () {
     //   return player.getVideoLoadedFraction();
     // };
+    var playerInit = true;
+    player.addEventListener('onStateChange', function () {
+      console.log('playerStateChange: '+player.getPlayerState());
+      if (playerInit && player.getPlayerState() === 1) {
+        playerInit = false;
+        $scope.$apply(function () {
+          $scope.showOverlay = true;
+        });
+        console.log('showOverlay');
+      }
+    });
   };
 
   //video overlay

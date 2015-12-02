@@ -1,3 +1,6 @@
+$video-overlay-color: rgba(black, 0.6)
+$video-overlay-hover-color: rgba($white, 0.8)
+
 ps-muine-navbar
   width: 100%
   position: fixed
@@ -10,22 +13,106 @@ ps-muine-navbar
   // background: url('../assets/img/video-background.png')
   // background-size: cover
   min-width: 1200px
-.loader
-  position: absolute
-  top: 50%
-  left: 50%
-  transform: translate(-12.5px, -82.5px)
-.video-overlay
-  height: 600px
-  box-shadow: inset 0 -20px 20px -20px black //bottom only
-  svg
-    width: 50px
-    height: 50px
+
+  .loader
     position: absolute
-    top: 80px
-    right: 20px
-    fill: rgba(black, 0.6)
-    cursor: pointer
+    top: 50%
+    left: 50%
+    transform: translate(-12.5px, -82.5px)
+
+[ps-video-bg]
+
+  .video-overlay
+    height: 600px
+    box-shadow: inset 0 -20px 20px -20px black //bottom only
+
+    svg
+      width: 50px
+      height: 50px
+      position: absolute
+      fill: $video-overlay-color
+      cursor: pointer
+      &.mute
+        top: 80px
+        right: 20px
+
+    .cover-text
+      font-family: 'Open Sans', sans-serif
+      width: 100%
+      text-align: center
+      color: white
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%) translate(0, 30px)
+      text-shadow: rgb(0, 0, 0) 0px 0px 10px
+      opacity: 0.2
+      animation:
+        name: show, fadeOut2
+        delay: 0s, 15s
+        duration: 15s, 10s
+    .cover-title
+      text-transform: uppercase
+      font:
+        size: 60px
+        weight: bold
+      animation:
+        name: hide, fadeIn
+        delay: 0s, 6s
+        duration: 6s, 3s
+    .cover-description
+      font-size: 40px
+      span
+        animation-name: hide, fadeIn
+        &:nth-child(1)
+          animation:
+            delay: 0s, 10s
+            duration: 10s, 1s
+        &:nth-child(2)
+          animation:
+            delay: 0s, 11s
+            duration: 11s, 1s
+        &:nth-child(3)
+          animation:
+            delay: 0s, 11.5s
+            duration: 11.5s, 0.5s
+
+    .skip-intro
+      line-height: 50px
+      height: 50px
+      display: flex
+      font-size: 30px
+      color: $video-overlay-color
+      position: absolute
+      left: 50%
+      transform: translate(-25px, 0)
+      bottom: 15px
+      cursor: pointer
+      span
+        margin-left: 60px
+        vertical-align: middle
+        line-height: 50px
+        display: inline
+      svg
+        line-height: 50px
+        vertical-align: middle
+        display: inline
+        width: 50px
+        height: 50px
+        fill: $video-overlay-color
+        cursor: pointer
+      &:hover
+        color: $video-overlay-hover-color
+        svg
+          fill: $video-overlay-hover-color
+          animation:
+            name: arrowUpDown
+            duration: 1s
+            iteration-count: infinite
+            timing-function: ease-in-out
+
+
+
 
 //'muine' state
 .muine-section

@@ -1,7 +1,13 @@
 <div class="view1_container">
-  <p>view 1 sandbox</p>
+  <!-- <p>view 1 sandbox</p>
   <div class="view1-a">
     sdgsgd
   </div>
-  <view1-dir test=""></view1-dir>
+  <view1-dir test=""></view1-dir> -->
+  {{test}}
+  <div ng-repeat="i in [1,2,3]">{{i}}</div>
+  <view1-dir view1-second-dir ng-if="show">
+    {{test}}
+  </view1-dir>
+  <input type="checkbox" ng-model="show" name="name" value="">
 </div>

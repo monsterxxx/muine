@@ -25,7 +25,7 @@
 						<a class="icon"
 							 ng-repeat="state in childStates"
 						   ng-href="{{uiSref() + state}}"
-							 ng-class="{active: $state.includes(rootState +'.'+ dataKey +'.'+ state)}">
+							 ng-class="{active: $state.includes(rootState +'.'+ statePath +'.'+ state)}">
 							<svg>
 								<use ng-attr-xlink:href="{{'#shape-'+ state}}" xlink:href="" ></use>
 							</svg>
