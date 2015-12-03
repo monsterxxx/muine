@@ -76,6 +76,32 @@ angular.module('myApp.muine', [
   .state('muine.sports.sport', {
     url: '/{sportId:int}',
     abstract: true,
+    resolve: {
+      jojo: function (muineData, PsUtils, $stateParams) {
+        var sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
+        var imageLocation = 'assets/img/sports/' + sport.name.toLowerCase() +'/'+ sport.home.img;
+        var image = $(new Image())
+          .load(function (event) {
+            console.log('loaded');
+            return;
+
+          }
+            // function(event) {
+            //   // Since the load event is asynchronous, we have to
+            //   // tell AngularJS that something changed.
+            //   $rootScope.$apply(
+            //     function() {
+            //       preloader.handleImageLoad(event.target.src);
+            //       // Clean up object reference to help with the
+            //       // garbage collection in the closure.
+            //       preloader = image = event = null;
+            //     }
+            //   );
+            // }
+          )
+          .prop("src", imageLocation);
+      }
+    },
     templateUrl: './muine/sports/sports.html',
     controller: 'MuineSportsCtrl'
   })
@@ -171,6 +197,73 @@ angular.module('myApp.muine', [
     restrict: 'A',
     link: function ($scope, el, attrs) {
 
+      //default video background params
+      $scope.videoMuted = true;
+
+      //register video-bg youtube player functions
+      $scope.videoBgReg = function(player) {
+        $scope.getPlayerState = function () {
+          return player.getPlayerState();
+        };
+        $scope.pauseVideo = function() {
+          player.pauseVideo();
+        };
+        $scope.playVideo = function() {
+          player.playVideo();
+        };
+        $scope.playerIsMuted = function () {
+          return player.isMuted();
+        };
+        $scope.playerMute = function() {
+          player.mute();
+          $scope.videoMuted = true;
+        };
+        $scope.playerUnmute = function() {
+          player.unMute();
+          $scope.videoMuted = false;
+        };
+        if ($scope.videoMuted) {
+          player.mute();
+        } else {
+          player.unMute();
+        }
+        // $scope.getVideoLoadedFraction = function () {
+        //   return player.getVideoLoadedFraction();
+        // };
+        var playerInit = true;
+        player.addEventListener('onStateChange', function () {
+          console.log('playerStateChange: '+player.getPlayerState());
+          if (playerInit && player.getPlayerState() === 1) {
+            playerInit = false;
+            $scope.$apply(function () {
+              $scope.showOverlay = true;
+            });
+            console.log('showOverlay');
+          }
+        });
+      };
+
+      //video overlay
+      $scope.videoPlayPause = function () {
+        if ($scope.getPlayerState() === 1) {
+          $scope.pauseVideo();
+          return;
+        }
+        if ($scope.getPlayerState() === 2) {
+          $scope.playVideo();
+          return;
+        }
+      };
+      $scope.videoMuteUnmute = function (event) {
+        console.log('mute - unmute');
+        event.stopPropagation();
+        if ($scope.playerIsMuted()) {
+          $scope.playerUnmute();
+        } else {
+          $scope.playerMute();
+        }
+      };
+
     }
   };
 })
@@ -180,82 +273,7 @@ function(                  $scope ,  $stickyState ) {
   console.log('> MuineCtrl load');
   $scope.navbarTransparent = true;
 
-  //default video background params
-  $scope.videoMuted = false;
 
-  $scope.videoPlaylist = [{
-    videoId: 'USWnYR8DErY',
-    start: 158,
-    end: 178
-  },{
-    videoId: 'USWnYR8DErY',
-    start: 187,
-    end: 235
-  }];
-
-  //register video-bg youtube player functions
-  $scope.videoBgReg = function(player) {
-    $scope.getPlayerState = function () {
-      return player.getPlayerState();
-    };
-    $scope.pauseVideo = function() {
-      player.pauseVideo();
-    };
-    $scope.playVideo = function() {
-      player.playVideo();
-    };
-    $scope.playerIsMuted = function () {
-      return player.isMuted();
-    };
-    $scope.playerMute = function() {
-      player.mute();
-      $scope.videoMuted = true;
-    };
-    $scope.playerUnmute = function() {
-      player.unMute();
-      $scope.videoMuted = false;
-    };
-    if ($scope.videoMuted) {
-      player.mute();
-    } else {
-      player.unMute();
-    }
-    // $scope.getVideoLoadedFraction = function () {
-    //   return player.getVideoLoadedFraction();
-    // };
-    var playerInit = true;
-    player.addEventListener('onStateChange', function () {
-      console.log('playerStateChange: '+player.getPlayerState());
-      if (playerInit && player.getPlayerState() === 1) {
-        playerInit = false;
-        $scope.$apply(function () {
-          $scope.showOverlay = true;
-        });
-        console.log('showOverlay');
-      }
-    });
-  };
-
-  //video overlay
-  $scope.videoPlayPause = function () {
-    if ($scope.getPlayerState() === 1) {
-      $scope.pauseVideo();
-      return;
-    }
-    if ($scope.getPlayerState() === 2) {
-      $scope.playVideo();
-      return;
-    }
-  };
-  $scope.videoMuteUnmute = function (event) {
-    console.log('mute - unmute');
-    event.stopPropagation();
-    if ($scope.playerIsMuted()) {
-      $scope.playerUnmute();
-    } else {
-      $scope.playerMute();
-    }
-  };
 
   //scrollspy
   $(window).scroll(function() {

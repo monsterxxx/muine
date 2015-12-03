@@ -1240,12 +1240,19 @@ ps-muine-navbar {
     opacity: 0.2;
     -webkit-animation-name: show, fadeOut2;
             animation-name: show, fadeOut2;
-    -webkit-animation-delay: 0s, 15s;
-            animation-delay: 0s, 15s;
-    -webkit-animation-duration: 15s, 10s;
-            animation-duration: 15s, 10s; }
+    -webkit-animation-delay: 0s, 17s;
+            animation-delay: 0s, 17s;
+    -webkit-animation-duration: 17s, 10s;
+            animation-duration: 17s, 10s;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    -webkit-touch-callout: none;
+    cursor: default; }
   [ps-video-bg] .video-overlay .cover-title {
     text-transform: uppercase;
+    margin-bottom: 20px;
     font-size: 60px;
     font-weight: bold;
     -webkit-animation-name: hide, fadeIn;
@@ -1270,10 +1277,10 @@ ps-muine-navbar {
         -webkit-animation-duration: 11s, 1s;
                 animation-duration: 11s, 1s; }
       [ps-video-bg] .video-overlay .cover-description span:nth-child(3) {
-        -webkit-animation-delay: 0s, 11.5s;
-                animation-delay: 0s, 11.5s;
-        -webkit-animation-duration: 11.5s, 0.5s;
-                animation-duration: 11.5s, 0.5s; }
+        -webkit-animation-delay: 0s, 13.5s;
+                animation-delay: 0s, 13.5s;
+        -webkit-animation-duration: 13.5s, 0.5s;
+                animation-duration: 13.5s, 0.5s; }
   [ps-video-bg] .video-overlay .skip-intro {
     line-height: 50px;
     height: 50px;

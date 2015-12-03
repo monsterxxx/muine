@@ -1137,10 +1137,14 @@ ps-muine-navbar {
     text-shadow: black 0px 0px 10px;
     opacity: 0.2;
     animation-name: show, fadeOut2;
-    animation-delay: 0s, 15s;
-    animation-duration: 15s, 10s; }
+    animation-delay: 0s, 17s;
+    animation-duration: 17s, 10s;
+    user-select: none;
+    -webkit-touch-callout: none;
+    cursor: default; }
   [ps-video-bg] .video-overlay .cover-title {
     text-transform: uppercase;
+    margin-bottom: 20px;
     font-size: 60px;
     font-weight: bold;
     animation-name: hide, fadeIn;
@@ -1157,8 +1161,8 @@ ps-muine-navbar {
         animation-delay: 0s, 11s;
         animation-duration: 11s, 1s; }
       [ps-video-bg] .video-overlay .cover-description span:nth-child(3) {
-        animation-delay: 0s, 11.5s;
-        animation-duration: 11.5s, 0.5s; }
+        animation-delay: 0s, 13.5s;
+        animation-duration: 13.5s, 0.5s; }
   [ps-video-bg] .video-overlay .skip-intro {
     line-height: 50px;
     height: 50px;
