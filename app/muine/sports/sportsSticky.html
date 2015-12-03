@@ -1,21 +1,4 @@
 <div ui-view class="section-sticky-view"
      ng-class="{'ps-transition-slideRight': slideRight, 'ps-transition-slideLeft': !slideRight}">
 </div>
-<!-- <div ng-hide="{{true}}">
-	<script type="text/javascript">
-			var images = new Array()
-			function preload() {
-				for (i = 0; i < preload.arguments.length; i++) {
-					images[i] = new Image();
-					images[i].src = preload.arguments[i];
-					console.log(images[i]);
-					images[i].onload = function () {
-						console.log('gho');
-					};
-				}
-			}
-			preload(
-				"assets/img/sports/kitesurfing/1.jpg"
-			)
-	</script>
-</div> -->
+<div id="sports-loader" class="loader">Loading...</div>

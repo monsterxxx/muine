@@ -77,31 +77,19 @@ angular.module('myApp.muine', [
     url: '/{sportId:int}',
     abstract: true,
     resolve: {
-      // jojo: function (muineData, PsUtils, $stateParams) {
-      //   var sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
-      //   var imageLocation = 'assets/img/sports/' + sport.name.toLowerCase() +'/'+ sport.home.img;
-      //   var image = $(new Image())
-      //     .load(function (event) {
-      //       console.log('loaded');
-      //       return;
-      //
-      //     })
-      //     .prop("src", imageLocation);
-      // }
-      // img: function ($http, muineData, PsUtils, $stateParams) {
-      //   var sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
-      //   var imageLocation = 'assets/img/sports/' + sport.name.toLowerCase() +'/'+ sport.home.img;
-      //   return $http.get(imageLocation, {cache: true});
-      // }
       sport: function (muineData, PsUtils, $stateParams) {
         return PsUtils.getById(muineData.sports, $stateParams.sportId);
       },
-      img: function ($q, sport) {
-        console.log('resolve, sport: '+JSON.stringify(sport , null, 2));
+      //preload bgImg before slide
+      img: function ($q, sport, $rootScope) {
+        console.log('resolve');
+        $('#sports-loader').show();
         var homeImageLocation = 'assets/img/sports/' + sport.name.toLowerCase() +'/'+ sport.home.img;
         var deferred = $q.defer();
         var bgImage = new Image();
         bgImage.onload = function () {
+          console.log('resolved');
+          $('#sports-loader').hide();
           deferred.resolve();
         };
         bgImage.src = homeImageLocation;
@@ -353,24 +341,6 @@ function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $locati
         console.log('> stateChangeError');
         console.log.bind(console);
       });
-
-      // $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState){
-      //   console.log('> stateChangeStart > '+ fromState.name +' --> '+ toState.name, toParams);
-      //   if (toState.name.split('.')[1] === 'sports') {
-      //     console.log('to Sports');
-      //       var muineData = MuineDataSvc.getData();
-      //       var sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
-      //       var imageLocation = 'assets/img/sports/' + sport.name.toLowerCase() +'/'+ sport.home.img;
-      //       var image = $(new Image())
-      //         .load(function (event) {
-      //           console.log('loaded');
-      //           return;
-      //
-      //         })
-      //         .prop("src", imageLocation);
-      //     PsDebugs.sleep(5);
-      //   }
-      // });
 
       $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState){
         console.log('> stateChangeSuccess > '+ fromState.name +' --> '+ toState.name, toParams);
