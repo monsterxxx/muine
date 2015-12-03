@@ -77,29 +77,35 @@ angular.module('myApp.muine', [
     url: '/{sportId:int}',
     abstract: true,
     resolve: {
-      jojo: function (muineData, PsUtils, $stateParams) {
-        var sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
-        var imageLocation = 'assets/img/sports/' + sport.name.toLowerCase() +'/'+ sport.home.img;
-        var image = $(new Image())
-          .load(function (event) {
-            console.log('loaded');
-            return;
-
-          }
-            // function(event) {
-            //   // Since the load event is asynchronous, we have to
-            //   // tell AngularJS that something changed.
-            //   $rootScope.$apply(
-            //     function() {
-            //       preloader.handleImageLoad(event.target.src);
-            //       // Clean up object reference to help with the
-            //       // garbage collection in the closure.
-            //       preloader = image = event = null;
-            //     }
-            //   );
-            // }
-          )
-          .prop("src", imageLocation);
+      // jojo: function (muineData, PsUtils, $stateParams) {
+      //   var sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
+      //   var imageLocation = 'assets/img/sports/' + sport.name.toLowerCase() +'/'+ sport.home.img;
+      //   var image = $(new Image())
+      //     .load(function (event) {
+      //       console.log('loaded');
+      //       return;
+      //
+      //     })
+      //     .prop("src", imageLocation);
+      // }
+      // img: function ($http, muineData, PsUtils, $stateParams) {
+      //   var sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
+      //   var imageLocation = 'assets/img/sports/' + sport.name.toLowerCase() +'/'+ sport.home.img;
+      //   return $http.get(imageLocation, {cache: true});
+      // }
+      sport: function (muineData, PsUtils, $stateParams) {
+        return PsUtils.getById(muineData.sports, $stateParams.sportId);
+      },
+      img: function ($q, sport) {
+        console.log('resolve, sport: '+JSON.stringify(sport , null, 2));
+        var homeImageLocation = 'assets/img/sports/' + sport.name.toLowerCase() +'/'+ sport.home.img;
+        var deferred = $q.defer();
+        var bgImage = new Image();
+        bgImage.onload = function () {
+          deferred.resolve();
+        };
+        bgImage.src = homeImageLocation;
+        return deferred.promise;
       }
     },
     templateUrl: './muine/sports/sports.html',
@@ -335,8 +341,8 @@ function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $locati
 }])
 
 .run(
-  [          '$rootScope', '$state', '$stateParams', '$stickyState', 'PsMuineScroll',
-    function ($rootScope,   $state,   $stateParams ,  $stickyState ,  PsMuineScroll) {
+  [          '$rootScope', '$state', '$stateParams', '$stickyState', 'PsMuineScroll', 'PsDebugs', 'MuineDataSvc', 'PsUtils',
+    function ($rootScope,   $state,   $stateParams ,  $stickyState ,  PsMuineScroll ,  PsDebugs, MuineDataSvc, PsUtils) {
       var doLog = false;
 
       if (doLog) {console.log('> run');}
@@ -348,9 +354,24 @@ function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $locati
         console.log.bind(console);
       });
 
-      //$rootScope.firstInit = false;
-      var toPara = {};
-      var toStat = '';
+      // $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState){
+      //   console.log('> stateChangeStart > '+ fromState.name +' --> '+ toState.name, toParams);
+      //   if (toState.name.split('.')[1] === 'sports') {
+      //     console.log('to Sports');
+      //       var muineData = MuineDataSvc.getData();
+      //       var sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
+      //       var imageLocation = 'assets/img/sports/' + sport.name.toLowerCase() +'/'+ sport.home.img;
+      //       var image = $(new Image())
+      //         .load(function (event) {
+      //           console.log('loaded');
+      //           return;
+      //
+      //         })
+      //         .prop("src", imageLocation);
+      //     PsDebugs.sleep(5);
+      //   }
+      // });
+
       $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState){
         console.log('> stateChangeSuccess > '+ fromState.name +' --> '+ toState.name, toParams);
       });
