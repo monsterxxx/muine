@@ -30,6 +30,7 @@
   <!-- responsiveness and styles -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- TODO <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scaleable=no"> -->
+  <link rel="stylesheet" href="../bower_components/materialize/sass/materialize.css">
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -58,7 +59,8 @@
   <div ui-view="muine"></div>
 
   <script src="../bower_components/jquery/dist/jquery.js"></script>
-  <script src="../bower_components/velocity/velocity.min.js"></script>
+  <!-- <script src="../bower_components/velocity/velocity.min.js"></script> //materialize contains velocity-->
+  <script src="../bower_components/materialize/js/bin/materialize.min.js"></script>
   <script src="../bower_components/velocity/velocity.ui.min.js"></script>
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/angular-animate/angular-animate.js"></script>
@@ -74,6 +76,7 @@
   <script src="muine/muine.js"></script>
   <script src="muine/sports/sports.js"></script>
   <script src="muine/sports/home/home.js"></script>
+  <script src="muine/sports/photo/photo.js"></script>
   <script src="muine/clubs/clubs.js"></script>
   <script src="muine/clubs/home/home.js"></script>
   <script src="muine/spots/spots.js"></script>

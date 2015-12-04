@@ -9,26 +9,42 @@ angular.module('muineApp.services.data', [])
   var sports = [{
     id: 3,
     name: 'Windsurfing',
+    description: 'The Free-Sail System potented by Jim Drake and Hoyle Schweitzer in 1970 has underwent an agile path of evolution.\
+      The sport itself has greatly evolved and offers you everything from crazy wave riding and freestyle to astonishing\
+      flatwater tricks! Windsurfing is widly presented in Muine.',
     home: {
-      img: '1.jpg'
+      bgImg: '1.jpg',
+      cardImg: '4w.jpg'
     }
   },{
     id: 55,
     name: 'Kitesurfing',
+    description: 'The Free-Sail System potented by Jim Drake and Hoyle Schweitzer in 1970 has underwent an agile path of evolution.\
+      The sport itself has greatly evolved and offers you everything from crazy wave riding and freestyle to astonishing\
+      flatwater tricks! Windsurfing is widly presented in Muine.',
     home: {
-      img: '1.jpg'
+      bgImg: '1w.jpg',
+      cardImg: '1w.jpg'
     }
   },{
     id: 87,
     name: 'Surfing',
+    description: 'The Free-Sail System potented by Jim Drake and Hoyle Schweitzer in 1970 has underwent an agile path of evolution.\
+      The sport itself has greatly evolved and offers you everything from crazy wave riding and freestyle to astonishing\
+      flatwater tricks! Windsurfing is widly presented in Muine.',
     home: {
-      img: '1.jpg'
+      bgImg: '1.jpg',
+      cardImg: '1.jpg'
     }
   },{
     id: 49,
     name: 'SUP',
+    description: 'The Free-Sail System potented by Jim Drake and Hoyle Schweitzer in 1970 has underwent an agile path of evolution.\
+      The sport itself has greatly evolved and offers you everything from crazy wave riding and freestyle to astonishing\
+      flatwater tricks! Windsurfing is widly presented in Muine.',
     home: {
-      img: '1.jpg'
+      bgImg: '1.jpg',
+      cardImg: '1.jpg'
     }
   }];
   var clubs = [{

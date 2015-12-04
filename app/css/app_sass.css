@@ -536,8 +536,8 @@ div.view2-container {
         text-align: center; }
         div.view2-container div.window:nth-child(2) ul > li {
           position: relative;
-          border-right: 1px solid #2ECC40;
-          border-left: 1px solid #2ECC40;
+          border-right: 1px solid green;
+          border-left: 1px solid green;
           border-bottom: 1px solid black;
           background: #404040;
           vertical-align: middle; }
@@ -549,7 +549,7 @@ div.view2-container {
             border: none;
             border-bottom: 1px solid black; }
           div.view2-container div.window:nth-child(2) ul > li:last-child {
-            border-bottom: 1px solid #2ECC40; }
+            border-bottom: 1px solid green; }
           div.view2-container div.window:nth-child(2) ul > li > a {
             line-height: 30px;
             height: 30px; }
@@ -714,7 +714,7 @@ box7-dir .control-panel-row {
   position: relative;
   width: 273px;
   height: 30px;
-  border-bottom: 1px solid #2ECC40; }
+  border-bottom: 1px solid green; }
 box7-dir .caret, box7-dir .icon > svg {
   position: relative;
   z-index: 2;
@@ -749,8 +749,8 @@ box7-dir li {
   list-style-type: none;
   height: 30px;
   position: relative;
-  border-right: 1px solid #2ECC40;
-  border-left: 1px solid #2ECC40;
+  border-right: 1px solid green;
+  border-left: 1px solid green;
   border-bottom: 1px solid black; }
   box7-dir li.selected {
     margin: 0 1px;
@@ -778,7 +778,7 @@ box7-dir li {
     border: none;
     border-bottom: 1px solid black; }
   box7-dir li:last-child {
-    border-bottom: 1px solid #2ECC40; }
+    border-bottom: 1px solid green; }
   box7-dir li a {
     line-height: 30px;
     display: list-item; }
@@ -841,7 +841,7 @@ ps-muine-subcontrol .control-panel-row {
   position: relative;
   width: 273px;
   height: 30px;
-  border-bottom: 1px solid #2ECC40; }
+  border-bottom: 1px solid green; }
 ps-muine-subcontrol .caret, ps-muine-subcontrol .icon > svg {
   position: relative;
   z-index: 2;
@@ -876,8 +876,8 @@ ps-muine-subcontrol li {
   list-style-type: none;
   height: 30px;
   position: relative;
-  border-right: 1px solid #2ECC40;
-  border-left: 1px solid #2ECC40;
+  border-right: 1px solid green;
+  border-left: 1px solid green;
   border-bottom: 1px solid black; }
   ps-muine-subcontrol li.selected {
     margin: 0 1px;
@@ -905,7 +905,7 @@ ps-muine-subcontrol li {
     border: none;
     border-bottom: 1px solid black; }
   ps-muine-subcontrol li:last-child {
-    border-bottom: 1px solid #2ECC40; }
+    border-bottom: 1px solid green; }
   ps-muine-subcontrol li a {
     line-height: 30px;
     display: list-item; }
@@ -986,11 +986,9 @@ header {
     .navbar-container a.icon:hover > svg > use {
       stroke-width: 2px;
       stroke: white; }
-    .navbar-container a.icon.active > svg {
-      filter: drop-shadow(0 0 4px #2ecc40); }
-      .navbar-container a.icon.active > svg > use {
-        stroke: white;
-        stroke-width: 2px; }
+    .navbar-container a.icon.active > svg > use {
+      stroke: white;
+      stroke-width: 2px; }
   .navbar-container > nav {
     transition: 1s linear all;
     border-left: 1px solid black; }
@@ -1041,17 +1039,17 @@ header {
           transform: translate(-17px, 17px) rotate(-90deg); }
         .navbar-container ul.mainmenu > li > a.underlined > span {
           padding: 3px 0;
-          border-bottom: 1px solid #FF851B; }
+          border-bottom: 1px solid #ff9800; }
   .navbar-container .item-n1 a.icon.active > svg {
-    filter: drop-shadow(0 0 4px #ffdc00); }
+    filter: drop-shadow(0 0 4px #ffeb3b); }
   .navbar-container .item-n1 .control-panel-row {
-    border-left: 1px solid #FFDC00;
-    border-right: 1px solid #FFDC00; }
+    border-left: 1px solid #ffeb3b;
+    border-right: 1px solid #ffeb3b; }
   .navbar-container .item-n1 ps-muine-subcontrol .control-panel-row {
-    border-bottom: 1px solid #FFDC00; }
+    border-bottom: 1px solid #ffeb3b; }
   .navbar-container .item-n1 ps-muine-subcontrol li {
-    border-right: 1px solid #FFDC00;
-    border-left: 1px solid #FFDC00; }
+    border-right: 1px solid #ffeb3b;
+    border-left: 1px solid #ffeb3b; }
   .navbar-container .item-n1 ps-muine-subcontrol li.selected {
     border-right: none;
     border-left: none; }
@@ -1059,17 +1057,17 @@ header {
     border: none;
     border-bottom: 1px solid black; }
   .navbar-container .item-n1 ps-muine-subcontrol li:last-child {
-    border-bottom: 1px solid #FFDC00; }
+    border-bottom: 1px solid #ffeb3b; }
   .navbar-container .item-n2 a.icon.active > svg {
-    filter: drop-shadow(0 0 4px #2ecc40); }
+    filter: drop-shadow(0 0 4px #4caf50); }
   .navbar-container .item-n2 .control-panel-row {
-    border-left: 1px solid #2ECC40;
-    border-right: 1px solid #2ECC40; }
+    border-left: 1px solid #4CAF50;
+    border-right: 1px solid #4CAF50; }
   .navbar-container .item-n2 ps-muine-subcontrol .control-panel-row {
-    border-bottom: 1px solid #2ECC40; }
+    border-bottom: 1px solid #4CAF50; }
   .navbar-container .item-n2 ps-muine-subcontrol li {
-    border-right: 1px solid #2ECC40;
-    border-left: 1px solid #2ECC40; }
+    border-right: 1px solid #4CAF50;
+    border-left: 1px solid #4CAF50; }
   .navbar-container .item-n2 ps-muine-subcontrol li.selected {
     border-right: none;
     border-left: none; }
@@ -1077,17 +1075,17 @@ header {
     border: none;
     border-bottom: 1px solid black; }
   .navbar-container .item-n2 ps-muine-subcontrol li:last-child {
-    border-bottom: 1px solid #2ECC40; }
+    border-bottom: 1px solid #4CAF50; }
   .navbar-container .item-n3 a.icon.active > svg {
-    filter: drop-shadow(0 0 4px #b10dc9); }
+    filter: drop-shadow(0 0 4px #9c27b0); }
   .navbar-container .item-n3 .control-panel-row {
-    border-left: 1px solid #B10DC9;
-    border-right: 1px solid #B10DC9; }
+    border-left: 1px solid #9c27b0;
+    border-right: 1px solid #9c27b0; }
   .navbar-container .item-n3 ps-muine-subcontrol .control-panel-row {
-    border-bottom: 1px solid #B10DC9; }
+    border-bottom: 1px solid #9c27b0; }
   .navbar-container .item-n3 ps-muine-subcontrol li {
-    border-right: 1px solid #B10DC9;
-    border-left: 1px solid #B10DC9; }
+    border-right: 1px solid #9c27b0;
+    border-left: 1px solid #9c27b0; }
   .navbar-container .item-n3 ps-muine-subcontrol li.selected {
     border-right: none;
     border-left: none; }
@@ -1095,7 +1093,7 @@ header {
     border: none;
     border-bottom: 1px solid black; }
   .navbar-container .item-n3 ps-muine-subcontrol li:last-child {
-    border-bottom: 1px solid #B10DC9; }
+    border-bottom: 1px solid #9c27b0; }
 
 ps-muine-navbar {
   width: 100%;
@@ -1107,12 +1105,14 @@ ps-muine-navbar {
   position: relative;
   height: 600px;
   min-width: 1200px; }
+  .v .loader {
+    transform: translate(-5px, -75px); }
 
 .loader {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-12.5px, -82.5px); }
+  transform: translate(-5px, -105px); }
 
 [ps-video-bg] .video-overlay {
   height: 600px;
@@ -1167,12 +1167,13 @@ ps-muine-navbar {
   [ps-video-bg] .video-overlay .skip-intro {
     line-height: 50px;
     height: 50px;
+    width: 50px;
     display: flex;
     font-size: 30px;
     color: rgba(0, 0, 0, 0.6);
     position: absolute;
     left: 50%;
-    transform: translate(-25px, 0);
+    transform: translate(-50%, 0);
     bottom: 15px;
     cursor: pointer; }
     [ps-video-bg] .video-overlay .skip-intro span {
@@ -1203,16 +1204,38 @@ ps-muine-navbar {
   min-width: 1200px; }
 
 .section-view {
-  height: 600px;
   box-shadow: inset 0 -20px 20px -20px black; }
   .section-view .background {
     width: 100%;
-    height: 100%;
+    height: 600px;
     position: absolute;
     z-index: -1; }
   .section-view .container {
     width: 100%;
     height: 100%; }
+
+.card {
+  font-family: Roboto;
+  width: 400px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  background: none;
+  background: #616161; }
+
+.card-content {
+  background: #616161; }
+
+.card-action {
+  border-top: 1px solid rgba(255, 255, 255, 0.3); }
+  .card-action a {
+    color: #ffeb3b; }
+    .card-action a:hover {
+      color: #fdd835; }
+
+.card-right {
+  right: 20px; }
 
 #prices {
   margin: 0;
@@ -1231,14 +1254,14 @@ ps-muine-navbar {
     display: inline-block;
     margin: 0; }
 
-.sports-child-view .background {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: -1; }
-.sports-child-view .container {
-  width: 100%;
-  height: 100%; }
+#sports .card-action a {
+  color: #ffeb3b; }
+  #sports .card-action a:hover {
+    color: #fdd835; }
+
+#sports .carousel-belt {
+  position: relative;
+  height: 112.5px; }
 
 #sports .loader {
   display: none; }
@@ -1246,17 +1269,17 @@ ps-muine-navbar {
 .clubs-container {
   width: 100%;
   height: 100%;
-  background: #2ECC40; }
+  background: #4CAF50; }
 
 .spots-container {
   width: 100%;
   height: 100%;
-  background: #B10DC9; }
+  background: #9c27b0; }
 
 .prices-container {
   width: 100%;
   height: 100%;
-  background: #FF851B; }
+  background: #ff9800; }
 
 .dev-menu {
   list-style: none;

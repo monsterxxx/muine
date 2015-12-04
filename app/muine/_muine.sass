@@ -13,12 +13,14 @@ ps-muine-navbar
   // background: url('../assets/img/video-background.png')
   // background-size: cover
   min-width: 1200px
+  .loader
+    transform: translate(-$loader_size/2, -100px - $loader_size/2 + $navbar_height/2)
 
 .loader
   position: absolute
   top: 50%
   left: 50%
-  transform: translate(-12.5px, -82.5px)
+  transform: translate(-$loader_size/2, -100px - $loader_size/2)
 
 [ps-video-bg]
 
@@ -84,12 +86,13 @@ ps-muine-navbar
     .skip-intro
       line-height: 50px
       height: 50px
+      width: 50px
       display: flex
       font-size: 30px
       color: $video-overlay-color
       position: absolute
       left: 50%
-      transform: translate(-25px, 0)
+      transform: translate(-50%, 0)
       bottom: 15px
       cursor: pointer
       span
@@ -117,29 +120,53 @@ ps-muine-navbar
 
 
 
-
 //'muine' state
 .muine-section
   position: relative
   height: 600px
   min-width: 1200px
+  // position: relative
+  // height: 600px
+
 
 //'muine.sections' state templates
 .section-sticky-view
 
+
 //'muine.sections.section' state templates
 .section-view
-  height: 600px
   box-shadow: inset 0 -20px 20px -20px black //bottom only
   //'muine.sections.section.child' state templates' content:
   .background
     width: 100%
-    height: 100%
+    height: 600px
+    // height: 100%
     position: absolute
     z-index: -1
   .container
     width: 100%
     height: 100%
+
+.card
+  font-family: Roboto
+  width: 400px
+  margin: 0
+  position: absolute
+  top: 50%
+  transform: translate(0, -50%)
+  background: none
+  background: color('grey', darken-2)
+.card-content
+  background: rgba(color('grey', 'darken-2'), 1)
+.card-action
+  border-top: 1px solid rgba(white, 0.3)
+  a
+    color: color('yellow', 'base')
+    &:hover
+      color: color('yellow', 'darken-1')
+.card-right
+  right: 20px
+
 
 #prices
   margin: 0

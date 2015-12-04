@@ -1,6 +1,8 @@
+$loader_size: 10px;
+
 .loader {
   margin: 100px auto;
-  font-size: 10px;
+  font-size: $loader_size;
   width: 1em;
   height: 1em;
   border-radius: 50%;

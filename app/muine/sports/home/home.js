@@ -4,16 +4,18 @@
 angular.module('ps.muine.sports.home', [])
 
 .controller
-('MuineSportsHomeCtrl', ['$scope',
-function                ( $scope ){
+('MuineSportsHomeCtrl', ['$scope', 'Sport',
+function                ( $scope ,  Sport){
   console.log('> SportsHomeCtrl load');
   var doLog = true;
 
   //Data
   //from ancestor's template used
   //$scope.section
+  $scope.sport = Sport;
 
-  $scope.bgImg = 'assets/img/sports/' + $scope.sport.name.toLowerCase() +'/'+ $scope.sport.home.img;
+  $scope.bgImg = 'assets/img/sports/' + Sport.name.toLowerCase() +'/'+ Sport.home.bgImg;
+  $scope.cardImg = 'assets/img/sports/' + Sport.name.toLowerCase() +'/'+ Sport.home.cardImg;
 }]);
 
 })();

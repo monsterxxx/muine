@@ -9,6 +9,7 @@ angular.module('myApp.muine', [
   'ps.muine.navbar.subcontrol',
   'ps.muine.sports',
   'ps.muine.sports.home',
+  'ps.muine.sports.photo',
   'ps.muine.clubs',
   'ps.muine.clubs.home',
   'ps.muine.spots',
@@ -77,14 +78,14 @@ angular.module('myApp.muine', [
     url: '/{sportId:int}',
     abstract: true,
     resolve: {
-      sport: function (muineData, PsUtils, $stateParams) {
+      Sport: function (muineData, PsUtils, $stateParams) {
         return PsUtils.getById(muineData.sports, $stateParams.sportId);
       },
       //preload bgImg before slide
-      img: function ($q, sport, $rootScope) {
+      img: function ($q, Sport, $rootScope) {
         console.log('resolve');
         $('#sports-loader').show();
-        var homeImageLocation = 'assets/img/sports/' + sport.name.toLowerCase() +'/'+ sport.home.img;
+        var homeImageLocation = 'assets/img/sports/' + Sport.name.toLowerCase() +'/'+ Sport.home.bgImg;
         var deferred = $q.defer();
         var bgImage = new Image();
         bgImage.onload = function () {
@@ -107,7 +108,9 @@ angular.module('myApp.muine', [
       controller: 'MuineSportsHomeCtrl'
     })
     .state('muine.sports.sport.photo', {
-      url: '/photo'
+      url: '/photo',
+      templateUrl: './muine/sports/photo/photo.html',
+      controller: 'MuineSportsPhotoCtrl'
     })
     .state('muine.sports.sport.video', {
       url: '/video'

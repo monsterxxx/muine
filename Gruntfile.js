@@ -17,7 +17,8 @@ module.exports = function(grunt){
           style: 'nested'               //expanded
         },
         files: {                         // Dictionary of files
-          'app/css/app_sass.css': 'app/css/app.sass'       // 'destination': 'source'
+          'app/css/app_sass.css': 'app/css/app.sass',       // 'destination': 'source'
+          'bower_components/materialize/sass/materialize.css': 'bower_components/materialize/sass/materialize.scss'
         }
       }
     },
