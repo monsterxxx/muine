@@ -10,13 +10,15 @@ angular.module('myApp.muine', [
   'ps.muine.sports',
   'ps.muine.sports.home',
   'ps.muine.sports.photo',
+  'ps.muine.sports.video',
   'ps.muine.clubs',
   'ps.muine.clubs.home',
   'ps.muine.spots',
   'ps.muine.spots.home',
   'ps.muine.prices',
   'ps.muine.layout',
-  'angular-velocity'
+  'angular-velocity',
+  'youtube-embed'
 ])
 
 .config(function ($urlRouterProvider, $stickyStateProvider) {
@@ -111,7 +113,9 @@ angular.module('myApp.muine', [
       controller: 'MuineSportsPhotoCtrl'
     })
     .state('muine.sports.sport.video', {
-      url: '/video'
+      url: '/video',
+      templateUrl: './muine/sports/video/video.html',
+      controller: 'MuineSportsVideoCtrl'
     })
   .state('muine.clubs', {
     url: '/clubs',

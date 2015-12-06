@@ -27,6 +27,14 @@
   right: 0
   transition: all 1s ease-in-out
 
+/* this is required as of 1.3x to properly
+   apply all styling in a show/hide animation */
+.ps-transition-slideLeft.ng-hide-add, .ps-transition-slideLeft.ng-hide-remove
+  transition: 0s linear all
+/* the transition for ng-hide is defined in the active class */
+.ps-transition-slideLeft.ng-hide-add, .ps-transition-slideLeft.ng-hide-remove
+  transition: all 1s ease-in-out
+
 .ps-transition-slideLeft
   &.ng-enter
     transform: translate3d(100%, 0, 0)
@@ -37,10 +45,25 @@
   &.ng-leave-active
     transform: translate3d(-100%, 0, 0)
 
+  &.ng-hide-remove
+    transform: translate3d(100%, 0, 0)
+  &.ng-hide-remove.ng-hide-remove-active
+    transform: translate3d(0, 0, 0)
+  &.ng-hide-add
+    transform: translate3d(0, 0, 0)
+  &.ng-hide-add.ng-hide-add-active
+    transform: translate3d(-100%, 0, 0)
+
+
 .ps-transition-slideRight.ng-enter, .ps-transition-slideRight.ng-leave
   position: absolute
   left: 0
   right: 0
+  transition: all 1s ease-in-out
+
+.ps-transition-slideRight.ng-hide-add, .ps-transition-slideRight.ng-hide-remove
+  transition: 0s linear all
+.ps-transition-slideRight.ng-hide-add, .ps-transition-slideRight.ng-hide-remove
   transition: all 1s ease-in-out
 
 .ps-transition-slideRight
@@ -51,4 +74,13 @@
   &.ng-leave
     transform: translate3d(0, 0, 0)
   &.ng-leave-active
+    transform: translate3d(100%, 0, 0)
+
+  &.ng-hide-remove
+    transform: translate3d(-100%, 0, 0)
+  &.ng-hide-remove.ng-hide-remove-active
+    transform: translate3d(0, 0, 0)
+  &.ng-hide-add
+    transform: translate3d(0, 0, 0)
+  &.ng-hide-add.ng-hide-add-active
     transform: translate3d(100%, 0, 0)

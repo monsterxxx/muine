@@ -73,7 +73,7 @@ ps-muine-navbar
       cursor: default
     .cover-title
       text-transform: uppercase
-      margin-bottom: 20px
+      margin-bottom: 12px
       font:
         size: 60px
         weight: bold
@@ -119,17 +119,19 @@ ps-muine-navbar
 //'muine.sections' state templates
 .section-sticky-view
 
-
 //'muine.sections.section' state templates
 .section-view
+  min-height: 600px
+  overflow: hidden
+  position: relative
   //'muine.sections.section.child' state templates' content:
   .background
     width: 100%
     height: 600px
-    // height: 100%
     position: absolute
     z-index: -1
     box-shadow: inset 0 -20px 20px -20px black //bottom only
+    background: black
   .child-container
     height: 600px
 
@@ -169,13 +171,24 @@ ps-muine-navbar
   &:hover
     background: color('yellow', 'base')
     color: $navbar_background
-.slider-prev
-  transform: rotate(180deg) translate(0, 50%)
-.slider-next
-  right: 0
+  &.hide-slider-controls
+    &.slider-prev
+      opacity: 0
+      transform: rotate(180deg) translate(100%, 50%)
+    &.slider-next
+      opacity: 0
+      transform: translate(100%, -50%)
+  &.slider-prev
+    transform: rotate(180deg) translate(0, 50%)
+  &.slider-next
+    right: 0
 
 .slider-bullets
+  position: absolute
+  left: 50%
   bottom: 15px
+  transform: translate(-50%, 0)
+  transition: 0.3s linear all
   .slider-bullet
     display: inline-block
     width: 15px
@@ -189,7 +202,15 @@ ps-muine-navbar
       background: color('yellow', 'base')
     &:last-child
       margin: 0
+  &.hide-slider-controls
+    transform: translate(-50%, 100%)
+    opacity: 0
 
+.video-frame
+  position: absolute
+  height: 600px
+  width: 100% //1067px
+  top: 0
 
 #sports
 

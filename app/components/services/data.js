@@ -22,6 +22,13 @@ angular.module('muineApp.services.data', [])
         '6.jpg',
         '7.jpg'
       ]
+    },
+    video: {
+      slides: [
+        'QkuC0lvMAX0',
+        'BuYu_pOqVGM',
+        'zKv_sUx9EDM'
+      ]
     }
   },{
     id: 55,
@@ -36,6 +43,11 @@ angular.module('muineApp.services.data', [])
     photo: {
       slides: [
         '1w.jpg'
+
+      ]
+    },
+    video: {
+      slides: [
 
       ]
     }
@@ -53,6 +65,11 @@ angular.module('muineApp.services.data', [])
       slides: [
         '1.jpg'
       ]
+    },
+    video: {
+      slides: [
+
+      ]
     }
   },{
     id: 49,
@@ -68,8 +85,14 @@ angular.module('muineApp.services.data', [])
       slides: [
         '1.jpg'
       ]
+    },
+    video: {
+      slides: [
+
+      ]
     }
   }];
+  
   var clubs = [{
     id: 49,
     name: 'Kitesurf Vietnam',

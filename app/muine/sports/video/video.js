@@ -1,27 +1,25 @@
 (function(){
 'use strict';
 
-angular.module('ps.muine.sports.photo', [])
+angular.module('ps.muine.sports.video', [])
 
 .controller
-('MuineSportsPhotoCtrl', ['$scope', 'Sport', '$timeout', '$q',
-function                ( $scope  ,  Sport ,  $timeout ,  $q ){
-  console.log('> SportsPhotoCtrl load');
+('MuineSportsVideoCtrl', ['$scope', 'Sport', '$timeout',
+function                ( $scope  ,  Sport ,  $timeout ){
+  console.log('> SportsVideoCtrl load');
   var doLog = true;
 
   //Data
-  //from ancestor's template used
-  //$scope.section
   $scope.sport = Sport;
 
-  var sportName = Sport.name.toLowerCase();
+  $scope.slides = Sport.video.slides;
 
-  $scope.slides = Sport.photo.slides.map(function (imgName) {
-    return 'assets/img/sports/' + sportName +'/'+ imgName;
-  });
-
+  //Init
   $scope.currSlide = 0;
 
+  $scope.slideRight = false;
+
+  //FUNCTIONS
   $scope.isCurrSlide = function (index) {
     return index === $scope.currSlide;
   };
@@ -32,12 +30,9 @@ function                ( $scope  ,  Sport ,  $timeout ,  $q ){
     } else {
       $scope.slideRight = true;
     }
-    resolveSlide(index).then(function () {
+    $timeout(function () {
       $scope.currSlide = index;
-    });
-    // $timeout(function () {
-    //
-    // }, 5);
+    }, 500);
   };
 
   var prevIndex = function (array, index) {
@@ -48,19 +43,20 @@ function                ( $scope  ,  Sport ,  $timeout ,  $q ){
     if (index === array.length - 1) return 0; else return ++index;
   };
 
-  var resolveSlide = function (index) {
-    $('#sports-loader').show();
-    var imageSrc = $scope.slides[index];
-    var deferred = $q.defer();
-    var image = new Image();
-    image.onload = function () {
-      $('#sports-loader').hide();
-      deferred.resolve();
-    };
-    image.src = imageSrc;
-    return deferred.promise;
-  };
+  // var resolveSlide = function (index) {
+  //   $('#sports-loader').show();
+  //   var imageSrc = $scope.slides[index];
+  //   var deferred = $q.defer();
+  //   var image = new Image();
+  //   image.onload = function () {
+  //     $('#sports-loader').hide();
+  //     deferred.resolve();
+  //   };
+  //   image.src = imageSrc;
+  //   return deferred.promise;
+  // };
 
+  //UI
   $scope.nextSlide = function () {
     var nextSlide = nextIndex($scope.slides, $scope.currSlide);
     $scope.selectSlide(nextSlide);
@@ -70,7 +66,6 @@ function                ( $scope  ,  Sport ,  $timeout ,  $q ){
     var prevSlide = prevIndex($scope.slides, $scope.currSlide);
     $scope.selectSlide(prevSlide);
   };
-
 
 }]);
 

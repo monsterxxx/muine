@@ -364,6 +364,15 @@ th {
   right: 0;
   transition: all 1s ease-in-out; }
 
+/* this is required as of 1.3x to properly
+ * apply all styling in a show/hide animation */
+.ps-transition-slideLeft.ng-hide-add, .ps-transition-slideLeft.ng-hide-remove {
+  transition: 0s linear all; }
+
+/* the transition for ng-hide is defined in the active class */
+.ps-transition-slideLeft.ng-hide-add, .ps-transition-slideLeft.ng-hide-remove {
+  transition: all 1s ease-in-out; }
+
 .ps-transition-slideLeft.ng-enter {
   -webkit-transform: translate3d(100%, 0, 0);
           transform: translate3d(100%, 0, 0); }
@@ -376,11 +385,29 @@ th {
 .ps-transition-slideLeft.ng-leave-active {
   -webkit-transform: translate3d(-100%, 0, 0);
           transform: translate3d(-100%, 0, 0); }
+.ps-transition-slideLeft.ng-hide-remove {
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0); }
+.ps-transition-slideLeft.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0); }
+.ps-transition-slideLeft.ng-hide-add {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0); }
+.ps-transition-slideLeft.ng-hide-add.ng-hide-add-active {
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0); }
 
 .ps-transition-slideRight.ng-enter, .ps-transition-slideRight.ng-leave {
   position: absolute;
   left: 0;
   right: 0;
+  transition: all 1s ease-in-out; }
+
+.ps-transition-slideRight.ng-hide-add, .ps-transition-slideRight.ng-hide-remove {
+  transition: 0s linear all; }
+
+.ps-transition-slideRight.ng-hide-add, .ps-transition-slideRight.ng-hide-remove {
   transition: all 1s ease-in-out; }
 
 .ps-transition-slideRight.ng-enter {
@@ -393,6 +420,18 @@ th {
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0); }
 .ps-transition-slideRight.ng-leave-active {
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0); }
+.ps-transition-slideRight.ng-hide-remove {
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0); }
+.ps-transition-slideRight.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0); }
+.ps-transition-slideRight.ng-hide-add {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0); }
+.ps-transition-slideRight.ng-hide-add.ng-hide-add-active {
   -webkit-transform: translate3d(100%, 0, 0);
           transform: translate3d(100%, 0, 0); }
 
@@ -1261,7 +1300,7 @@ ps-muine-navbar {
     cursor: default; }
   [ps-video-bg] .video-overlay .cover-title {
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     font-size: 60px;
     font-weight: bold;
     -webkit-animation-name: hide, fadeIn;
@@ -1311,14 +1350,19 @@ ps-muine-navbar {
         -webkit-animation-timing-function: ease-in-out;
                 animation-timing-function: ease-in-out; }
 
-.section-view .background {
-  width: 100%;
-  height: 600px;
-  position: absolute;
-  z-index: -1;
-  box-shadow: inset 0 -20px 20px -20px black; }
-.section-view .child-container {
-  height: 600px; }
+.section-view {
+  min-height: 600px;
+  overflow: hidden;
+  position: relative; }
+  .section-view .background {
+    width: 100%;
+    height: 600px;
+    position: absolute;
+    z-index: -1;
+    box-shadow: inset 0 -20px 20px -20px black;
+    background: black; }
+  .section-view .child-container {
+    height: 600px; }
 
 .card {
   font-family: Roboto;
@@ -1361,16 +1405,27 @@ ps-muine-navbar {
   .slider-prev-next:hover {
     background: #ffeb3b;
     color: #222222; }
-
-.slider-prev {
-  -webkit-transform: rotate(180deg) translate(0, 50%);
-          transform: rotate(180deg) translate(0, 50%); }
-
-.slider-next {
-  right: 0; }
+  .slider-prev-next.hide-slider-controls.slider-prev {
+    opacity: 0;
+    -webkit-transform: rotate(180deg) translate(100%, 50%);
+            transform: rotate(180deg) translate(100%, 50%); }
+  .slider-prev-next.hide-slider-controls.slider-next {
+    opacity: 0;
+    -webkit-transform: translate(100%, -50%);
+            transform: translate(100%, -50%); }
+  .slider-prev-next.slider-prev {
+    -webkit-transform: rotate(180deg) translate(0, 50%);
+            transform: rotate(180deg) translate(0, 50%); }
+  .slider-prev-next.slider-next {
+    right: 0; }
 
 .slider-bullets {
-  bottom: 15px; }
+  position: absolute;
+  left: 50%;
+  bottom: 15px;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  transition: 0.3s linear all; }
   .slider-bullets .slider-bullet {
     display: inline-block;
     width: 15px;
@@ -1384,6 +1439,16 @@ ps-muine-navbar {
       background: #ffeb3b; }
     .slider-bullets .slider-bullet:last-child {
       margin: 0; }
+  .slider-bullets.hide-slider-controls {
+    -webkit-transform: translate(-50%, 100%);
+            transform: translate(-50%, 100%);
+    opacity: 0; }
+
+.video-frame {
+  position: absolute;
+  height: 600px;
+  width: 100%;
+  top: 0; }
 
 #prices {
   margin: 0;
@@ -1406,10 +1471,6 @@ ps-muine-navbar {
   color: #ffeb3b; }
   #sports .card-action a:hover {
     color: #fdd835; }
-
-#sports .carousel-belt {
-  position: relative;
-  height: 112.5px; }
 
 #sports .loader {
   display: none; }

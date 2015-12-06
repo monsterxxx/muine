@@ -13,6 +13,17 @@ function            ( $scope ,  $stateParams ,  muineData ,  PsUtils ,  $rootSco
   //get data
   $scope.sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
   if (doLog) console.log('$scope.sport'+JSON.stringify($scope.sport , null, 2));
+
+  $scope.sectionFocus = function (bool) {
+    $scope.sectionInFocus = bool;
+    var $controls = $('#sports').find('.slider-control');
+    if (bool) {
+      $controls.removeClass('hide-slider-controls');
+    } else {
+      $controls.addClass('hide-slider-controls');
+    }
+  };
+
 }]);
 
 })();

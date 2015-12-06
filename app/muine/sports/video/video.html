@@ -1,9 +1,10 @@
-<!-- <div class="background" ps-bg-img="{{bgImg}}"></div> -->
-
+<!-- <div class="background"></div>
+<iframe class="video-frame" width="1067" height="600" src="https://www.youtube.com/embed/sMKoNBRZM1M" frameborder="0" allowfullscreen></iframe> -->
 <ul>
-  <li ng-repeat="slide in slides" ng-if="isCurrSlide($index)"
+  <li ng-repeat="slide in slides" ng-show="isCurrSlide($index)"
       ng-class="{'ps-transition-slideRight': slideRight, 'ps-transition-slideLeft': !slideRight}">
-    <div class="background" ps-bg-img="{{slide}}"></div>
+      <!-- <div class="background"></div> -->
+      <youtube-video onload="console.log('hey!')" class="video-frame" video-id="slide"></youtube-video>
   </li>
 </ul>
 <a class="slider-prev-next slider-prev slider-control" href=""
@@ -20,6 +21,9 @@
   ></a>
 </div>
 
-<!-- <div class="carousel-belt">
-
-</div> -->
+<div class="debug-info">
+<button type="button" ng-click="" name="button">refresh</button>
+<pre>
+slideRight: {{slideRight}};
+</pre>
+</div>
