@@ -1186,13 +1186,19 @@ header {
   .navbar-container .item-n3 ps-muine-subcontrol li:last-child {
     border-bottom: 1px solid #9c27b0; }
 
-.rotate-cw {
+.ps-rotate-cw {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg); }
 
-.rotate-ccw {
+.ps-rotate-ccw {
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg); }
+
+.ps-center {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0); }
 
 ps-muine-navbar {
   width: 100%;
@@ -1349,18 +1355,35 @@ ps-muine-navbar {
   -webkit-transform: translate(0, -50%);
           transform: translate(0, -50%);
   background: #222222;
+  color: #ffeb3b;
+  font-size: 30px;
   transition: all 0.3s linear; }
-  .slider-prev-next svg {
-    line-height: 30px;
-    vertical-align: middle;
-    width: 30px;
-    height: 30px;
-    fill: #ffeb3b; }
-  .slider-prev-next:hover svg {
-    fill: #fdd835; }
+  .slider-prev-next:hover {
+    background: #ffeb3b;
+    color: #222222; }
+
+.slider-prev {
+  -webkit-transform: rotate(180deg) translate(0, 50%);
+          transform: rotate(180deg) translate(0, 50%); }
 
 .slider-next {
   right: 0; }
+
+.slider-bullets {
+  bottom: 15px; }
+  .slider-bullets .slider-bullet {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 15px;
+    background: #222222;
+    transition: 0.3s linear all; }
+    .slider-bullets .slider-bullet:hover {
+      background: #ffeb3b; }
+    .slider-bullets .slider-bullet.active {
+      background: #ffeb3b; }
+    .slider-bullets .slider-bullet:last-child {
+      margin: 0; }
 
 #prices {
   margin: 0;

@@ -29,21 +29,30 @@ function                ( $scope  ,  Sport ,  $timeout){
   };
 
   $scope.selectSlide = function (index) {
-    $scope.currSlide = index;
+    if (index > $scope.currSlide) {
+      $scope.slideRight = false;
+    } else {
+      $scope.slideRight = true;
+    }
+    $timeout(function () {
+      $scope.currSlide = index;
+    }, 5);
+  };
+
+  var prevIndex = function (array, index) {
+    if (index === 0) return array.length - 1; else return --index;
+  };
+
+  var nextIndex = function (array, index) {
+    if (index === array.length - 1) return 0; else return ++index;
   };
 
   $scope.nextSlide = function () {
-    $scope.slideRight = false;
-    $timeout(function () {
-      $scope.currSlide++;
-    }, 5);
+    $scope.selectSlide(nextIndex($scope.slides, $scope.currSlide));
   };
 
   $scope.prevSlide = function () {
-    $scope.slideRight = true;
-    $timeout(function () {
-      $scope.currSlide--;
-    }, 5);
+    $scope.selectSlide(prevIndex($scope.slides, $scope.currSlide));
   };
 
 }]);
