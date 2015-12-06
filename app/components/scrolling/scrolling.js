@@ -281,6 +281,7 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
 
 
     //NAVBAR STYLER
+    //TODO THIS DOES NOT WORK!!!!
     //This is a fix for strange navcontrol > selected items behavior.
     //  Could not get it done with css transition.
     fixSelectedItemStyle: function () {
@@ -296,7 +297,7 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
         duration: 0,
         delay: 1000,
         complete: function () {
-          console.log('topFix complete: '+ $(this).length );
+          // console.log('topFix complete: '+ $(this).length );
         }
       });
     },

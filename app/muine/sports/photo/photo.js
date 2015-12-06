@@ -4,8 +4,8 @@
 angular.module('ps.muine.sports.photo', [])
 
 .controller
-('MuineSportsPhotoCtrl', ['$scope', 'Sport',
-function                ( $scope ,  Sport){
+('MuineSportsPhotoCtrl', ['$scope', 'Sport', '$timeout',
+function                ( $scope  ,  Sport ,  $timeout){
   console.log('> SportsPhotoCtrl load');
   var doLog = true;
 
@@ -14,7 +14,38 @@ function                ( $scope ,  Sport){
   //$scope.section
   $scope.sport = Sport;
 
-  $scope.bgImg = 'assets/img/sports/' + Sport.name.toLowerCase() +'/'+ Sport.home.bgImg;
+  var sportName = Sport.name.toLowerCase();
+
+  $scope.bgImg = 'assets/img/sports/' + sportName +'/'+ Sport.home.bgImg;
+
+  $scope.slides = Sport.photo.slides.map(function (imgName) {
+    return 'assets/img/sports/' + sportName +'/'+ imgName;
+  });
+
+  $scope.currSlide = 0;
+
+  $scope.isCurrSlide = function (index) {
+    return index === $scope.currSlide;
+  };
+
+  $scope.selectSlide = function (index) {
+    $scope.currSlide = index;
+  };
+
+  $scope.nextSlide = function () {
+    $scope.slideRight = false;
+    $timeout(function () {
+      $scope.currSlide++;
+    }, 5);
+  };
+
+  $scope.prevSlide = function () {
+    $scope.slideRight = true;
+    $timeout(function () {
+      $scope.currSlide--;
+    }, 5);
+  };
+
 }]);
 
 })();

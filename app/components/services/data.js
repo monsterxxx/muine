@@ -15,6 +15,13 @@ angular.module('muineApp.services.data', [])
     home: {
       bgImg: '1.jpg',
       cardImg: '4w.jpg'
+    },
+    photo: {
+      slides: [
+        '1.jpg',
+        '6.jpg',
+        '7.jpg'
+      ]
     }
   },{
     id: 55,
@@ -25,6 +32,12 @@ angular.module('muineApp.services.data', [])
     home: {
       bgImg: '1w.jpg',
       cardImg: '1w.jpg'
+    },
+    photo: {
+      slides: [
+        '1w.jpg'
+
+      ]
     }
   },{
     id: 87,
@@ -35,6 +48,11 @@ angular.module('muineApp.services.data', [])
     home: {
       bgImg: '1.jpg',
       cardImg: '1.jpg'
+    },
+    photo: {
+      slides: [
+        '1.jpg'
+      ]
     }
   },{
     id: 49,
@@ -45,6 +63,11 @@ angular.module('muineApp.services.data', [])
     home: {
       bgImg: '1.jpg',
       cardImg: '1.jpg'
+    },
+    photo: {
+      slides: [
+        '1.jpg'
+      ]
     }
   }];
   var clubs = [{

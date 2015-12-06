@@ -1,26 +1,39 @@
 $video-overlay-color: rgba(black, 0.6)
 $video-overlay-hover-color: rgba($white, 0.8)
 
+//GENERAL
+.rotate-cw
+  transform: rotate(90deg)
+.rotate-ccw
+  transform: rotate(-90deg)
+
 ps-muine-navbar
   width: 100%
   position: fixed
   z-index: 1000
   top: 0
 
-.v
+//COMMON FOR EVERY SECTION STYLES
+//'muine' state template
+.muine-section
   position: relative
-  height: 600px
-  // background: url('../assets/img/video-background.png')
-  // background-size: cover
+  min-height: 600px
   min-width: 1200px
-  .loader
-    transform: translate(-$loader_size/2, -100px - $loader_size/2 + $navbar_height/2)
+
+  svg
+    width: 50px
+    height: 50px
+    cursor: pointer
 
 .loader
   position: absolute
   top: 50%
   left: 50%
   transform: translate(-$loader_size/2, -100px - $loader_size/2)
+
+.v
+  .loader
+    transform: translate(-$loader_size/2, -100px - $loader_size/2 + $navbar_height/2)
 
 [ps-video-bg]
 
@@ -29,12 +42,9 @@ ps-muine-navbar
     box-shadow: inset 0 -20px 20px -20px black //bottom only
 
     svg
-      width: 50px
-      height: 50px
       position: absolute
       fill: $video-overlay-color
-      cursor: pointer
-      &.mute
+      &.mute-unmute
         top: 80px
         right: 20px
 
@@ -84,33 +94,15 @@ ps-muine-navbar
             duration: 13.5s, 0.5s
 
     .skip-intro
-      line-height: 50px
       height: 50px
       width: 50px
-      display: flex
-      font-size: 30px
-      color: $video-overlay-color
       position: absolute
       left: 50%
       transform: translate(-50%, 0)
       bottom: 15px
-      cursor: pointer
-      span
-        margin-left: 60px
-        vertical-align: middle
-        line-height: 50px
-        display: inline
       svg
-        line-height: 50px
-        vertical-align: middle
-        display: inline
-        width: 50px
-        height: 50px
         fill: $video-overlay-color
-        cursor: pointer
-      &:hover
-        color: $video-overlay-hover-color
-        svg
+        &:hover
           fill: $video-overlay-hover-color
           animation:
             name: arrowUpDown
@@ -119,23 +111,12 @@ ps-muine-navbar
             timing-function: ease-in-out
 
 
-
-//'muine' state
-.muine-section
-  position: relative
-  height: 600px
-  min-width: 1200px
-  // position: relative
-  // height: 600px
-
-
 //'muine.sections' state templates
 .section-sticky-view
 
 
 //'muine.sections.section' state templates
 .section-view
-  box-shadow: inset 0 -20px 20px -20px black //bottom only
   //'muine.sections.section.child' state templates' content:
   .background
     width: 100%
@@ -143,9 +124,9 @@ ps-muine-navbar
     // height: 100%
     position: absolute
     z-index: -1
-  .container
-    width: 100%
-    height: 100%
+    box-shadow: inset 0 -20px 20px -20px black //bottom only
+  .child-container
+    height: 600px
 
 .card
   font-family: Roboto
@@ -167,6 +148,31 @@ ps-muine-navbar
 .card-right
   right: 20px
 
+.slider-prev-next
+  text-align: center
+  position: absolute
+  width: 50px
+  height: 50px
+  line-height: 50px
+  bottom: 20px
+  top: 50%
+  transform: translate(0, -50%)
+  background: $navbar_background
+  transition: all 0.3s linear
+  svg
+    line-height: 30px
+    vertical-align: middle
+    width: 30px
+    height: 30px
+    fill: color('yellow', base)
+  &:hover
+    svg
+      fill: color('yellow', darken-1)
+.slider-next
+  right: 0
+
+
+#sports
 
 #prices
   margin: 0

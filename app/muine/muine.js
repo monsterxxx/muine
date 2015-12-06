@@ -83,13 +83,11 @@ angular.module('myApp.muine', [
       },
       //preload bgImg before slide
       img: function ($q, Sport, $rootScope) {
-        console.log('resolve');
         $('#sports-loader').show();
         var homeImageLocation = 'assets/img/sports/' + Sport.name.toLowerCase() +'/'+ Sport.home.bgImg;
         var deferred = $q.defer();
         var bgImage = new Image();
         bgImage.onload = function () {
-          console.log('resolved');
           $('#sports-loader').hide();
           deferred.resolve();
         };
@@ -193,6 +191,7 @@ angular.module('myApp.muine', [
   return {
     restrict: 'A',
     link: function ($scope, el, attrs) {
+      var doLog = false;
 
       //default video background params
       $scope.videoMuted = true;
@@ -229,13 +228,13 @@ angular.module('myApp.muine', [
         // };
         var playerInit = true;
         player.addEventListener('onStateChange', function () {
-          console.log('playerStateChange: '+player.getPlayerState());
+          if (doLog) console.log('playerStateChange: '+player.getPlayerState());
           if (playerInit && player.getPlayerState() === 1) {
             playerInit = false;
             $scope.$apply(function () {
               $scope.showOverlay = true;
             });
-            console.log('showOverlay');
+            if (doLog) console.log('showOverlay');
           }
         });
       };
@@ -294,7 +293,7 @@ function(                  $scope ,  $stickyState ) {
 
 .run(     ['$state', '$q', '$urlRouter', '$rootScope', 'PsMuineScroll', '$location', '$timeout',
 function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $location ,  $timeout ) {
-  var doLog = true;
+  var doLog = false;
 
   //default globals
   $rootScope.enableVideo = true;
@@ -316,7 +315,7 @@ function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $locati
       //Now, when all sections are rendered, run essential scrolling functions
       PsMuineScroll.initialize();
       $rootScope.firstInit = false;
-      if (doLog) {console.log('> RUN > before url sync');}
+      console.log('> RUN > url sync');
 
       // ok, now sync the url
       $urlRouter.listen();

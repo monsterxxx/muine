@@ -4,7 +4,7 @@
 <!-- <div class="v">
 
 </div> -->
-<div class="v">
+<div class="v muine-section">
   <div class="loader">Loading...</div>
   <video-bg ps-video-bg
             ng-if="videoEnabled"
@@ -16,8 +16,8 @@
             start="158.5"
             end="235">
     <div class="video-overlay" ng-click="videoPlayPause()">
-      <svg class="mute" ng-show="videoMuted && showOverlay" ng-click="videoMuteUnmute($event)"><use xlink:href="#shape-mute"></use></svg>
-      <svg class="mute" ng-show="!videoMuted && showOverlay" ng-click="videoMuteUnmute($event)"><use xlink:href="#shape-unmute"></use></svg>
+      <svg class="mute-unmute" ng-show="videoMuted && showOverlay" ng-click="videoMuteUnmute($event)"><use xlink:href="#shape-mute"></use></svg>
+      <svg class="mute-unmute" ng-show="!videoMuted && showOverlay" ng-click="videoMuteUnmute($event)"><use xlink:href="#shape-unmute"></use></svg>
       <div class="cover-text" ng-show="showOverlay">
         <div class="cover-title">Unleash Your Greatness</div>
         <div class="cover-description">
@@ -27,7 +27,7 @@
         </div>
       </div>
       <a ui-sref="muine.sports" class="skip-intro">
-        <svg class="down" ng-click="skipIntro($event)"><use xlink:href="#shape-down"></use></svg>
+        <svg ng-click="skipIntro($event)"><use xlink:href="#shape-down"></use></svg>
       </a>
     </div>
   </video-bg>

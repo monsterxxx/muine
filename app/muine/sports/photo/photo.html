@@ -1,6 +1,15 @@
-<div class="background" ps-bg-img="{{bgImg}}">
+<!-- <div class="background" ps-bg-img="{{bgImg}}"></div> -->
 
-</div>
-<div class="carousel-belt">
+<ul>
+  <li ng-repeat="slide in slides" ng-if="isCurrSlide($index)"
+      ng-class="{'ps-transition-slideRight': slideRight, 'ps-transition-slideLeft': !slideRight}">
+    <div class="background" ps-bg-img="{{slide}}">
+    </div>
+  </li>
+</ul>
+<a class="slider-prev-next slider-prev" href="" ng-click="prevSlide()"><svg class="rotate-cw" ng-click="skipIntro($event)"><use xlink:href="#shape-down"></use></svg></a>
+<a class="slider-prev-next slider-next" href="" ng-click="nextSlide()"><svg class="rotate-ccw" ng-click="skipIntro($event)"><use xlink:href="#shape-down"></use></svg></a>
 
-</div>
+<!-- <div class="carousel-belt">
+
+</div> -->

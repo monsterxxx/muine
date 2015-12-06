@@ -15,13 +15,11 @@ angular.module('myApp.view1', [])
 
 .controller('View1Ctrl', function($scope) {
 
-  $scope.show = false;
-
-  $scope.test = 'initial test';
-
-  $scope.$on('$destroy', function () {
-    window.alert('scope.destroied');
-  });
+  $scope.slides = [
+    {img: 'assets/img/sports/windsurfing/1.jpg'},
+    {img: 'assets/img/sports/windsurfing/6.jpg'},
+    {img: 'assets/img/sports/windsurfing/7.jpg'}
+  ];
 
 })
 
