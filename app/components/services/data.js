@@ -42,13 +42,14 @@ angular.module('muineApp.services.data', [])
     },
     photo: {
       slides: [
-        '1w.jpg'
-
+        '1w.jpg',
+        '2.jpg'
       ]
     },
     video: {
       slides: [
-
+        'o3ttzu5VWII',
+        'Gup_JcxSO2o'
       ]
     }
   },{
@@ -92,7 +93,7 @@ angular.module('muineApp.services.data', [])
       ]
     }
   }];
-  
+
   var clubs = [{
     id: 49,
     name: 'Kitesurf Vietnam',

@@ -209,6 +209,7 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
           //before scroll
           if (toStateNameArr[1] === 'home') {
             //insert video background if it's not there yet
+            console.log('insert video');
             $rootScope.videoEnabled = true;
           }
           if (firstTransition) {

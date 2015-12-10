@@ -18,6 +18,7 @@ angular.module('myApp.muine', [
   'ps.muine.prices',
   'ps.muine.layout',
   'angular-velocity',
+  'angularVideoBg',
   'youtube-embed'
 ])
 
@@ -198,7 +199,7 @@ angular.module('myApp.muine', [
       var doLog = false;
 
       //default video background params
-      $scope.videoMuted = true;
+      $scope.videoMuted = false;
 
       //register video-bg youtube player functions
       $scope.videoBgReg = function(player) {
@@ -303,7 +304,7 @@ function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $locati
   $rootScope.enableVideo = true;
 
   //firstInit var prevents scrolling on stateChangeSuccess while preloading states
-  $rootScope.firstInit = false;
+  $rootScope.firstInit = true;
 
   // get list of all registered states
   $state.get()

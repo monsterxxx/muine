@@ -3,7 +3,7 @@
 <ul>
   <li ng-repeat="slide in slides" ng-if="isCurrSlide($index)"
       ng-class="{'ps-transition-slideRight': slideRight, 'ps-transition-slideLeft': !slideRight}">
-    <div class="background" ps-bg-img="{{slide}}"></div>
+    <div class="background" ps-bg-img="slide"></div>
   </li>
 </ul>
 <a class="slider-prev-next slider-prev slider-control" href=""

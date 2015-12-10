@@ -4,15 +4,19 @@
 angular.module('ps.muine.sports', [])
 
 .controller
-('MuineSportsCtrl', ['$scope', '$stateParams', 'muineData', 'PsUtils', '$rootScope',
-function            ( $scope ,  $stateParams ,  muineData ,  PsUtils ,  $rootScope){
+('MuineSportsCtrl', ['$scope', '$stateParams', 'muineData', 'PsUtils', '$rootScope', 'Sport',
+function            ( $scope ,  $stateParams ,  muineData ,  PsUtils ,  $rootScope ,  Sport){
   console.log('> SportsCtrl load');
   var doLog = false;
 
   $rootScope.sportsResolving = false;
   //get data
-  $scope.sport = PsUtils.getById(muineData.sports, $stateParams.sportId);
+  $scope.sport = Sport;
   if (doLog) console.log('$scope.sport'+JSON.stringify($scope.sport , null, 2));
+
+  $scope.bgImg = 'assets/img/sports/' + Sport.name.toLowerCase() +'/'+ Sport.home.bgImg;
+
+  $scope.currPhoto = 0;
 
   $scope.sectionFocus = function (bool) {
     $scope.sectionInFocus = bool;
@@ -23,6 +27,8 @@ function            ( $scope ,  $stateParams ,  muineData ,  PsUtils ,  $rootSco
       $controls.addClass('hide-slider-controls');
     }
   };
+
+
 
 }]);
 

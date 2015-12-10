@@ -1,12 +1,14 @@
-<!-- <div class="background"></div>
-<iframe class="video-frame" width="1067" height="600" src="https://www.youtube.com/embed/sMKoNBRZM1M" frameborder="0" allowfullscreen></iframe> -->
+<div class="background" ps-bg-img="bgImg"></div>
+
 <ul>
   <li ng-repeat="slide in slides" ng-show="isCurrSlide($index)"
       ng-class="{'ps-transition-slideRight': slideRight, 'ps-transition-slideLeft': !slideRight}">
       <!-- <div class="background"></div> -->
-      <youtube-video onload="console.log('hey!')" class="video-frame" video-id="slide"></youtube-video>
+      <youtube-video class="video-frame" video-id="slide" player="youtubePlayers[$index]"></youtube-video>
+      <div class="section-overlay"></div>
   </li>
 </ul>
+
 <a class="slider-prev-next slider-prev slider-control" href=""
    ng-click="prevSlide()"
   >&#10132;</a>
@@ -19,11 +21,4 @@
       ng-click="selectSlide($index)"
       ng-class="{active: isCurrSlide($index)}"
   ></a>
-</div>
-
-<div class="debug-info">
-<button type="button" ng-click="" name="button">refresh</button>
-<pre>
-slideRight: {{slideRight}};
-</pre>
 </div>
