@@ -1,10 +1,90 @@
 //nth($navbar_items_themes, 2)
-.sports-child-view
-  .background
-    width: 100%
-    height: 100%
-    position: absolute
-    z-index: -1
-  .container
-    width: 100%
-    height: 100%
+#clubs
+  .description-card
+  .collection
+    margin-top: 0
+    margin-bottom: 0
+    font-weight: 300
+    background-color: color('grey', base)
+    border-top: none
+    border-right: none
+    border-bottom: none
+    border-left: none
+    border-color: rgba(white, 0.3)
+  .collection-item
+    height: 34px
+    padding-top: 5.5px
+    padding-bottom: 5.5px
+    border-bottom-color: rgba(white, 0.3)
+    >div
+      height: 22px
+      line-height: 22px
+      vertical-align: middle
+    img
+      width: 20px
+      height: 20px
+      margin-top: -2px
+      margin-right: 15px
+      vertical-align: middle
+  .item-title
+    font-weight: 400
+    font-style: italic
+  a.collection-item
+    color: white
+    background-color: color('grey', 'base')
+    &:hover
+      background-color: color('grey', 'darken-1')
+  .collapsible-header
+    min-height: 0
+    border-bottom: none
+    span
+      float: right
+      font-style: normal
+    &.active
+      span
+        transform: rotate(90deg) translateX(-1px)
+  .collapsible-body
+    border-bottom: none
+
+  svg
+    width: 30px
+    height: 30px
+    margin-top: -4.5px
+    margin-right: 10px
+    // margin-bottom: 2px
+    margin-left: -5px
+    fill: white
+    vertical-align: middle
+    cursor: default
+  .card-action
+    font-weight: 400
+    a
+      color: color('green', lighten-2)
+      &:hover
+        color: color('green', darken-1)
+
+  .card-content
+    padding-top: 10px
+    padding-bottom: 10px
+    &:nth-child(2)
+      .row
+        margin-bottom: 0
+  .card-club-top
+    padding-top: 0
+
+  .logo
+    width: 157.5px
+    height: 157.5px
+    // width: 188.75px
+    // height: 188.75px
+
+  .representative
+    padding-left: 0.75rem
+    font-size: 1.25rem
+    span
+      font-size: 1rem
+      color: rgba(white, 0.7)
+
+  .welcome
+    padding-top: 0.5rem
+    font-size: 1.12rem

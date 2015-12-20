@@ -1,4 +1,4 @@
-<header ng-class="{transparent: navbarTransparent}">
+<header ng-class="{navbarOnTop: navbarOnTop}">
 	<div class="navbar-container">
 			<a class="brandzone"
 				 ui-sref="muine.home"
@@ -13,7 +13,7 @@
 				<li class="item"
 						ng-repeat="dataKey in dataKeysList"
 						ng-controller="mainMenuItemCtrl1"
-						ng-class="['item-n' + {{$index + 1}}, {active: $state.includes(rootState +'.'+ dataKey)}]">
+						ng-class="['item-n' + {{$index + 1}}, {active: $state.includes(rootState +'.'+ dataKey)}, {firstInit: firstInit}]">
 					<a ng-href="{{uiSref() + childStates[0]}}"
 						 ng-class="{rotated: $state.includes(rootState +'.'+ dataKey)}"
 						 ps-smooth-scroll="{{dataKey}}"

@@ -7,6 +7,7 @@ angular.module('myApp.muine', [
   'ps.background',
   'ps.muine.navbar',
   'ps.muine.navbar.subcontrol',
+  'ps.muine.home',
   'ps.muine.sports',
   'ps.muine.sports.home',
   'ps.muine.sports.photo',
@@ -64,7 +65,10 @@ angular.module('myApp.muine', [
     sticky: true,
     preload: true,
     views: {
-      'home': {}
+      'home': {
+        templateUrl: './muine/home/home.html',
+        controller: 'MuineHomeCtrl'
+      }
     }
   })
   .state('muine.sports', {
@@ -85,13 +89,14 @@ angular.module('myApp.muine', [
         return PsUtils.getById(muineData.sports, $stateParams.sportId);
       },
       //preload bgImg before slide
-      img: function ($q, Sport, $rootScope) {
-        $('#sports-loader').show();
+      img: function ($q, Sport) {
+        var $sports = $('#sports');
+        $sports.append('<div class="ball-spin-fade-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
         var homeImageLocation = 'assets/img/sports/' + Sport.name.toLowerCase() +'/'+ Sport.home.bgImg;
         var deferred = $q.defer();
         var bgImage = new Image();
         bgImage.onload = function () {
-          $('#sports-loader').hide();
+          $sports.find('.ball-spin-fade-loader').remove();
           deferred.resolve();
         };
         bgImage.src = homeImageLocation;
@@ -131,6 +136,25 @@ angular.module('myApp.muine', [
   .state('muine.clubs.club', {
     url: '/{clubId:int}',
     abstract: true,
+    resolve: {
+      Club: function (muineData, PsUtils, $stateParams) {
+        return PsUtils.getById(muineData.clubs, $stateParams.clubId);
+      },
+      //preload bgImg before slide
+      img: function ($q, Club) {
+        var $clubs = $('#clubs');
+        $clubs.append('<div class="ball-spin-fade-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+        var homeImageLocation = 'assets/img/clubs/' + Club.home.bgImg;
+        var deferred = $q.defer();
+        var bgImage = new Image();
+        bgImage.onload = function () {
+          $clubs.find('.ball-spin-fade-loader').remove();
+          deferred.resolve();
+        };
+        bgImage.src = homeImageLocation;
+        return deferred.promise;
+      }
+    },
     templateUrl: './muine/clubs/clubs.html',
     controller: 'MuineClubsCtrl'
   })
@@ -163,6 +187,25 @@ angular.module('myApp.muine', [
   .state('muine.spots.spot', {
     url: '/{spotId:int}',
     abstract: true,
+    resolve: {
+      Spot: function (muineData, PsUtils, $stateParams) {
+        return PsUtils.getById(muineData.spots, $stateParams.spotId);
+      },
+      //preload bgImg before slide
+      img: function ($q, Spot) {
+        var $spots = $('#spots');
+        $spots.append('<div class="ball-spin-fade-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+        var homeImageLocation = 'assets/img/spots/' + Spot.home.bgImg;
+        var deferred = $q.defer();
+        var bgImage = new Image();
+        bgImage.onload = function () {
+          $spots.find('.ball-spin-fade-loader').remove();
+          deferred.resolve();
+        };
+        bgImage.src = homeImageLocation;
+        return deferred.promise;
+      }
+    },
     templateUrl: './muine/spots/spots.html',
     controller: 'MuineSpotsCtrl'
   })
@@ -199,7 +242,7 @@ angular.module('myApp.muine', [
       var doLog = false;
 
       //default video background params
-      $scope.videoMuted = false;
+      $scope.videoMuted = true;
 
       //register video-bg youtube player functions
       $scope.videoBgReg = function(player) {
@@ -272,19 +315,18 @@ angular.module('myApp.muine', [
 .controller('MuineCtrl', ['$scope', '$stickyState',
 function(                  $scope ,  $stickyState ) {
   console.log('> MuineCtrl load');
-  $scope.navbarTransparent = true;
-
+  $scope.navbarOnTop = true;
 
 
   //scrollspy
   $(window).scroll(function() {
    if ($(this).scrollTop() === 0) {
      $scope.$apply(function () {
-       $scope.navbarTransparent = true;
+       $scope.navbarOnTop = true;
      });
    } else {
      $scope.$apply(function () {
-       $scope.navbarTransparent = false;
+       $scope.navbarOnTop = false;
      });
    }
   });

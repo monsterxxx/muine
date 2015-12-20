@@ -36,6 +36,11 @@ ps-muine-navbar
   left: 50%
   transform: translate(-$loader_size/2, -100px - $loader_size/2)
 
+.ball-spin-fade-loader
+  position: absolute
+  top: 50%
+  left: 50%
+
 .v
   .loader
     transform: translate(-$loader_size/2, -100px - $loader_size/2 + $navbar_height/2)
@@ -73,7 +78,7 @@ ps-muine-navbar
       cursor: default
     .cover-title
       text-transform: uppercase
-      margin-bottom: 12px
+      margin-bottom: 8px
       font:
         size: 60px
         weight: bold
@@ -99,21 +104,24 @@ ps-muine-navbar
             duration: 13.5s, 0.5s
 
     .skip-intro
-      height: 50px
+      height: 70px
       width: 50px
       position: absolute
       left: 50%
       transform: translate(-50%, 0)
-      bottom: 15px
-      svg
-        fill: $video-overlay-color
-        &:hover
+      bottom: 0
+      &:hover
+        svg
           fill: $video-overlay-hover-color
           animation:
             name: arrowUpDown
             duration: 1s
             iteration-count: infinite
             timing-function: ease-in-out
+      svg
+        overflow: visible
+        fill: $video-overlay-color
+
 
 
 //'muine.sections' state templates
@@ -130,26 +138,30 @@ ps-muine-navbar
     height: 600px
     position: absolute
     z-index: -2
-    box-shadow: inset 0 -20px 20px -20px black //bottom only
+    // box-shadow: inset 0 -20px 20px -20px black //bottom only
     background: black
   .child-container
     height: 600px
-  .section-overlay
-    position: absolute
-    height: 600px
-    width: 100%
-    top: 0
-    box-shadow: inset 0 -20px 20px -20px black //bottom only
-    pointer-events: none
+
+.section-overlay
+  position: absolute
+  top: 0
+  z-index: 1
+  width: 100%
+  height: 600px
+  box-shadow: inset 0 -20px 20px -20px black //bottom only
+  pointer-events: none
 
 .card
   font-family: Roboto
-  width: 400px
   margin: 0
   position: absolute
+  background: color('grey', darken-2)
+.description-card
   top: 50%
   transform: translate(0, -50%)
-  background: color('grey', darken-2)
+.properties-card
+  top: 0
 .card-content
   background: rgba(color('grey', 'darken-2'), 1)
 .card-action
@@ -160,6 +172,10 @@ ps-muine-navbar
       color: color('yellow', 'darken-1')
 .card-right
   right: 20px
+  width: 400px
+.card-middle
+  right: 420px
+  width: 200px
 
 .slider-prev-next
   text-align: center
@@ -219,6 +235,8 @@ ps-muine-navbar
   top: 0
 
 #sports
+  .ball-spin-fade-loader
+    // display: none
 
 #prices
   margin: 0

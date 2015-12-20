@@ -191,7 +191,7 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
       }
 
 
-      var firstTransition = true;
+      var firstHomeLeave = true;
       //ON STATECHANGE SCROLL
       $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState) {
         if (doLog) {console.log('> PsMuineScroll > on.stateChangeSuccess > '
@@ -209,14 +209,14 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
           //before scroll
           if (toStateNameArr[1] === 'home') {
             //insert video background if it's not there yet
-            console.log('insert video');
             $rootScope.videoEnabled = true;
           }
-          if (firstTransition) {
-            //fix selected subcontrol item style
-            PsMuineScroll.fixSelectedItemStyle();
-            firstTransition = false;
-          }
+          // if (firstHomeLeave && fromStateNameArr[1] === 'home') {
+          //   //fix selected subcontrol item style
+          //   console.log('first transition > fix');
+          //   PsMuineScroll.fixSelectedItemStyle();
+          //   firstHomeLeave = false;
+          // }
           PsMuineScroll.scroll(toStateNameArr[1]).then(function () {
             //after scroll
             if (fromStateNameArr[1] === 'home') {
@@ -281,27 +281,7 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
 
 
 
-    //NAVBAR STYLER
-    //TODO THIS DOES NOT WORK!!!!
-    //This is a fix for strange navcontrol > selected items behavior.
-    //  Could not get it done with css transition.
-    fixSelectedItemStyle: function () {
-      var $selected = $('li.selected');
-      $selected.velocity({
-        backgroundColorAlpha: 0
-      },{
-        duration: 0,
-        delay: 0
-      }).velocity({
-        backgroundColorAlpha: 1
-      },{
-        duration: 0,
-        delay: 1000,
-        complete: function () {
-          // console.log('topFix complete: '+ $(this).length );
-        }
-      });
-    },
+
 
 
 

@@ -97,69 +97,340 @@ angular.module('muineApp.services.data', [])
   var clubs = [{
     id: 49,
     name: 'Kitesurf Vietnam',
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    spots: [{
+      id: 49,
+      name: 'Suoi Nuoc'
+    }],
     home: {
-      img: '1.jpg'
+      bgImg: '1.jpg',
+      cardLogo: '3.jpg',
+      cardAvatar: '4w.jpg',
+      cardTopBackground: '#0e0e0e',
+      welcome: 'We welcome you in our club and hope to build strong relationship for the future!',
+      pros: [
+        'Surf trips to secret spot',
+        'More than 40 sails and boards',
+        'Special prices for Surf Hotel guests'
+      ],
+      languages: [
+        'Vietnameese',
+        'English',
+        'Russian',
+        'German',
+        'French'
+      ],
+      equipment: [
+        'JP Australia',
+        'Starboard',
+        'Cabrinha',
+        'Ocean rodeo'
+      ]
     }
   },{
     id: 3,
     name: 'Rids',
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    spots: [{
+      id: 49,
+      name: 'Suoi Nuoc'
+    }],
     home: {
-      img: '1.jpg'
+      bgImg: '1.jpg',
+      cardLogo: '3.jpg',
+      cardAvatar: '4w.jpg',
+      cardTopBackground: '#0e0e0e',
+      welcome: 'We welcome you in our club and hope to build strong relationship for the future!',
+      pros: [
+        'Surf trips to secret spot',
+        'More than 40 sails and boards',
+        'Special prices for Surf Hotel guests'
+      ],
+      languages: [
+        'Vietnameese',
+        'English',
+        'Russian',
+        'German',
+        'French'
+      ],
+      equipment: [
+        'JP Australia',
+        'Starboard',
+        'Cabrinha',
+        'Ocean rodeo'
+      ]
     }
   },{
     id: 23,
     name: 'Surf4You',
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    spots: [{
+      id: 49,
+      name: 'Suoi Nuoc'
+    }],
     home: {
-      img: '2.jpg'
+      bgImg: '2.jpg',
+      cardLogo: '3.jpg',
+      cardAvatar: '4w.jpg',
+      cardTopBackground: '#0e0e0e',
+      welcome: 'We welcome you in our club and hope to build strong relationship for the future!',
+      pros: [
+        'Surf trips to secret spot',
+        'More than 40 sails and boards',
+        'Special prices for Surf Hotel guests'
+      ],
+      languages: [
+        'Vietnameese',
+        'English',
+        'Russian',
+        'German',
+        'French'
+      ],
+      equipment: [
+        'JP Australia',
+        'Starboard',
+        'Cabrinha',
+        'Ocean rodeo'
+      ]
     }
   },{
     id: 87,
     name: 'VKS',
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    spots: [{
+      id: 49,
+      name: 'Suoi Nuoc'
+    }],
     home: {
-      img: '1.jpg'
+      bgImg: '1.jpg',
+      cardLogo: '3.jpg',
+      cardAvatar: '4w.jpg',
+      cardTopBackground: '#0e0e0e',
+      welcome: 'We welcome you in our club and hope to build strong relationship for the future!',
+      pros: [
+        'Surf trips to secret spot',
+        'More than 40 sails and boards',
+        'Special prices for Surf Hotel guests'
+      ],
+      languages: [
+        'Vietnameese',
+        'English',
+        'Russian',
+        'German',
+        'French'
+      ],
+      equipment: [
+        'JP Australia',
+        'Starboard',
+        'Cabrinha',
+        'Ocean rodeo'
+      ]
     }
   },{
     id: 28,
     name: 'Leto',
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    spots: [{
+      id: 49,
+      name: 'Suoi Nuoc'
+    }],
     home: {
-      img: '2.jpg'
+      bgImg: '2.jpg',
+      cardLogo: '3.jpg',
+      cardAvatar: '4w.jpg',
+      cardTopBackground: '#0e0e0e',
+      welcome: 'We welcome you in our club and hope to build strong relationship for the future!',
+      pros: [
+        'Surf trips to secret spot',
+        'More than 40 sails and boards',
+        'Special prices for Surf Hotel guests'
+      ],
+      languages: [
+        'Vietnameese',
+        'English',
+        'Russian',
+        'German',
+        'French'
+      ],
+      equipment: [
+        'JP Australia',
+        'Starboard',
+        'Cabrinha',
+        'Ocean rodeo'
+      ]
     }
   },{
     id: 99,
     name: "Jibe's",
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    spots: [{
+      id: 49,
+      name: 'Suoi Nuoc'
+    }],
     home: {
-      img: '1.jpg'
+      bgImg: '1.jpg',
+      cardLogo: '3.jpg',
+      cardAvatar: '4w.jpg',
+      cardTopBackground: '#0e0e0e',
+      welcome: 'We welcome you in our club and hope to build strong relationship for the future!',
+      pros: [
+        'Surf trips to secret spot',
+        'More than 40 sails and boards',
+        'Special prices for Surf Hotel guests'
+      ],
+      languages: [
+        'Vietnameese',
+        'English',
+        'Russian',
+        'German',
+        'French'
+      ],
+      equipment: [
+        'JP Australia',
+        'Starboard',
+        'Cabrinha',
+        'Ocean rodeo'
+      ]
     }
   },{
     id: 115,
     name: 'Source Kiteboarding',
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    spots: [{
+      id: 49,
+      name: 'Suoi Nuoc'
+    }],
     home: {
-      img: '2.jpg'
+      bgImg: '2.jpg',
+      cardLogo: '3.jpg',
+      cardAvatar: '4w.jpg',
+      cardTopBackground: '#0e0e0e',
+      welcome: 'We welcome you in our club and hope to build strong relationship for the future!',
+      pros: [
+        'Surf trips to secret spot',
+        'More than 40 sails and boards',
+        'Special prices for Surf Hotel guests'
+      ],
+      languages: [
+        'Vietnameese',
+        'English',
+        'Russian',
+        'German',
+        'French'
+      ],
+      equipment: [
+        'JP Australia',
+        'Starboard'
+      ]
     }
   }];
   var spots = [{
     id: 3,
     name: 'Muine overview',
     home: {
-      img: '1.jpg'
+      bgImg: '1.jpg'
     }
   },{
     id: 55,
     name: 'Nga Tro',
     home: {
-      img: '2.jpg'
+      bgImg: '2.jpg'
     }
   },{
     id: 87,
     name: 'Tro Nka',
     home: {
-      img: '1.jpg'
+      bgImg: '1.jpg'
     }
   },{
     id: 49,
     name: 'Suoi Nuoc',
     home: {
-      img: '2.jpg'
+      bgImg: '2.jpg'
     }
   }];
   var data = {

@@ -483,6 +483,67 @@ th {
     transform: translateY(10px); }
   100% {
     transform: translateY(0px); } }
+@keyframes ball-spin-fade-loader {
+  50% {
+    opacity: 0.3;
+    transform: scale(0.4); }
+  100% {
+    opacity: 1;
+    transform: scale(1); } }
+.ball-spin-fade-loader {
+  position: relative;
+  top: -10px;
+  left: -10px; }
+
+.ball-spin-fade-loader > div:nth-child(1) {
+  top: 25px;
+  left: 0;
+  animation: ball-spin-fade-loader 1s -0.96s infinite linear; }
+
+.ball-spin-fade-loader > div:nth-child(2) {
+  top: 17.04545px;
+  left: 17.04545px;
+  animation: ball-spin-fade-loader 1s -0.84s infinite linear; }
+
+.ball-spin-fade-loader > div:nth-child(3) {
+  top: 0;
+  left: 25px;
+  animation: ball-spin-fade-loader 1s -0.72s infinite linear; }
+
+.ball-spin-fade-loader > div:nth-child(4) {
+  top: -17.04545px;
+  left: 17.04545px;
+  animation: ball-spin-fade-loader 1s -0.6s infinite linear; }
+
+.ball-spin-fade-loader > div:nth-child(5) {
+  top: -25px;
+  left: 0;
+  animation: ball-spin-fade-loader 1s -0.48s infinite linear; }
+
+.ball-spin-fade-loader > div:nth-child(6) {
+  top: -17.04545px;
+  left: -17.04545px;
+  animation: ball-spin-fade-loader 1s -0.36s infinite linear; }
+
+.ball-spin-fade-loader > div:nth-child(7) {
+  top: 0;
+  left: -25px;
+  animation: ball-spin-fade-loader 1s -0.24s infinite linear; }
+
+.ball-spin-fade-loader > div:nth-child(8) {
+  top: 17.04545px;
+  left: -17.04545px;
+  animation: ball-spin-fade-loader 1s -0.12s infinite linear; }
+
+.ball-spin-fade-loader > div {
+  background-color: #fff;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  margin: 2px;
+  animation-fill-mode: both;
+  position: absolute; }
+
 .loader {
   margin: 100px auto;
   font-size: 10px;
@@ -979,28 +1040,18 @@ header {
   background-color: #222222;
   box-shadow: 0 1px 4px 0 black;
   transition: 1s linear all; }
-  header.transparent {
+  header.navbarOnTop {
     background-color: rgba(34, 34, 34, 0.3); }
-    header.transparent .navbar-container a.brandzone {
+    header.navbarOnTop .navbar-container a.brandzone {
       transition: 1s linear all; }
-      header.transparent .navbar-container a.brandzone:hover {
+      header.navbarOnTop .navbar-container a.brandzone:hover {
         background-color: #222222; }
-    header.transparent .navbar-container > nav {
+    header.navbarOnTop .navbar-container > nav {
       border-left: 1px solid black; }
-    header.transparent ul.mainmenu > li {
+    header.navbarOnTop ul.mainmenu > li {
       border-right: 1px solid black; }
-      header.transparent ul.mainmenu > li:hover {
+      header.navbarOnTop ul.mainmenu > li:hover {
         background-color: #222222; }
-      header.transparent ul.mainmenu > li.active {
-        width: 150px; }
-        header.transparent ul.mainmenu > li.active > ps-muine-subcontrol {
-          opacity: 0; }
-        header.transparent ul.mainmenu > li.active > div {
-          display: none; }
-        header.transparent ul.mainmenu > li.active > a.rotated {
-          transform: none;
-          line-height: 54px;
-          width: 150px; }
 
 .navbar-container {
   min-width: 1200px;
@@ -1071,12 +1122,20 @@ header {
         justify-content: space-around; }
         .navbar-container ul.mainmenu > li > div > a {
           display: inline-block; }
-      .navbar-container ul.mainmenu > li.active {
+      .navbar-container ul.mainmenu > li.active:not(.firstInit) {
         width: 300px; }
-        .navbar-container ul.mainmenu > li.active > ps-muine-subcontrol {
+        .navbar-container ul.mainmenu > li.active:not(.firstInit) > ps-muine-subcontrol {
           display: block; }
-        .navbar-container ul.mainmenu > li.active > div {
+        .navbar-container ul.mainmenu > li.active:not(.firstInit) > div {
           display: flex; }
+        .navbar-container ul.mainmenu > li.active:not(.firstInit) > a.rotated {
+          width: 60px;
+          z-index: 3;
+          line-height: 20px;
+          transform: translate(-17px, 17px) rotate(-90deg); }
+        .navbar-container ul.mainmenu > li.active:not(.firstInit) > a.underlined > span {
+          padding: 3px 0;
+          border-bottom: 1px solid #ff9800; }
       .navbar-container ul.mainmenu > li > a {
         line-height: 54px;
         width: 150px;
@@ -1088,14 +1147,6 @@ header {
         text-align: center;
         text-transform: uppercase;
         transition: transform 0.2s; }
-        .navbar-container ul.mainmenu > li > a.rotated {
-          width: 60px;
-          z-index: 3;
-          line-height: 20px;
-          transform: translate(-17px, 17px) rotate(-90deg); }
-        .navbar-container ul.mainmenu > li > a.underlined > span {
-          padding: 3px 0;
-          border-bottom: 1px solid #ff9800; }
   .navbar-container .item-n1 a.icon.active > svg {
     filter: drop-shadow(0 0 4px #ffeb3b); }
   .navbar-container .item-n1 .control-panel-row {
@@ -1183,6 +1234,11 @@ ps-muine-navbar {
   left: 50%;
   transform: translate(-5px, -105px); }
 
+.ball-spin-fade-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%; }
+
 .v .loader {
   transform: translate(-5px, -75px); }
 
@@ -1214,7 +1270,7 @@ ps-muine-navbar {
     cursor: default; }
   [ps-video-bg] .video-overlay .cover-title {
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     font-size: 60px;
     font-weight: bold;
     animation-name: hide, fadeIn;
@@ -1234,20 +1290,21 @@ ps-muine-navbar {
         animation-delay: 0s, 13.5s;
         animation-duration: 13.5s, 0.5s; }
   [ps-video-bg] .video-overlay .skip-intro {
-    height: 50px;
+    height: 70px;
     width: 50px;
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    bottom: 15px; }
+    bottom: 0; }
+    [ps-video-bg] .video-overlay .skip-intro:hover svg {
+      fill: rgba(255, 255, 255, 0.8);
+      animation-name: arrowUpDown;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out; }
     [ps-video-bg] .video-overlay .skip-intro svg {
+      overflow: visible;
       fill: rgba(0, 0, 0, 0.6); }
-      [ps-video-bg] .video-overlay .skip-intro svg:hover {
-        fill: rgba(255, 255, 255, 0.8);
-        animation-name: arrowUpDown;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
-        animation-timing-function: ease-in-out; }
 
 .section-view {
   height: 600px;
@@ -1258,26 +1315,31 @@ ps-muine-navbar {
     height: 600px;
     position: absolute;
     z-index: -2;
-    box-shadow: inset 0 -20px 20px -20px black;
     background: black; }
   .section-view .child-container {
     height: 600px; }
-  .section-view .section-overlay {
-    position: absolute;
-    height: 600px;
-    width: 100%;
-    top: 0;
-    box-shadow: inset 0 -20px 20px -20px black;
-    pointer-events: none; }
+
+.section-overlay {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 600px;
+  box-shadow: inset 0 -20px 20px -20px black;
+  pointer-events: none; }
 
 .card {
   font-family: Roboto;
-  width: 400px;
   margin: 0;
   position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
   background: #616161; }
+
+.description-card {
+  top: 50%;
+  transform: translate(0, -50%); }
+
+.properties-card {
+  top: 0; }
 
 .card-content {
   background: #616161; }
@@ -1290,7 +1352,12 @@ ps-muine-navbar {
       color: #fdd835; }
 
 .card-right {
-  right: 20px; }
+  right: 20px;
+  width: 400px; }
+
+.card-middle {
+  right: 420px;
+  width: 200px; }
 
 .slider-prev-next {
   text-align: center;
@@ -1370,18 +1437,83 @@ ps-muine-navbar {
   #sports .card-action a:hover {
     color: #fdd835; }
 
-#sports .loader {
-  display: none; }
-
-.clubs-container {
-  width: 100%;
-  height: 100%;
-  background: #4CAF50; }
-
-.spots-container {
-  width: 100%;
-  height: 100%;
-  background: #9c27b0; }
+#clubs .collection {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 300;
+  background-color: #9e9e9e;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+  border-color: rgba(255, 255, 255, 0.3); }
+#clubs .collection-item {
+  height: 34px;
+  padding-top: 5.5px;
+  padding-bottom: 5.5px;
+  border-bottom-color: rgba(255, 255, 255, 0.3); }
+  #clubs .collection-item > div {
+    height: 22px;
+    line-height: 22px;
+    vertical-align: middle; }
+  #clubs .collection-item img {
+    width: 20px;
+    height: 20px;
+    margin-top: -2px;
+    margin-right: 15px;
+    vertical-align: middle; }
+#clubs .item-title {
+  font-weight: 400;
+  font-style: italic; }
+#clubs a.collection-item {
+  color: white;
+  background-color: #9e9e9e; }
+  #clubs a.collection-item:hover {
+    background-color: #757575; }
+#clubs .collapsible-header {
+  min-height: 0;
+  border-bottom: none; }
+  #clubs .collapsible-header span {
+    float: right;
+    font-style: normal; }
+  #clubs .collapsible-header.active span {
+    transform: rotate(90deg) translateX(-1px); }
+#clubs .collapsible-body {
+  border-bottom: none; }
+#clubs svg {
+  width: 30px;
+  height: 30px;
+  margin-top: -4.5px;
+  margin-right: 10px;
+  margin-left: -5px;
+  fill: white;
+  vertical-align: middle;
+  cursor: default; }
+#clubs .card-action {
+  font-weight: 400; }
+  #clubs .card-action a {
+    color: #81C784; }
+    #clubs .card-action a:hover {
+      color: #43A047; }
+#clubs .card-content {
+  padding-top: 10px;
+  padding-bottom: 10px; }
+  #clubs .card-content:nth-child(2) .row {
+    margin-bottom: 0; }
+#clubs .card-club-top {
+  padding-top: 0; }
+#clubs .logo {
+  width: 157.5px;
+  height: 157.5px; }
+#clubs .representative {
+  padding-left: 0.75rem;
+  font-size: 1.25rem; }
+  #clubs .representative span {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7); }
+#clubs .welcome {
+  padding-top: 0.5rem;
+  font-size: 1.12rem; }
 
 .prices-container {
   width: 100%;

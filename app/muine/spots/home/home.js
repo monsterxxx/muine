@@ -4,16 +4,15 @@
 angular.module('ps.muine.spots.home', [])
 
 .controller
-('MuineSpotsHomeCtrl', ['$scope',
-function                ( $scope ){
+('MuineSpotsHomeCtrl', ['$scope', '$rootScope', 'Spot', '$timeout', '$state',
+function               ( $scope ,  $rootScope ,  Spot ,  $timeout ,  $state){
   console.log('> SpotsHomeCtrl load');
   var doLog = true;
 
   //Data
-  //from ancestor's template used
-  //$scope.section
+  $scope.spot = Spot;
 
-  $scope.bgImg = 'assets/img/spots/' + $scope.spot.home.img;
+  $scope.bgImg = 'assets/img/spots/' + Spot.home.bgImg;
 }]);
 
 })();

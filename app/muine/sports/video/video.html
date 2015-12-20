@@ -3,9 +3,7 @@
 <ul>
   <li ng-repeat="slide in slides" ng-show="isCurrSlide($index)"
       ng-class="{'ps-transition-slideRight': slideRight, 'ps-transition-slideLeft': !slideRight}">
-      <!-- <div class="background"></div> -->
       <youtube-video class="video-frame" video-id="slide" player="youtubePlayers[$index]"></youtube-video>
-      <div class="section-overlay"></div>
   </li>
 </ul>
 

@@ -10,8 +10,6 @@ function                ( $scope ,  $rootScope ,  Sport ,  $timeout ,  $state){
   var doLog = true;
 
   //Data
-  //from ancestor's template used
-  //$scope.section
   $scope.sport = Sport;
 
   $scope.cardImg = 'assets/img/sports/' + Sport.name.toLowerCase() +'/'+ Sport.home.cardImg;
@@ -23,8 +21,10 @@ function                ( $scope ,  $rootScope ,  Sport ,  $timeout ,  $state){
 
   //animation on state leave
   $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
-    if ($rootScope.firstInit || !$scope.showCard || toState.name.indexOf('muine.sports.sport') === -1) return;
     if (fromState.name === 'muine.sports.sport.home' ) {
+      console.log('toState.name: '+ toState.name, toState.name.indexOf('muine.sports.sport') === -1);
+      if ($rootScope.firstInit || !$scope.showCard) return;
+      if (toState.name.indexOf('muine.sports.sport') === -1 || toState.name === fromState.name) return;
       event.preventDefault();
       $scope.showCard = false;
       $timeout(function () {
@@ -32,6 +32,7 @@ function                ( $scope ,  $rootScope ,  Sport ,  $timeout ,  $state){
       }, 600);
     }
   });
+
 
 }]);
 
