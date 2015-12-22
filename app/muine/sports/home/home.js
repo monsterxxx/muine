@@ -7,7 +7,7 @@ angular.module('ps.muine.sports.home', [])
 ('MuineSportsHomeCtrl', ['$scope', '$rootScope', 'Sport', '$timeout', '$state',
 function                ( $scope ,  $rootScope ,  Sport ,  $timeout ,  $state){
   console.log('> SportsHomeCtrl load');
-  var doLog = true;
+  var doLog = false;
 
   //Data
   $scope.sport = Sport;
@@ -17,14 +17,21 @@ function                ( $scope ,  $rootScope ,  Sport ,  $timeout ,  $state){
   // animation on state enter
   $timeout(function () {
     $scope.showCard = true;
-  }, 500);
+  }, 1200);
 
-  //animation on state leave
-  $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
+  //animation on state leave.
+  //$scope.showCard is used in ng-show directive which is hooked to animation
+  //animation lies in switching $scope.showCard to false
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
     if (fromState.name === 'muine.sports.sport.home' ) {
-      console.log('toState.name: '+ toState.name, toState.name.indexOf('muine.sports.sport') === -1);
-      if ($rootScope.firstInit || !$scope.showCard) return;
-      if (toState.name.indexOf('muine.sports.sport') === -1 || toState.name === fromState.name) return;
+      if (doLog) console.log('> $stateChangeStart toState.name: '+ toState.name);
+      //don't switch if moving vertically
+      if (toState.name.indexOf('muine.sports.sport') === -1) return;
+      //switch implies delay in state transition in order for animation to take place.
+      //this delay is not welcome when indirect transition takes place (see scrolling.js)
+      if (!$scope.showCard) return;
+      //switch:
+      if (doLog) console.log('> $stateChangeStart switch');
       event.preventDefault();
       $scope.showCard = false;
       $timeout(function () {

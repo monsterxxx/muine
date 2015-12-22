@@ -1,16 +1,17 @@
 (function(){
 'use strict';
 
-angular.module('ps.muine.clubs.home', [])
+angular.module('ps.muine.clubs.contact', [])
 
 .controller
-('MuineClubsHomeCtrl', ['$scope', '$rootScope', 'Club', '$timeout', '$state',
-function               ( $scope ,  $rootScope ,  Club ,  $timeout ,  $state){
-  console.log('> ClubsHomeCtrl load');
+('MuineClubsContactCtrl', ['$scope', '$rootScope', 'Club', '$timeout', '$state',
+function                  ( $scope ,  $rootScope ,  Club ,  $timeout ,  $state){
+  console.log('> ClubsContactCtrl load');
   var doLog = true;
 
   //Data
   $scope.club = Club;
+
 
   $scope.bgImg = 'assets/img/clubs/' + Club.home.bgImg;
   $scope.cardLogo = 'assets/img/clubs/' + Club.home.cardLogo;
@@ -25,7 +26,7 @@ function               ( $scope ,  $rootScope ,  Club ,  $timeout ,  $state){
   //animation lies in switching $scope.showCard to true
   $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
     var doLog = false;
-    if (toState.name !== 'muine.clubs.club.home') return;
+    if (toState.name !== 'muine.clubs.club.contact') return;
     //if it was vertical state transition, showCard with a little delay
     //so that in case of indirect transition (see scrolling.js), card never appears
     if (fromState.name.indexOf('muine.clubs.club') === -1) {
@@ -56,7 +57,7 @@ function               ( $scope ,  $rootScope ,  Club ,  $timeout ,  $state){
   //animation lies in switching $scope.showCard to false
   $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
     var doLog = false;
-    if (fromState.name !== 'muine.clubs.club.home' ) return;
+    if (fromState.name !== 'muine.clubs.club.contact' ) return;
     //don't switch if moving vertically
     if (toState.name.indexOf('muine.clubs.club') === -1) return;
     //switch implies delay in state transition in order for animation to take place.
@@ -70,6 +71,11 @@ function               ( $scope ,  $rootScope ,  Club ,  $timeout ,  $state){
       $state.go(toState, toParams);
     }, 1200);
   });
+
+  // // animation on state enter
+  // $timeout(function () {
+  //   $scope.showCard = true;
+  // }, 1200);
 
 
 }]);

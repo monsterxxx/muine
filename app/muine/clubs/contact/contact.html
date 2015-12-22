@@ -1,46 +1,42 @@
 <div class="background" ps-bg-img="bgImg"></div>
 
-<div class="card description-card card-right ps-enter-slideLeft-middle ps-leave-slideRight-middle" ng-show="showCard && $state.includes('muine.clubs.club.home', {clubId: club.id})">
+<div class="card description-card card-right card-contact ps-enter-slideLeft-middle ps-leave-slideRight-middle" ng-show="showCard && $state.includes('muine.clubs.club.contact', {clubId: club.id})">
   <div class="card-content white-text card-club-top">
-    <span class="card-title flow-text">{{club.name}}</span>
-    <div class="row">
-      <div class="col s6">
-        <img class="circle responsive-img" src="{{cardAvatar}}" alt="">
-      </div>
-      <div class="col s6">
+    <span class="card-title">{{club.name}}</span>
+    <div class="row ">
+      <div class="col s12">
         <img class="logo" src="{{cardLogo}}" alt="" >
       </div>
     </div>
-    <p class="representative">
-      <i>Robby Naish</i><span>&nbsp;&nbsp;-&nbsp; club owner</span>
-    </p>
   </div>
   <div class="card-content white-text">
     <div class="row">
-      <div class="col s2">
-        <img class="responsive-img" src="assets/fonts/quotes_w.png" alt="" >
-
-      </div>
-      <div class="col s10">
-        <p class="welcome">
-          {{club.home.welcome}}
-        </p>
-      </div>
+      69 Nguyen Dinh Chieu <br>Mui Ne, Vietnam
+    </div>
+    <div class="row website-link">
+      <a href="http://www.ridsurf.com" target="_blank">www.ridsurf.com</a>
     </div>
   </div>
+  <div class="divider"></div>
+  <div class="collection">
+    <a class="collection-item grey darken-2 white-text item-title">SPOT</a>
+    <a class="collection-item" ng-repeat="spot in club.spots" ui-sref="muine.spots.spot.home({spotId: spot.id})">
+      {{spot.name}}
+    </a>
+  </div>
+
   <ul class="collection">
-    <!-- <li class="collection-header"><span class="title">Specials</span></li> -->
-    <li class="collection-item grey white-text" ng-repeat="pro in club.home.pros">
-      <div><svg><use xlink:href="#shape-star"></use></svg>{{pro}}</div>
+    <li class="collection-item grey darken-2 white-text item-title">CLOSEST HOTELS</li>
+    <li class="collection-item grey white-text" ng-repeat="hotel in club.hotels">
+      {{hotel.name}}
     </li>
   </ul>
+
   <div class="card-action grey darken-2">
     <a ui-sref="muine.clubs.club.photo" href="">Pics</a>
     <a ui-sref="muine.clubs.club.video" href="">Vids</a>
     <a ui-sref="muine.clubs.club.video" href="">Prices</a>
   </div>
-
-
 
   <div class="card properties-card card-middle ps-enter-slideLeft ps-leave-slideRight" ng-show="showCard && $state.includes('muine.clubs.club.home', {clubId: club.id})">
     <div class="collection">
@@ -72,7 +68,5 @@
       </li>
     </ul>
   </div>
-
-
 
 </div>

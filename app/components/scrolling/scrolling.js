@@ -15,8 +15,8 @@ angular.module('ps.scrolling', [])
   };
 }])
 
-.factory('PsMuineScroll', ['$rootScope', '$state', 'MuineLayoutSvc', '$q', '$compile',
-function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $compile) {
+.factory('PsMuineScroll', ['$rootScope', '$state', 'MuineLayoutSvc', '$q', '$compile', '$deepStateRedirect',
+function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $compile ,  $deepStateRedirect) {
 
   //common jquery objects
   var $window = $(window),
@@ -191,9 +191,40 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
       }
 
 
+      //INDIRECT TRANSITION
+      //intercept transition to another section, firstly go to dsr state, then proceed
+      $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState) {
+        var doLog = false;
+        if (doLog) console.log('> stateChangeStart $rootScope.indirectTransition: '+ $rootScope.indirectTransition);
+        var fromStateNameArr = fromState.name.split('.');
+        var toStateNameArr = toState.name.split('.');
+        if (doLog) console.log(JSON.stringify(toState , null, 2));
+        if (doLog) console.log(JSON.stringify(toParams , null, 2));
+        if ($rootScope.firstInit === false && !$rootScope.indirectTransition
+            && fromStateNameArr[0] === 'muine' && toStateNameArr[0] === 'muine'
+            && fromStateNameArr[1] !== toStateNameArr[1]
+            && ['home', 'prices'].indexOf(toStateNameArr[1]) === -1
+          ) {
+          evt.preventDefault();
+          $rootScope.indirectTransition = true;
+          if (doLog) console.log('  indirect transition to muine.'+ toStateNameArr[1]);
+          var redirect = $deepStateRedirect.getRedirect ('muine.'+ toStateNameArr[1]);
+          if (doLog) console.log('  firstly, will redirect to ' + JSON.stringify(redirect , null, 2));
+          $state.go(redirect.state, redirect.params).then(function () {
+            if (doLog) console.log('  transitioned to sticky state, now goto '+ toState.name, JSON.stringify(toParams , null, 2));
+            $state.go(toState.name, toParams);
+            $rootScope.indirectTransition = false;
+          }, function () {
+            if (doLog) console.log('  not successfull');
+          });
+        }
+      });
+
+
       var firstHomeLeave = true;
       //ON STATECHANGE SCROLL
       $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState) {
+        var doLog = false;
         if (doLog) {console.log('> PsMuineScroll > on.stateChangeSuccess > '
                                 + fromState.name +' --> '+ toState.name);}
         var fromStateNameArr = fromState.name.split('.');
@@ -206,17 +237,12 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $com
             && fromStateNameArr[1] !== toStateNameArr[1]
         ) {
           if (doLog) {console.log('  stateChange triggered scrolling');}
+          if (doLog) console.log('toParams: '+ JSON.stringify(toParams , null, 2));
           //before scroll
           if (toStateNameArr[1] === 'home') {
             //insert video background if it's not there yet
             $rootScope.videoEnabled = true;
           }
-          // if (firstHomeLeave && fromStateNameArr[1] === 'home') {
-          //   //fix selected subcontrol item style
-          //   console.log('first transition > fix');
-          //   PsMuineScroll.fixSelectedItemStyle();
-          //   firstHomeLeave = false;
-          // }
           PsMuineScroll.scroll(toStateNameArr[1]).then(function () {
             //after scroll
             if (fromStateNameArr[1] === 'home') {

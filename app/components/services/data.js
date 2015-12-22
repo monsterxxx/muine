@@ -69,7 +69,7 @@ angular.module('muineApp.services.data', [])
     },
     video: {
       slides: [
-
+        'iqqoHav2xyk'
       ]
     }
   },{
@@ -93,6 +93,8 @@ angular.module('muineApp.services.data', [])
       ]
     }
   }];
+
+
 
   var clubs = [{
     id: 49,
@@ -138,7 +140,22 @@ angular.module('muineApp.services.data', [])
         'Cabrinha',
         'Ocean rodeo'
       ]
-    }
+    },
+    photo: {
+      slides: [
+        '1.jpg',
+        '5.jpg',
+        '6.jpg'
+      ]
+    },
+    video: {
+      slides: [
+        'f1PdKL_tNEI'
+      ]
+    },
+    hotels: [{
+      name: 'SUOI HONG'
+    }]
   },{
     id: 3,
     name: 'Rids',
@@ -160,7 +177,7 @@ angular.module('muineApp.services.data', [])
       name: 'Suoi Nuoc'
     }],
     home: {
-      bgImg: '1.jpg',
+      bgImg: '2.jpg',
       cardLogo: '3.jpg',
       cardAvatar: '4w.jpg',
       cardTopBackground: '#0e0e0e',
@@ -183,7 +200,22 @@ angular.module('muineApp.services.data', [])
         'Cabrinha',
         'Ocean rodeo'
       ]
-    }
+    },
+    photo: {
+      slides: [
+        '2.jpg',
+        '5.jpg',
+        '6.jpg'
+      ]
+    },
+    video: {
+      slides: [
+        'f1PdKL_tNEI'
+      ]
+    },
+    hotels: [{
+      name: 'SUOI HONG'
+    }]
   },{
     id: 23,
     name: 'Surf4You',
@@ -205,7 +237,7 @@ angular.module('muineApp.services.data', [])
       name: 'Suoi Nuoc'
     }],
     home: {
-      bgImg: '2.jpg',
+      bgImg: '1.jpg',
       cardLogo: '3.jpg',
       cardAvatar: '4w.jpg',
       cardTopBackground: '#0e0e0e',
@@ -228,7 +260,22 @@ angular.module('muineApp.services.data', [])
         'Cabrinha',
         'Ocean rodeo'
       ]
-    }
+    },
+    photo: {
+      slides: [
+        '1.jpg',
+        '5.jpg',
+        '6.jpg'
+      ]
+    },
+    video: {
+      slides: [
+        'f1PdKL_tNEI'
+      ]
+    },
+    hotels: [{
+      name: 'SUOI HONG'
+    }]
   },{
     id: 87,
     name: 'VKS',
@@ -250,6 +297,66 @@ angular.module('muineApp.services.data', [])
       name: 'Suoi Nuoc'
     }],
     home: {
+      bgImg: '2.jpg',
+      cardLogo: '3.jpg',
+      cardAvatar: '4w.jpg',
+      cardTopBackground: '#0e0e0e',
+      welcome: 'We welcome you in our club and hope to build strong relationship for the future!',
+      pros: [
+        'Surf trips to secret spot',
+        'More than 40 sails and boards',
+        'Special prices for Surf Hotel guests'
+      ],
+      languages: [
+        'Vietnameese',
+        'English',
+        'Russian',
+        'German',
+        'French'
+      ],
+      equipment: [
+        'JP Australia',
+        'Starboard',
+        'Cabrinha',
+        'Ocean rodeo'
+      ]
+    },
+    photo: {
+      slides: [
+        '2.jpg',
+        '5.jpg',
+        '6.jpg'
+      ]
+    },
+    video: {
+      slides: [
+        'f1PdKL_tNEI'
+      ]
+    },
+    hotels: [{
+      name: 'SUOI HONG'
+    }]
+  },{
+    id: 28,
+    name: 'Leto',
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    spots: [{
+      id: 49,
+      name: 'Suoi Nuoc'
+    }],
+    home: {
       bgImg: '1.jpg',
       cardLogo: '3.jpg',
       cardAvatar: '4w.jpg',
@@ -273,10 +380,25 @@ angular.module('muineApp.services.data', [])
         'Cabrinha',
         'Ocean rodeo'
       ]
-    }
+    },
+    photo: {
+      slides: [
+        '1.jpg',
+        '5.jpg',
+        '6.jpg'
+      ]
+    },
+    video: {
+      slides: [
+        'f1PdKL_tNEI'
+      ]
+    },
+    hotels: [{
+      name: 'SUOI HONG'
+    }]
   },{
-    id: 28,
-    name: 'Leto',
+    id: 99,
+    name: "Jibe's",
     sports: [{
       id: 3,
       name: 'Windsurfing'
@@ -318,52 +440,22 @@ angular.module('muineApp.services.data', [])
         'Cabrinha',
         'Ocean rodeo'
       ]
-    }
-  },{
-    id: 99,
-    name: "Jibe's",
-    sports: [{
-      id: 3,
-      name: 'Windsurfing'
-    },{
-      id: 55,
-      name: 'Kitesurfing'
-    },{
-      id: 87,
-      name: 'Surfing'
-    },{
-      id: 49,
-      name: 'SUP'
-    }],
-    spots: [{
-      id: 49,
-      name: 'Suoi Nuoc'
-    }],
-    home: {
-      bgImg: '1.jpg',
-      cardLogo: '3.jpg',
-      cardAvatar: '4w.jpg',
-      cardTopBackground: '#0e0e0e',
-      welcome: 'We welcome you in our club and hope to build strong relationship for the future!',
-      pros: [
-        'Surf trips to secret spot',
-        'More than 40 sails and boards',
-        'Special prices for Surf Hotel guests'
-      ],
-      languages: [
-        'Vietnameese',
-        'English',
-        'Russian',
-        'German',
-        'French'
-      ],
-      equipment: [
-        'JP Australia',
-        'Starboard',
-        'Cabrinha',
-        'Ocean rodeo'
+    },
+    photo: {
+      slides: [
+        '2.jpg',
+        '5.jpg',
+        '6.jpg'
       ]
-    }
+    },
+    video: {
+      slides: [
+        'f1PdKL_tNEI'
+      ]
+    },
+    hotels: [{
+      name: 'SUOI HONG'
+    }]
   },{
     id: 115,
     name: 'Source Kiteboarding',
@@ -406,33 +498,114 @@ angular.module('muineApp.services.data', [])
         'JP Australia',
         'Starboard'
       ]
-    }
+    },
+    photo: {
+      slides: [
+        '2.jpg',
+        '5.jpg',
+        '6.jpg'
+      ]
+    },
+    video: {
+      slides: [
+        'f1PdKL_tNEI'
+      ]
+    },
+    hotels: [{
+      name: 'SUOI HONG'
+    }]
   }];
+
+
+
   var spots = [{
     id: 3,
     name: 'Muine overview',
     home: {
       bgImg: '1.jpg'
+    },
+    photo: {
+      slides: [
+        '1.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg'
+      ]
+    },
+    video: {
+      slides: [
+        'C4waSWgFgIE',
+        'ETa-HnYJxVQ',
+        'TSVdiNxLu50'
+      ]
     }
   },{
     id: 55,
     name: 'Nga Tro',
     home: {
       bgImg: '2.jpg'
+    },
+    photo: {
+      slides: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg'
+      ]
+    },
+    video: {
+      slides: [
+        'C4waSWgFgIE',
+        'ETa-HnYJxVQ',
+        'TSVdiNxLu50'
+      ]
     }
   },{
     id: 87,
     name: 'Tro Nka',
     home: {
       bgImg: '1.jpg'
+    },
+    photo: {
+      slides: [
+        '1.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg'
+      ]
+    },
+    video: {
+      slides: [
+        'C4waSWgFgIE',
+        'ETa-HnYJxVQ',
+        'TSVdiNxLu50'
+      ]
     }
   },{
     id: 49,
     name: 'Suoi Nuoc',
     home: {
       bgImg: '2.jpg'
+    },
+    photo: {
+      slides: [
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg'
+      ]
+    },
+    video: {
+      slides: [
+        'C4waSWgFgIE',
+        'ETa-HnYJxVQ',
+        'TSVdiNxLu50'
+      ]
     }
   }];
+
+
+
   var data = {
     sports: sports,
     clubs: clubs,

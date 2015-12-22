@@ -1,6 +1,18 @@
 //nth($navbar_items_themes, 2)
 #clubs
+
   .description-card
+    &.ng-hide-add
+      transition-delay: 0.5s
+
+  .properties-card
+    z-index: -1
+    &.ng-hide-add
+      transition-duration: 0.5s
+    &.ng-hide-remove
+      transition-duration: 0.5s
+      transition-delay: 0.5s
+
   .collection
     margin-top: 0
     margin-bottom: 0
@@ -75,8 +87,6 @@
   .logo
     width: 157.5px
     height: 157.5px
-    // width: 188.75px
-    // height: 188.75px
 
   .representative
     padding-left: 0.75rem

@@ -1,6 +1,6 @@
 <div class="background" ps-bg-img="bgImg"></div>
 
-<div class="card description-card card-right ps-enter-slideLeft-middle ps-leave-slideRight-middle" ng-show="showCard">
+<div class="card description-card card-right ps-enter-slideLeft-middle ps-leave-slideRight-middle" ng-show="showCard && $state.includes('muine.sports.sport.home', {sportId: sport.id})">
   <div class="card-image">
     <img src="{{cardImg}}">
     <span class="card-title">{{sport.name}}</span>
@@ -16,5 +16,5 @@
     <a ui-sref="muine.sports.sport.video" href="">Prices</a>
   </div>
 </div>
-
+{{}}
 <!-- <section class="container"></section> -->

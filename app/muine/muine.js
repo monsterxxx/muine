@@ -14,6 +14,9 @@ angular.module('myApp.muine', [
   'ps.muine.sports.video',
   'ps.muine.clubs',
   'ps.muine.clubs.home',
+  'ps.muine.clubs.photo',
+  'ps.muine.clubs.video',
+  'ps.muine.clubs.contact',
   'ps.muine.spots',
   'ps.muine.spots.home',
   'ps.muine.prices',
@@ -166,13 +169,19 @@ angular.module('myApp.muine', [
       controller: 'MuineClubsHomeCtrl'
     })
     .state('muine.clubs.club.photo', {
-      url: '/photo'
+      url: '/photo',
+      templateUrl: './muine/clubs/photo/photo.html',
+      controller: 'MuineClubsPhotoCtrl'
     })
     .state('muine.clubs.club.video', {
-      url: '/video'
+      url: '/video',
+      templateUrl: './muine/clubs/video/video.html',
+      controller: 'MuineClubsVideoCtrl'
     })
     .state('muine.clubs.club.contact', {
-      url: '/contact'
+      url: '/contact',
+      templateUrl: './muine/clubs/contact/contact.html',
+      controller: 'MuineClubsContactCtrl'
     })
   .state('muine.spots', {
     url: '/spots',
