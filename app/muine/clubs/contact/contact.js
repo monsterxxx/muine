@@ -12,8 +12,6 @@ function                  ( $scope ,  $rootScope ,  Club ,  $timeout ,  $state){
   //Data
   $scope.club = Club;
 
-
-  $scope.bgImg = 'assets/img/clubs/' + Club.home.bgImg;
   $scope.cardLogo = 'assets/img/clubs/' + Club.home.cardLogo;
   $scope.cardAvatar = 'assets/img/clubs/' + Club.home.cardAvatar;
 
@@ -69,7 +67,7 @@ function                  ( $scope ,  $rootScope ,  Club ,  $timeout ,  $state){
     $scope.showCard = false;
     $timeout(function () {
       $state.go(toState, toParams);
-    }, 1200);
+    }, 600);
   });
 
   // // animation on state enter

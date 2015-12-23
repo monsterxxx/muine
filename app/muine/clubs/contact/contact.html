@@ -1,6 +1,14 @@
 <div class="background" ps-bg-img="bgImg"></div>
 
-<div class="card description-card card-right card-contact ps-enter-slideLeft-middle ps-leave-slideRight-middle" ng-show="showCard && $state.includes('muine.clubs.club.contact', {clubId: club.id})">
+<div class="card map-card z-depth-2 ps-leave-slideLeft ps-enter-slideRight" ng-if="showCard && $state.includes('muine.clubs.club.contact', {clubId: club.id})">
+  <ng-map zoom="14" center="{{club.map.pos}}">
+    <marker position="{{club.map.pos}}"
+            title="{{club.name}}">
+    </marker>
+  </ng-map>
+</div>
+
+<div class="card description-card card-right card-contact z-depth-2 ps-enter-slideLeft-middle ps-leave-slideRight-middle" ng-show="showCard && $state.includes('muine.clubs.club.contact', {clubId: club.id})">
   <div class="card-content white-text card-club-top">
     <span class="card-title">{{club.name}}</span>
     <div class="row ">
@@ -36,37 +44,6 @@
     <a ui-sref="muine.clubs.club.photo" href="">Pics</a>
     <a ui-sref="muine.clubs.club.video" href="">Vids</a>
     <a ui-sref="muine.clubs.club.video" href="">Prices</a>
-  </div>
-
-  <div class="card properties-card card-middle ps-enter-slideLeft ps-leave-slideRight" ng-show="showCard && $state.includes('muine.clubs.club.home', {clubId: club.id})">
-    <div class="collection">
-      <a class="collection-item grey darken-2 white-text item-title">SPORTS</a>
-      <a class="collection-item" ng-repeat="sport in club.sports" ui-sref="muine.sports.sport.home({sportId: sport.id})">
-        {{sport.name}}
-      </a>
-      <a class="collection-item grey darken-2 white-text item-title">LOCATION</a>
-      <a class="collection-item" ng-repeat="spot in club.spots" ui-sref="muine.spots.spot.home({spotId: spot.id})">
-        {{spot.name}}
-      </a>
-    </div>
-    <ul class="collection collapsible" data-collapsible="accordion">
-      <li>
-        <div class="collapsible-header collection-item grey darken-2 white-text item-title active">LANGUAGES<span>▶</span></div>
-        <div class="collapsible-body">
-          <div class="collection-item grey white-text" ng-repeat="language in club.home.languages">
-            <div><img class="circle responsive-img" ng-src="{{'assets/img/languages/' + language + '.png'}}" alt="{{language}}">{{language}}</div>
-          </div>
-        </div>
-      </li>
-      <li>
-        <div class="collapsible-header collection-item grey darken-2 white-text item-title">EQUIPMENT<span>▶</span></div>
-        <div class="collapsible-body">
-          <div class="collection-item grey white-text" ng-repeat="equipment in club.home.equipment">
-            <div><img class="circle responsive-img" ng-src="{{'assets/img/equipment/' + equipment + '.png'}}" alt="{{equipment}}">{{equipment}}</div>
-          </div>
-        </div>
-      </li>
-    </ul>
   </div>
 
 </div>

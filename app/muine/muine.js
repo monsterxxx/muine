@@ -23,7 +23,8 @@ angular.module('myApp.muine', [
   'ps.muine.layout',
   'angular-velocity',
   'angularVideoBg',
-  'youtube-embed'
+  'youtube-embed',
+  'ngMap'
 ])
 
 .config(function ($urlRouterProvider, $stickyStateProvider) {

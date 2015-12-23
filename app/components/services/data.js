@@ -155,7 +155,10 @@ angular.module('muineApp.services.data', [])
     },
     hotels: [{
       name: 'SUOI HONG'
-    }]
+    }],
+    map: {
+      pos: [10.9467236, 108.3012948]
+    }
   },{
     id: 3,
     name: 'Rids',
@@ -215,7 +218,10 @@ angular.module('muineApp.services.data', [])
     },
     hotels: [{
       name: 'SUOI HONG'
-    }]
+    }],
+    map: {
+      pos: [10.9467236, 108.3012948]
+    }
   },{
     id: 23,
     name: 'Surf4You',
@@ -275,7 +281,10 @@ angular.module('muineApp.services.data', [])
     },
     hotels: [{
       name: 'SUOI HONG'
-    }]
+    }],
+    map: {
+      pos: [10.9467236, 108.3012948]
+    }
   },{
     id: 87,
     name: 'VKS',
@@ -335,7 +344,10 @@ angular.module('muineApp.services.data', [])
     },
     hotels: [{
       name: 'SUOI HONG'
-    }]
+    }],
+    map: {
+      pos: [10.9467236, 108.3012948]
+    }
   },{
     id: 28,
     name: 'Leto',
@@ -395,7 +407,10 @@ angular.module('muineApp.services.data', [])
     },
     hotels: [{
       name: 'SUOI HONG'
-    }]
+    }],
+    map: {
+      pos: [10.9467236, 108.3012948]
+    }
   },{
     id: 99,
     name: "Jibe's",
@@ -455,7 +470,10 @@ angular.module('muineApp.services.data', [])
     },
     hotels: [{
       name: 'SUOI HONG'
-    }]
+    }],
+    map: {
+      pos: [10.9467236, 108.3012948]
+    }
   },{
     id: 115,
     name: 'Source Kiteboarding',
@@ -513,7 +531,10 @@ angular.module('muineApp.services.data', [])
     },
     hotels: [{
       name: 'SUOI HONG'
-    }]
+    }],
+    map: {
+      pos: [10.9467236, 108.3012948]
+    }
   }];
 
 

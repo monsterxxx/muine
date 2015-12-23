@@ -12,7 +12,6 @@ function               ( $scope ,  $rootScope ,  Club ,  $timeout ,  $state){
   //Data
   $scope.club = Club;
 
-  $scope.bgImg = 'assets/img/clubs/' + Club.home.bgImg;
   $scope.cardLogo = 'assets/img/clubs/' + Club.home.cardLogo;
   $scope.cardAvatar = 'assets/img/clubs/' + Club.home.cardAvatar;
 

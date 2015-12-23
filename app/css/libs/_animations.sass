@@ -84,20 +84,18 @@
 
 
 
-.ps-enter-slideLeft-middle.ng-hide-remove
-  transition: all 0.5s ease-out
 .ps-enter-slideLeft-middle
   &.ng-hide-remove
+    transition: all 0.5s ease-out
     transform: translate(110%, -50%)
-  &.ng-hide-remove.ng-hide-remove-active
+  &.ng-hide-remove-active
     transform: translate(0, -50%)
 
-.ps-leave-slideRight-middle.ng-hide-add
-  transition: all 0.5s ease-in
 .ps-leave-slideRight-middle
   &.ng-hide-add
+    transition: all 0.5s ease-in
     transform: translate(0, -50%)
-  &.ng-hide-add.ng-hide-add-active
+  &.ng-hide-add-active
     transform: translate(110%, -50%)
 
 
@@ -111,29 +109,41 @@
     transform: translate(0, -50%)
     opacity: 1
 
-.ps-leave-fadeSlideRight-middle.ng-hide-add
-  transition: all 0.5s ease-in-out
 .ps-leave-fadeSlideRight-middle
   &.ng-hide-add
+    transition: all 0.5s ease-in-out
     transform: translate(0, -50%)
     opacity: 1
-  &.ng-hide-add.ng-hide-add-active
+  &.ng-hide-add-active
     transform: translate(110%, -50%)
     opacity: 0
 
 
-.ps-enter-slideLeft.ng-hide-remove
-  transition: all 0.5s ease-out
+
 .ps-enter-slideLeft
-  &.ng-hide-remove
+  &.ng-hide-remove, &.ng-enter
+    transition: all 0.5s ease-out
     transform: translate(110%, 0)
-  &.ng-hide-remove.ng-hide-remove-active
+  &.ng-hide-remove-active, &.ng-enter-active
     transform: translate(0, 0)
 
-.ps-leave-slideRight.ng-hide-add
-  transition: all 0.5s ease-in
-.ps-leave-slideRight
-  &.ng-hide-add
+.ps-leave-slideLeft
+  &.ng-hide-add, &.ng-leave
+    transition: all 0.5s ease-out
     transform: translate(0, 0)
-  &.ng-hide-add.ng-hide-add-active
+  &.ng-hide-add-active, &.ng-leave-active
+    transform: translate(-110%, 0)
+
+.ps-enter-slideRight
+  &.ng-hide-remove, &.ng-enter
+    transition: all 0.5s ease-out
+    transform: translate(-110%, 0)
+  &.ng-hide-remove-active, &.ng-enter-active
+    transform: translate(0, 0)
+
+.ps-leave-slideRight
+  &.ng-hide-add, &.ng-leave
+    transition: all 0.5s ease-in
+    transform: translate(0, 0)
+  &.ng-hide-add-active, &.ng-leave-active
     transform: translate(110%, 0)
