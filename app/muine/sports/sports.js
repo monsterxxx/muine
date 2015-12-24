@@ -4,12 +4,11 @@
 angular.module('ps.muine.sports', [])
 
 .controller
-('MuineSportsCtrl', ['$scope', '$stateParams', 'muineData', 'PsUtils', '$rootScope', 'Sport',
-function            ( $scope ,  $stateParams ,  muineData ,  PsUtils ,  $rootScope ,  Sport){
+('MuineSportsCtrl', ['$scope', '$stateParams', 'muineData', 'PsUtils', 'Sport',
+function            ( $scope ,  $stateParams ,  muineData ,  PsUtils ,  Sport){
   console.log('> SportsCtrl load');
   var doLog = false;
 
-  $rootScope.sportsResolving = false;
   //get data
   $scope.sport = Sport;
   if (doLog) console.log('$scope.sport'+JSON.stringify($scope.sport , null, 2));

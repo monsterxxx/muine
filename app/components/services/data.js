@@ -537,11 +537,16 @@ angular.module('muineApp.services.data', [])
     }
   }];
 
-
+//SPOTS //////////////////////////////////////////////////////////////////////////////////////////////////
 
   var spots = [{
     id: 3,
     name: 'Muine overview',
+    description: "The most popular spot in Muine region. More than 20 \
+                  surf clubs. During high season, the beach is protected from \
+                  big waves by Muine city peninsula. Great sandy beach, constant \
+                  afternoon wind and warm water that's what makes this place \
+                  mekka for kite and windsurfing",
     home: {
       bgImg: '1.jpg'
     },
@@ -559,8 +564,40 @@ angular.module('muineApp.services.data', [])
         'ETa-HnYJxVQ',
         'TSVdiNxLu50'
       ]
+    },
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    clubs: [{
+      id: 23,
+      name: 'Surf4You'
+    },{
+      id: 87,
+      name: 'VKS'
+    },{
+      id: 28,
+      name: 'Leto'
+    },{
+      id: 99,
+      name: "Jibe's"
+    }],
+    map: {
+      pos: [10.9467236, 108.3012948]
     }
-  },{
+  },
+
+
+  {
     id: 55,
     name: 'Nga Tro',
     home: {
@@ -580,8 +617,40 @@ angular.module('muineApp.services.data', [])
         'ETa-HnYJxVQ',
         'TSVdiNxLu50'
       ]
+    },
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    clubs: [{
+      id: 23,
+      name: 'Surf4You'
+    },{
+      id: 87,
+      name: 'VKS'
+    },{
+      id: 28,
+      name: 'Leto'
+    },{
+      id: 99,
+      name: "Jibe's"
+    }],
+    map: {
+      pos: [10.9467236, 108.3012948]
     }
-  },{
+  },
+
+
+  {
     id: 87,
     name: 'Tro Nka',
     home: {
@@ -601,8 +670,40 @@ angular.module('muineApp.services.data', [])
         'ETa-HnYJxVQ',
         'TSVdiNxLu50'
       ]
+    },
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    clubs: [{
+      id: 23,
+      name: 'Surf4You'
+    },{
+      id: 87,
+      name: 'VKS'
+    },{
+      id: 28,
+      name: 'Leto'
+    },{
+      id: 99,
+      name: "Jibe's"
+    }],
+    map: {
+      pos: [10.9467236, 108.3012948]
     }
-  },{
+  },
+
+
+  {
     id: 49,
     name: 'Suoi Nuoc',
     home: {
@@ -622,6 +723,35 @@ angular.module('muineApp.services.data', [])
         'ETa-HnYJxVQ',
         'TSVdiNxLu50'
       ]
+    },
+    sports: [{
+      id: 3,
+      name: 'Windsurfing'
+    },{
+      id: 55,
+      name: 'Kitesurfing'
+    },{
+      id: 87,
+      name: 'Surfing'
+    },{
+      id: 49,
+      name: 'SUP'
+    }],
+    clubs: [{
+      id: 23,
+      name: 'Surf4You'
+    },{
+      id: 87,
+      name: 'VKS'
+    },{
+      id: 28,
+      name: 'Leto'
+    },{
+      id: 99,
+      name: "Jibe's"
+    }],
+    map: {
+      pos: [10.9467236, 108.3012948]
     }
   }];
 

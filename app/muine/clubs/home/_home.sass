@@ -1,69 +1,11 @@
 //nth($navbar_items_themes, 2)
 #clubs
 
-  .description-card:not(.card-contact)
-    &.ng-hide-add
-      transition-delay: 0.5s
-
-  .properties-card
-    z-index: -1
-    &.ng-hide-add
-      transition-duration: 0.5s
-    &.ng-hide-remove
-      transition-duration: 0.5s
-      transition-delay: 0.5s
-
-  .collection
-    margin-top: 0
-    margin-bottom: 0
-    font-weight: 300
-    background-color: color('grey', base)
-    border-top: none
-    border-right: none
-    border-bottom: none
-    border-left: none
-    border-color: rgba(white, 0.3)
-  .collection-item
-    height: 34px
-    padding-top: 5.5px
-    padding-bottom: 5.5px
-    border-bottom-color: rgba(white, 0.3)
-    >div
-      height: 22px
-      line-height: 22px
-      vertical-align: middle
-    img
-      width: 20px
-      height: 20px
-      margin-top: -2px
-      margin-right: 15px
-      vertical-align: middle
-  .item-title
-    font-weight: 400
-    font-style: italic
-  a.collection-item
-    color: white
-    background-color: color('grey', 'base')
-    &:hover
-      background-color: color('grey', 'darken-1')
-  .collapsible-header
-    min-height: 0
-    border-bottom: none
-    span
-      float: right
-      font-style: normal
-    &.active
-      span
-        transform: rotate(90deg) translateX(-1px)
-  .collapsible-body
-    border-bottom: none
-
   svg
     width: 30px
     height: 30px
     margin-top: -4.5px
     margin-right: 10px
-    // margin-bottom: 2px
     margin-left: -5px
     fill: white
     vertical-align: middle

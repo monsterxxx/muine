@@ -1541,6 +1541,62 @@ ps-muine-navbar {
   right: 420px;
   width: 200px; }
 
+.description-card:not(.card-contact).ng-hide-add {
+  transition-delay: 0.5s; }
+
+.properties-card {
+  z-index: -1; }
+  .properties-card.ng-hide-add {
+    transition-duration: 0.5s; }
+  .properties-card.ng-hide-remove {
+    transition-duration: 0.5s;
+    transition-delay: 0.5s; }
+
+.collection {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 300;
+  background-color: #9e9e9e;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+  border-color: rgba(255, 255, 255, 0.3); }
+  .collection .item-title {
+    font-weight: 400;
+    font-style: italic; }
+  .collection .collection-item {
+    height: 34px;
+    padding-top: 5.5px;
+    padding-bottom: 5.5px;
+    border-bottom-color: rgba(255, 255, 255, 0.3); }
+    .collection .collection-item > div {
+      height: 22px;
+      line-height: 22px;
+      vertical-align: middle; }
+    .collection .collection-item img {
+      width: 20px;
+      height: 20px;
+      margin-top: -2px;
+      margin-right: 15px;
+      vertical-align: middle; }
+  .collection a.collection-item {
+    color: white;
+    background-color: #9e9e9e; }
+    .collection a.collection-item:hover {
+      background-color: #757575 !important; }
+  .collection .collapsible-header {
+    min-height: 0;
+    border-bottom: none; }
+    .collection .collapsible-header span {
+      float: right;
+      font-style: normal; }
+    .collection .collapsible-header.active span {
+      -webkit-transform: rotate(90deg) translateX(-1px);
+              transform: rotate(90deg) translateX(-1px); }
+  .collection .collapsible-body {
+    border-bottom: none; }
+
 .map-card {
   width: 50%;
   height: 100%;
@@ -1633,59 +1689,6 @@ ps-muine-navbar {
   #sports .card-action a:hover {
     color: #fdd835; }
 
-#clubs .description-card:not(.card-contact).ng-hide-add {
-  transition-delay: 0.5s; }
-#clubs .properties-card {
-  z-index: -1; }
-  #clubs .properties-card.ng-hide-add {
-    transition-duration: 0.5s; }
-  #clubs .properties-card.ng-hide-remove {
-    transition-duration: 0.5s;
-    transition-delay: 0.5s; }
-#clubs .collection {
-  margin-top: 0;
-  margin-bottom: 0;
-  font-weight: 300;
-  background-color: #9e9e9e;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-  border-left: none;
-  border-color: rgba(255, 255, 255, 0.3); }
-#clubs .collection-item {
-  height: 34px;
-  padding-top: 5.5px;
-  padding-bottom: 5.5px;
-  border-bottom-color: rgba(255, 255, 255, 0.3); }
-  #clubs .collection-item > div {
-    height: 22px;
-    line-height: 22px;
-    vertical-align: middle; }
-  #clubs .collection-item img {
-    width: 20px;
-    height: 20px;
-    margin-top: -2px;
-    margin-right: 15px;
-    vertical-align: middle; }
-#clubs .item-title {
-  font-weight: 400;
-  font-style: italic; }
-#clubs a.collection-item {
-  color: white;
-  background-color: #9e9e9e; }
-  #clubs a.collection-item:hover {
-    background-color: #757575; }
-#clubs .collapsible-header {
-  min-height: 0;
-  border-bottom: none; }
-  #clubs .collapsible-header span {
-    float: right;
-    font-style: normal; }
-  #clubs .collapsible-header.active span {
-    -webkit-transform: rotate(90deg) translateX(-1px);
-            transform: rotate(90deg) translateX(-1px); }
-#clubs .collapsible-body {
-  border-bottom: none; }
 #clubs svg {
   width: 30px;
   height: 30px;
@@ -1731,6 +1734,13 @@ ps-muine-navbar {
   margin-bottom: 3px; }
   #clubs .website-link a {
     color: rgba(255, 255, 255, 0.7); }
+
+#spots .card-action {
+  font-weight: 400; }
+  #spots .card-action a {
+    color: #ba68c8; }
+    #spots .card-action a:hover {
+      color: #8e24aa; }
 
 .prices-container {
   width: 100%;

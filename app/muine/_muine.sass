@@ -177,6 +177,64 @@ ps-muine-navbar
   right: 420px
   width: 200px
 
+.description-card:not(.card-contact)
+  &.ng-hide-add
+    transition-delay: 0.5s
+
+.properties-card
+  z-index: -1
+  &.ng-hide-add
+    transition-duration: 0.5s
+  &.ng-hide-remove
+    transition-duration: 0.5s
+    transition-delay: 0.5s
+
+.collection
+  margin-top: 0
+  margin-bottom: 0
+  font-weight: 300
+  background-color: color('grey', base)
+  border-top: none
+  border-right: none
+  border-bottom: none
+  border-left: none
+  border-color: rgba(white, 0.3)
+  .item-title
+    font-weight: 400
+    font-style: italic
+  .collection-item
+    height: 34px
+    padding-top: 5.5px
+    padding-bottom: 5.5px
+    border-bottom-color: rgba(white, 0.3)
+    >div
+      height: 22px
+      line-height: 22px
+      vertical-align: middle
+    img
+      width: 20px
+      height: 20px
+      margin-top: -2px
+      margin-right: 15px
+      vertical-align: middle
+  a.collection-item
+    color: white
+    background-color: color('grey', 'base')
+    &:hover
+      background-color: color('grey', 'darken-1') !important
+  .collapsible-header
+    min-height: 0
+    border-bottom: none
+    span
+      float: right
+      font-style: normal
+    &.active
+      span
+        transform: rotate(90deg) translateX(-1px)
+  .collapsible-body
+    border-bottom: none
+
+
 .map-card
   width: 50%
   height: 100%
