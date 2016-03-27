@@ -7,15 +7,24 @@ angular.module('myApp.muine', [
   'ps.background',
   'ps.muine.navbar',
   'ps.muine.navbar.subcontrol',
+  'ps.muine.home',
   'ps.muine.sports',
   'ps.muine.sports.home',
+  'ps.muine.sports.photo',
+  'ps.muine.sports.video',
   'ps.muine.clubs',
   'ps.muine.clubs.home',
+  'ps.muine.clubs.photo',
+  'ps.muine.clubs.video',
+  'ps.muine.clubs.contact',
   'ps.muine.spots',
   'ps.muine.spots.home',
   'ps.muine.prices',
   'ps.muine.layout',
-  'angular-velocity'
+  'angular-velocity',
+  'angularVideoBg',
+  'youtube-embed',
+  'ngMap'
 ])
 
 .config(function ($urlRouterProvider, $stickyStateProvider) {
@@ -60,7 +69,10 @@ angular.module('myApp.muine', [
     sticky: true,
     preload: true,
     views: {
-      'home': {}
+      'home': {
+        templateUrl: './muine/home/home.html',
+        controller: 'MuineHomeCtrl'
+      }
     }
   })
   .state('muine.sports', {
@@ -76,6 +88,25 @@ angular.module('myApp.muine', [
   .state('muine.sports.sport', {
     url: '/{sportId:int}',
     abstract: true,
+    resolve: {
+      Sport: function (muineData, PsUtils, $stateParams) {
+        return PsUtils.getById(muineData.sports, $stateParams.sportId);
+      },
+      //preload bgImg before slide
+      img: function ($q, Sport) {
+        var $sports = $('#sports');
+        $sports.append('<div class="ball-spin-fade-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+        var homeImageLocation = 'assets/img/sports/' + Sport.name.toLowerCase() +'/'+ Sport.home.bgImg;
+        var deferred = $q.defer();
+        var bgImage = new Image();
+        bgImage.onload = function () {
+          $sports.find('.ball-spin-fade-loader').remove();
+          deferred.resolve();
+        };
+        bgImage.src = homeImageLocation;
+        return deferred.promise;
+      }
+    },
     templateUrl: './muine/sports/sports.html',
     controller: 'MuineSportsCtrl'
   })
@@ -87,10 +118,14 @@ angular.module('myApp.muine', [
       controller: 'MuineSportsHomeCtrl'
     })
     .state('muine.sports.sport.photo', {
-      url: '/photo'
+      url: '/photo',
+      templateUrl: './muine/sports/photo/photo.html',
+      controller: 'MuineSportsPhotoCtrl'
     })
     .state('muine.sports.sport.video', {
-      url: '/video'
+      url: '/video',
+      templateUrl: './muine/sports/video/video.html',
+      controller: 'MuineSportsVideoCtrl'
     })
   .state('muine.clubs', {
     url: '/clubs',
@@ -105,6 +140,25 @@ angular.module('myApp.muine', [
   .state('muine.clubs.club', {
     url: '/{clubId:int}',
     abstract: true,
+    resolve: {
+      Club: function (muineData, PsUtils, $stateParams) {
+        return PsUtils.getById(muineData.clubs, $stateParams.clubId);
+      },
+      //preload bgImg before slide
+      img: function ($q, Club) {
+        var $clubs = $('#clubs');
+        $clubs.append('<div class="ball-spin-fade-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+        var homeImageLocation = 'assets/img/clubs/' + Club.home.bgImg;
+        var deferred = $q.defer();
+        var bgImage = new Image();
+        bgImage.onload = function () {
+          $clubs.find('.ball-spin-fade-loader').remove();
+          deferred.resolve();
+        };
+        bgImage.src = homeImageLocation;
+        return deferred.promise;
+      }
+    },
     templateUrl: './muine/clubs/clubs.html',
     controller: 'MuineClubsCtrl'
   })
@@ -116,13 +170,19 @@ angular.module('myApp.muine', [
       controller: 'MuineClubsHomeCtrl'
     })
     .state('muine.clubs.club.photo', {
-      url: '/photo'
+      url: '/photo',
+      templateUrl: './muine/clubs/photo/photo.html',
+      controller: 'MuineClubsPhotoCtrl'
     })
     .state('muine.clubs.club.video', {
-      url: '/video'
+      url: '/video',
+      templateUrl: './muine/clubs/video/video.html',
+      controller: 'MuineClubsVideoCtrl'
     })
     .state('muine.clubs.club.contact', {
-      url: '/contact'
+      url: '/contact',
+      templateUrl: './muine/clubs/contact/contact.html',
+      controller: 'MuineClubsContactCtrl'
     })
   .state('muine.spots', {
     url: '/spots',
@@ -130,14 +190,32 @@ angular.module('myApp.muine', [
     dsr: true,
     views: {
       'spots': {
-        templateUrl: './muine/spots/spotsSticky.html',
-        controller: 'MuineSpotsCtrl'
+        templateUrl: './muine/spots/spotsSticky.html'
       }
     }
   })
   .state('muine.spots.spot', {
     url: '/{spotId:int}',
     abstract: true,
+    resolve: {
+      Spot: function (muineData, PsUtils, $stateParams) {
+        return PsUtils.getById(muineData.spots, $stateParams.spotId);
+      },
+      //preload bgImg before slide
+      img: function ($q, Spot) {
+        var $spots = $('#spots');
+        $spots.append('<div class="ball-spin-fade-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+        var homeImageLocation = 'assets/img/spots/' + Spot.home.bgImg;
+        var deferred = $q.defer();
+        var bgImage = new Image();
+        bgImage.onload = function () {
+          $spots.find('.ball-spin-fade-loader').remove();
+          deferred.resolve();
+        };
+        bgImage.src = homeImageLocation;
+        return deferred.promise;
+      }
+    },
     templateUrl: './muine/spots/spots.html',
     controller: 'MuineSpotsCtrl'
   })
@@ -167,19 +245,98 @@ angular.module('myApp.muine', [
   });
 }])
 
-.controller('MuineCtrl', ['$scope', '$stickyState', function($scope, $stickyState) {
+.directive('psVideoBg', function () {
+  return {
+    restrict: 'A',
+    link: function ($scope, el, attrs) {
+      var doLog = false;
+
+      //default video background params
+      $scope.videoMuted = true;
+
+      //register video-bg youtube player functions
+      $scope.videoBgReg = function(player) {
+        $scope.getPlayerState = function () {
+          return player.getPlayerState();
+        };
+        $scope.pauseVideo = function() {
+          player.pauseVideo();
+        };
+        $scope.playVideo = function() {
+          player.playVideo();
+        };
+        $scope.playerIsMuted = function () {
+          return player.isMuted();
+        };
+        $scope.playerMute = function() {
+          player.mute();
+          $scope.videoMuted = true;
+        };
+        $scope.playerUnmute = function() {
+          player.unMute();
+          $scope.videoMuted = false;
+        };
+        if ($scope.videoMuted) {
+          player.mute();
+        } else {
+          player.unMute();
+        }
+        // $scope.getVideoLoadedFraction = function () {
+        //   return player.getVideoLoadedFraction();
+        // };
+        var playerInit = true;
+        player.addEventListener('onStateChange', function () {
+          if (doLog) console.log('playerStateChange: '+player.getPlayerState());
+          if (playerInit && player.getPlayerState() === 1) {
+            playerInit = false;
+            $scope.$apply(function () {
+              $scope.showOverlay = true;
+            });
+            if (doLog) console.log('showOverlay');
+          }
+        });
+      };
+
+      //video overlay
+      $scope.videoPlayPause = function () {
+        if ($scope.getPlayerState() === 1) {
+          $scope.pauseVideo();
+          return;
+        }
+        if ($scope.getPlayerState() === 2) {
+          $scope.playVideo();
+          return;
+        }
+      };
+      $scope.videoMuteUnmute = function (event) {
+        console.log('mute - unmute');
+        event.stopPropagation();
+        if ($scope.playerIsMuted()) {
+          $scope.playerUnmute();
+        } else {
+          $scope.playerMute();
+        }
+      };
+
+    }
+  };
+})
+
+.controller('MuineCtrl', ['$scope', '$stickyState',
+function(                  $scope ,  $stickyState ) {
   console.log('> MuineCtrl load');
-  $scope.navbarTransparent = true;
+  $scope.navbarOnTop = true;
+
 
   //scrollspy
   $(window).scroll(function() {
    if ($(this).scrollTop() === 0) {
      $scope.$apply(function () {
-       $scope.navbarTransparent = true;
+       $scope.navbarOnTop = true;
      });
    } else {
      $scope.$apply(function () {
-       $scope.navbarTransparent = false;
+       $scope.navbarOnTop = false;
      });
    }
   });
@@ -193,10 +350,13 @@ angular.module('myApp.muine', [
 
 .run(     ['$state', '$q', '$urlRouter', '$rootScope', 'PsMuineScroll', '$location', '$timeout',
 function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $location ,  $timeout ) {
-  var doLog = true;
+  var doLog = false;
+
+  //default globals
+  $rootScope.enableVideo = true;
 
   //firstInit var prevents scrolling on stateChangeSuccess while preloading states
-  $rootScope.firstInit = false;
+  $rootScope.firstInit = true;
 
   // get list of all registered states
   $state.get()
@@ -212,7 +372,7 @@ function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $locati
       //Now, when all sections are rendered, run essential scrolling functions
       PsMuineScroll.initialize();
       $rootScope.firstInit = false;
-      if (doLog) {console.log('> RUN > before url sync');}
+      console.log('> RUN > url sync');
 
       // ok, now sync the url
       $urlRouter.listen();
@@ -228,8 +388,8 @@ function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $locati
 }])
 
 .run(
-  [          '$rootScope', '$state', '$stateParams', '$stickyState', 'PsMuineScroll',
-    function ($rootScope,   $state,   $stateParams ,  $stickyState ,  PsMuineScroll) {
+  [          '$rootScope', '$state', '$stateParams', '$stickyState', 'PsMuineScroll', 'PsDebugs', 'MuineDataSvc', 'PsUtils',
+    function ($rootScope,   $state,   $stateParams ,  $stickyState ,  PsMuineScroll ,  PsDebugs, MuineDataSvc, PsUtils) {
       var doLog = false;
 
       if (doLog) {console.log('> run');}
@@ -241,9 +401,6 @@ function  ( $state,   $q,   $urlRouter,   $rootScope,   PsMuineScroll,   $locati
         console.log.bind(console);
       });
 
-      //$rootScope.firstInit = false;
-      var toPara = {};
-      var toStat = '';
       $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState){
         console.log('> stateChangeSuccess > '+ fromState.name +' --> '+ toState.name, toParams);
       });

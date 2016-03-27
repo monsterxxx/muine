@@ -1,8 +1,41 @@
-<div class="background" ps-bg-img="{{bgImg}}">
+<div class="background" ps-bg-img="bgImg"></div>
+
+<div class="card map-card z-depth-2 ps-leave-slideLeft ps-enter-slideRight" ng-if="showCard && $state.includes('muine.spots.spot.home', {spotId: spot.id})">
+  <ng-map zoom="14" center="{{spot.map.pos}}">
+    <marker position="{{spot.map.pos}}" title="{{spot.name}}"></marker>
+  </ng-map>
+</div>
+
+<div class="card description-card card-right z-depth-2 ps-enter-slideLeft ps-leave-slideRight" ng-show="showCard && $state.includes('muine.spots.spot.home', {spotId: spot.id})">
+  <div class="card-image">
+    <img src="{{bgImg}}">
+    <span class="card-title">{{spot.name}}</span>
+  </div>
+  <div class="card-content white-text">
+    <p>
+      {{spot.description}}
+    </p>
+  </div>
+  <div class="card-action grey darken-2">
+    <a ui-sref="muine.spots.spot.photo" href="">Pics</a>
+    <a ui-sref="muine.spots.spot.video" href="">Vids</a>
+    <a ui-sref="muine.spots.spot.video" href="">Prices</a>
+  </div>
+
+
+
+  <div class="card properties-card card-middle ps-enter-slideLeft ps-leave-slideRight" ng-show="showCard && $state.includes('muine.spots.spot.home', {spotId: spot.id})">
+    <div class="collection">
+      <a class="collection-item grey darken-2 white-text item-title">SPORTS</a>
+      <a class="collection-item" ng-repeat="sport in spot.sports" ui-sref="muine.sports.sport.home({sportId: sport.id})">
+        {{sport.name}}
+      </a>
+      <a class="collection-item grey darken-2 white-text item-title">CLUBS</a>
+      <a class="collection-item" ng-repeat="club in spot.clubs" ui-sref="muine.clubs.club.home({clubId: club.id})">
+        {{club.name}}
+      </a>
+    </div>
+  </div>
+
 
 </div>
-<section class="container">
-
-
-
-</section>

@@ -5,8 +5,10 @@ $black: rgb(0, 0, 0)
 //original navbar palette http://www.adam-bray.com/blog/91/easy-html-5-css-3-navigation-menu/
 $white_1: rgba($white, 0.1)
 $black_055: rgba($black, 0.055)
+$gray-7: rgb(17, 17, 17)
 $gray-13: rgb(34, 34, 34)
 $gray-25: rgb(64, 64, 64)
+$gray-38: rgb(97, 97, 97)
 $gray-53: rgb(136, 136, 136)
 $gray-67: rgb(170, 170, 170)
 $gray-87: rgb(222, 222, 222) //87%
@@ -29,15 +31,17 @@ $color_3: rgb(51, 131, 173)
 $color_green: rgb(40, 153, 122)
 
 //freestyle    base from http://clrs.cc/
-$gray-7: rgb(17, 17, 17)
-$green: #2ECC40 //need something between $green: #2ECC40 and $lime: #01FF70
-$lime: #01FF70
-$blue: #0074D9 //need something between $blue: #0074D9 and $aqua: #7FDBFF
-$aqua: #7FDBFF
-$yellow: #FFDC00 //should be more yellow
-$purple: #B10DC9 //ok
-$teal: #39CCCC //biruzoviy
-$orange: #FF851B
+//$gray-7
+// $green: #2ECC40 //need something between $green: #2ECC40 and $lime: #01FF70
+// $lime: #01FF70
+// $blue: #0074D9 //need something between $blue: #0074D9 and $aqua: #7FDBFF
+// $aqua: #7FDBFF
+// $yellow: #FFDC00 //should be more yellow
+// $purple: #B10DC9 //ok
+// $teal: #39CCCC //biruzoviy
+// $orange: #FF851B
+
+//material design
 
 
 //main
@@ -45,15 +49,15 @@ $background: $gray-25
 $color: $gray-13
 
 //navbar
-$navbar_items_themes: $yellow $green $purple
+$navbar_items_themes: color('yellow', 'base') color('green', 'base') color('purple', 'base')
 $navbar_height: 60px
 $navbar_background: $gray-13
+$navbar_transparent_background: rgba($navbar_background, 0.3)
 $navbar_border: $gray-87
 $navbar_color: $gray-87
 $navbar_shadow: $black_055
 $navbar_brand_background: $background_40
-$navbar_logo: $teal
-$navbar_brand: $color_2
+$navbar_brand: $color_2 // #0288d1 // #03a9f4 //
 $navbar_brand_hover: $color_1
 $navbar_control_width: 300px
 $navbar_item_width: 150px

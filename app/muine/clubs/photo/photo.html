@@ -1,0 +1,19 @@
+<ul>
+  <li ng-repeat="slide in slides" ng-if="isCurrSlide($index)"
+      ng-class="{'ps-transition-slideRight': slideRight, 'ps-transition-slideLeft': !slideRight}">
+    <div class="background" ps-bg-img="slide"></div>
+  </li>
+</ul>
+<a class="slider-prev-next slider-prev slider-control" href=""
+   ng-click="prevSlide()"
+  >&#10132;</a>
+<a class="slider-prev-next slider-next slider-control" href=""
+   ng-click="nextSlide()"
+  >&#10132;</a>
+<div class="slider-bullets slider-control">
+  <a class="slider-bullet"
+      ng-repeat="slide in slides" href=""
+      ng-click="selectSlide($index)"
+      ng-class="{active: isCurrSlide($index)}"
+  ></a>
+</div>

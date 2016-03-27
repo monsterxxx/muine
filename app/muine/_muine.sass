@@ -1,37 +1,318 @@
+$video-overlay-color: rgba(black, 0.6)
+$video-overlay-hover-color: rgba($white, 0.8)
+$slider_prev_next_size: 50px
+
+//GENERAL
+.ps-rotate-cw
+  transform: rotate(90deg)
+.ps-rotate-ccw
+  transform: rotate(-90deg)
+.ps-center
+  position: absolute
+  left: 50%
+  transform: translate(-50%, 0)
+
 ps-muine-navbar
   width: 100%
   position: fixed
   z-index: 1000
   top: 0
 
-.v
-  height: 600px
-  background: url('../assets/img/video-background.png')
-  background-size: cover
-  box-shadow: inset 0 -20px 20px -20px black //bottom only
-
-//'muine' state
+//COMMON FOR EVERY SECTION STYLES
+//'muine' state template
 .muine-section
   position: relative
-  height: 600px
+  min-height: 600px
   min-width: 1200px
+
+  svg
+    width: 50px
+    height: 50px
+    cursor: pointer
+
+.loader
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-$loader_size/2, -100px - $loader_size/2)
+
+.ball-spin-fade-loader
+  position: absolute
+  top: 50%
+  left: 50%
+
+.v
+  .loader
+    transform: translate(-$loader_size/2, -100px - $loader_size/2 + $navbar_height/2)
+
+[ps-video-bg]
+
+  .video-overlay
+    height: 600px
+    box-shadow: inset 0 -20px 20px -20px black //bottom only
+
+    svg
+      position: absolute
+      fill: $video-overlay-color
+      &.mute-unmute
+        top: 80px
+        right: 20px
+
+    .cover-text
+      font-family: 'Open Sans', sans-serif
+      width: 100%
+      text-align: center
+      color: white
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%) translate(0, 30px)
+      text-shadow: rgb(0, 0, 0) 0px 0px 10px
+      opacity: 0.2
+      animation:
+        name: show, fadeOut2
+        delay: 0s, 17s
+        duration: 17s, 10s
+      user-select: none
+      -webkit-touch-callout: none
+      cursor: default
+    .cover-title
+      text-transform: uppercase
+      margin-bottom: 8px
+      font:
+        size: 60px
+        weight: bold
+      animation:
+        name: hide, fadeIn
+        delay: 0s, 6s
+        duration: 6s, 3s
+    .cover-description
+      font-size: 40px
+      span
+        animation-name: hide, fadeIn
+        &:nth-child(1)
+          animation:
+            delay: 0s, 10s
+            duration: 10s, 1s
+        &:nth-child(2)
+          animation:
+            delay: 0s, 11s
+            duration: 11s, 1s
+        &:nth-child(3)
+          animation:
+            delay: 0s, 13.5s
+            duration: 13.5s, 0.5s
+
+    .skip-intro
+      height: 70px
+      width: 50px
+      position: absolute
+      left: 50%
+      transform: translate(-50%, 0)
+      bottom: 0
+      &:hover
+        svg
+          fill: $video-overlay-hover-color
+          animation:
+            name: arrowUpDown
+            duration: 1s
+            iteration-count: infinite
+            timing-function: ease-in-out
+      svg
+        overflow: visible
+        fill: $video-overlay-color
+
+
 
 //'muine.sections' state templates
 .section-sticky-view
 
 //'muine.sections.section' state templates
 .section-view
+  position: relative
   height: 600px
-  box-shadow: inset 0 -20px 20px -20px black //bottom only
+  display: flex
+  justify-content: flex-end
+  align-items: center
+  overflow: hidden
   //'muine.sections.section.child' state templates' content:
   .background
-    width: 100%
-    height: 100%
     position: absolute
-    z-index: -1
-  .container
+    top: 0
+    left: 0
+    width: 100%
+    height: 600px
+    z-index: -2
+    // box-shadow: inset 0 -20px 20px -20px black //bottom only
+    background: black
+  .child-container
+    height: 600px
+
+.section-overlay
+  position: absolute
+  top: 0
+  z-index: 1
+  width: 100%
+  height: 600px
+  box-shadow: inset 0 -20px 20px -20px black //bottom only
+  pointer-events: none
+
+.card
+  font-family: Roboto
+  margin: 0
+  //position: absolute
+  background: color('grey', darken-2)
+.description-card
+  // top: 50%
+  // transform: translate(0, -50%)
+  &:not(.card-contact)
+    &.ng-hide-add
+      transition-delay: 0.5s
+.properties-card
+  top: 0
+  z-index: -1
+  &.ng-hide-add
+    transition-duration: 0.5s
+  &.ng-hide-remove
+    transition-duration: 0.5s
+    transition-delay: 0.5s
+
+.card-content
+  background: rgba(color('grey', 'darken-2'), 1)
+.card-action
+  border-top: 1px solid rgba(white, 0.3)
+  a
+    color: color('yellow', 'base')
+    &:hover
+      color: color('yellow', 'darken-1')
+.card-right
+  width: 400px
+  margin-right: 20px
+.card-middle
+  position: absolute
+  right: 420px
+  width: 200px
+
+
+.collection
+  margin-top: 0
+  margin-bottom: 0
+  font-weight: 300
+  background-color: color('grey', base)
+  border-top: none
+  border-right: none
+  border-bottom: none
+  border-left: none
+  border-color: rgba(white, 0.3)
+  .item-title
+    font-weight: 400
+    font-style: italic
+  .collection-item
+    height: 34px
+    padding-top: 5.5px
+    padding-bottom: 5.5px
+    border-bottom-color: rgba(white, 0.3)
+    >div
+      height: 22px
+      line-height: 22px
+      vertical-align: middle
+    img
+      width: 20px
+      height: 20px
+      margin-top: -2px
+      margin-right: 15px
+      vertical-align: middle
+  a.collection-item
+    color: white
+    background-color: color('grey', 'base')
+    &:hover
+      background-color: color('grey', 'darken-1') !important
+  .collapsible-header
+    min-height: 0
+    border-bottom: none
+    span
+      float: right
+      font-style: normal
+    &.active
+      span
+        transform: rotate(90deg) translateX(-1px)
+  .collapsible-body
+    border-bottom: none
+
+
+.map-card
+  position: absolute
+  top: 0
+  left: 0
+  width: 50%
+  height: 100%
+  // border-top: 5px solid color('grey', 'darken-2')
+  border-right: 5px solid color('grey', 'darken-2')
+  // border-bottom: 5px solid color('grey', 'darken-2')
+  ng-map
     width: 100%
     height: 100%
+
+.slider-prev-next
+  text-align: center
+  position: absolute
+  width: 50px
+  height: 50px
+  line-height: 50px
+  bottom: 20px
+  top: 50%
+  transform: translate(0, -50%)
+  background: $navbar_background
+  color: color('yellow', 'base')
+  font-size: 30px
+  transition: all 0.3s linear
+  &:hover
+    background: color('yellow', 'base')
+    color: $navbar_background
+  &.hide-slider-controls
+    &.slider-prev
+      opacity: 0
+      transform: rotate(180deg) translate(100%, 50%)
+    &.slider-next
+      opacity: 0
+      transform: translate(100%, -50%)
+  &.slider-prev
+    transform: rotate(180deg) translate(0, 50%)
+  &.slider-next
+    right: 0
+
+.slider-bullets
+  position: absolute
+  left: 50%
+  bottom: 15px
+  transform: translate(-50%, 0)
+  transition: 0.3s linear all
+  .slider-bullet
+    display: inline-block
+    width: 15px
+    height: 15px
+    margin-right: 15px
+    background: $navbar_background
+    transition: 0.3s linear all
+    &:hover
+      background: color('yellow', 'base')
+    &.active
+      background: color('yellow', 'base')
+    &:last-child
+      margin: 0
+  &.hide-slider-controls
+    transform: translate(-50%, 100%)
+    opacity: 0
+
+.video-frame
+  position: absolute
+  height: 600px
+  width: 100%
+  top: 0
+
+#sports
+  .ball-spin-fade-loader
+    // display: none
 
 #prices
   margin: 0

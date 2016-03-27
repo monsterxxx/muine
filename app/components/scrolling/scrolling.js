@@ -15,12 +15,12 @@ angular.module('ps.scrolling', [])
   };
 }])
 
-.factory('PsMuineScroll', ['$rootScope', '$state', 'MuineLayoutSvc',
-function(                   $rootScope,   $state ,  MuineLayoutSvc) {
+.factory('PsMuineScroll', ['$rootScope', '$state', 'MuineLayoutSvc', '$q', '$compile', '$deepStateRedirect',
+function(                   $rootScope,   $state ,  MuineLayoutSvc ,  $q ,  $compile ,  $deepStateRedirect) {
 
   //common jquery objects
-  var $window = $(window);
-  var $html = $('html');
+  var $window = $(window),
+      $html = $('html');
 
   //PAGE SECTIONS AND THEIR BREAKPOINTS
   //in html markup page sections are defined as id="pageSection.name"
@@ -38,6 +38,8 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
   var scrollDown;
 
   var PsMuineScroll = {
+
+
 
     findSections: function () {
       var doLog = false;
@@ -68,6 +70,8 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
       if (doLog) {console.log('breakPoints: '+ breakPoints);}
     },
 
+
+
     //to determine section based on scroll position within break points
     getSection: function (scroll) {
       for (var i = 0; i < breakPoints.length; i++) {
@@ -77,9 +81,12 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
       }
     },
 
+
+
     initialize: function () {
       var doLog = false;
       if (doLog) {console.log('> PsMuineScroll.initialize()');}
+
 
       //INITIALIZE
       PsMuineScroll.findSections();
@@ -175,7 +182,6 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
       // window.onresize = handleResize;
       $window.on('resize', handleResize);
       $window.on('scroll', PsMuineScroll.scrollHandler);
-      $window.on('scroll', PsMuineScroll.navbarStyleFix);
       if (support === 'wheel') {
         window.addEventListener('wheel', handleWheel);
         // $window.on('wheel', handleWheel);
@@ -185,9 +191,40 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
       }
 
 
+      //INDIRECT TRANSITION
+      //intercept transition to another section, firstly go to dsr state, then proceed
+      $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState) {
+        var doLog = false;
+        if (doLog) console.log('> stateChangeStart $rootScope.indirectTransition: '+ $rootScope.indirectTransition);
+        var fromStateNameArr = fromState.name.split('.');
+        var toStateNameArr = toState.name.split('.');
+        if (doLog) console.log(JSON.stringify(toState , null, 2));
+        if (doLog) console.log(JSON.stringify(toParams , null, 2));
+        if ($rootScope.firstInit === false && !$rootScope.indirectTransition
+            && fromStateNameArr[0] === 'muine' && toStateNameArr[0] === 'muine'
+            && fromStateNameArr[1] !== toStateNameArr[1]
+            && ['home', 'prices'].indexOf(toStateNameArr[1]) === -1
+          ) {
+          evt.preventDefault();
+          $rootScope.indirectTransition = true;
+          if (doLog) console.log('  indirect transition to muine.'+ toStateNameArr[1]);
+          var redirect = $deepStateRedirect.getRedirect ('muine.'+ toStateNameArr[1]);
+          if (doLog) console.log('  firstly, will redirect to ' + JSON.stringify(redirect , null, 2));
+          $state.go(redirect.state, redirect.params).then(function () {
+            if (doLog) console.log('  transitioned to sticky state, now goto '+ toState.name, JSON.stringify(toParams , null, 2));
+            $state.go(toState.name, toParams);
+            $rootScope.indirectTransition = false;
+          }, function () {
+            if (doLog) console.log('  not successfull');
+          });
+        }
+      });
 
+
+      var firstHomeLeave = true;
       //ON STATECHANGE SCROLL
       $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState) {
+        var doLog = false;
         if (doLog) {console.log('> PsMuineScroll > on.stateChangeSuccess > '
                                 + fromState.name +' --> '+ toState.name);}
         var fromStateNameArr = fromState.name.split('.');
@@ -199,12 +236,24 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
             && fromStateNameArr[0] === 'muine' && toStateNameArr[0] === 'muine'
             && fromStateNameArr[1] !== toStateNameArr[1]
         ) {
-          if (doLog) {console.log('  stateChange triggered scroll passed');}
-          PsMuineScroll.scroll(toStateNameArr[1]);
+          if (doLog) {console.log('  stateChange triggered scrolling');}
+          if (doLog) console.log('toParams: '+ JSON.stringify(toParams , null, 2));
+          //before scroll
+          if (toStateNameArr[1] === 'home') {
+            //insert video background if it's not there yet
+            $rootScope.videoEnabled = true;
+          }
+          PsMuineScroll.scroll(toStateNameArr[1]).then(function () {
+            //after scroll
+            if (fromStateNameArr[1] === 'home') {
+              $rootScope.videoEnabled = false;
+            }
+          });
         }
       });
 
     },
+
 
 
     //SCROLL HANDLER
@@ -258,29 +307,16 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
 
 
 
-    //NAVBAR TOP STYLE
-    //this is a fix for strange navcontrol > selected items behavior
-    //could not get it done with css transition
-    navbarStyleFix: function () {
-      if (prevScroll === 0) {
-        var $selected = $('li.selected');
-        $selected.velocity({
-          backgroundColorAlpha: 0
-        },{
-          duration: 0,
-          delay: 0
-        }).velocity({
-          backgroundColorAlpha: 1
-        },{
-          duration: 0,
-          delay: 1000
-        });
-      }
-    },
 
+
+
+
+    //Smooth scroll to specified section. Returns promise.
     scroll: function (sectionName) {
       var doLog = false;
       if (doLog) {console.log('> PsMuineScroll.scroll('+ sectionName +')');}
+
+      var deferred = $q.defer();
 
       //find this sectionOffset in breakPoints array
       var sectionOffset = 0;
@@ -312,9 +348,14 @@ function(                   $rootScope,   $state ,  MuineLayoutSvc) {
           currSection = prevSection = i;
           $rootScope.psMuineScrolling = false;
           $window.on('scroll', PsMuineScroll.scrollHandler);
+          deferred.resolve();
         }
       });
+      return deferred.promise;
     }
+
+
+
   };
 
   return PsMuineScroll;

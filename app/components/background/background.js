@@ -6,7 +6,7 @@ angular.module('ps.background', [])
   return {
 
     scope: {
-      psBgImg: '@'
+      psBgImg: '='
     },
     link: function(scope, element, attrs) {
       // var url = attrs.psBgImg;

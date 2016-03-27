@@ -83,6 +83,8 @@ function                         ( $scope,   $state,   $stateParams) {
       $scope.childStates.push(nameArr[3]);
     }
   });
+  //to address child state from template, here's the middle part of the state name
+  $scope.statePath = $scope.dataKey.concat('.' + $scope.dataKey.slice(0, -1));
 
   $scope.prevId = function () {
     if ($scope.index === 0) {return $scope.col[$scope.colLength - 1].id;}

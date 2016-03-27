@@ -16,13 +16,15 @@
     "angular-video-bg": "~0.3.3",
     "angular-scroll": "~0.7.3",
     "ui-router-extras": "~0.1.0",
-    "angular-velocity": "~0.3.2"
+    "angular-velocity": "~0.3.2",
+    "angular-touch": "~1.4.8",
+    "angular-youtube-mb": "~1.1.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.7"
   },
   "resolutions": {
-    "angular": "~1.4.8",
+    "angular": "1.4.8",
     "angular-animate": "~1.4.8"
   }
 }

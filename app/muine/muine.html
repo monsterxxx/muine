@@ -1,8 +1,37 @@
 <ps-muine-navbar></ps-muine-navbar>
 
 <!-- video background replaced with img for development stage-->
-<div class="v">
-  <!-- <video-bg video-id="'USWnYR8DErY'"></video-bg> -->
+<!-- <div class="v">
+
+</div> -->
+<div class="v muine-section">
+  <!-- <div class="loader">Loading...</div> -->
+  <div class="ball-spin-fade-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  <video-bg ps-video-bg
+            ng-if="videoEnabled"
+            video-id="'USWnYR8DErY'"
+            mobile-image="'assets/img/1.jpg'"
+            mute="false"
+            allow-click-events="true"
+            player-callback="videoBgReg(player)"
+            start="158.5"
+            end="235">
+    <div class="video-overlay" ng-click="videoPlayPause()">
+      <svg class="mute-unmute" ng-show="videoMuted && showOverlay" ng-click="videoMuteUnmute($event)"><use xlink:href="#shape-mute"></use></svg>
+      <svg class="mute-unmute" ng-show="!videoMuted && showOverlay" ng-click="videoMuteUnmute($event)"><use xlink:href="#shape-unmute"></use></svg>
+      <div class="cover-text" ng-show="showOverlay">
+        <div class="cover-title">Unleash Your Greatness</div>
+        <div class="cover-description">
+          <span>Welcome </span>
+          <span>to </span>
+          <span>Muine Watersports</span>
+        </div>
+      </div>
+      <a ui-sref="muine.sports" class="skip-intro">
+        <svg ng-click="skipIntro($event)"><use xlink:href="#shape-down"></use></svg>
+      </a>
+    </div>
+  </video-bg>
 </div>
 
 <!-- blank view -->
@@ -20,9 +49,10 @@
 
 
 <!-- DEBUG INFO in the bottom -->
-<div class="debug-info">
+<!-- <div class="debug-info">
 <button type="button" ng-click="refreshDebugInfo()" name="button">refresh</button>
 <pre>
 $state.current.name: {{$state.current.name}}; $stateParams: {{$stateParams}}; $state.params: {{$state.params}}
+$rootScope.videoEnabled: {{videoEnabled}}
 </pre>
-</div>
+</div> -->

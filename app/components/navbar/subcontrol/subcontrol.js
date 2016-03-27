@@ -38,6 +38,7 @@ function (                        MuineDataSvc ,  $timeout ,  $state ,  $statePa
 
       //VARIABlES
       var $menu = element.find('.menu');
+      var menuAnimating = false;
 
       //FUNCTIONS FOR TESTING PURPOSES
       $scope.$watch('index', function () {
@@ -88,11 +89,14 @@ function (                        MuineDataSvc ,  $timeout ,  $state ,  $statePa
       };
 
       $scope.toggleMenu = function () {
-        if ($scope.menuOpened) {
-          closeMenu();
-        } else {
-          console.log('open from toggleMenu');
-          openMenu();
+        //toggle only if menu is not opening or closing now
+        if (!menuAnimating) {
+          if ($scope.menuOpened) {
+            closeMenu();
+          } else {
+            console.log('open from toggleMenu');
+            openMenu();
+          }
         }
       };
 
@@ -150,7 +154,7 @@ function (                        MuineDataSvc ,  $timeout ,  $state ,  $statePa
         if (!$span.hasClass('velocity-animating')) {
           $span.velocity('transition.slide'+ direction +'BigIn');
         }
-        element.find('.icon').removeClass('active');
+        $scope.menuOpened = false;
       };
 
       var openMenu = function () {
@@ -161,42 +165,52 @@ function (                        MuineDataSvc ,  $timeout ,  $state ,  $statePa
         $scope.menuOpened = true;
 
         var $selected = element.find('.selected');
-        var menuOffset = $selected.outerHeight() * (col.length - 1);
+        var submenuHeight = $selected.outerHeight() * (col.length - 1);
         for (var i = 0; i < col.length; i++){
           if (i !== $scope.index){
             var $subselect = angular.element(genSubselect(i));
-            $subselect.css({ 'top' : '-' + menuOffset + 'px' });
+            $subselect.css({ 'top' : '-' + submenuHeight + 'px' });
             //TODO check why following variant is not working:
-            //$subselect.css({ 'transform' : 'translateY(-' + menuOffset + 'px)' });
+            //$subselect.css({ 'transform' : 'translateY(-' + submenuHeight + 'px)' });
 
             $menu.append($subselect);
-
-            $subselect.velocity({
-              'translateY':  menuOffset + 'px',
-              //'translateY':  0
-            },{
-              duration: speed * (col.length - 1),
-              easing: 'linear'
-            });
           }
         }
+        //take all generated subselect menu items and animate them slideDown
+        element.find('.subselect').velocity({
+          'translateY':  submenuHeight + 'px',
+          //'translateY':  0
+        },{
+          duration: speed * (col.length - 1),
+          easing: 'linear',
+          before: function () {
+            menuAnimating = true;
+          },
+          complete: function () {
+            menuAnimating = false;
+          }
+        });
+
       };
 
       var closeMenu = function () {
         console.log('> closeMenu()');
 
         var $selected = element.find('.selected');
-        var menuOffset = $selected.outerHeight() * (col.length - 1);
         //take all subselect elements, translate them up and remove
         element.find('.subselect').velocity({
           'translateY': 0
         },{
           duration: speed * (col.length - 1),
           easing: 'linear',
+          before: function () {
+            menuAnimating = true;
+          },
           complete: function (elements) {
             elements.forEach(function (el) {
               angular.element(el).remove();
             });
+            menuAnimating = false;
           }
         });
 
@@ -236,7 +250,13 @@ function (                        MuineDataSvc ,  $timeout ,  $state ,  $statePa
             'translateY': height * (col.length - selectedIndex - 1)
           },{
             easing: 'linear',
-            duration: speed * selectedIndex
+            duration: speed * selectedIndex,
+            before: function () {
+              menuAnimating = true;
+            },
+            complete: function () {
+              menuAnimating = false;
+            }
           });
 
         underlay
@@ -246,9 +266,6 @@ function (                        MuineDataSvc ,  $timeout ,  $state ,  $statePa
           },{
             easing: 'linear',
             duration: speed * selectedIndex
-            // before: function () {
-            //   console.log('el'+$(this));
-            // }
           });
 
         subselect

@@ -13,49 +13,42 @@ angular.module('myApp.view1', [])
   });
 }])
 
-.controller('View1Ctrl', function() {
+.controller('View1Ctrl', function($scope) {
 
-
-  $(document).ready(function () {
-    var $window = $(window);
-    var $a = $('.view1-a');
-
-
-    console.log($a);
-    $a.append('<p>Vasja!</p>');
-    function handler1(e) {
-      console.log('handler1');
-      e.preventDefault();
-    }
-    function handler2(e) {
-      console.log('handler2');
-    }
-
-    function handler3(e) {
-      console.log('scrolling');
-      e.preventDefault();
-    }
-
-    $a.on('click', handler1);
-    $a.on('click', handler2);
-
-    $window.on('scroll', handler3);
-
-    function preventDefault(e) {
-      console.log('onwheel');
-      // e = e || window.event;
-      // if (e.preventDefault)
-      //     e.preventDefault();
-      // e.returnValue = false;
-    }
-    window.onwheel = preventDefault;
-  });
+  $scope.slides = [
+    {img: 'assets/img/sports/windsurfing/1.jpg'},
+    {img: 'assets/img/sports/windsurfing/6.jpg'},
+    {img: 'assets/img/sports/windsurfing/7.jpg'}
+  ];
 
 })
 
-.directive('view1Dir', function ($parse) {
+.directive('view1Dir', function ($parse, $timeout) {
   return function link($scope, element, attrs){
 
+    $timeout(function () {
+      $scope.test = 'buya1';
+      window.alert('dir1 timeout');
+    }, 6000);
+
+    $scope.$on('$destroy', function () {
+      window.alert('dir1 destroied');
+    });
+
+
+  };
+})
+
+.directive('view1SecondDir', function ($parse, $timeout) {
+  return function link($scope, element, attrs){
+
+    $timeout(function () {
+      $scope.test = 'buya2';
+    }, 3000);
+
+    $scope.$on('$destroy', function () {
+      window.alert('dir2 destroied');
+    });
 
 
   };
