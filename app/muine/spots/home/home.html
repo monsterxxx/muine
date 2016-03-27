@@ -2,13 +2,11 @@
 
 <div class="card map-card z-depth-2 ps-leave-slideLeft ps-enter-slideRight" ng-if="showCard && $state.includes('muine.spots.spot.home', {spotId: spot.id})">
   <ng-map zoom="14" center="{{spot.map.pos}}">
-    <marker position="{{spot.map.pos}}"
-            title="{{spot.name}}">
-    </marker>
+    <marker position="{{spot.map.pos}}" title="{{spot.name}}"></marker>
   </ng-map>
 </div>
 
-<div class="card description-card card-right z-depth-2 ps-enter-slideLeft-middle ps-leave-slideRight-middle" ng-show="showCard && $state.includes('muine.spots.spot.home', {spotId: spot.id})">
+<div class="card description-card card-right z-depth-2 ps-enter-slideLeft ps-leave-slideRight" ng-show="showCard && $state.includes('muine.spots.spot.home', {spotId: spot.id})">
   <div class="card-image">
     <img src="{{bgImg}}">
     <span class="card-title">{{spot.name}}</span>
@@ -38,7 +36,6 @@
       </a>
     </div>
   </div>
-
 
 
 </div>
